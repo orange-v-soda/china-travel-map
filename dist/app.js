@@ -20,12 +20,11 @@ referenceSvg.querySelector('#reference-outline').remove();
 referenceSvg.querySelector('#reference-regions').setAttribute('stroke-width','1.4');
 document.querySelector('#reference-host').append(referenceSvg);
 function ink(hex){const rgb=hex.slice(1).match(/../g).map(v=>parseInt(v,16)/255).map(v=>v<=.04045?v/12.92:((v+.055)/1.055)**2.4);return .2126*rgb[0]+.7152*rgb[1]+.0722*rgb[2]>.179?'#17263b':'#ffffff';}
-function path(points){return points.map(([x,y],i)=>(i?'L':'M')+(124+x*32)+' '+(152+y*32)).join(' ')+' Z';}
 function count(){document.querySelector('#count').textContent=Object.values(colors).filter(c=>c!=='#ffffff').length;}
 function setColor(region,color){
  colors[region.id]=color;
  for(const elements of [regionElements,referenceElements]){const p=elements.get(region.id);p.setAttribute('fill',color);p.setAttribute('aria-label',region.name+'市，'+(color==='#ffffff'?'未填色':'已填色')+'，按回车填色');}
- labelElements.get(region.id).setAttribute('fill',ink(color));referenceLabels.get(region.id).setAttribute('fill',ink(color));referenceLabels.get(region.id).setAttribute('stroke',color);count();
+ labelElements.get(region.id).setAttribute('fill',ink(color));labelElements.get(region.id).setAttribute('stroke',color);referenceLabels.get(region.id).setAttribute('fill',ink(color));referenceLabels.get(region.id).setAttribute('stroke',color);count();
 }
 function paint(region){setColor(region,active);status.textContent=region.name+'：两图'+(active==='#ffffff'?'已擦除':'已同步填色');}
 function highlight(region,on){for(const elements of [regionElements,referenceElements])elements.get(region.id).classList.toggle('linked',on);if(on)status.textContent='正在对照：'+region.name+'市';}
@@ -36,20 +35,20 @@ function makeRegion(region,d,parent,elements){
 }
 function makeLabel(region,xy,parent,elements,halo=false){const t=document.createElementNS(NS,'text');t.setAttribute('x',xy[0]);t.setAttribute('y',xy[1]);t.setAttribute('fill','#17263b');if(halo){t.setAttribute('paint-order','stroke');t.setAttribute('stroke','#ffffff');t.setAttribute('stroke-width','3');t.setAttribute('stroke-linejoin','round');}t.textContent=region.name;parent.append(t);elements.set(region.id,t);}
 for(const region of MAP_DATA.regions){
- makeRegion(region,path(region.diagonal),document.querySelector('#regions'),regionElements);
- makeLabel(region,[124+region.label[0]*32,152+region.label[1]*32],document.querySelector('#labels'),labelElements);
+ makeRegion(region,region.variants.diagonal.path,document.querySelector('#regions'),regionElements);
+ makeLabel(region,region.variants.diagonal.label,document.querySelector('#labels'),labelElements,true);
  const real=REFERENCE_MAP.regions.find(r=>r.id===region.id);
  makeRegion(region,real.path,referenceSvg.querySelector('#reference-regions'),referenceElements);
  makeLabel(region,real.label,referenceSvg.querySelector('#reference-labels'),referenceLabels,true);
 }
 function setMode(value){
  mode=value;const diagonal=mode==='diagonal';
- for(const region of MAP_DATA.regions)regionElements.get(region.id).setAttribute('d',path(diagonal?region.diagonal:region.points));
- document.querySelector('#outline').setAttribute('d',path(diagonal?MAP_DATA.diagonalOutline:MAP_DATA.outline));
- document.querySelector('#map-subtitle').textContent=diagonal?'45°斜边 / ABSTRACT MAP':'原直角版 / ABSTRACT MAP';
+ for(const region of MAP_DATA.regions){const variant=region.variants[mode];regionElements.get(region.id).setAttribute('d',variant.path);labelElements.get(region.id).setAttribute('x',variant.label[0]);labelElements.get(region.id).setAttribute('y',variant.label[1]);}
+ document.querySelector('#outline').setAttribute('d',MAP_DATA.variants[mode].outline);
+ document.querySelector('#map-subtitle').textContent=diagonal?'45°斜边 / ABSTRACT MAP':'轮廓简化 / SIMPLIFIED BOUNDARIES';
  for(const b of document.querySelectorAll('[data-mode]'))b.setAttribute('aria-pressed',String(b.dataset.mode===mode));
 }
-for(const b of document.querySelectorAll('[data-mode]'))b.addEventListener('click',()=>{setMode(b.dataset.mode);status.textContent=(mode==='diagonal'?'已切换到 45°斜边版':'已切换到原直角版')+'，颜色保留';});
+for(const b of document.querySelectorAll('[data-mode]'))b.addEventListener('click',()=>{setMode(b.dataset.mode);status.textContent=(mode==='diagonal'?'已切换到 45°斜边版':'已切换到轮廓简化版')+'，颜色保留';});
 setMode(mode);
 function select(color){active=color.toLowerCase();for(const b of document.querySelectorAll('.swatch'))b.setAttribute('aria-pressed',String(b.dataset.color===active));document.querySelector('#custom-color').value=active;}
 for(const [color,name]of palette){const b=document.createElement('button');b.type='button';b.className='swatch';b.dataset.color=color;b.style.backgroundColor=color;b.style.setProperty('--check',ink(color));b.setAttribute('aria-label',name);b.title=name;b.addEventListener('click',()=>select(color));document.querySelector('#palette').append(b);}
@@ -65,6 +64,6 @@ document.querySelector('#export').addEventListener('click',async()=>{
   const img=new Image();await new Promise((resolve,reject)=>{img.onload=resolve;img.onerror=()=>reject(new Error('图片渲染失败'));img.src=sourceUrl;});
   const canvas=document.createElement('canvas');canvas.width=1520;canvas.height=1720;const ctx=canvas.getContext('2d');if(!ctx)throw new Error('浏览器不支持图片导出');ctx.drawImage(img,0,0,1520,1720);
   const blob=await new Promise(resolve=>canvas.toBlob(resolve,'image/png'));if(!blob)throw new Error('无法生成 PNG');
-  const downloadUrl=URL.createObjectURL(blob);const a=document.createElement('a');a.href=downloadUrl;a.download='中国旅行地图-江西-'+(mode==='diagonal'?'45度斜边':'直角')+'.png';document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(downloadUrl),60000);status.textContent='已生成完整图片（1520 × 1720）';
+  const downloadUrl=URL.createObjectURL(blob);const a=document.createElement('a');a.href=downloadUrl;a.download='中国旅行地图-江西-'+(mode==='diagonal'?'45度规整':'轮廓简化')+'.png';document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(downloadUrl),60000);status.textContent='已生成完整图片（1520 × 1720）';
  }catch(e){status.textContent='导出失败，请重试或更换浏览器。';console.error(e);}finally{if(sourceUrl)URL.revokeObjectURL(sourceUrl);button.disabled=false;}
 });

@@ -1,48 +1,48 @@
-"""Independent geometry checks for both abstract map variants (no dependencies)."""
+"""Validate the actual SVG paths shipped to the browser. Requires Shapely."""
 import json
-import math
-from pathlib import Path
 from itertools import combinations
-from generate_map import polygon_area
+from pathlib import Path
+import shapely
+from shapely.geometry import Polygon, Point
+from shapely.ops import unary_union
 ROOT=Path(__file__).parent
-D=json.loads((ROOT/'dist/map-data.js').read_text().split(' = ',1)[1].rstrip(';\n'))
-def edges(p):return list(zip(p,p[1:]+p[:1]))
-def cross(a,b,c):return (b[0]-a[0])*(c[1]-a[1])-(b[1]-a[1])*(c[0]-a[0])
-def proper_intersect(a,b,c,d):return cross(a,b,c)*cross(a,b,d)<0 and cross(c,d,a)*cross(c,d,b)<0
-def inside(p,poly):
-    x,y=p;result=False
-    for a,b in edges(poly):
-        if cross(a,b,p)==0 and min(a[0],b[0])<=x<=max(a[0],b[0]) and min(a[1],b[1])<=y<=max(a[1],b[1]):return False
-        if (a[1]>y)!=(b[1]>y) and x<(b[0]-a[0])*(y-a[1])/(b[1]-a[1])+a[0]:result=not result
-    return result
 
-def shared(a,b,c,d):
-    if cross(a,b,c)!=0 or cross(a,b,d)!=0:return 0
-    axis=0 if a[0]!=b[0] else 1
-    return max(0,min(max(a[axis],b[axis]),max(c[axis],d[axis]))-max(min(a[axis],b[axis]),min(c[axis],d[axis])))
+def parse(path):
+    rings=[]
+    for part in path.split('M')[1:]:
+        points=[tuple(map(float,p.split(','))) for p in part.split('Z')[0].strip().replace('L','').split()]
+        rings.append(Polygon(points))
+    out=rings[0]
+    for ring in rings[1:]:out=out.symmetric_difference(ring)
+    return out
 
-for mode,outline in [('points','outline'),('diagonal','diagonalOutline')]:
-    observed=set();diagonal_segments=0
-    for r in D['regions']:
-        p=r[mode];es=edges(p)
-        assert polygon_area(p)>0
-        assert inside(r['label'],p),('label',r['name'])
-        for a,b in es:
-            dx=abs(a[0]-b[0]);dy=abs(a[1]-b[1]);assert dx+dy>0
-            assert dx==0 or dy==0 or dx==dy,('non octilinear',a,b)
-            diagonal_segments+=int(dx==dy and dx>0)
-        for (a,b),(c,d) in combinations(es,2):assert not proper_intersect(a,b,c,d),('self intersection',r['name'])
-    for a,b in combinations(D['regions'],2):
-        shared_length=0
-        for x,y in edges(a[mode]):
-            for z,w in edges(b[mode]):
-                assert not proper_intersect(x,y,z,w),('crossing',a['name'],b['name'])
-                shared_length+=shared(x,y,z,w)
-        assert not any(inside(p,b[mode]) for p in a[mode]),('overlap',a['name'],b['name'])
-        assert not any(inside(p,a[mode]) for p in b[mode]),('overlap',a['name'],b['name'])
-        if shared_length:observed.add(tuple(sorted([a['id'],b['id']])))
-    expected={tuple(sorted([r['id'],n])) for r in D['regions'] for n in r['neighbors']}
-    assert expected==observed,('adjacency changed',expected-observed,observed-expected)
-    assert abs(sum(polygon_area(r[mode]) for r in D['regions'])-polygon_area(D[outline]))<1e-8,'coverage'
-    areas=[polygon_area(r[mode]) for r in D['regions']]
-    print(mode,': 11 valid regions; 19 adjacencies; no overlap or coverage gaps; labels inside; ratio',round(max(areas)/min(areas),3),'diagonal segments',diagonal_segments)
+def edges(path):
+    for part in path.split('M')[1:]:
+        pp=[tuple(map(float,p.split(','))) for p in part.split('Z')[0].strip().replace('L','').split()]
+        yield from zip(pp,pp[1:])
+
+if __name__=='__main__':
+    data=json.loads((ROOT/'dist/map-data.js').read_text().split(' = ',1)[1].rstrip(';\n'))
+    reference=json.loads((ROOT/'dist/reference-data.js').read_text().split(' = ',1)[1].rstrip(';\n'))
+    assert data['sourceSha256']==reference['sha256']
+    real={r['id']:parse(r['path']) for r in reference['regions']}
+    expected={(a,b) for a,b in combinations(sorted(real),2) if real[a].boundary.intersection(real[b].boundary).length>1e-6}
+    assert len(expected)==19
+    for mode in ['simplified','diagonal']:
+        polys={r['id']:parse(r['variants'][mode]['path']) for r in data['regions']}
+        assert len(polys)==11 and set(polys)==set(real)
+        assert all(p.is_valid and p.area>0 for p in polys.values())
+        assert shapely.coverage_is_valid(list(polys.values()))
+        actual={(a,b) for a,b in combinations(sorted(polys),2) if polys[a].boundary.intersection(polys[b].boundary).length>1e-6}
+        assert actual==expected
+        merged=unary_union(list(polys.values()))
+        assert abs(sum(p.area for p in polys.values())-merged.area)<1e-6
+        assert merged.symmetric_difference(parse(data['variants'][mode]['outline'])).area<1e-5
+        for r in data['regions']:
+            assert polys[r['id']].contains(Point(r['variants'][mode]['label']))
+            if mode=='diagonal':
+                for a,b in edges(r['variants'][mode]['path']):
+                    dx=abs(a[0]-b[0]);dy=abs(a[1]-b[1]);assert min(dx,dy)<1e-6 or abs(dx-dy)<1e-6
+        base=unary_union(list(real.values()));iou=base.intersection(merged).area/base.union(merged).area
+        assert iou>.97
+        print(mode,': 11 regions, 19 adjacencies, no overlaps, outline matches coverage, labels inside; province IoU',round(iou,4))

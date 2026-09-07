@@ -1,0 +1,2 @@
+# Build-time only. The browser has no runtime package dependencies.
+shapely==2.1.2
