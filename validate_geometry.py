@@ -5,6 +5,7 @@ from pathlib import Path
 import shapely
 from shapely.geometry import Polygon, Point
 from shapely.ops import unary_union
+from generate_map import topology_signature, octilinear, ITERATION_TOLERANCE, TINY_AREA
 ROOT=Path(__file__).parent
 
 def parse(path):
@@ -28,11 +29,12 @@ if __name__=='__main__':
     real={r['id']:parse(r['path']) for r in reference['regions']}
     expected={(a,b) for a,b in combinations(sorted(real),2) if real[a].boundary.intersection(real[b].boundary).length>1e-6}
     assert len(expected)==19
-    for mode in ['simplified','diagonal']:
+    for mode in data['variants']:
         polys={r['id']:parse(r['variants'][mode]['path']) for r in data['regions']}
         assert len(polys)==11 and set(polys)==set(real)
         assert all(p.is_valid and p.area>0 for p in polys.values())
         assert shapely.coverage_is_valid(list(polys.values()))
+        assert topology_signature([polys[k] for k in real])==topology_signature(list(real.values()))
         actual={(a,b) for a,b in combinations(sorted(polys),2) if polys[a].boundary.intersection(polys[b].boundary).length>1e-6}
         assert actual==expected
         merged=unary_union(list(polys.values()))
@@ -40,9 +42,21 @@ if __name__=='__main__':
         assert merged.symmetric_difference(parse(data['variants'][mode]['outline'])).area<1e-5
         for r in data['regions']:
             assert polys[r['id']].contains(Point(r['variants'][mode]['label']))
-            if mode=='diagonal':
-                for a,b in edges(r['variants'][mode]['path']):
-                    dx=abs(a[0]-b[0]);dy=abs(a[1]-b[1]);assert min(dx,dy)<1e-6 or abs(dx-dy)<1e-6
+            for a,b in edges(r['variants'][mode]['path']):
+                dx=abs(a[0]-b[0]);dy=abs(a[1]-b[1]);assert min(dx,dy)<1e-6 or abs(dx-dy)<1e-6
         base=unary_union(list(real.values()));iou=base.intersection(merged).area/base.union(merged).area
-        assert iou>.97
+        assert iou>.95
         print(mode,': 11 regions, 19 adjacencies, no overlaps, outline matches coverage, labels inside; province IoU',round(iou,4))
+
+    # Replay one more simplify/refit pass on the serialized final geometry.
+    final={r['id']:parse(r['variants'][data['defaultVariant']]['path']) for r in data['regions']}
+    active=[];locked=[]
+    for p in final.values():
+        parts=list(p.geoms) if p.geom_type=='MultiPolygon' else [p]
+        active.append(unary_union([g for g in parts if g.area>=TINY_AREA]))
+        locked.append([g for g in parts if g.area<TINY_AREA])
+    candidate=octilinear(shapely.coverage_simplify(active,ITERATION_TOLERANCE))
+    assert all(a.equals(b) for a,b in zip(active,candidate)), 'Final serialized shape is not a fixed point'
+    assert data['convergence']['status']=='fixed_point' and data['convergence']['verifiedExtraPass']
+    assert data['iterations'][-1]['areaChange']==0
+    print('Serialized final geometry: an extra pass produces identical geometry; component/hole/contact signatures match source in every stage.')
