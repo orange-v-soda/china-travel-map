@@ -8,25 +8,25 @@
 <script defer src="map-data.js"></script><script defer src="reference-data.js"></script><script defer src="app.js"></script>
 </head>
 <body>
-<header class="top"><a class="brand" href="./">中国旅行地图<span>TRAVEL ATLAS</span></a><span class="edition">江西样图 · 02</span></header>
+<header class="top"><a class="brand" href="./">中国旅行地图<span>TRAVEL ATLAS</span></a><span class="edition">江西样图 · 03</span></header>
 <main>
 <div class="heading"><div><h1>江西，真实与抽象。</h1><p class="intro">移到城市上对照位置，点击即可同步填色。</p></div><div class="progress"><strong id="count">0</strong><span>/ 11 座城市已填色</span></div></div>
 <div class="toolbar"><fieldset><legend class="sr-only">填充颜色</legend><span class="tool-label" aria-hidden="true">填充颜色</span><div id="palette" class="palette"></div><label class="custom">自选<input id="custom-color" type="color" value="#2864dc" aria-label="自选填充颜色"></label></fieldset><div class="actions"><button id="reset" class="secondary">清空颜色</button><button id="export" class="primary">导出抽象图 PNG <span aria-hidden="true">↓</span></button></div></div>
 <div class="status-row"><p id="status" class="status" role="status" aria-live="polite">点击任意一张地图填色</p><p class="hint">白色擦除 · Tab 选择城市，回车填色</p></div>
 <div class="comparison">
-<section class="workspace" aria-labelledby="reference-heading"><div class="panel-heading"><div><span class="panel-number">01</span><h2 id="reference-heading">真实区划</h2></div><a class="download-svg" href="jiangxi-reference.svg" download="江西真实区划参考.svg">下载 SVG ↗</a></div><div class="paper" id="reference-host"></div><p class="caption">保留源数据轮廓 · 两图分别适配画幅，非同一比例尺</p></section>
-<section class="workspace" aria-labelledby="abstract-heading"><div class="panel-heading"><div><span class="panel-number">02</span><h2 id="abstract-heading">抽象区划</h2></div><div class="modes" role="group" aria-label="抽象边界样式"><button data-mode="diagonal" aria-pressed="true">45°斜边</button><button data-mode="orthogonal" aria-pressed="false">原直角版</button></div></div>
+<section class="workspace" aria-labelledby="reference-heading"><div class="panel-heading"><div><span class="panel-number">01</span><h2 id="reference-heading">真实区划</h2></div><a class="download-svg" href="jiangxi-reference.svg" download="江西真实区划参考.svg">下载 SVG ↗</a></div><div class="paper" id="reference-host"></div><p class="caption">保留源数据轮廓 · 两图使用相同投影与比例尺</p></section>
+<section class="workspace" aria-labelledby="abstract-heading"><div class="panel-heading"><div><span class="panel-number">02</span><h2 id="abstract-heading">抽象区划</h2></div><div class="modes" role="group" aria-label="抽象边界样式"><button data-mode="diagonal" aria-pressed="true">45°规整</button><button data-mode="simplified" aria-pressed="false">轮廓简化</button></div></div>
 <div class="paper"><svg id="map" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 860" aria-labelledby="map-title map-desc">
 <title id="map-title">江西省 11 市抽象地图</title><desc id="map-desc">边界和面积经过调整的旅行标记示意图。每座城市可独立填色。</desc>
 <rect width="760" height="860" fill="#fff"/>
-<g font-family="sans-serif" fill="#17263b"><text x="64" y="76" font-size="34" font-weight="700">江西</text><text id="map-subtitle" x="65" y="101" font-size="12" fill="#68768a">45°斜边 / ABSTRACT MAP</text><text x="695" y="69" text-anchor="end" font-size="12" fill="#68768a">中国旅行地图</text></g>
+<g font-family="sans-serif" fill="#17263b"><text x="64" y="76" font-size="34" font-weight="700">江西</text><text id="map-subtitle" x="65" y="101" font-size="12" fill="#68768a">45°规整 / ABSTRACT MAP</text><text x="695" y="69" text-anchor="end" font-size="12" fill="#68768a">中国旅行地图</text></g>
 <path d="M680 142V114M673 122L680 114L687 122" fill="none" stroke="#17263b" stroke-width="1.5"/><text x="680" y="105" text-anchor="middle" font-size="12" font-family="sans-serif" fill="#17263b">N</text>
 <g id="regions" stroke="#26364b" stroke-width="2" stroke-linejoin="round"></g>
 <path id="outline" fill="none" stroke="#17263b" stroke-width="3" stroke-linejoin="round" pointer-events="none"/>
 <g id="labels" font-family="sans-serif" font-size="21" font-weight="600" text-anchor="middle" dominant-baseline="central" pointer-events="none"></g>
-<path d="M64 795H696" stroke="#dfe5ec"/><g font-family="sans-serif" fill="#68768a" font-size="12"><text id="map-note" x="64" y="822">市级抽象示意 · 边界与面积非等比例</text><text x="696" y="822" text-anchor="end">江西 / 11 市</text></g>
+<path d="M64 795H696" stroke="#dfe5ec"/><g font-family="sans-serif" fill="#68768a" font-size="12"><text id="map-note" x="64" y="822">真实边界简化 · 未进行面积均衡</text><text x="696" y="822" text-anchor="end">江西 / 11 市</text></g>
 </svg></div>
-<p class="caption">保留 19 对市际邻接 · 放大小区域 · 支持原版对照</p>
+<p class="caption">从真实边界简化 · 保留 19 对市际邻接 · 同位置对照</p>
 </section>
 </div>
 </main>
