@@ -34,7 +34,7 @@ META = {
 }
 EXPECTED = {'J':'NYS','K':'S','S':'NKJTF','N':'JYFS','Y':'NPJXAF','P':'AY','X':'AY','T':'FS','A':'PXGYF','F':'NTGAYS','G':'AF'}
 
-def boundary(cells):
+def boundary(cells, keep=None):
     edges=set()
     for x,y in cells:
         p=[(x,y),(x+1,y),(x+1,y+1),(x,y+1)]
@@ -47,7 +47,29 @@ def boundary(cells):
     while p!=start:
         points.append(p); p=following[p]
     assert len(points)==len(edges), 'disconnected or hole'
-    return [b for a,b,c in zip(points[-1:]+points[:-1],points,points[1:]+points[:1]) if (b[0]-a[0])*(c[1]-b[1]) != (b[1]-a[1])*(c[0]-b[0])]
+    if keep is False:return points
+    return [b for a,b,c in zip(points[-1:]+points[:-1],points,points[1:]+points[:1]) if (keep and b in keep) or (b[0]-a[0])*(c[1]-b[1]) != (b[1]-a[1])*(c[0]-b[0])]
+
+def octilinear(points, junctions):
+    """Bevel shared degree-two corners consistently; keep triple junctions fixed.
+
+    Half-edge limits prevent neighboring bevels from passing one another.
+    The same corner generates the same segment in both incident regions.
+    """
+    result=[]
+    for a,b,c in zip(points[-1:]+points[:-1],points,points[1:]+points[:1]):
+        u=(a[0]-b[0],a[1]-b[1]);v=(c[0]-b[0],c[1]-b[1])
+        if b in junctions or u[0]*v[1]==u[1]*v[0]:result.append(b);continue
+        la=abs(u[0])+abs(u[1]);lc=abs(v[0])+abs(v[1]);r=min(1,la/2,lc/2)
+        result.extend([(b[0]+r*u[0]/la,b[1]+r*u[1]/la),(b[0]+r*v[0]/lc,b[1]+r*v[1]/lc)])
+    clean=[]
+    for p in result:
+        if not clean or clean[-1]!=p:clean.append(p)
+    if clean[0]==clean[-1]:clean.pop()
+    return clean
+
+def polygon_area(points):
+    return abs(sum(a[0]*b[1]-b[0]*a[1] for a,b in zip(points,points[1:]+points[:1])))/2
 
 def generate():
     assert all(len(row)==16 for row in ROWS)
@@ -65,11 +87,19 @@ def generate():
                     if other not in ('.',k):adjacency[k].add(other)
     for k in META:
         assert adjacency[k]==set(EXPECTED[k]), (k,adjacency[k],set(EXPECTED[k]))
+    from collections import defaultdict
+    graph=defaultdict(set)
+    for cc in cells.values():
+        ring=boundary(cc,False)
+        for a,b in zip(ring,ring[1:]+ring[:1]):graph[a].add(b);graph[b].add(a)
+    junctions={p for p,n in graph.items() if len(n)>2}
     regions=[]
     for key,(code,name,lx,ly) in META.items():
-        points=boundary(cells[key])
-        regions.append(dict(id=code,name=name,points=points,label=[lx,ly],area=len(cells[key]),neighbors=sorted(META[k][0] for k in adjacency[key])))
-    data={'version':'0.1.0','regions':regions,'outline':boundary(set.union(*cells.values()))}
+        points=boundary(cells[key],junctions)
+        diagonal=octilinear(points,junctions)
+        regions.append(dict(id=code,name=name,points=points,diagonal=diagonal,label=[lx,ly],area=len(cells[key]),diagonalArea=polygon_area(diagonal),neighbors=sorted(META[k][0] for k in adjacency[key])))
+    outline=boundary(set.union(*cells.values()),junctions)
+    data={'version':'0.2.0','regions':regions,'outline':outline,'diagonalOutline':octilinear(outline,junctions)}
     (ROOT/'dist'/'map-data.js').write_text('const MAP_DATA = '+json.dumps(data,ensure_ascii=False,indent=2)+';\n')
     sizes=[len(c) for c in cells.values()]
     print(f'{len(regions)} regions; {sum(map(len,adjacency.values()))//2} shared-edge adjacencies; no holes or disconnected regions; area ratio {max(sizes)/min(sizes):.2f}:1')
