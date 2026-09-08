@@ -171,3 +171,6 @@ if __name__=='__main__':
 
     from soften_angles import generate as generate_softened
     generate_softened()
+
+    from compact_lobes import generate as generate_compact
+    generate_compact()

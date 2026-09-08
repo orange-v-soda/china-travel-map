@@ -35,7 +35,7 @@ if __name__=='__main__':
         assert len(polys)==11 and set(polys)==set(real)
         assert all(p.is_valid and p.area>0 for p in polys.values())
         assert shapely.coverage_is_valid(list(polys.values()))
-        expected_polys=filter_parts(list(real.values()))[0] if mode=='softened' else list(real.values())
+        expected_polys=filter_parts(list(real.values()))[0] if mode in ('softened','compact') else list(real.values())
         assert topology_signature([polys[k] for k in real])==topology_signature(expected_polys)
         actual={(a,b) for a,b in combinations(sorted(polys),2) if polys[a].boundary.intersection(polys[b].boundary).length>1e-6}
         assert actual==expected
@@ -47,7 +47,7 @@ if __name__=='__main__':
             for a,b in edges(r['variants'][mode]['path']):
                 dx=abs(a[0]-b[0]);dy=abs(a[1]-b[1]);assert min(dx,dy)<1e-6 or abs(dx-dy)<1e-6
         base=unary_union(list(real.values()));iou=base.intersection(merged).area/base.union(merged).area
-        assert iou>(.92 if mode in ('shortcuts','softened') else .95)
+        assert iou>(.90 if mode=='compact' else .92 if mode in ('shortcuts','softened') else .95)
         print(mode,': 11 regions, 19 adjacencies, no overlaps, outline matches coverage, labels inside; province IoU',round(iou,4))
 
     # Replay one more simplify/refit pass on the serialized final geometry.
@@ -116,3 +116,25 @@ if __name__=='__main__':
     assert not acute_vertices(Polygon([(0,0),(4,0),(4,2),(2,2),(2,4),(0,4)]))
     assert json.loads((ROOT/'dist/angle-report.json').read_text())==angle
     print('Softened: component filtering, polygon interior angles, 45-degree edges, shared contacts/rotations, cumulative displacement, area/IoU budgets and decreasing objective verified:',angle['afterScore'])
+
+    from compact_lobes import rotation_signature, short_edges
+    report=data['compactReport']
+    final=[parse(r['variants']['compact']['path']) for r in data['regions']]
+    old=[LineString(c['original']) for c in report['chains']]
+    new=[LineString(c['simplified']) for c in report['chains']]
+    assert unary_union(old).equals(unary_union([p.boundary for p in soft]))
+    assert unary_union(new).equals(unary_union([p.boundary for p in final]))
+    assert rotation_signature(old)==rotation_signature(new)
+    for a,b in zip(old,new):
+        assert a.buffer(24,quad_segs=16).covers(b) and b.buffer(24,quad_segs=16).covers(a)
+    for a,p,r in zip(soft,final,baseline):
+        assert not acute_vertices(p)
+        assert a.boundary.buffer(24,quad_segs=16).covers(p.boundary)
+        assert p.boundary.buffer(24,quad_segs=16).covers(a.boundary)
+        assert abs(p.area-r.area)/r.area<=.15
+        assert p.intersection(r).area/p.union(r).area>=.75
+    assert all(tuple(b)<tuple(a) for a,b in zip(report['objectiveTrace'],report['objectiveTrace'][1:]))
+    target=[p for r,p in zip(data['regions'],final) if r['name'] in report['targetCities']]
+    assert report['afterObjective']==[sum(short_edges(p) for p in target),sum(turns(p) for p in final)]
+    assert json.loads((ROOT/'dist/compact-report.json').read_text())==report
+    print('Compact: moved junction rotation, source chain identity, cumulative distance, zero acute angles, shape budgets and target short edges verified:',report['afterObjective'])
