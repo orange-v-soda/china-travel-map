@@ -5,6 +5,7 @@ from pathlib import Path
 import shapely
 from shapely.geometry import Polygon, Point
 from shapely.ops import unary_union
+from soften_angles import filter_parts, acute_vertices, score
 from generate_map import topology_signature, octilinear, ITERATION_TOLERANCE, TINY_AREA
 ROOT=Path(__file__).parent
 
@@ -34,7 +35,8 @@ if __name__=='__main__':
         assert len(polys)==11 and set(polys)==set(real)
         assert all(p.is_valid and p.area>0 for p in polys.values())
         assert shapely.coverage_is_valid(list(polys.values()))
-        assert topology_signature([polys[k] for k in real])==topology_signature(list(real.values()))
+        expected_polys=filter_parts(list(real.values()))[0] if mode=='softened' else list(real.values())
+        assert topology_signature([polys[k] for k in real])==topology_signature(expected_polys)
         actual={(a,b) for a,b in combinations(sorted(polys),2) if polys[a].boundary.intersection(polys[b].boundary).length>1e-6}
         assert actual==expected
         merged=unary_union(list(polys.values()))
@@ -45,7 +47,7 @@ if __name__=='__main__':
             for a,b in edges(r['variants'][mode]['path']):
                 dx=abs(a[0]-b[0]);dy=abs(a[1]-b[1]);assert min(dx,dy)<1e-6 or abs(dx-dy)<1e-6
         base=unary_union(list(real.values()));iou=base.intersection(merged).area/base.union(merged).area
-        assert iou>(.92 if mode=='shortcuts' else .95)
+        assert iou>(.92 if mode in ('shortcuts','softened') else .95)
         print(mode,': 11 regions, 19 adjacencies, no overlaps, outline matches coverage, labels inside; province IoU',round(iou,4))
 
     # Replay one more simplify/refit pass on the serialized final geometry.
@@ -59,7 +61,7 @@ if __name__=='__main__':
     assert all(a.equals(b) for a,b in zip(active,candidate)), 'Final serialized shape is not a fixed point'
     assert data['convergence']['status']=='fixed_point' and data['convergence']['verifiedExtraPass']
     assert data['iterations'][-1]['areaChange']==0
-    print('Serialized final geometry: an extra pass produces identical geometry; component/hole/contact signatures match source in every stage.')
+    print('Historical iteration_9 geometry: an extra legacy pass produces identical geometry.')
 
     from simplify_boundaries import rotations, turns
     from shapely.geometry import LineString
@@ -86,3 +88,31 @@ if __name__=='__main__':
     assert all(b<a for a,b in zip(report['turnTrace'],report['turnTrace'][1:]))
     assert json.loads((ROOT/'dist/shortcut-report.json').read_text())==report
     print('Shortcuts: serialized shared-chain provenance, junction rotations, contacts, cumulative distance/area/IoU budgets and strict turn reduction verified.')
+
+    angle=data['angleReport']
+    soft=[parse(r['variants']['softened']['path']) for r in data['regions']]
+    base,removed=filter_parts(compact)
+    assert angle['removedComponents']==removed
+    baseline,source_removed=filter_parts(list(real.values()))
+    assert angle['removedSourceComponents']==source_removed
+    old=[LineString(c['original']) for c in angle['chains']]
+    new=[LineString(c['simplified']) for c in angle['chains']]
+    assert unary_union(old).equals(unary_union([p.boundary for p in base]))
+    assert unary_union(new).equals(unary_union([p.boundary for p in soft]))
+    assert rotations(old)==rotations(new)
+    for a,b in zip(old,new):
+        assert a.coords[0]==b.coords[0] and a.coords[-1]==b.coords[-1]
+        assert a.buffer(8,quad_segs=16).covers(b) and b.buffer(8,quad_segs=16).covers(a)
+    for i,j in combinations(range(len(old)),2):
+        assert old[i].intersection(old[j]).equals(new[i].intersection(new[j]))
+    assert list(score(soft))==angle['afterScore']
+    assert angle['afterScore'][0]==0, 'Jiangxi delivery must have no acute interior angles'
+    assert all(tuple(b)<tuple(a) for a,b in zip(angle['scoreTrace'],angle['scoreTrace'][1:]))
+    for p,r in zip(soft,baseline):
+        assert abs(p.area-r.area)/r.area<=.15
+        assert p.intersection(r).area/p.union(r).area>=.75
+    assert len(acute_vertices(Polygon([(0,0),(4,0),(0,4)])))==2
+    assert len(acute_vertices(Polygon([(0,4),(4,0),(0,0)])))==2
+    assert not acute_vertices(Polygon([(0,0),(4,0),(4,2),(2,2),(2,4),(0,4)]))
+    assert json.loads((ROOT/'dist/angle-report.json').read_text())==angle
+    print('Softened: component filtering, polygon interior angles, 45-degree edges, shared contacts/rotations, cumulative displacement, area/IoU budgets and decreasing objective verified:',angle['afterScore'])

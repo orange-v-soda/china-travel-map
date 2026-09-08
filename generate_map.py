@@ -168,3 +168,6 @@ if __name__=='__main__':
     generate()
     from simplify_boundaries import generate as generate_shortcuts
     generate_shortcuts()
+
+    from soften_angles import generate as generate_softened
+    generate_softened()
