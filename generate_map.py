@@ -174,3 +174,6 @@ if __name__=='__main__':
 
     from compact_lobes import generate as generate_compact
     generate_compact()
+
+    from simplify_shared import generate as generate_shared
+    generate_shared()

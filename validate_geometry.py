@@ -35,7 +35,7 @@ if __name__=='__main__':
         assert len(polys)==11 and set(polys)==set(real)
         assert all(p.is_valid and p.area>0 for p in polys.values())
         assert shapely.coverage_is_valid(list(polys.values()))
-        expected_polys=filter_parts(list(real.values()))[0] if mode in ('softened','compact') else list(real.values())
+        expected_polys=filter_parts(list(real.values()))[0] if mode in ('softened','compact','shared') else list(real.values())
         assert topology_signature([polys[k] for k in real])==topology_signature(expected_polys)
         actual={(a,b) for a,b in combinations(sorted(polys),2) if polys[a].boundary.intersection(polys[b].boundary).length>1e-6}
         assert actual==expected
@@ -47,7 +47,7 @@ if __name__=='__main__':
             for a,b in edges(r['variants'][mode]['path']):
                 dx=abs(a[0]-b[0]);dy=abs(a[1]-b[1]);assert min(dx,dy)<1e-6 or abs(dx-dy)<1e-6
         base=unary_union(list(real.values()));iou=base.intersection(merged).area/base.union(merged).area
-        assert iou>(.90 if mode=='compact' else .92 if mode in ('shortcuts','softened') else .95)
+        assert iou>(.90 if mode in ('compact','shared') else .92 if mode in ('shortcuts','softened') else .95)
         print(mode,': 11 regions, 19 adjacencies, no overlaps, outline matches coverage, labels inside; province IoU',round(iou,4))
 
     # Replay one more simplify/refit pass on the serialized final geometry.
@@ -138,3 +138,30 @@ if __name__=='__main__':
     assert report['afterObjective']==[sum(short_edges(p) for p in target),sum(turns(p) for p in final)]
     assert json.loads((ROOT/'dist/compact-report.json').read_text())==report
     print('Compact: moved junction rotation, source chain identity, cumulative distance, zero acute angles, shape budgets and target short edges verified:',report['afterObjective'])
+
+    from simplify_shared import pair_stats, objective
+    shared_report=data['sharedReport']
+    shared=[parse(r['variants']['shared']['path']) for r in data['regions']]
+    old=[LineString(c['original']) for c in shared_report['chains']]
+    new=[LineString(c['simplified']) for c in shared_report['chains']]
+    limit=shared_report['deviationLimit']
+    assert unary_union(old).equals(unary_union([p.boundary for p in final]))
+    assert unary_union(new).equals(unary_union([p.boundary for p in shared]))
+    assert rotation_signature(old)==rotation_signature(new)
+    for a,b in zip(old,new):
+        assert a.buffer(limit,quad_segs=16).covers(b) and b.buffer(limit,quad_segs=16).covers(a)
+    for a,p,r in zip(final,shared,baseline):
+        assert not acute_vertices(p)
+        assert a.boundary.buffer(limit,quad_segs=16).covers(p.boundary)
+        assert p.boundary.buffer(limit,quad_segs=16).covers(a.boundary)
+        assert abs(p.area-r.area)/r.area<=.15
+        assert p.intersection(r).area/p.union(r).area>=.75
+    names=[r['name'] for r in data['regions']]
+    assert shared_report['beforePairs']==pair_stats(final,names)
+    assert shared_report['afterPairs']==pair_stats(shared,names)
+    assert shared_report['beforeObjective']==list(objective(final))==[8,53,141]
+    assert shared_report['afterObjective']==list(objective(shared))
+    assert shared_report['afterObjective'][1]<53
+    assert all(tuple(b)<tuple(a) for a,b in zip(shared_report['objectiveTrace'],shared_report['objectiveTrace'][1:]))
+    assert json.loads((ROOT/'dist/shared-report.json').read_text())==shared_report
+    print('Shared: all 19 pair statistics, frozen geometry budgets, junction rotation, zero acute angles and reducing shared-boundary objective verified:',shared_report['afterObjective'])
