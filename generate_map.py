@@ -164,4 +164,7 @@ def generate():
     (ROOT/'dist/iteration-report.json').write_text(json.dumps({'parameters':{'initialTolerance':TOLERANCE,'iterationTolerance':ITERATION_TOLERANCE,'grid':GRID},'convergence':convergence,'iterations':logs},ensure_ascii=False,indent=2)+'\n')
     print(json.dumps({'convergence':convergence,'iterations':logs},ensure_ascii=False,indent=2))
 
-if __name__=='__main__':generate()
+if __name__=='__main__':
+    generate()
+    from simplify_boundaries import generate as generate_shortcuts
+    generate_shortcuts()

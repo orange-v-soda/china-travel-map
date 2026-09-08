@@ -43,17 +43,18 @@ for(const region of MAP_DATA.regions){
 }
 const iterationSelect=document.querySelector('#iteration');
 const stopLabels={fixed_point:'已收敛',topology_blocked:'拓扑约束停止',cycle_detected:'检测到循环',iteration_limit:'达到迭代上限'};
+const shortcutOption=document.createElement('option');shortcutOption.value='shortcuts';shortcutOption.textContent='长线合并 · 新版';iterationSelect.append(shortcutOption);
 for(const log of MAP_DATA.iterations){const option=document.createElement('option');option.value='iteration_'+log.iteration;option.textContent=log.iteration===0?'首次贴合':('第 '+log.iteration+' 轮'+(option.value===MAP_DATA.defaultVariant?' · '+stopLabels[MAP_DATA.convergence.status]:''));iterationSelect.append(option);}
 function setMode(value){
  mode=value;
  for(const region of MAP_DATA.regions){const variant=region.variants[mode];regionElements.get(region.id).setAttribute('d',variant.path);labelElements.get(region.id).setAttribute('x',variant.label[0]);labelElements.get(region.id).setAttribute('y',variant.label[1]);}
- const iteration=Number(mode.split('_')[1]);const record=MAP_DATA.iterations[iteration];
+ const compact=mode==='shortcuts';const iteration=Number(mode.split('_')[1]);const record=compact?MAP_DATA.shortcutReport:MAP_DATA.iterations[iteration];
  document.querySelector('#outline').setAttribute('d',MAP_DATA.variants[mode].outline);
- document.querySelector('#map-subtitle').textContent='45°迭代规整 / PASS '+iteration;
- document.querySelector('#iteration-caption').textContent='第 '+iteration+' 轮 · 路径坐标点 '+record.vertices+' · 19 对市际邻接'+(mode===MAP_DATA.defaultVariant?' · '+stopLabels[MAP_DATA.convergence.status]:'');
+ document.querySelector('#map-subtitle').textContent=compact?'45°长线合并 / SIMPLIFIED MAP':'45°迭代规整 / PASS '+iteration;
+ document.querySelector('#iteration-caption').textContent=compact?'全图 '+record.afterTurns.reduce((a,b)=>a+b,0)+' 个转角 · 共享边界统一合并 · 19 对市际邻接':('第 '+iteration+' 轮 · 路径坐标点 '+record.vertices+' · 19 对市际邻接');
  iterationSelect.value=mode;
 }
-iterationSelect.addEventListener('change',()=>{setMode(iterationSelect.value);status.textContent='已切换迭代轮次，颜色保留';});
+iterationSelect.addEventListener('change',()=>{setMode(iterationSelect.value);status.textContent='已切换地图版本，颜色保留';});
 setMode(mode);
 function select(color){active=color.toLowerCase();for(const b of document.querySelectorAll('.swatch'))b.setAttribute('aria-pressed',String(b.dataset.color===active));document.querySelector('#custom-color').value=active;}
 for(const [color,name]of palette){const b=document.createElement('button');b.type='button';b.className='swatch';b.dataset.color=color;b.style.backgroundColor=color;b.style.setProperty('--check',ink(color));b.setAttribute('aria-label',name);b.title=name;b.addEventListener('click',()=>select(color));document.querySelector('#palette').append(b);}
@@ -69,6 +70,6 @@ document.querySelector('#export').addEventListener('click',async()=>{
   const img=new Image();await new Promise((resolve,reject)=>{img.onload=resolve;img.onerror=()=>reject(new Error('图片渲染失败'));img.src=sourceUrl;});
   const canvas=document.createElement('canvas');canvas.width=1520;canvas.height=1720;const ctx=canvas.getContext('2d');if(!ctx)throw new Error('浏览器不支持图片导出');ctx.drawImage(img,0,0,1520,1720);
   const blob=await new Promise(resolve=>canvas.toBlob(resolve,'image/png'));if(!blob)throw new Error('无法生成 PNG');
-  const downloadUrl=URL.createObjectURL(blob);const a=document.createElement('a');a.href=downloadUrl;a.download='中国旅行地图-江西-'+('45度规整-第'+exportMode.split('_')[1]+'轮')+'.png';document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(downloadUrl),60000);status.textContent='已生成完整图片（1520 × 1720）';
+  const downloadUrl=URL.createObjectURL(blob);const a=document.createElement('a');a.href=downloadUrl;a.download='中国旅行地图-江西-'+(exportMode==='shortcuts'?'45度长线合并':('45度规整-第'+exportMode.split('_')[1]+'轮'))+'.png';document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(downloadUrl),60000);status.textContent='已生成完整图片（1520 × 1720）';
  }catch(e){status.textContent='导出失败，请重试或更换浏览器。';console.error(e);}finally{if(sourceUrl)URL.revokeObjectURL(sourceUrl);button.disabled=false;}
 });
