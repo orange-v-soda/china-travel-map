@@ -12,8 +12,8 @@ let mode=MAP_DATA.defaultVariant;
 const referenceSvg=svg.cloneNode(true);
 for(const el of [referenceSvg,...referenceSvg.querySelectorAll('[id]')])el.id='reference-'+el.id;
 referenceSvg.setAttribute('aria-labelledby','reference-map-title reference-map-desc');
-referenceSvg.querySelector('#reference-map-title').textContent='江西省真实区划参考图';
-referenceSvg.querySelector('#reference-map-desc').textContent='根据市级边界数据生成的 SVG，同步高亮并标记对应城市。';
+referenceSvg.querySelector('#reference-map-title').textContent=(MAP_DATA.title||'联合区域')+'真实区划参考图';
+referenceSvg.querySelector('#reference-map-desc').textContent='相邻省份使用同一投影生成的 SVG，同步高亮并标记对应城市。';
 referenceSvg.querySelector('#reference-map-subtitle').textContent='真实区划 / GEOGRAPHIC REFERENCE';
 referenceSvg.querySelector('#reference-map-note').textContent='边界数据：DataV.GeoAtlas · 参考示意';
 referenceSvg.querySelector('#reference-outline').remove();
@@ -68,11 +68,11 @@ document.querySelector('#export').addEventListener('click',async()=>{
  const button=document.querySelector('#export');button.disabled=true;status.textContent='正在生成完整图片…';let sourceUrl;
  try{
   await document.fonts.ready;
-  const exportMode=mode;const copy=svg.cloneNode(true);copy.setAttribute('width','1520');copy.setAttribute('height','1720');copy.querySelectorAll('[tabindex]').forEach(el=>{el.removeAttribute('tabindex');el.removeAttribute('role');});
+  const exportMode=mode;const copy=svg.cloneNode(true);const cw=MAP_DATA.canvas?.width||760;const ch=MAP_DATA.canvas?.height||860;copy.setAttribute('width',String(cw*2));copy.setAttribute('height',String(ch*2));copy.querySelectorAll('[tabindex]').forEach(el=>{el.removeAttribute('tabindex');el.removeAttribute('role');});
   sourceUrl=URL.createObjectURL(new Blob([new XMLSerializer().serializeToString(copy)],{type:'image/svg+xml;charset=utf-8'}));
   const img=new Image();await new Promise((resolve,reject)=>{img.onload=resolve;img.onerror=()=>reject(new Error('图片渲染失败'));img.src=sourceUrl;});
-  const canvas=document.createElement('canvas');canvas.width=1520;canvas.height=1720;const ctx=canvas.getContext('2d');if(!ctx)throw new Error('浏览器不支持图片导出');ctx.drawImage(img,0,0,1520,1720);
+  const canvas=document.createElement('canvas');canvas.width=cw*2;canvas.height=ch*2;const ctx=canvas.getContext('2d');if(!ctx)throw new Error('浏览器不支持图片导出');ctx.drawImage(img,0,0,cw*2,ch*2);
   const blob=await new Promise(resolve=>canvas.toBlob(resolve,'image/png'));if(!blob)throw new Error('无法生成 PNG');
-  const downloadUrl=URL.createObjectURL(blob);const a=document.createElement('a');a.href=downloadUrl;a.download='中国旅行地图-江西-'+(exportMode==='shared'?'45度共边简化':exportMode==='compact'?'45度主体整合':exportMode==='softened'?'45度去尖角':exportMode==='shortcuts'?'45度长线合并':('45度规整-第'+exportMode.split('_')[1]+'轮'))+'.png';document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(downloadUrl),60000);status.textContent='已生成完整图片（1520 × 1720）';
+  const downloadUrl=URL.createObjectURL(blob);const a=document.createElement('a');a.href=downloadUrl;a.download='中国旅行地图-'+(MAP_DATA.shortName||'联合地图')+'-'+(exportMode==='shared'?'45度共边简化':exportMode==='compact'?'45度主体整合':exportMode==='softened'?'45度去尖角':exportMode==='shortcuts'?'45度长线合并':('45度规整-第'+exportMode.split('_')[1]+'轮'))+'.png';document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(downloadUrl),60000);status.textContent='已生成完整图片（'+(cw*2)+' × '+(ch*2)+'）';
  }catch(e){status.textContent='导出失败，请重试或更换浏览器。';console.error(e);}finally{if(sourceUrl)URL.revokeObjectURL(sourceUrl);button.disabled=false;}
 });

@@ -115,7 +115,7 @@ def optimize(initial,real,names,*,target_names=None,objective_fn=None,boundary_f
 def generate():
     data=json.loads((ROOT/'dist/map-data.js').read_text().split(' = ',1)[1].rstrip(';\n'));reference=read_reference()
     real=[geometry_from_path(r['path']) for r in reference['regions']];initial=[geometry_from_path(r['variants']['softened']['path']) for r in data['regions']]
-    polys,report=optimize(initial,real,[r['name'] for r in data['regions']])
+    names=[r['name'] for r in data['regions']]\n    polys,report=optimize(initial,real,names,target_names=names)
     for r,p,ref in zip(data['regions'],polys,reference['regions']):r['variants']['compact']={'path':svg_path(p),'label':label_for(p,ref['label'])}
     data['variants']['compact']={'outline':svg_path(unary_union(polys)),**stats(real,polys)}
     data.update(version='0.7.0',defaultVariant='compact',compactReport=report)

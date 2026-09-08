@@ -136,7 +136,7 @@ def generate(tolerance=18.0):
     reference=read_reference();real=[geometry_from_path(r['path']) for r in reference['regions']]
     initial=[geometry_from_path(r['variants']['iteration_0']['path']) for r in data['regions']]
     polys,report=simplify(initial,real,tolerance)
-    report['cities']=[{'name':r['name'],'previousTurns':turns(geometry_from_path(r['variants']['iteration_9']['path'])),'turns':turns(p),'areaError':round(abs(p.area-q.area)/q.area,4),'sourceBoundaryDeviation':round(p.boundary.hausdorff_distance(q.boundary),3)} for r,p,q in zip(data['regions'],polys,real)]
+    legacy_mode=f"iteration_{data['convergence']['iteration']}"\n    report['cities']=[{'name':r['name'],'previousTurns':turns(geometry_from_path(r['variants'][legacy_mode]['path'])),'turns':turns(p),'areaError':round(abs(p.area-q.area)/q.area,4),'sourceBoundaryDeviation':round(p.boundary.hausdorff_distance(q.boundary),3)} for r,p,q in zip(data['regions'],polys,real)]
     mode='shortcuts'
     for r,p in zip(data['regions'],polys):r['variants'][mode]={'path':svg_path(p),'label':label_for(p,reference['regions'][data['regions'].index(r)]['label'])}
     data['variants'][mode]={'outline':svg_path(unary_union(polys)),**stats(real,polys)}

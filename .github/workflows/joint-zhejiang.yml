@@ -1,0 +1,34 @@
+name: Build joint Jiangxi-Zhejiang prototype
+
+on:
+  push:
+    branches: [prototype/zhejiang-expansion]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install -r requirements-map.txt
+      - name: Generate joint reference
+        run: python generate_reference.py
+      - name: Generate octilinear map
+        run: python generate_map.py
+      - name: Validate joint geometry
+        run: python validate_joint.py
+      - name: Commit generated prototype
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add dist/reference-data.js dist/region-reference.svg dist/map-data.js dist/*-report.json
+          git diff --cached --quiet && exit 0
+          git commit -m "chore: generate seamless Jiangxi-Zhejiang prototype"
+          git push
