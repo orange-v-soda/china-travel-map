@@ -92,11 +92,15 @@ def compact():
 def emit():
     from simplify_shared import pair_stats
     a=load('data/zhejiang-final.json');polys=[geometry_from_path(p) for p in a['paths']];zr,raw,sha=source();refs=[{**r,'province':'江西'} for r in read_reference()['regions']]+zr;filtered=bodies(raw)
+    from island_groups import fit_groups
+    island_index=next(i for i,r in enumerate(refs) if r['name']=='舟山')
+    polys[island_index],island_report=fit_groups(raw[island_index-11],unary_union([p for i,p in enumerate(polys) if i!=island_index]))
     regions=[{'id':r['id'],'name':r['name'],'province':r['province'],'variants':{'east':{'path':svg_path(p),'label':label_for(p,r['label'])}}} for r,p in zip(refs,polys)]
     for r in refs:r['label']=label_for(geometry_from_path(r['path']),r['label'])
     metrics=[{'name':r['name'],'turns':turns(p),'acuteAngles':len(acute_vertices(p)),'parts':len(polygon_parts(p)),'bodyIou':p.intersection(b).area/p.union(b).area,'fullSourceIou':p.intersection(o).area/p.union(o).area,'areaError':abs(p.area-b.area)/b.area} for r,p,b,o in zip(zr,polys[11:],filtered,raw)]
-    report={'version':'0.9.0','seam':a['seam'],'frozenJiangxiSha256':freeze()['sourceDataSha256'],'zhejiangSourceSha256':sha,'zhejiangRetrieved':'2026-09-08','islandPolicy':'Each Zhejiang city retains its largest connected body; full reference retains all parts','omittedDetachedParts':sum(len(polygon_parts(p))-1 for p in raw),'cities':metrics,'sharedPairs':pair_stats(polys,[r['name'] for r in refs]),'optimization':a['report']}
-    data={'version':'0.9.0','defaultVariant':'east','regions':regions,'variants':{'east':{'outline':svg_path(unary_union(polys))}}}
+    metrics[island_index-11]['shapeBudget']='Schematic enlargement: exempt from body IoU and 15% area constraint'
+    report={'version':'0.10.0','seam':a['seam'],'frozenJiangxiSha256':freeze()['sourceDataSha256'],'zhejiangSourceSha256':sha,'zhejiangRetrieved':'2026-09-08','islandPolicy':'Zhoushan uses three enlarged island groups; other Zhejiang cities retain their main body','islandGroups':island_report,'mainlandOmittedDetachedParts':sum(len(polygon_parts(p))-1 for i,p in enumerate(raw) if i!=island_index-11),'cities':metrics,'sharedPairs':pair_stats(polys,[r['name'] for r in refs]),'preIslandGroupingOptimization':a['report']}
+    data={'version':'0.10.0','defaultVariant':'east','regions':regions,'variants':{'east':{'outline':svg_path(unary_union(polys))}}}
     (ROOT/'dist/east-data.js').write_text('const MAP_DATA = '+json.dumps(data,ensure_ascii=False)+';\nconst REFERENCE_MAP = '+json.dumps({'regions':refs},ensure_ascii=False)+';\n')
     save('dist/east-report.json',report)
     svg=['<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1160 1020"><title>江西与浙江真实区划参考</title><rect width="1160" height="1020" fill="white"/><g transform="translate(40 140)">']

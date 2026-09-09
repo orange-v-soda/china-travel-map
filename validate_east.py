@@ -20,7 +20,14 @@ def validate():
     assert abs(sum(p.area for p in polys)-unary_union(polys).area)<1e-6
     assert unary_union(polys).equals(parse(data['variants']['east']['outline']))
     _,raw,sha=source();filtered=bodies(raw);assert sha==report['zhejiangSourceSha256']
-    assert topology_signature(polys[11:])==topology_signature(filtered)
+    island_index=next(i for i,r in enumerate(data["regions"]) if r["name"]=="舟山")
+    from island_groups import fit_groups
+    from generate_map import polygon_parts
+    expected_islands,group_report=fit_groups(raw[island_index-11],unary_union([p for i,p in enumerate(polys) if i!=island_index]))
+    assert polys[island_index].equals(expected_islands) and len(polygon_parts(polys[island_index]))==3
+    assert group_report==report["islandGroups"]
+    expected_shapes=list(filtered);expected_shapes[island_index-11]=expected_islands
+    assert topology_signature(polys[11:])==topology_signature(expected_shapes)
     expected=adjacent(fixed)|{(a+11,b+11) for a,b in adjacent(filtered)}|{(10,18)}
     assert adjacent(polys)==expected
     assert polys[10].boundary.intersection(polys[18].boundary).equals(LineString(report['seam']))
@@ -33,7 +40,8 @@ def validate():
             for a,b in zip(rr,rr[1:]):
                 dx=abs(a[0]-b[0]);dy=abs(a[1]-b[1]);assert min(dx,dy)<1e-6 or abs(dx-dy)<1e-6
             assert all(0<=x+40<=1160 and 140<=y+140<=950 for x,y in rr)
-    for p,r in zip(polys[11:],filtered):
+    for i,(p,r) in enumerate(zip(polys[11:],filtered)):
+        if i==island_index-11:continue  # Explicitly enlarged schematic island groups.
         assert p.intersection(r).area/p.union(r).area>=.75 and abs(p.area-r.area)/r.area<=.15
     assert report['sharedPairs']==pair_stats(polys,[r['name'] for r in data['regions']])
     assert [r['turns'] for r in report['cities']]==[turns(p) for p in polys[11:]]

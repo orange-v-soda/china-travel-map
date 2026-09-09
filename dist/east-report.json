@@ -1,5 +1,5 @@
 {
-  "version": "0.9.0",
+  "version": "0.10.0",
   "seam": [
     [
       574.0,
@@ -17,8 +17,44 @@
   "frozenJiangxiSha256": "e223c22b79ecb0b1c8f068318550da1dec6cec2070f555fdc17d6d4d37ee304a",
   "zhejiangSourceSha256": "f87241d47687264861aa619b8dc37ffeb61a2be5d6018a8c01ec0ce0acb5cb38",
   "zhejiangRetrieved": "2026-09-08",
-  "islandPolicy": "Each Zhejiang city retains its largest connected body; full reference retains all parts",
-  "omittedDetachedParts": 151,
+  "islandPolicy": "Zhoushan uses three enlarged island groups; other Zhejiang cities retain their main body",
+  "islandGroups": {
+    "method": "area-weighted k-means, 3 clipped rectangles",
+    "minimumGap": 6,
+    "centerSeparationScale": 1.15,
+    "groups": [
+      {
+        "center": [
+          969.0,
+          148.5
+        ],
+        "sourceArea": 968.1882006614192,
+        "displayArea": 1415.5,
+        "sourceParts": 32
+      },
+      {
+        "center": [
+          988.5,
+          85.5
+        ],
+        "sourceArea": 243.42950000000067,
+        "displayArea": 421.25,
+        "sourceParts": 28
+      },
+      {
+        "center": [
+          983.0,
+          186.5
+        ],
+        "sourceArea": 364.4580500000005,
+        "displayArea": 515.5,
+        "sourceParts": 32
+      }
+    ],
+    "sourceArea": 1576.0757506614204,
+    "displayArea": 2352.25
+  },
+  "mainlandOmittedDetachedParts": 60,
   "cities": [
     {
       "name": "杭州",
@@ -94,12 +130,13 @@
     },
     {
       "name": "舟山",
-      "turns": 13,
+      "turns": 24,
       "acuteAngles": 0,
-      "parts": 1,
-      "bodyIou": 0.7512579459979342,
-      "fullSourceIou": 0.28778761591045454,
-      "areaError": 0.0015992891620053822
+      "parts": 3,
+      "bodyIou": 0.21710965891629877,
+      "fullSourceIou": 0.2738001062687358,
+      "areaError": 3.2845848521207257,
+      "shapeBudget": "Schematic enlargement: exempt from body IoU and 15% area constraint"
     },
     {
       "name": "台州",
@@ -512,7 +549,7 @@
       "length": 35.5
     }
   ],
-  "optimization": {
+  "preIslandGroupingOptimization": {
     "algorithm": "shared-junction-lobe-removal",
     "targetCities": [
       "丽水",
