@@ -10,3 +10,11 @@ data/fujian-base.json
 data/fujian-anchored.json
 data/fujian-finished.json
 data/fujian-final.json
+
+data/hunan-base.json
+data/hunan-anchored.json
+data/hunan-finished.json
+data/hunan-final.json
+
+data/hunan-compact-checkpoint.json
+data/hunan-compact-checkpoint.tmp

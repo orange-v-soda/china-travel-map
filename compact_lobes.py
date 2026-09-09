@@ -1,5 +1,6 @@
 """Remove small attached hooks by shared-chain shortcuts and junction relocation."""
-import json,math,itertools
+import json,math,itertools,hashlib
+from pathlib import Path
 from functools import lru_cache
 from shapely.geometry import LineString, Point
 from shapely.ops import unary_union,linemerge
@@ -26,17 +27,26 @@ def short_edges(poly):
 def rotation_signature(chains):return sorted(rotations(chains).values())
 
 
-def optimize(initial,real,names,*,target_names=None,objective_fn=None,boundary_fn=None,limit=LIMIT,chain_routes=alternatives,locked_count=0,expected_topology=None,allowed_acute_points=()):
+def optimize(initial,real,names,*,target_names=None,objective_fn=None,boundary_fn=None,limit=LIMIT,chain_routes=alternatives,locked_count=0,expected_topology=None,allowed_acute_points=(),checkpoint_path=None,first_improvement=False):
     real,_=filter_parts(real);expected=topology_signature(real) if expected_topology is None else expected_topology
     network=linemerge(unary_union([p.boundary for p in initial]))
     chains=sorted([LineString(clean(g.coords)) for g in network.geoms],key=lambda g:tuple(g.coords))
     original=list(chains);rotation=rotation_signature(chains);current=initial
     frozen=unary_union(initial[:locked_count]) if locked_count else None
+    frozen_network=unary_union([p.boundary for p in initial[:locked_count]]) if locked_count else None
     selected=TARGETS if target_names is None else set(target_names)
     targets=[i for i,n in enumerate(names) if n in selected]
     def objective(polys):return objective_fn(polys) if objective_fn else (sum(short_edges(polys[i]) for i in targets),sum(turns(p) for p in polys))
     allowed_acute_points=set(map(tuple,allowed_acute_points))
     trace=[objective(current)];edits=[]
+    checkpoint_key=hashlib.sha256(json.dumps({'initial':[p.wkb_hex for p in initial],'real':[p.wkb_hex for p in real],'targets':sorted(selected),'limit':limit,'locked':locked_count,'allowed':sorted(allowed_acute_points),'firstImprovement':first_improvement,'objective':getattr(objective_fn,'__name__',None),'routes':chain_routes.__name__},sort_keys=True).encode()).hexdigest()
+    if checkpoint_path and Path(checkpoint_path).exists():
+        checkpoint=json.loads(Path(checkpoint_path).read_text())
+        if checkpoint['key']!=checkpoint_key:raise ValueError('Checkpoint input differs; remove stale checkpoint before restarting')
+        chains=[LineString(c) for c in checkpoint['chains']];current=[geometry_from_path(p) for p in checkpoint['paths']];trace=[tuple(v) for v in checkpoint['trace']];edits=checkpoint['edits']
+        assert validate_step(current,expected) is None
+        assert all(a.equals(b) for a,b in zip(initial[:locked_count],current[:locked_count]))
+        print('Resumed',len(edits),'accepted improvements',flush=True)
     corridors=[g.buffer(limit,quad_segs=16) for g in original]
     @lru_cache(maxsize=20000)
     def valid_line(k,coords):
@@ -55,6 +65,7 @@ def optimize(initial,real,names,*,target_names=None,objective_fn=None,boundary_f
         if any(not a.boundary.buffer(limit,quad_segs=16).covers(p.boundary) or not p.boundary.buffer(limit,quad_segs=16).covers(a.boundary) for a,p in zip(initial,polys)):return None
         delta=sum(a.symmetric_difference(p).area for a,p in zip(initial,polys))
         return score,delta,polys
+    class FirstImprovement(Exception):pass
     while True:
         best=None
         def consider(proposal,kind):
@@ -63,57 +74,64 @@ def optimize(initial,real,names,*,target_names=None,objective_fn=None,boundary_f
             if result is None:return
             score,delta,polys=result;rank=(score,delta,tuple(tuple(g.coords) for g in proposal))
             if best is None or rank<best[0]:best=(rank,proposal,polys,kind)
-        # Straighten entire groups of edges; a wider frozen corridor permits
-        # removing long narrow tips that the 8-unit angle pass had to preserve.
-        target_boundary=boundary_fn(current) if boundary_fn else unary_union([current[i].boundary for i in targets])
-        for k,line in enumerate(chains):
-            if line.is_ring or line.intersection(target_boundary).length<1e-6:continue
-            if frozen is not None and line.intersection(frozen.boundary).length>1e-7:continue
-            pp=list(line.coords)
-            for i in range(len(pp)-2):
-                for j in range(i+2,len(pp)):
-                    for route in chain_routes(pp[i],pp[j]):
-                        out=clean(pp[:i]+route+pp[j+1:])
-                        if len(out)>=len(pp):continue
-                        proposal=list(chains);proposal[k]=LineString(out);consider(proposal,{'type':'chain','chain':k})
-        # Move a shared junction and re-route all its incident chains together.
-        nodes={}
-        for k,line in enumerate(chains):
-            pp=list(line.coords)
-            for reverse,a in [(False,pp[0]),(True,pp[-1])]:nodes.setdefault(a,[]).append((k,reverse))
-        for node,arms in sorted(nodes.items()):
-            if len(arms)!=3 or target_boundary.distance(Point(node))>1e-6:continue
-            if frozen is not None and frozen.boundary.distance(Point(node))<1e-7:continue
-            local=[]
-            for k,rev in arms:
-                pp=list(chains[k].coords);pp=pp[::-1] if rev else pp
-                local.extend(p for p in pp[1:4] if math.dist(node,p)<=limit)
-            # Corners plus intersections of nearby horizontal/vertical supports.
-            xs={p[0] for p in local}|{node[0]};ys={p[1] for p in local}|{node[1]}
-            positions=sorted(set(local)|{(x,y) for x in xs for y in ys})
-            for position in positions:
-                if position==node or math.dist(position,node)>limit:continue
-                options=[]
+            if first_improvement:raise FirstImprovement
+        try:
+            # Straighten entire groups of edges; a wider frozen corridor permits
+            # removing long narrow tips that the 8-unit angle pass had to preserve.
+            target_boundary=boundary_fn(current) if boundary_fn else unary_union([current[i].boundary for i in targets])
+            for k,line in enumerate(chains):
+                if line.is_ring or line.intersection(target_boundary).length<1e-6:continue
+                if frozen is not None and line.intersection(frozen_network).length>1e-7:continue
+                pp=list(line.coords)
+                for i in range(len(pp)-2):
+                    for j in range(i+2,len(pp)):
+                        for route in chain_routes(pp[i],pp[j]):
+                            out=clean(pp[:i]+route+pp[j+1:])
+                            if len(out)>=len(pp):continue
+                            proposal=list(chains);proposal[k]=LineString(out);consider(proposal,{'type':'chain','chain':k})
+            # Move a shared junction and re-route all its incident chains together.
+            nodes={}
+            for k,line in enumerate(chains):
+                pp=list(line.coords)
+                for reverse,a in [(False,pp[0]),(True,pp[-1])]:nodes.setdefault(a,[]).append((k,reverse))
+            for node,arms in sorted(nodes.items()):
+                if len(arms)!=3 or target_boundary.distance(Point(node))>1e-6:continue
+                if frozen is not None and frozen_network.distance(Point(node))<1e-7:continue
+                local=[]
                 for k,rev in arms:
-                    pp=list(chains[k].coords);pp=pp[::-1] if rev else pp;routes={}
-                    for cut in range(1,min(4,len(pp))):
-                        if cut>1 and any(math.dist(node,p)>limit for p in pp[1:cut]):continue
-                        for route in alternatives(position,pp[cut]):
-                            out=clean(route+pp[cut+1:]);out=out[::-1] if rev else out
-                            if len(out)<2:continue
-                            g=LineString(out)
-                            if valid_line(k,tuple(out)):routes[tuple(out)]=g
-                    if not routes:break
-                    options.append(list(routes.values()))
-                if len(options)!=3:continue
-                for combination in itertools.product(*options):
-                    proposal=list(chains)
-                    for (k,_),g in zip(arms,combination):proposal[k]=g
-                    consider(proposal,{'type':'junction','from':node,'to':position})
+                    pp=list(chains[k].coords);pp=pp[::-1] if rev else pp
+                    local.extend(p for p in pp[1:4] if math.dist(node,p)<=limit)
+                # Corners plus intersections of nearby horizontal/vertical supports.
+                xs={p[0] for p in local}|{node[0]};ys={p[1] for p in local}|{node[1]}
+                positions=sorted(set(local)|{(x,y) for x in xs for y in ys})
+                for position in positions:
+                    if position==node or math.dist(position,node)>limit:continue
+                    options=[]
+                    for k,rev in arms:
+                        pp=list(chains[k].coords);pp=pp[::-1] if rev else pp;routes={}
+                        for cut in range(1,min(4,len(pp))):
+                            if cut>1 and any(math.dist(node,p)>limit for p in pp[1:cut]):continue
+                            for route in alternatives(position,pp[cut]):
+                                out=clean(route+pp[cut+1:]);out=out[::-1] if rev else out
+                                if len(out)<2:continue
+                                g=LineString(out)
+                                if valid_line(k,tuple(out)):routes[tuple(out)]=g
+                        if not routes:break
+                        options.append(list(routes.values()))
+                    if len(options)!=3:continue
+                    for combination in itertools.product(*options):
+                        proposal=list(chains)
+                        for (k,_),g in zip(arms,combination):proposal[k]=g
+                        consider(proposal,{'type':'junction','from':node,'to':position})
+        except FirstImprovement:pass
         if best is None:break
         _,chains,current,kind=best;trace.append(objective(current));edits.append(kind)
+        if checkpoint_path:
+            cp=Path(checkpoint_path);temporary=cp.with_suffix('.tmp')
+            temporary.write_text(json.dumps({'key':checkpoint_key,'chains':[list(g.coords) for g in chains],'paths':[svg_path(p) for p in current],'trace':trace,'edits':edits}))
+            temporary.replace(cp)
         print('compact',len(edits),trace[-1],kind,flush=True)
-    report={'algorithm':'shared-junction-lobe-removal','targetCities':sorted(selected),'shortEdgeThreshold':12,'deviationLimit':limit,'beforeObjective':trace[0],'afterObjective':trace[-1],'objectiveTrace':trace,'edits':edits,'stopReason':'no_feasible_improving_candidate','chains':[{'original':list(a.coords),'simplified':list(b.coords)} for a,b in zip(original,chains)],'cities':[{'name':name,'beforeShortEdges':short_edges(a),'shortEdges':short_edges(p),'beforeTurns':turns(a),'turns':turns(p),'acuteAngles':len(acute_vertices(p))} for name,a,p in zip(names,initial,current)],**stats(real,current)}
+    report={'algorithm':'shared-junction-lobe-removal','candidateSelection':'first_improvement' if first_improvement else 'best_improvement','targetCities':sorted(selected),'shortEdgeThreshold':12,'deviationLimit':limit,'beforeObjective':trace[0],'afterObjective':trace[-1],'objectiveTrace':trace,'edits':edits,'stopReason':'no_feasible_improving_candidate','chains':[{'original':list(a.coords),'simplified':list(b.coords)} for a,b in zip(original,chains)],'cities':[{'name':name,'beforeShortEdges':short_edges(a),'shortEdges':short_edges(p),'beforeTurns':turns(a),'turns':turns(p),'acuteAngles':len(acute_vertices(p))} for name,a,p in zip(names,initial,current)],**stats(real,current)}
     return current,report
 
 

@@ -7,6 +7,7 @@ import json, math
 from pathlib import Path
 import shapely
 from shapely.geometry import LineString, Polygon, Point
+from shapely.strtree import STRtree
 from shapely.ops import unary_union, linemerge, polygonize
 from generate_map import (ROOT, geometry_from_path, read_reference, topology_signature,
                           validate_step, svg_path, label_for, stats, rings)
@@ -64,10 +65,14 @@ def rotations(chains):
     return result
 
 def rebuild(chains,owners):
-    groups=[[] for _ in owners]
+    groups=[[] for _ in owners];index=STRtree(owners)
     for face in polygonize(unary_union(chains)):
-        overlap=[face.intersection(p).area for p in owners]
-        groups[max(range(len(owners)),key=lambda i:overlap[i])].append(face)
+        # Bounds pruning preserves maximum-overlap ownership and lowest-index ties.
+        candidates=sorted(map(int,index.query(face)))
+        overlap=[(face.intersection(owners[i]).area,-i) for i in candidates]
+        area,negative_owner=max(overlap,default=(0,0))
+        owner=-negative_owner if area>0 else 0
+        groups[owner].append(face)
     return [unary_union(g) for g in groups]
 
 def simplify(initial,real,tolerance=18.0):

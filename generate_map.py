@@ -20,12 +20,14 @@ def read_reference():
     return json.loads((ROOT/'dist/reference-data.js').read_text().split(' = ',1)[1].rstrip(';\n'))
 
 def geometry_from_path(path):
-    # The retained source consists of exterior rings, including Jiujiang islands.
+    # Match SVG even-odd filling, including nested holes in later provinces.
     polys=[]
     for part in path.split('M')[1:]:
         coords=[tuple(map(float,p.split(','))) for p in part.split('Z')[0].strip().replace('L','').split()]
         polys.append(Polygon(coords))
-    return MultiPolygon(polys) if len(polys)>1 else polys[0]
+    out=polys[0]
+    for p in polys[1:]:out=out.symmetric_difference(p)
+    return out
 
 def polygon_parts(g):return list(g.geoms) if g.geom_type=='MultiPolygon' else [g]
 def rings(g):
