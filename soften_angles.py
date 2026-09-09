@@ -37,14 +37,14 @@ def acute_vertices(poly):
 def score(polys):return (sum(len(acute_vertices(p)) for p in polys),sum(turns(p) for p in polys))
 
 
-def candidates(points,sharp):
+def candidates(points,sharp,steps=(2,4,6,8)):
     # Junctions need a short initial leg in a new direction. A monotone
     # endpoint-to-endpoint route cannot repair every acute meeting angle.
     for reverse in [False,True]:
         pp=points[::-1] if reverse else points
         if pp[0] not in sharp:continue
         a,b=pp[:2]
-        for size in [2,4,6,8]:
+        for size in steps:
             for dx,dy in [(1,0),(1,1),(0,1),(-1,1),(-1,0),(-1,-1),(0,-1),(1,-1)]:
                 c=(a[0]+size*dx,a[1]+size*dy)
                 for route in alternatives(c,b):
@@ -62,7 +62,7 @@ def candidates(points,sharp):
         a,b,c=points[i-1:i+2]
         la=max(abs(a[0]-b[0]),abs(a[1]-b[1]));lc=max(abs(c[0]-b[0]),abs(c[1]-b[1]))
         if min(la,lc)==0:continue
-        for size in [2,4,6,8]:
+        for size in steps:
             for ratio in [.5,1,2]:
                 x=size;y=size*ratio
                 if x>=la*.8 or y>=lc*.8:continue
@@ -73,21 +73,30 @@ def candidates(points,sharp):
                 yield clean(points[:i]+[p,q]+points[i+1:])
 
 
-def soften(initial,real):
+def soften(initial,real,*,locked_count=0,expected_topology=None,split_rings=False,first_improvement=False,detail_steps=(2,4,6,8)):
     initial,removed=filter_parts(initial);real,source_removed=filter_parts(real)
-    expected=topology_signature(real)
+    expected=topology_signature(real) if expected_topology is None else expected_topology
     assert validate_step(initial,expected) is None
     network=linemerge(unary_union([p.boundary for p in initial]))
     chains=sorted([LineString(clean(g.coords)) for g in network.geoms],key=lambda g:tuple(g.coords))
+    if split_rings:
+        expanded=[]
+        for g in chains:
+            if not g.is_ring:expanded.append(g);continue
+            pp=list(g.coords)[:-1];k=min(range(len(pp)),key=lambda i:pp[i]);pp=pp[k:]+pp[:k];j=max(range(1,len(pp)),key=lambda i:(pp[i][0]-pp[0][0])**2+(pp[i][1]-pp[0][1])**2)
+            expanded.extend([LineString(pp[:j+1]),LineString(pp[j:]+pp[:1])])
+        chains=expanded
+    frozen=unary_union(initial[:locked_count]) if locked_count else None
     original=list(chains);rotation=rotations(chains);current=initial
     trace=[score(current)];accepted=0
     while True:
         best=None;sharp={tuple(v["point"]) for p in current for v in acute_vertices(p)}
         for k,line in enumerate(chains):
             if line.is_ring:continue
+            if frozen is not None and line.intersection(frozen.boundary).length>1e-7:continue
             others=unary_union([g for i,g in enumerate(chains) if i!=k]);contacts=line.intersection(others)
             seen=set()
-            for pp in candidates(list(line.coords),sharp):
+            for pp in candidates(list(line.coords),sharp,detail_steps):
                 key=tuple(pp)
                 if key in seen:continue
                 seen.add(key);candidate=LineString(pp)
@@ -100,10 +109,13 @@ def soften(initial,real):
                 if rotations(proposal)!=rotation:continue
                 polys=rebuild(proposal,initial);s=score(polys)
                 if s>=trace[-1]:continue
+                if any(not a.equals(b) for a,b in zip(initial[:locked_count],polys[:locked_count])):continue
                 if validate_step(polys,expected):continue
                 if any(p.intersection(r).area/p.union(r).area<.75 or abs(p.area-r.area)/r.area>.15 for p,r in zip(polys,real)):continue
                 rank=(s,original[k].hausdorff_distance(candidate),k,key)
                 if best is None or rank<best[0]:best=(rank,proposal,polys)
+                if first_improvement:break
+            if best is not None and first_improvement:break
         if best is None:break
         _,chains,current=best;trace.append(score(current));accepted+=1
         print('angle improvement',accepted,trace[-1],flush=True)

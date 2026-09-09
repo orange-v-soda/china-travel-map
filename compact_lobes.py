@@ -26,11 +26,12 @@ def short_edges(poly):
 def rotation_signature(chains):return sorted(rotations(chains).values())
 
 
-def optimize(initial,real,names,*,target_names=None,objective_fn=None,boundary_fn=None,limit=LIMIT,chain_routes=alternatives):
-    real,_=filter_parts(real);expected=topology_signature(real)
+def optimize(initial,real,names,*,target_names=None,objective_fn=None,boundary_fn=None,limit=LIMIT,chain_routes=alternatives,locked_count=0,expected_topology=None):
+    real,_=filter_parts(real);expected=topology_signature(real) if expected_topology is None else expected_topology
     network=linemerge(unary_union([p.boundary for p in initial]))
     chains=sorted([LineString(clean(g.coords)) for g in network.geoms],key=lambda g:tuple(g.coords))
     original=list(chains);rotation=rotation_signature(chains);current=initial
+    frozen=unary_union(initial[:locked_count]) if locked_count else None
     selected=TARGETS if target_names is None else set(target_names)
     targets=[i for i,n in enumerate(names) if n in selected]
     def objective(polys):return objective_fn(polys) if objective_fn else (sum(short_edges(polys[i]) for i in targets),sum(turns(p) for p in polys))
@@ -44,6 +45,7 @@ def optimize(initial,real,names,*,target_names=None,objective_fn=None,boundary_f
         if rotation_signature(proposal)!=rotation:return None
         if any(not valid_line(k,tuple(g.coords)) for k,g in enumerate(proposal)):return None
         polys=rebuild(proposal,initial)
+        if any(not a.equals(b) for a,b in zip(initial[:locked_count],polys[:locked_count])):return None
         score=objective(polys)
         if score>=trace[-1] or any(acute_vertices(p) for p in polys):return None
         if validate_step(polys,expected):return None
@@ -65,6 +67,7 @@ def optimize(initial,real,names,*,target_names=None,objective_fn=None,boundary_f
         target_boundary=boundary_fn(current) if boundary_fn else unary_union([current[i].boundary for i in targets])
         for k,line in enumerate(chains):
             if line.is_ring or line.intersection(target_boundary).length<1e-6:continue
+            if frozen is not None and line.intersection(frozen.boundary).length>1e-7:continue
             pp=list(line.coords)
             for i in range(len(pp)-2):
                 for j in range(i+2,len(pp)):
@@ -79,6 +82,7 @@ def optimize(initial,real,names,*,target_names=None,objective_fn=None,boundary_f
             for reverse,a in [(False,pp[0]),(True,pp[-1])]:nodes.setdefault(a,[]).append((k,reverse))
         for node,arms in sorted(nodes.items()):
             if len(arms)!=3 or target_boundary.distance(Point(node))>1e-6:continue
+            if frozen is not None and frozen.boundary.distance(Point(node))<1e-7:continue
             local=[]
             for k,rev in arms:
                 pp=list(chains[k].coords);pp=pp[::-1] if rev else pp

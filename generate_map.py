@@ -51,12 +51,12 @@ def route(a,b,grid=GRID):
         if not out or v!=out[-1]:out.append(v)
     return out
 
-def octilinear(polys):
+def octilinear(polys,grid=GRID):
     lines=[]
     for poly in polys:
         for ring in rings(poly):
             for a,b in zip(ring,ring[1:]):
-                rr=route(a,b)
+                rr=route(a,b,grid)
                 if len(rr)>1:lines.append(LineString(rr))
     # Polygonize the shared, noded network once, so faces cannot overlap.
     faces=list(polygonize(unary_union(lines)));groups=[[] for p in polys]
