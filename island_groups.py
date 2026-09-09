@@ -35,3 +35,17 @@ def fit_groups(source,obstacles,separation=1.0):
         if separation>=1.6:raise ValueError('Cannot separate island groups')
         return fit_groups(source,obstacles,round(separation+.05,2))
     return unary_union(blocks),{'method':'area-weighted k-means, 3 clipped rectangles','minimumGap':6,'centerSeparationScale':separation,'groups':records,'sourceArea':source.area,'displayArea':sum(p.area for p in blocks)}
+
+def fit_detached_island(part,obstacles):
+    """Keep a significant coastal island legible, with the smallest safe shift."""
+    x,y=part.centroid.coords[0];x=round(x*2)/2;y=round(y*2)/2
+    left,top,right,bottom=part.bounds;ratio=max(.7,min(1.5,(right-left)/(bottom-top)))
+    target=max(160,part.area*1.25);w=round(math.sqrt(target*ratio)*2)/2;h=round(math.sqrt(target/ratio)*2)/2;cut=round(min(w,h)*.2*2)/2
+    candidates=sorted((dx*dx+dy*dy,dx,dy) for dx in range(-24,25) for dy in range(-24,25))
+    for distance,dx,dy in candidates:
+        if distance>24**2:break
+        cx,cy=x+dx,y+dy
+        g=Polygon([(cx-w/2+cut,cy-h/2),(cx+w/2-cut,cy-h/2),(cx+w/2,cy-h/2+cut),(cx+w/2,cy+h/2-cut),(cx+w/2-cut,cy+h/2),(cx-w/2+cut,cy+h/2),(cx-w/2,cy+h/2-cut),(cx-w/2,cy-h/2+cut)])
+        if g.distance(obstacles)>=2.5:
+            return g,{'sourceCenter':[x,y],'displayCenter':[cx,cy],'translation':[dx,dy],'sourceArea':part.area,'displayArea':g.area,'minimumGap':2.5}
+    raise ValueError('Cannot fit detached island within 24 units of its source center')

@@ -16,8 +16,8 @@ def freeze():
         raw=(ROOT/'dist/map-data.js').read_bytes();d=json.loads(raw.decode().split(' = ',1)[1].rstrip(';\n'))
         save('data/jiangxi-v08-frozen.json',{'sourceDataSha256':hashlib.sha256(raw).hexdigest(),'regions':[{'id':r['id'],'name':r['name'],**r['variants']['shared']} for r in d['regions']]})
     return load('data/jiangxi-v08-frozen.json')
-def source():
-    raw=(ROOT/'data/zhejiang-source.geojson').read_bytes();d=json.loads(raw);c=load('data/jiangxi-projection.json')
+def source(filename="zhejiang-source.geojson",province="浙江"):
+    raw=(ROOT/'data'/filename).read_bytes();d=json.loads(raw);c=load('data/jiangxi-projection.json')
     def xy(p):
         x=math.radians(p[0]);y=-math.log(math.tan(math.pi/4+math.radians(p[1])/2))
         return round(c['dx']+(x-c['left'])*c['scale'],2),round(c['dy']+(y-c['top'])*c['scale'],2)
@@ -25,7 +25,7 @@ def source():
     for f in d['features']:
         parts=f['geometry']['coordinates'] if f['geometry']['type']=='MultiPolygon' else [f['geometry']['coordinates']]
         g=unary_union([Polygon([xy(p) for p in pp[0]],[[xy(p) for p in rr] for rr in pp[1:]]) for pp in parts]);polys.append(g)
-        props=f['properties'];regions.append({'id':str(props['adcode']),'name':props['name'].removesuffix('市'),'province':'浙江','path':svg_path(g),'label':label_for(g,xy(props.get('centroid',props['center'])))})
+        props=f['properties'];regions.append({'id':str(props['adcode']),'name':props['name'].removesuffix('市'),'province':province,'path':svg_path(g),'label':label_for(g,xy(props.get('centroid',props['center'])))})
     return regions,polys,hashlib.sha256(raw).hexdigest()
 def bodies(polys):return [max(polygon_parts(p),key=lambda q:q.area) for p in polys]
 def base():

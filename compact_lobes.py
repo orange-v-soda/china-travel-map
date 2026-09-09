@@ -26,7 +26,7 @@ def short_edges(poly):
 def rotation_signature(chains):return sorted(rotations(chains).values())
 
 
-def optimize(initial,real,names,*,target_names=None,objective_fn=None,boundary_fn=None,limit=LIMIT,chain_routes=alternatives,locked_count=0,expected_topology=None):
+def optimize(initial,real,names,*,target_names=None,objective_fn=None,boundary_fn=None,limit=LIMIT,chain_routes=alternatives,locked_count=0,expected_topology=None,allowed_acute_points=()):
     real,_=filter_parts(real);expected=topology_signature(real) if expected_topology is None else expected_topology
     network=linemerge(unary_union([p.boundary for p in initial]))
     chains=sorted([LineString(clean(g.coords)) for g in network.geoms],key=lambda g:tuple(g.coords))
@@ -35,6 +35,7 @@ def optimize(initial,real,names,*,target_names=None,objective_fn=None,boundary_f
     selected=TARGETS if target_names is None else set(target_names)
     targets=[i for i,n in enumerate(names) if n in selected]
     def objective(polys):return objective_fn(polys) if objective_fn else (sum(short_edges(polys[i]) for i in targets),sum(turns(p) for p in polys))
+    allowed_acute_points=set(map(tuple,allowed_acute_points))
     trace=[objective(current)];edits=[]
     corridors=[g.buffer(limit,quad_segs=16) for g in original]
     @lru_cache(maxsize=20000)
@@ -47,7 +48,7 @@ def optimize(initial,real,names,*,target_names=None,objective_fn=None,boundary_f
         polys=rebuild(proposal,initial)
         if any(not a.equals(b) for a,b in zip(initial[:locked_count],polys[:locked_count])):return None
         score=objective(polys)
-        if score>=trace[-1] or any(acute_vertices(p) for p in polys):return None
+        if score>=trace[-1] or any(tuple(v["point"]) not in allowed_acute_points for p in polys for v in acute_vertices(p)):return None
         if validate_step(polys,expected):return None
         if any(p.intersection(r).area/p.union(r).area<.75 or abs(p.area-r.area)/r.area>.15 for p,r in zip(polys,real)):return None
         # Keep each city's change bounded against the frozen v0.6 geometry.

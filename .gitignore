@@ -5,3 +5,8 @@ data/zhejiang-base.json
 data/zhejiang-anchored.json
 data/zhejiang-finished.json
 data/zhejiang-final.json
+
+data/fujian-base.json
+data/fujian-anchored.json
+data/fujian-finished.json
+data/fujian-final.json
