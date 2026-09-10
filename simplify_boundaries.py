@@ -75,7 +75,7 @@ def rebuild(chains,owners):
         groups[owner].append(face)
     return [unary_union(g) for g in groups]
 
-def simplify(initial,real,tolerance=18.0,*,minimum_iou=.75):
+def simplify(initial,real,tolerance=18.0,*,minimum_iou=.75,first_improvement=False,checkpoint_path=None):
     if not math.isfinite(tolerance) or tolerance<=0:raise ValueError('tolerance must be finite and positive')
     if not 0<minimum_iou<=1:raise ValueError('minimum_iou must be in (0, 1]')
     expected=topology_signature(real)
@@ -86,52 +86,79 @@ def simplify(initial,real,tolerance=18.0,*,minimum_iou=.75):
     current=list(initial);accepted=0;rejections={};passes=0;trace=[sum(turns(p) for p in current)]
     source_limits=[p.boundary.hausdorff_distance(r.boundary)+tolerance for p,r in zip(initial,real)]
     source_corridors=[r.boundary.buffer(limit,quad_segs=16) for r,limit in zip(real,source_limits)]
+    shapely.prepare(corridors)
+    shapely.prepare(source_corridors)
+    from functools import lru_cache
+    @lru_cache(maxsize=2048)
+    def source_iou(p,i):
+        r=real[i];return p.intersection(r).area/p.union(r).area
+    @lru_cache(maxsize=2048)
+    def source_deviation_ok(p,i):
+        return source_corridors[i].covers(p.boundary) and p.boundary.buffer(source_limits[i],quad_segs=16).covers(real[i].boundary)
+    candidate_boxes=[g.envelope for g in corridors]
+    shapely.prepare(candidate_boxes)
+    @lru_cache(maxsize=32768)
+    def feasible_geometry(k,line,candidate,others):
+        if not candidate.is_simple or not corridors[k].covers(candidate):return False
+        if not candidate.buffer(tolerance,quad_segs=16).covers(original[k]):return False
+        if not candidate.intersection(others).equals(line.intersection(others)):return False
+        swept=list(polygonize(unary_union([line,candidate])))
+        return not any(p.buffer(-1e-6).intersects(others) for p in swept)
+    completed=False
+    if checkpoint_path is not None:
+        import hashlib
+        checkpoint_path=Path(checkpoint_path)
+        key=hashlib.sha256(json.dumps({'algorithm':'short-window-v1','initial':[p.wkb_hex for p in initial],'real':[p.wkb_hex for p in real],'tolerance':tolerance,'minimumIou':minimum_iou,'firstImprovement':first_improvement},sort_keys=True).encode()).hexdigest()
+        if checkpoint_path.exists():
+            saved=json.loads(checkpoint_path.read_text())
+            if saved['key']!=key:raise ValueError('Base checkpoint input or strategy changed')
+            chains=[LineString(c) for c in saved['chains']];current=rebuild(chains,initial)
+            assert validate_step(current,expected) is None and rotations(chains)==expected_rotations
+            accepted=saved['accepted'];passes=saved['passes'];trace=saved['trace'];rejections=saved['rejections'];completed=saved['completed']
+            print('Resumed base sweep',passes,'turns',trace[-1],flush=True)
     # Stable cyclic sweep: edits reduce the integer segment count, so termination
     # is guaranteed without an iteration cap. A full unchanged sweep ends it.
-    while True:
+    while not completed:
         changed=False;passes+=1
         for k,line in enumerate(chains):
             pp=list(line.coords)
             if line.is_ring or len(pp)<4:continue # protect islands/closed rings
-            others=unary_union([g for i,g in enumerate(chains) if i!=k])
-            old_contacts=line.intersection(others)
-            choices=[]
-            for span in range(len(pp)-1,2,-1):
-                for i in range(len(pp)-span):
-                    j=i+span
-                    for shortcut in alternatives(pp[i],pp[j]):
-                        newpoints=clean(pp[:i]+shortcut+pp[j+1:])
-                        gain=len(pp)-len(newpoints)
-                        if gain<=0:continue
-                        candidate=LineString(newpoints)
-                        if not candidate.is_simple:continue
-                        if not corridors[k].covers(candidate):continue
-                        if not candidate.buffer(tolerance,quad_segs=16).covers(original[k]):continue
-                        if not candidate.intersection(others).equals(old_contacts):continue
-                        # Swept pockets may not swallow another boundary, island,
-                        # or junction even when old/new intersections are equal.
-                        swept=list(polygonize(unary_union([line,candidate])))
-                        if any(p.buffer(-1e-6).intersects(others) for p in swept):continue
-                        err=original[k].hausdorff_distance(candidate)
-                        short=sum(math.dist(a,b)<6 for a,b in zip(newpoints,newpoints[1:]))
-                        choices.append((-gain,short,err,tuple(newpoints),candidate))
-            for _,_,_,_,candidate in sorted(choices,key=lambda c:c[:4]):
+            others=unary_union([g for i,g in enumerate(chains) if i!=k and candidate_boxes[k].intersects(g)])
+            def choices_for_line():
+                for span in (range(3,len(pp)) if first_improvement else range(len(pp)-1,2,-1)):
+                    for i in range(len(pp)-span):
+                        j=i+span
+                        for shortcut in alternatives(pp[i],pp[j]):
+                            newpoints=clean(pp[:i]+shortcut+pp[j+1:])
+                            gain=len(pp)-len(newpoints)
+                            if gain<=0:continue
+                            candidate=LineString(newpoints)
+                            if not feasible_geometry(k,line,candidate,others):continue
+                            err=original[k].hausdorff_distance(candidate)
+                            short=sum(math.dist(a,b)<6 for a,b in zip(newpoints,newpoints[1:]))
+                            yield (-gain,short,err,tuple(newpoints),candidate)
+            choices=choices_for_line()
+            for _,_,_,_,candidate in (choices if first_improvement else sorted(choices,key=lambda c:c[:4])):
                 proposed=list(chains);proposed[k]=candidate
                 if rotations(proposed)!=expected_rotations:continue
                 polys=rebuild(proposed,initial)
                 error=validate_step(polys,expected)
                 if error is None and sum(turns(p) for p in polys)>=sum(turns(p) for p in current):error='no_turn_reduction'
-                if error is None and any(p.intersection(r).area/p.union(r).area < minimum_iou for p,r in zip(polys,real)):error='city_iou_budget'
+                if error is None and any(source_iou(p,i) < minimum_iou for i,p in enumerate(polys)):error='city_iou_budget'
                 if error is None:
                     # Cumulative area error, measured against real source (not last pass).
                     if any(abs(p.area-r.area)/r.area>max(.15,abs(b.area-r.area)/r.area+1e-6) for p,b,r in zip(polys,initial,real)):error='area_budget'
-                    elif any(not corridor.covers(p.boundary) or not p.boundary.buffer(limit,quad_segs=16).covers(r.boundary) for p,r,corridor,limit in zip(polys,real,source_corridors,source_limits)):error='source_distance_budget'
+                    elif any(not source_deviation_ok(p,i) for i,p in enumerate(polys)):error='source_distance_budget'
                 if error:
                     rejections[error]=rejections.get(error,0)+1;continue
                 chains=proposed;current=polys;accepted+=1;changed=True;trace.append(sum(turns(p) for p in current));break
-        if not changed:break
+        completed=not changed
+        if checkpoint_path is not None:
+            saved={'key':key,'chains':[list(g.coords) for g in chains],'accepted':accepted,'passes':passes,'trace':trace,'rejections':rejections,'completed':completed}
+            temporary=checkpoint_path.with_suffix('.tmp');temporary.write_text(json.dumps(saved));temporary.replace(checkpoint_path)
+        if completed:break
         print('sweep',passes,'accepted',accepted,'turns',sum(turns(p) for p in current),flush=True)
-    report={'algorithm':'shared-boundary-block-shortcuts','tolerance':tolerance,'areaErrorLimit':.15,'minimumCityIou':minimum_iou,'junctionRotationPreserved':rotations(chains)==expected_rotations,'acceptedShortcuts':accepted,'sweeps':passes,'stopReason':'no_feasible_reducing_shortcut','rejections':rejections,'beforeTurns':[turns(p) for p in initial],'afterTurns':[turns(p) for p in current],'chainMaxDeviation':max(a.hausdorff_distance(b) for a,b in zip(original,chains)),**stats(real,current)}
+    report={'algorithm':'shared-boundary-block-shortcuts','candidateSelection':'first_improvement' if first_improvement else 'best_improvement','tolerance':tolerance,'areaErrorLimit':.15,'minimumCityIou':minimum_iou,'junctionRotationPreserved':rotations(chains)==expected_rotations,'acceptedShortcuts':accepted,'sweeps':passes,'stopReason':'no_feasible_reducing_shortcut','rejections':rejections,'beforeTurns':[turns(p) for p in initial],'afterTurns':[turns(p) for p in current],'chainMaxDeviation':max(a.hausdorff_distance(b) for a,b in zip(original,chains)),**stats(real,current)}
     report['turnTrace']=trace
     report['sourceBoundaryLimits']=source_limits
     report['chains']=[{'original':list(a.coords),'simplified':list(b.coords)} for a,b in zip(original,chains)]

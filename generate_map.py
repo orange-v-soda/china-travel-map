@@ -84,18 +84,21 @@ def stats(original,polys):
 def component_signature(g):
     return (len(polygon_parts(g)),tuple(sorted(len(p.interiors) for p in polygon_parts(g))))
 
+from functools import lru_cache
+
+@lru_cache(maxsize=8192)
+def contact_signature(p,q):
+    # Shapely geometries are immutable: unchanged borders can reuse exact results.
+    x=p.boundary.intersection(q.boundary)
+    if x.is_empty:return ('none',0)
+    if x.length<1e-6:return ('point',len(x.geoms) if hasattr(x,'geoms') else 1)
+    if x.geom_type=='LineString':return ('line',1)
+    if x.geom_type=='MultiLineString':
+        merged=linemerge(x);return ('line',len(merged.geoms) if hasattr(merged,'geoms') else 1)
+    return (x.geom_type,len(x.geoms) if hasattr(x,'geoms') else 1)
+
 def topology_signature(polys):
-    pairs=[]
-    for i,p in enumerate(polys):
-        for j in range(i+1,len(polys)):
-            x=p.boundary.intersection(polys[j].boundary)
-            if x.is_empty:kind=('none',0)
-            elif x.length<1e-6:kind=('point',len(x.geoms) if hasattr(x,'geoms') else 1)
-            elif x.geom_type=='LineString':kind=('line',1)
-            elif x.geom_type=='MultiLineString':
-                merged=linemerge(x);kind=('line',len(merged.geoms) if hasattr(merged,'geoms') else 1)
-            else:kind=(x.geom_type,len(x.geoms) if hasattr(x,'geoms') else 1)
-            pairs.append((i,j,kind))
+    pairs=[(i,j,contact_signature(p,polys[j])) for i,p in enumerate(polys) for j in range(i+1,len(polys))]
     return (tuple(component_signature(p) for p in polys),component_signature(unary_union(polys)),tuple(pairs))
 
 def lock_tiny_components(real):

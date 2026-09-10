@@ -1,5 +1,6 @@
 """Remove small attached hooks by shared-chain shortcuts and junction relocation."""
 import json,math,itertools,hashlib
+import shapely
 from pathlib import Path
 from functools import lru_cache
 from shapely.geometry import LineString, Point
@@ -43,11 +44,18 @@ def optimize(initial,real,names,*,target_names=None,objective_fn=None,boundary_f
     if checkpoint_path and Path(checkpoint_path).exists():
         checkpoint=json.loads(Path(checkpoint_path).read_text())
         if checkpoint['key']!=checkpoint_key:raise ValueError('Checkpoint input differs; remove stale checkpoint before restarting')
-        chains=[LineString(c) for c in checkpoint['chains']];current=[geometry_from_path(p) for p in checkpoint['paths']];trace=[tuple(v) for v in checkpoint['trace']];edits=checkpoint['edits']
+        chains=[LineString(c) for c in checkpoint['chains']];current=rebuild(chains,initial);trace=[tuple(v) for v in checkpoint['trace']];edits=checkpoint['edits']
         assert validate_step(current,expected) is None
         assert all(a.equals(b) for a,b in zip(initial[:locked_count],current[:locked_count]))
         print('Resumed',len(edits),'accepted improvements',flush=True)
     corridors=[g.buffer(limit,quad_segs=16) for g in original]
+    city_corridors=[p.boundary.buffer(limit,quad_segs=16) for p in initial]
+    shapely.prepare(corridors)
+    shapely.prepare(city_corridors)
+    @lru_cache(maxsize=4096)
+    def city_budget_ok(i,p):
+        r=real[i];a=initial[i]
+        return p.intersection(r).area/p.union(r).area>=.75 and abs(p.area-r.area)/r.area<=.15 and city_corridors[i].covers(p.boundary) and p.boundary.buffer(limit,quad_segs=16).covers(a.boundary)
     @lru_cache(maxsize=20000)
     def valid_line(k,coords):
         g=LineString(coords)
@@ -60,9 +68,8 @@ def optimize(initial,real,names,*,target_names=None,objective_fn=None,boundary_f
         score=objective(polys)
         if score>=trace[-1] or any(tuple(v["point"]) not in allowed_acute_points for p in polys for v in acute_vertices(p)):return None
         if validate_step(polys,expected):return None
-        if any(p.intersection(r).area/p.union(r).area<.75 or abs(p.area-r.area)/r.area>.15 for p,r in zip(polys,real)):return None
-        # Keep each city's change bounded against the frozen v0.6 geometry.
-        if any(not a.boundary.buffer(limit,quad_segs=16).covers(p.boundary) or not p.boundary.buffer(limit,quad_segs=16).covers(a.boundary) for a,p in zip(initial,polys)):return None
+        # Budgets always refer to the frozen stage input.
+        if any(not city_budget_ok(i,p) for i,p in enumerate(polys)):return None
         delta=sum(a.symmetric_difference(p).area for a,p in zip(initial,polys))
         return score,delta,polys
     class FirstImprovement(Exception):pass
