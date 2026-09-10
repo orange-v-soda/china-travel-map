@@ -75,8 +75,9 @@ def rebuild(chains,owners):
         groups[owner].append(face)
     return [unary_union(g) for g in groups]
 
-def simplify(initial,real,tolerance=18.0):
+def simplify(initial,real,tolerance=18.0,*,minimum_iou=.75):
     if not math.isfinite(tolerance) or tolerance<=0:raise ValueError('tolerance must be finite and positive')
+    if not 0<minimum_iou<=1:raise ValueError('minimum_iou must be in (0, 1]')
     expected=topology_signature(real)
     network=linemerge(unary_union([p.boundary for p in initial]))
     chains=sorted([LineString(clean(g.coords)) for g in network.geoms],key=lambda g:tuple(g.coords))
@@ -120,7 +121,7 @@ def simplify(initial,real,tolerance=18.0):
                 polys=rebuild(proposed,initial)
                 error=validate_step(polys,expected)
                 if error is None and sum(turns(p) for p in polys)>=sum(turns(p) for p in current):error='no_turn_reduction'
-                if error is None and any(p.intersection(r).area/p.union(r).area < .75 for p,r in zip(polys,real)):error='city_iou_budget'
+                if error is None and any(p.intersection(r).area/p.union(r).area < minimum_iou for p,r in zip(polys,real)):error='city_iou_budget'
                 if error is None:
                     # Cumulative area error, measured against real source (not last pass).
                     if any(abs(p.area-r.area)/r.area>max(.15,abs(b.area-r.area)/r.area+1e-6) for p,b,r in zip(polys,initial,real)):error='area_budget'
@@ -130,7 +131,7 @@ def simplify(initial,real,tolerance=18.0):
                 chains=proposed;current=polys;accepted+=1;changed=True;trace.append(sum(turns(p) for p in current));break
         if not changed:break
         print('sweep',passes,'accepted',accepted,'turns',sum(turns(p) for p in current),flush=True)
-    report={'algorithm':'shared-boundary-block-shortcuts','tolerance':tolerance,'areaErrorLimit':.15,'minimumCityIou':.75,'junctionRotationPreserved':rotations(chains)==expected_rotations,'acceptedShortcuts':accepted,'sweeps':passes,'stopReason':'no_feasible_reducing_shortcut','rejections':rejections,'beforeTurns':[turns(p) for p in initial],'afterTurns':[turns(p) for p in current],'chainMaxDeviation':max(a.hausdorff_distance(b) for a,b in zip(original,chains)),**stats(real,current)}
+    report={'algorithm':'shared-boundary-block-shortcuts','tolerance':tolerance,'areaErrorLimit':.15,'minimumCityIou':minimum_iou,'junctionRotationPreserved':rotations(chains)==expected_rotations,'acceptedShortcuts':accepted,'sweeps':passes,'stopReason':'no_feasible_reducing_shortcut','rejections':rejections,'beforeTurns':[turns(p) for p in initial],'afterTurns':[turns(p) for p in current],'chainMaxDeviation':max(a.hausdorff_distance(b) for a,b in zip(original,chains)),**stats(real,current)}
     report['turnTrace']=trace
     report['sourceBoundaryLimits']=source_limits
     report['chains']=[{'original':list(a.coords),'simplified':list(b.coords)} for a,b in zip(original,chains)]

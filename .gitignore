@@ -18,3 +18,10 @@ data/hunan-final.json
 
 data/hunan-compact-checkpoint.json
 data/hunan-compact-checkpoint.tmp
+
+data/anhui-base.json
+data/anhui-anchored.json
+data/anhui-finished.json
+data/anhui-final.json
+data/anhui-compact-checkpoint.json
+data/anhui-compact-checkpoint.tmp

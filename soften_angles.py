@@ -86,14 +86,14 @@ def soften(initial,real,*,locked_count=0,expected_topology=None,split_rings=Fals
             pp=list(g.coords)[:-1];k=min(range(len(pp)),key=lambda i:pp[i]);pp=pp[k:]+pp[:k];j=max(range(1,len(pp)),key=lambda i:(pp[i][0]-pp[0][0])**2+(pp[i][1]-pp[0][1])**2)
             expanded.extend([LineString(pp[:j+1]),LineString(pp[j:]+pp[:1])])
         chains=expanded
-    frozen=unary_union(initial[:locked_count]) if locked_count else None
+    frozen=unary_union([p.boundary for p in initial[:locked_count]]) if locked_count else None
     original=list(chains);rotation=rotations(chains);current=initial
     trace=[score(current)];accepted=0
     while True:
         best=None;sharp={tuple(v["point"]) for p in current for v in acute_vertices(p)}
         for k,line in enumerate(chains):
             if line.is_ring:continue
-            if frozen is not None and line.intersection(frozen.boundary).length>1e-7:continue
+            if frozen is not None and line.intersection(frozen).length>1e-7:continue
             others=unary_union([g for i,g in enumerate(chains) if i!=k]);contacts=line.intersection(others)
             seen=set()
             for pp in candidates(list(line.coords),sharp,detail_steps):
