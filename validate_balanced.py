@@ -15,10 +15,10 @@ def turn_count(p):
             a=rr[i-1];c=rr[(i+1)%len(rr)];u=(b[0]-a[0],b[1]-a[1]);v=(c[0]-b[0],c[1]-b[1]);count+=abs(u[0]*v[1]-u[1]*v[0])/(math.hypot(*u)*math.hypot(*v))>1e-7
     return count
 
-def validate():
-    d=load('balanced-data.js');old=load('south-data.js');report=json.loads((ROOT/'dist/balanced-report.json').read_text())
-    assert hashlib.sha256((ROOT/'dist/south-data.js').read_bytes()).hexdigest()==report['sourceSha256']
-    assert len(d['regions'])==82 and [r['id'] for r in d['regions']]==[r['id'] for r in old['regions']]
+def validate(source_name="south-data.js",result_name="balanced-data.js",report_name="balanced-report.json"):
+    d=load(result_name);old=load(source_name);report=json.loads((ROOT/'dist'/report_name).read_text());count=len(old['regions'])
+    assert hashlib.sha256((ROOT/'dist'/source_name).read_bytes()).hexdigest()==report['sourceSha256']
+    assert len(d['regions'])==count and [r['id'] for r in d['regions']]==[r['id'] for r in old['regions']]
     assert all(r['variants']['east']==o['variants']['east'] for r,o in zip(d['regions'],old['regions']))
     pp=[geometry_from_path(r['variants']['balanced']['path']) for r in d['regions']];qq=[geometry_from_path(r['variants']['east']['path']) for r in old['regions']]
     assert all(p.is_valid for p in pp) and shapely.coverage_is_valid(pp)
@@ -40,5 +40,5 @@ def validate():
             other=unary_union([x if j!=i else x.difference(part) for j,x in enumerate(pp)])
             assert part.distance(other)>=2.5-1e-6
     assert abs(max(p.area for p in pp)/min(p.area for p in pp)-report['afterRatio'])<1e-7
-    print(json.dumps({'cities':82,'topology':'identical','turnsBefore':sum(turn_count(p) for p in qq),'turnsAfter':sum(turn_count(p) for p in pp),'acuteAngles':sum(len(acute_vertices(p)) for p in pp),'beforeRatio':report['beforeRatio'],'afterRatio':report['afterRatio'],'minimumNormalizedShapeIou':min(m['normalizedShapeIou'] for m in report['cities'])},ensure_ascii=False))
+    print(json.dumps({'cities':count,'topology':'identical','turnsBefore':sum(turn_count(p) for p in qq),'turnsAfter':sum(turn_count(p) for p in pp),'acuteAngles':sum(len(acute_vertices(p)) for p in pp),'beforeRatio':report['beforeRatio'],'afterRatio':report['afterRatio'],'minimumNormalizedShapeIou':min(m['normalizedShapeIou'] for m in report['cities'])},ensure_ascii=False))
 if __name__=='__main__':validate()

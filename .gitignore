@@ -45,3 +45,6 @@ data/guangdong-base-preview.json
 data/guangdong-anchor-preview.json
 
 data/guangdong-generation.lock
+
+# Special-region geometry intermediates
+data/special-initial.json

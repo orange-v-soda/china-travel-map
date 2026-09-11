@@ -1,0 +1,707 @@
+{
+  "version": "0.16.0",
+  "retrieved": "2026-09-11",
+  "baseSha256": "10ac3477afabe7f08c2d2d1dc9b62e65340ba56d172b0b5836b657ecd55d883b",
+  "sourceReports": [
+    {
+      "name": "香港",
+      "sourceSha256": "8fa38f726438a2bab4141930bfe3e8590c6ae060ba163da502149ec7ea4d6d53",
+      "sourceFile": "hongkong-source.geojson",
+      "donor": "深圳",
+      "tolerance": 2,
+      "accepted": 16,
+      "initialTurns": 96,
+      "turns": 25,
+      "iou": 0.7501609583650966,
+      "areaError": 0.03435809381116524,
+      "carvedArea": 15.0859375,
+      "finalMainlandIou": 0.7501609583650946,
+      "finalMainlandAreaError": 0.03435809381116524,
+      "sourceParts": 137,
+      "retainedParts": 1
+    },
+    {
+      "name": "澳门",
+      "sourceSha256": "6f154b3a101339b2ecb714289f95041e9653bca09d7a08b26567cd1f5b7acdc6",
+      "sourceFile": "macau-source.geojson",
+      "donor": "珠海",
+      "tolerance": 1,
+      "accepted": 4,
+      "initialTurns": 17,
+      "turns": 7,
+      "iou": 0.7521571956860826,
+      "areaError": 0.110674961896252,
+      "translation": [
+        9.75,
+        -0.0
+      ],
+      "placement": "coastal adjacency illustration",
+      "carvedArea": 0.0,
+      "finalMainlandIou": 0.0,
+      "finalMainlandAreaError": 0.110674961896252,
+      "sourceParts": 2,
+      "retainedParts": 1
+    },
+    {
+      "name": "上海",
+      "sourceSha256": "9861383590cc045f85f5b114a12731c057d56f8f322dca913ad0351306892e20",
+      "sourceFile": "shanghai-source.geojson",
+      "donor": "嘉兴",
+      "tolerance": 6,
+      "accepted": 5,
+      "initialTurns": 38,
+      "turns": 9,
+      "iou": 0.7526520366139766,
+      "areaError": 0.03516697435040169,
+      "translation": [
+        -2.375,
+        0.0
+      ],
+      "carvedArea": 0.0,
+      "finalMainlandIou": 0.7632320375130484,
+      "finalMainlandAreaError": 0.03516697435040169,
+      "sourceParts": 11,
+      "retainedParts": 3
+    }
+  ],
+  "islands": [
+    {
+      "city": "上海",
+      "translation": [
+        0,
+        0
+      ],
+      "sourceArea": 1833.4588999999983,
+      "displayArea": 2019.09375,
+      "minimumGap": 2.5,
+      "fit": {
+        "tolerance": 4,
+        "accepted": 4,
+        "initialTurns": 18,
+        "turns": 9,
+        "iou": 0.7561815893265301,
+        "areaError": 0.10124843812970223
+      },
+      "path": "M931.5,-0.125 L954.25,-0.125 L954.25,-21.375 L936.625,-21.375 L907.625,-50.375 L884.875,-50.375 L872.0,-37.5 L891.25,-18.25 L913.375,-18.25 L931.5,-0.125 Z"
+    },
+    {
+      "city": "上海",
+      "sourceCenter": [
+        941.5,
+        9.0
+      ],
+      "displayCenter": [
+        945.5,
+        11.0
+      ],
+      "translation": [
+        4,
+        2
+      ],
+      "sourceArea": 343.8277500000004,
+      "displayArea": 409.0,
+      "minimumGap": 2.5,
+      "sourceGroupParts": 2,
+      "path": "M936.25,2.5 L954.75,2.5 L958.25,6.0 L958.25,16.0 L954.75,19.5 L936.25,19.5 L932.75,16.0 L932.75,6.0 L936.25,2.5 Z"
+    }
+  ],
+  "regions": [
+    {
+      "name": "南昌",
+      "area": 7780.5,
+      "turns": 6,
+      "parts": 1,
+      "acuteAngles": 0
+    },
+    {
+      "name": "景德镇",
+      "area": 5045.0,
+      "turns": 8,
+      "parts": 1,
+      "acuteAngles": 0
+    },
+    {
+      "name": "萍乡",
+      "area": 3369.5,
+      "turns": 17,
+      "parts": 1,
+      "acuteAngles": 0
+    },
+    {
+      "name": "九江",
+      "area": 18232.5,
+      "turns": 14,
+      "parts": 1,
+      "acuteAngles": 0
+    },
+    {
+      "name": "新余",
+      "area": 3478.0,
+      "turns": 8,
+      "parts": 1,
+      "acuteAngles": 0
+    },
+    {
+      "name": "鹰潭",
+      "area": 2953.5,
+      "turns": 8,
+      "parts": 1,
+      "acuteAngles": 0
+    },
+    {
+      "name": "赣州",
+      "area": 36332.5,
+      "turns": 12,
+      "parts": 1,
+      "acuteAngles": 0
+    },
+    {
+      "name": "吉安",
+      "area": 23187.0,
+      "turns": 10,
+      "parts": 1,
+      "acuteAngles": 0
+    },
+    {
+      "name": "宜春",
+      "area": 17606.5,
+      "turns": 20,
+      "parts": 1,
+      "acuteAngles": 0
+    },
+    {
+      "name": "抚州",
+      "area": 20283.5,
+      "turns": 12,
+      "parts": 1,
+      "acuteAngles": 0
+    },
+    {
+      "name": "上饶",
+      "area": 22833.5,
+      "turns": 17,
+      "parts": 1,
+      "acuteAngles": 0
+    },
+    {
+      "name": "杭州",
+      "area": 19175.75,
+      "turns": 11,
+      "parts": 1,
+      "acuteAngles": 0
+    },
+    {
+      "name": "宁波",
+      "area": 8895.625,
+      "turns": 11,
+      "parts": 1,
+      "acuteAngles": 0
+    },
+    {
+      "name": "温州",
+      "area": 10459.375,
+      "turns": 12,
+      "parts": 1,
+      "acuteAngles": 0
+    },
+    {
+      "name": "嘉兴",
+      "area": 4342.125,
+      "turns": 7,
+      "parts": 1,
+      "acuteAngles": 0
+    },
+    {
+      "name": "湖州",
+      "area": 5320.75,
+      "turns": 11,
+      "parts": 1,
+      "acuteAngles": 0
+    },
+    {
+      "name": "绍兴",
+      "area": 8163.25,
+      "turns": 11,
+      "parts": 1,
+      "acuteAngles": 0
+    },
+    {
+      "name": "金华",
+      "area": 10599.125,
+      "turns": 9,
+      "parts": 1,
+      "acuteAngles": 0
+    },
+    {
+      "name": "衢州",
+      "area": 8341.5,
+      "turns": 9,
+      "parts": 1,
+      "acuteAngles": 0
+    },
+    {
+      "name": "舟山",
+      "area": 2352.25,
+      "turns": 24,
+      "parts": 3,
+      "acuteAngles": 0
+    },
+    {
+      "name": "台州",
+      "area": 10853.625,
+      "turns": 10,
+      "parts": 1,
+      "acuteAngles": 0
+    },
+    {
+      "name": "丽水",
+      "area": 18785.875,
+      "turns": 7,
+      "parts": 1,
+      "acuteAngles": 0
+    },
+    {
+      "name": "福州",
+      "area": 9770.0,
+      "turns": 9,
+      "parts": 1,
+      "acuteAngles": 0
+    },
+    {
+      "name": "厦门",
+      "area": 1761.625,
+      "turns": 14,
+      "parts": 2,
+      "acuteAngles": 0
+    },
+    {
+      "name": "莆田",
+      "area": 3343.25,
+      "turns": 7,
+      "parts": 1,
+      "acuteAngles": 0
+    },
+    {
+      "name": "三明",
+      "area": 19894.375,
+      "turns": 13,
+      "parts": 1,
+      "acuteAngles": 0
+    },
+    {
+      "name": "泉州",
+      "area": 11533.5,
+      "turns": 10,
+      "parts": 1,
+      "acuteAngles": 0
+    },
+    {
+      "name": "漳州",
+      "area": 11964.75,
+      "turns": 9,
+      "parts": 1,
+      "acuteAngles": 0
+    },
+    {
+      "name": "南平",
+      "area": 24074.5,
+      "turns": 19,
+      "parts": 1,
+      "acuteAngles": 1
+    },
+    {
+      "name": "龙岩",
+      "area": 17534.0,
+      "turns": 15,
+      "parts": 1,
+      "acuteAngles": 0
+    },
+    {
+      "name": "宁德",
+      "area": 12919.75,
+      "turns": 14,
+      "parts": 1,
+      "acuteAngles": 1
+    },
+    {
+      "name": "长沙",
+      "area": 11540.5,
+      "turns": 10,
+      "parts": 1,
+      "acuteAngles": 1
+    },
+    {
+      "name": "株洲",
+      "area": 9971.375,
+      "turns": 16,
+      "parts": 1,
+      "acuteAngles": 0
+    },
+    {
+      "name": "湘潭",
+      "area": 4334.125,
+      "turns": 6,
+      "parts": 1,
+      "acuteAngles": 0
+    },
+    {
+      "name": "衡阳",
+      "area": 16062.625,
+      "turns": 9,
+      "parts": 1,
+      "acuteAngles": 0
+    },
+    {
+      "name": "邵阳",
+      "area": 19820.25,
+      "turns": 13,
+      "parts": 1,
+      "acuteAngles": 0
+    },
+    {
+      "name": "岳阳",
+      "area": 14254.875,
+      "turns": 15,
+      "parts": 1,
+      "acuteAngles": 0
+    },
+    {
+      "name": "常德",
+      "area": 17436.125,
+      "turns": 14,
+      "parts": 1,
+      "acuteAngles": 0
+    },
+    {
+      "name": "张家界",
+      "area": 9521.5,
+      "turns": 7,
+      "parts": 1,
+      "acuteAngles": 0
+    },
+    {
+      "name": "益阳",
+      "area": 11719.0,
+      "turns": 17,
+      "parts": 1,
+      "acuteAngles": 0
+    },
+    {
+      "name": "郴州",
+      "area": 18127.875,
+      "turns": 15,
+      "parts": 1,
+      "acuteAngles": 0
+    },
+    {
+      "name": "永州",
+      "area": 19557.875,
+      "turns": 12,
+      "parts": 1,
+      "acuteAngles": 0
+    },
+    {
+      "name": "怀化",
+      "area": 24689.25,
+      "turns": 19,
+      "parts": 1,
+      "acuteAngles": 0
+    },
+    {
+      "name": "娄底",
+      "area": 7220.875,
+      "turns": 12,
+      "parts": 1,
+      "acuteAngles": 0
+    },
+    {
+      "name": "湘西",
+      "area": 15698.75,
+      "turns": 7,
+      "parts": 1,
+      "acuteAngles": 0
+    },
+    {
+      "name": "合肥",
+      "area": 12250.375,
+      "turns": 12,
+      "parts": 1,
+      "acuteAngles": 0
+    },
+    {
+      "name": "芜湖",
+      "area": 6130.375,
+      "turns": 12,
+      "parts": 1,
+      "acuteAngles": 0
+    },
+    {
+      "name": "蚌埠",
+      "area": 6102.25,
+      "turns": 15,
+      "parts": 1,
+      "acuteAngles": 0
+    },
+    {
+      "name": "淮南",
+      "area": 5288.375,
+      "turns": 9,
+      "parts": 1,
+      "acuteAngles": 0
+    },
+    {
+      "name": "马鞍山",
+      "area": 3774.0,
+      "turns": 7,
+      "parts": 1,
+      "acuteAngles": 0
+    },
+    {
+      "name": "淮北",
+      "area": 3314.75,
+      "turns": 9,
+      "parts": 1,
+      "acuteAngles": 0
+    },
+    {
+      "name": "铜陵",
+      "area": 2852.5,
+      "turns": 10,
+      "parts": 1,
+      "acuteAngles": 0
+    },
+    {
+      "name": "安庆",
+      "area": 13012.125,
+      "turns": 15,
+      "parts": 1,
+      "acuteAngles": 0
+    },
+    {
+      "name": "黄山",
+      "area": 9567.25,
+      "turns": 13,
+      "parts": 1,
+      "acuteAngles": 0
+    },
+    {
+      "name": "滁州",
+      "area": 15657.0,
+      "turns": 14,
+      "parts": 1,
+      "acuteAngles": 0
+    },
+    {
+      "name": "阜阳",
+      "area": 9864.25,
+      "turns": 12,
+      "parts": 1,
+      "acuteAngles": 0
+    },
+    {
+      "name": "宿州",
+      "area": 10318.375,
+      "turns": 16,
+      "parts": 1,
+      "acuteAngles": 0
+    },
+    {
+      "name": "六安",
+      "area": 16597.125,
+      "turns": 12,
+      "parts": 1,
+      "acuteAngles": 0
+    },
+    {
+      "name": "亳州",
+      "area": 8080.75,
+      "turns": 12,
+      "parts": 1,
+      "acuteAngles": 0
+    },
+    {
+      "name": "池州",
+      "area": 9396.75,
+      "turns": 17,
+      "parts": 1,
+      "acuteAngles": 0
+    },
+    {
+      "name": "宣城",
+      "area": 12713.5,
+      "turns": 15,
+      "parts": 1,
+      "acuteAngles": 1
+    },
+    {
+      "name": "广州",
+      "area": 5837.75,
+      "turns": 15,
+      "parts": 1,
+      "acuteAngles": 0
+    },
+    {
+      "name": "韶关",
+      "area": 16605.375,
+      "turns": 13,
+      "parts": 1,
+      "acuteAngles": 1
+    },
+    {
+      "name": "深圳",
+      "area": 1967.5390625,
+      "turns": 18,
+      "parts": 1,
+      "acuteAngles": 0
+    },
+    {
+      "name": "珠海",
+      "area": 1704.25,
+      "turns": 9,
+      "parts": 1,
+      "acuteAngles": 0
+    },
+    {
+      "name": "汕头",
+      "area": 2016.75,
+      "turns": 15,
+      "parts": 2,
+      "acuteAngles": 0
+    },
+    {
+      "name": "佛山",
+      "area": 3856.625,
+      "turns": 14,
+      "parts": 1,
+      "acuteAngles": 0
+    },
+    {
+      "name": "江门",
+      "area": 7563.0,
+      "turns": 21,
+      "parts": 2,
+      "acuteAngles": 0
+    },
+    {
+      "name": "湛江",
+      "area": 11064.25,
+      "turns": 20,
+      "parts": 2,
+      "acuteAngles": 0
+    },
+    {
+      "name": "茂名",
+      "area": 11019.875,
+      "turns": 10,
+      "parts": 1,
+      "acuteAngles": 0
+    },
+    {
+      "name": "肇庆",
+      "area": 12041.875,
+      "turns": 12,
+      "parts": 1,
+      "acuteAngles": 0
+    },
+    {
+      "name": "惠州",
+      "area": 11259.625,
+      "turns": 15,
+      "parts": 1,
+      "acuteAngles": 0
+    },
+    {
+      "name": "梅州",
+      "area": 13212.75,
+      "turns": 16,
+      "parts": 1,
+      "acuteAngles": 1
+    },
+    {
+      "name": "汕尾",
+      "area": 4510.5,
+      "turns": 20,
+      "parts": 2,
+      "acuteAngles": 0
+    },
+    {
+      "name": "河源",
+      "area": 15069.0,
+      "turns": 7,
+      "parts": 1,
+      "acuteAngles": 0
+    },
+    {
+      "name": "阳江",
+      "area": 6508.5,
+      "turns": 11,
+      "parts": 1,
+      "acuteAngles": 0
+    },
+    {
+      "name": "清远",
+      "area": 17803.625,
+      "turns": 18,
+      "parts": 1,
+      "acuteAngles": 0
+    },
+    {
+      "name": "东莞",
+      "area": 2436.75,
+      "turns": 9,
+      "parts": 1,
+      "acuteAngles": 0
+    },
+    {
+      "name": "中山",
+      "area": 1451.375,
+      "turns": 14,
+      "parts": 1,
+      "acuteAngles": 0
+    },
+    {
+      "name": "潮州",
+      "area": 2694.5,
+      "turns": 12,
+      "parts": 1,
+      "acuteAngles": 0
+    },
+    {
+      "name": "揭阳",
+      "area": 5230.125,
+      "turns": 12,
+      "parts": 1,
+      "acuteAngles": 0
+    },
+    {
+      "name": "云浮",
+      "area": 7653.0,
+      "turns": 12,
+      "parts": 1,
+      "acuteAngles": 0
+    },
+    {
+      "name": "香港",
+      "area": 1039.7109375,
+      "turns": 25,
+      "parts": 1,
+      "acuteAngles": 0
+    },
+    {
+      "name": "澳门",
+      "area": 50.71875,
+      "turns": 7,
+      "parts": 1,
+      "acuteAngles": 0
+    },
+    {
+      "name": "上海",
+      "area": 8215.28125,
+      "turns": 26,
+      "parts": 3,
+      "acuteAngles": 0
+    }
+  ],
+  "adjacencies": 194,
+  "acuteAngles": 6
+}
