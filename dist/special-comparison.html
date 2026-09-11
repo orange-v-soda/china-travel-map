@@ -2,19 +2,19 @@
 <html lang="zh-CN">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>中国旅行地图 · 六省与香港、澳门、上海</title>
+<title>中国旅行地图 · 面积均衡对照</title>
 <meta name="description" content="六省与香港、澳门、上海 85 个市级区划抽象旅行地图。选择颜色，点击填色，导出完整图片。">
 <link rel="stylesheet" href="style.css">
-<script defer src="special-balanced-data.js"></script><script defer src="special-app.js"></script>
+<script defer src="special-balanced-data.js"></script><script defer src="special-comparison-app.js"></script>
 </head>
 <body>
 <header class="top"><a class="brand" href="./">中国旅行地图<span>TRAVEL ATLAS</span></a><span class="edition">港 · 澳 · 沪 · 16</span></header>
 <main>
-<div class="heading"><div><h1>香港、澳门、上海，接入旅行地图。</h1><p class="intro">左侧为真实区划，右侧为面积均衡图。悬停对照同一区划，点击可同步填色。</p></div><div class="progress"><strong id="count">0</strong><span>/ 85 个区划已填色</span></div></div>
-<p class="intro" style="margin-bottom:12px"><a href="special-comparison.html">查看均衡前后 ↗</a> · <a href="balanced.html">查看上一版六省均衡图 ↗</a></p><p class="intro" id="balance-summary" style="margin-bottom:16px"></p><label class="iteration-control" style="margin-bottom:16px">查看范围<select id="focus"><option value="all">全部 85 个区划</option><option value="delta">珠三角与港澳</option><option value="macau">澳门与珠海</option><option value="hongkong">香港与深圳</option><option value="shanghai">上海与周边</option><option value="minnan">厦门与周边</option><option value="chaoshan">潮汕地区</option><option value="islands">舟山与宁波</option><option value="shangrao">上饶与周边</option></select></label><div class="toolbar"><fieldset><legend class="sr-only">填充颜色</legend><span class="tool-label" aria-hidden="true">填充颜色</span><div id="palette" class="palette"></div><label class="custom">自选<input id="custom-color" type="color" value="#2864dc" aria-label="自选填充颜色"></label></fieldset><div class="actions"><button id="reset" class="secondary">清空颜色</button><button id="export" class="primary">导出抽象图 PNG <span aria-hidden="true">↓</span></button></div></div>
+<div class="heading"><div><h1>香港、澳门、上海，接入旅行地图。</h1><p class="intro">左侧为基础图，右侧为面积均衡图。悬停对照同一区划，点击可同步填色。</p></div><div class="progress"><strong id="count">0</strong><span>/ 85 个区划已填色</span></div></div>
+<p class="intro" id="balance-summary" style="margin-bottom:16px"></p><label class="iteration-control" style="margin-bottom:16px">查看范围<select id="focus"><option value="all">全部 85 个区划</option><option value="delta">珠三角与港澳</option><option value="macau">澳门与珠海</option><option value="hongkong">香港与深圳</option><option value="shanghai">上海与周边</option><option value="minnan">厦门与周边</option><option value="chaoshan">潮汕地区</option><option value="islands">舟山与宁波</option><option value="shangrao">上饶与周边</option></select></label><div class="toolbar"><fieldset><legend class="sr-only">填充颜色</legend><span class="tool-label" aria-hidden="true">填充颜色</span><div id="palette" class="palette"></div><label class="custom">自选<input id="custom-color" type="color" value="#2864dc" aria-label="自选填充颜色"></label></fieldset><div class="actions"><button id="reset" class="secondary">清空颜色</button><button id="export" class="primary">导出抽象图 PNG <span aria-hidden="true">↓</span></button></div></div>
 <div class="status-row"><p id="status" class="status" role="status" aria-live="polite">点击任意一张地图填色</p><p class="hint">白色擦除 · Tab 选择区划，回车填色</p></div>
 <div class="comparison">
-<section class="workspace" aria-labelledby="reference-heading"><div class="panel-heading"><div><span class="panel-number">01</span><h2 id="reference-heading">真实区划</h2></div><a class="download-svg" href="special-reference.svg" download>下载真实 SVG ↗</a></div><div class="paper" id="reference-host"></div><p class="caption">完整源边界 · 两侧使用相同画布和缩放</p></section>
+<section class="workspace" aria-labelledby="reference-heading"><div class="panel-heading"><div><span class="panel-number">01</span><h2 id="reference-heading">均衡前</h2></div><a class="download-svg" href="index.html">返回真实地图对照 ↗</a></div><div class="paper" id="reference-host"></div><p class="caption">基础抽象图 · 两侧使用相同画布和缩放</p></section>
 <section class="workspace" aria-labelledby="abstract-heading"><div class="panel-heading"><div><span class="panel-number">02</span><h2 id="abstract-heading">面积均衡</h2></div><label class="iteration-control">显示<select id="variant"><option value="balanced">均衡版</option><option value="east">均衡前</option></select></label></div>
 <div class="paper"><svg id="map" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1660 1880" aria-labelledby="map-title map-desc">
 <title id="map-title">六省与香港、澳门、上海 85 个市级区划抽象地图</title><desc id="map-desc">边界和面积经过调整的旅行标记示意图。每个区划可独立填色。</desc>
@@ -26,7 +26,7 @@
 <g id="labels" font-family="sans-serif" font-size="21" font-weight="600" text-anchor="middle" dominant-baseline="central" pointer-events="none"></g>
 </g><path d="M64 1815H1596" stroke="#dfe5ec"/><g font-family="sans-serif" fill="#68768a" font-size="12"><text id="map-note" x="64" y="1842">轮廓结构保持 · 区划面积均衡示意</text><text x="1596" y="1842" text-anchor="end">赣 · 浙 · 闽 · 湘 · 皖 · 粤 · 港 · 澳 · 沪 / 85 个市级区划</text></g>
 </svg></div>
-<p class="caption" id="iteration-caption">港澳示意放大 · 上海保留主体与两个岛块</p>
+<p class="caption" id="iteration-caption">边的方向与连接顺序保持 · 不新增转角</p>
 </section>
 </div>
 </main>

@@ -1,0 +1,106 @@
+{
+  "parameters": {
+    "initialTolerance": 6.0,
+    "iterationTolerance": 12.0,
+    "grid": 1.0
+  },
+  "convergence": {
+    "status": "fixed_point",
+    "iteration": 9,
+    "verifiedExtraPass": true,
+    "protectedComponents": 2,
+    "maxIterations": 30
+  },
+  "iterations": [
+    {
+      "iteration": 0,
+      "areaChange": null,
+      "state": "initial",
+      "vertices": 1242,
+      "provinceIou": 0.9811,
+      "minCityIou": 0.886,
+      "areaRatio": 11.712
+    },
+    {
+      "iteration": 1,
+      "areaChange": 13380.5,
+      "state": "accepted",
+      "vertices": 591,
+      "provinceIou": 0.9671,
+      "minCityIou": 0.7973,
+      "areaRatio": 11.889
+    },
+    {
+      "iteration": 2,
+      "areaChange": 4946.5,
+      "state": "accepted",
+      "vertices": 521,
+      "provinceIou": 0.9634,
+      "minCityIou": 0.8006,
+      "areaRatio": 11.894
+    },
+    {
+      "iteration": 3,
+      "areaChange": 2450.0,
+      "state": "accepted",
+      "vertices": 503,
+      "provinceIou": 0.9605,
+      "minCityIou": 0.7969,
+      "areaRatio": 11.909
+    },
+    {
+      "iteration": 4,
+      "areaChange": 1297.0,
+      "state": "accepted",
+      "vertices": 474,
+      "provinceIou": 0.9597,
+      "minCityIou": 0.7953,
+      "areaRatio": 11.925
+    },
+    {
+      "iteration": 5,
+      "areaChange": 419.5,
+      "state": "accepted",
+      "vertices": 459,
+      "provinceIou": 0.9591,
+      "minCityIou": 0.7931,
+      "areaRatio": 11.932
+    },
+    {
+      "iteration": 6,
+      "areaChange": 124.0,
+      "state": "accepted",
+      "vertices": 445,
+      "provinceIou": 0.9589,
+      "minCityIou": 0.7933,
+      "areaRatio": 11.93
+    },
+    {
+      "iteration": 7,
+      "areaChange": 38.0,
+      "state": "accepted",
+      "vertices": 441,
+      "provinceIou": 0.9589,
+      "minCityIou": 0.7933,
+      "areaRatio": 11.93
+    },
+    {
+      "iteration": 8,
+      "areaChange": 15.0,
+      "state": "accepted",
+      "vertices": 438,
+      "provinceIou": 0.9589,
+      "minCityIou": 0.7933,
+      "areaRatio": 11.93
+    },
+    {
+      "iteration": 9,
+      "areaChange": 0.0,
+      "state": "fixed_point",
+      "vertices": 438,
+      "provinceIou": 0.9589,
+      "minCityIou": 0.7933,
+      "areaRatio": 11.93
+    }
+  ]
+}
