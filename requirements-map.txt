@@ -1,2 +1,5 @@
 # Build-time only. The browser has no runtime package dependencies.
 shapely==2.1.2
+
+# Area-balancing experiment
+scipy==1.17.0

@@ -1,0 +1,6947 @@
+{
+  "version": "0.12.0",
+  "frozenEastSha256": "62bc4fc95af0fffc046993cd4a84e0f59c714165722ba9fed3d2b99c177d7e3b",
+  "hunanSourceSha256": "091cb4e77e2bc73fb37c8a9b3b174db9b2008db5f544a7156f5a8ad34e77dd66",
+  "retrieved": "2026-09-09",
+  "preparation": {
+    "omittedParts": 2,
+    "filledHoles": [
+      {
+        "name": "怀化",
+        "area": 10.320499999999972
+      }
+    ],
+    "sourceArcGapBridge": {
+      "maximumLength": 6,
+      "maximumDistance": 2
+    }
+  },
+  "cities": [
+    {
+      "name": "长沙",
+      "turns": 10,
+      "parts": 1,
+      "acuteAngles": [
+        {
+          "point": [
+            178.0,
+            391.0
+          ],
+          "angle": 45.0
+        }
+      ],
+      "mainlandIou": 0.7821896565226442,
+      "mainlandAreaError": 0.0029295266871791426,
+      "fullSourceIou": 0.7821896565226442
+    },
+    {
+      "name": "株洲",
+      "turns": 16,
+      "parts": 1,
+      "acuteAngles": [],
+      "mainlandIou": 0.7698464428730936,
+      "mainlandAreaError": 0.0728193206958579,
+      "fullSourceIou": 0.7698464428730936
+    },
+    {
+      "name": "湘潭",
+      "turns": 6,
+      "parts": 1,
+      "acuteAngles": [],
+      "mainlandIou": 0.785904326579069,
+      "mainlandAreaError": 0.10413244302568683,
+      "fullSourceIou": 0.785904326579069
+    },
+    {
+      "name": "衡阳",
+      "turns": 9,
+      "parts": 1,
+      "acuteAngles": [],
+      "mainlandIou": 0.8271864581382855,
+      "mainlandAreaError": 0.10595732315174229,
+      "fullSourceIou": 0.8271864581382855
+    },
+    {
+      "name": "邵阳",
+      "turns": 13,
+      "parts": 1,
+      "acuteAngles": [],
+      "mainlandIou": 0.8225300556872359,
+      "mainlandAreaError": 0.0009933193023299943,
+      "fullSourceIou": 0.8225300556872359
+    },
+    {
+      "name": "岳阳",
+      "turns": 15,
+      "parts": 1,
+      "acuteAngles": [],
+      "mainlandIou": 0.7814282540149379,
+      "mainlandAreaError": 0.03067082987959342,
+      "fullSourceIou": 0.7810562916478833
+    },
+    {
+      "name": "常德",
+      "turns": 14,
+      "parts": 1,
+      "acuteAngles": [],
+      "mainlandIou": 0.807254784163395,
+      "mainlandAreaError": 0.035869700272391704,
+      "fullSourceIou": 0.807254784163395
+    },
+    {
+      "name": "张家界",
+      "turns": 7,
+      "parts": 1,
+      "acuteAngles": [],
+      "mainlandIou": 0.7958669522302548,
+      "mainlandAreaError": 0.0028221203886186126,
+      "fullSourceIou": 0.7958669522302548
+    },
+    {
+      "name": "益阳",
+      "turns": 17,
+      "parts": 1,
+      "acuteAngles": [],
+      "mainlandIou": 0.7529739903879613,
+      "mainlandAreaError": 0.030405082633270217,
+      "fullSourceIou": 0.7529739903879613
+    },
+    {
+      "name": "郴州",
+      "turns": 15,
+      "parts": 1,
+      "acuteAngles": [],
+      "mainlandIou": 0.7749084484367352,
+      "mainlandAreaError": 0.005392368862903332,
+      "fullSourceIou": 0.7749084484367352
+    },
+    {
+      "name": "永州",
+      "turns": 12,
+      "parts": 1,
+      "acuteAngles": [],
+      "mainlandIou": 0.7991659708113951,
+      "mainlandAreaError": 0.059389747665066744,
+      "fullSourceIou": 0.7991659708113951
+    },
+    {
+      "name": "怀化",
+      "turns": 19,
+      "parts": 1,
+      "acuteAngles": [],
+      "mainlandIou": 0.7901765628201137,
+      "mainlandAreaError": 0.0686071199000196,
+      "fullSourceIou": 0.7898163020962599
+    },
+    {
+      "name": "娄底",
+      "turns": 12,
+      "parts": 1,
+      "acuteAngles": [],
+      "mainlandIou": 0.7519156188996282,
+      "mainlandAreaError": 0.07762905816389715,
+      "fullSourceIou": 0.7519156188996282
+    },
+    {
+      "name": "湘西",
+      "turns": 7,
+      "parts": 1,
+      "acuteAngles": [],
+      "mainlandIou": 0.7821562603628733,
+      "mainlandAreaError": 0.03143900663989262,
+      "fullSourceIou": 0.7821562603628733
+    }
+  ],
+  "seams": [
+    {
+      "city": "长沙",
+      "path": [
+        [
+          161.0,
+          385.0
+        ],
+        [
+          161.0,
+          382.0
+        ],
+        [
+          178.0,
+          382.0
+        ],
+        [
+          178.0,
+          391.0
+        ],
+        [
+          199.0,
+          370.0
+        ],
+        [
+          199.0,
+          320.5
+        ]
+      ]
+    },
+    {
+      "city": "株洲",
+      "path": [
+        [
+          176.0,
+          578.5
+        ],
+        [
+          176.0,
+          492.0
+        ],
+        [
+          174.0,
+          492.0
+        ],
+        [
+          163.0,
+          481.0
+        ],
+        [
+          163.0,
+          474.0
+        ],
+        [
+          169.0,
+          468.0
+        ],
+        [
+          146.0,
+          445.0
+        ],
+        [
+          146.0,
+          420.0
+        ],
+        [
+          161.0,
+          405.0
+        ],
+        [
+          161.0,
+          394.0
+        ],
+        [
+          161.0,
+          385.0
+        ]
+      ]
+    },
+    {
+      "city": "岳阳",
+      "path": [
+        [
+          199.0,
+          320.5
+        ],
+        [
+          199.0,
+          296.0
+        ],
+        [
+          185.0,
+          282.0
+        ],
+        [
+          189.0,
+          278.0
+        ]
+      ]
+    },
+    {
+      "city": "郴州",
+      "path": [
+        [
+          186.0,
+          658.5
+        ],
+        [
+          186.0,
+          590.0
+        ],
+        [
+          176.0,
+          590.0
+        ],
+        [
+          176.0,
+          578.5
+        ]
+      ]
+    }
+  ],
+  "initialSeams": [
+    {
+      "city": "长沙",
+      "path": [
+        [
+          161.0,
+          394.0
+        ],
+        [
+          161.0,
+          382.0
+        ],
+        [
+          178.0,
+          382.0
+        ],
+        [
+          178.0,
+          391.0
+        ],
+        [
+          199.0,
+          370.0
+        ],
+        [
+          199.0,
+          320.5
+        ]
+      ]
+    },
+    {
+      "city": "株洲",
+      "path": [
+        [
+          176.0,
+          578.5
+        ],
+        [
+          176.0,
+          492.0
+        ],
+        [
+          174.0,
+          492.0
+        ],
+        [
+          163.0,
+          481.0
+        ],
+        [
+          163.0,
+          474.0
+        ],
+        [
+          169.0,
+          468.0
+        ],
+        [
+          146.0,
+          445.0
+        ],
+        [
+          146.0,
+          420.0
+        ],
+        [
+          161.0,
+          405.0
+        ],
+        [
+          161.0,
+          394.0
+        ]
+      ]
+    },
+    {
+      "city": "岳阳",
+      "path": [
+        [
+          199.0,
+          320.5
+        ],
+        [
+          199.0,
+          296.0
+        ],
+        [
+          185.0,
+          282.0
+        ],
+        [
+          189.0,
+          278.0
+        ]
+      ]
+    },
+    {
+      "city": "郴州",
+      "path": [
+        [
+          186.0,
+          658.5
+        ],
+        [
+          186.0,
+          590.0
+        ],
+        [
+          176.0,
+          590.0
+        ],
+        [
+          176.0,
+          578.5
+        ]
+      ]
+    }
+  ],
+  "islands": [],
+  "sharedPairs": [
+    {
+      "cities": [
+        "南昌",
+        "九江"
+      ],
+      "segments": 1,
+      "chains": 1,
+      "shortSegments": 0,
+      "length": 84.0
+    },
+    {
+      "cities": [
+        "南昌",
+        "宜春"
+      ],
+      "segments": 2,
+      "chains": 1,
+      "shortSegments": 0,
+      "length": 146.0
+    },
+    {
+      "cities": [
+        "南昌",
+        "抚州"
+      ],
+      "segments": 2,
+      "chains": 1,
+      "shortSegments": 0,
+      "length": 47.971
+    },
+    {
+      "cities": [
+        "南昌",
+        "上饶"
+      ],
+      "segments": 2,
+      "chains": 1,
+      "shortSegments": 0,
+      "length": 84.213
+    },
+    {
+      "cities": [
+        "景德镇",
+        "上饶"
+      ],
+      "segments": 4,
+      "chains": 1,
+      "shortSegments": 0,
+      "length": 206.87
+    },
+    {
+      "cities": [
+        "萍乡",
+        "吉安"
+      ],
+      "segments": 2,
+      "chains": 1,
+      "shortSegments": 0,
+      "length": 78.497
+    },
+    {
+      "cities": [
+        "萍乡",
+        "宜春"
+      ],
+      "segments": 5,
+      "chains": 1,
+      "shortSegments": 2,
+      "length": 61.841
+    },
+    {
+      "cities": [
+        "萍乡",
+        "长沙"
+      ],
+      "segments": 3,
+      "chains": 1,
+      "shortSegments": 2,
+      "length": 29.0
+    },
+    {
+      "cities": [
+        "萍乡",
+        "株洲"
+      ],
+      "segments": 8,
+      "chains": 1,
+      "shortSegments": 3,
+      "length": 131.782
+    },
+    {
+      "cities": [
+        "九江",
+        "宜春"
+      ],
+      "segments": 3,
+      "chains": 1,
+      "shortSegments": 0,
+      "length": 163.0
+    },
+    {
+      "cities": [
+        "九江",
+        "上饶"
+      ],
+      "segments": 2,
+      "chains": 1,
+      "shortSegments": 0,
+      "length": 72.598
+    },
+    {
+      "cities": [
+        "九江",
+        "岳阳"
+      ],
+      "segments": 2,
+      "chains": 1,
+      "shortSegments": 1,
+      "length": 25.456
+    },
+    {
+      "cities": [
+        "新余",
+        "吉安"
+      ],
+      "segments": 3,
+      "chains": 1,
+      "shortSegments": 0,
+      "length": 99.0
+    },
+    {
+      "cities": [
+        "新余",
+        "宜春"
+      ],
+      "segments": 5,
+      "chains": 1,
+      "shortSegments": 0,
+      "length": 175.0
+    },
+    {
+      "cities": [
+        "鹰潭",
+        "抚州"
+      ],
+      "segments": 2,
+      "chains": 1,
+      "shortSegments": 0,
+      "length": 71.397
+    },
+    {
+      "cities": [
+        "鹰潭",
+        "上饶"
+      ],
+      "segments": 4,
+      "chains": 1,
+      "shortSegments": 0,
+      "length": 132.497
+    },
+    {
+      "cities": [
+        "鹰潭",
+        "南平"
+      ],
+      "segments": 2,
+      "chains": 1,
+      "shortSegments": 1,
+      "length": 31.0
+    },
+    {
+      "cities": [
+        "赣州",
+        "吉安"
+      ],
+      "segments": 2,
+      "chains": 1,
+      "shortSegments": 0,
+      "length": 209.321
+    },
+    {
+      "cities": [
+        "赣州",
+        "抚州"
+      ],
+      "segments": 2,
+      "chains": 1,
+      "shortSegments": 0,
+      "length": 97.882
+    },
+    {
+      "cities": [
+        "赣州",
+        "三明"
+      ],
+      "segments": 2,
+      "chains": 1,
+      "shortSegments": 0,
+      "length": 64.113
+    },
+    {
+      "cities": [
+        "赣州",
+        "龙岩"
+      ],
+      "segments": 2,
+      "chains": 1,
+      "shortSegments": 0,
+      "length": 142.154
+    },
+    {
+      "cities": [
+        "赣州",
+        "郴州"
+      ],
+      "segments": 1,
+      "chains": 1,
+      "shortSegments": 0,
+      "length": 68.5
+    },
+    {
+      "cities": [
+        "吉安",
+        "宜春"
+      ],
+      "segments": 3,
+      "chains": 2,
+      "shortSegments": 1,
+      "length": 58.0
+    },
+    {
+      "cities": [
+        "吉安",
+        "抚州"
+      ],
+      "segments": 1,
+      "chains": 1,
+      "shortSegments": 0,
+      "length": 72.0
+    },
+    {
+      "cities": [
+        "吉安",
+        "株洲"
+      ],
+      "segments": 1,
+      "chains": 1,
+      "shortSegments": 0,
+      "length": 86.5
+    },
+    {
+      "cities": [
+        "吉安",
+        "郴州"
+      ],
+      "segments": 2,
+      "chains": 1,
+      "shortSegments": 2,
+      "length": 21.5
+    },
+    {
+      "cities": [
+        "宜春",
+        "抚州"
+      ],
+      "segments": 2,
+      "chains": 1,
+      "shortSegments": 0,
+      "length": 70.326
+    },
+    {
+      "cities": [
+        "宜春",
+        "长沙"
+      ],
+      "segments": 2,
+      "chains": 1,
+      "shortSegments": 0,
+      "length": 79.198
+    },
+    {
+      "cities": [
+        "宜春",
+        "岳阳"
+      ],
+      "segments": 1,
+      "chains": 1,
+      "shortSegments": 0,
+      "length": 24.5
+    },
+    {
+      "cities": [
+        "抚州",
+        "上饶"
+      ],
+      "segments": 1,
+      "chains": 1,
+      "shortSegments": 0,
+      "length": 22.0
+    },
+    {
+      "cities": [
+        "抚州",
+        "三明"
+      ],
+      "segments": 1,
+      "chains": 1,
+      "shortSegments": 0,
+      "length": 71.418
+    },
+    {
+      "cities": [
+        "抚州",
+        "南平"
+      ],
+      "segments": 3,
+      "chains": 1,
+      "shortSegments": 1,
+      "length": 93.062
+    },
+    {
+      "cities": [
+        "上饶",
+        "衢州"
+      ],
+      "segments": 2,
+      "chains": 1,
+      "shortSegments": 0,
+      "length": 123.24
+    },
+    {
+      "cities": [
+        "上饶",
+        "南平"
+      ],
+      "segments": 2,
+      "chains": 1,
+      "shortSegments": 0,
+      "length": 133.5
+    },
+    {
+      "cities": [
+        "杭州",
+        "嘉兴"
+      ],
+      "segments": 2,
+      "chains": 1,
+      "shortSegments": 0,
+      "length": 51.27
+    },
+    {
+      "cities": [
+        "杭州",
+        "湖州"
+      ],
+      "segments": 2,
+      "chains": 1,
+      "shortSegments": 0,
+      "length": 93.335
+    },
+    {
+      "cities": [
+        "杭州",
+        "绍兴"
+      ],
+      "segments": 2,
+      "chains": 1,
+      "shortSegments": 1,
+      "length": 100.374
+    },
+    {
+      "cities": [
+        "杭州",
+        "金华"
+      ],
+      "segments": 2,
+      "chains": 1,
+      "shortSegments": 0,
+      "length": 88.468
+    },
+    {
+      "cities": [
+        "杭州",
+        "衢州"
+      ],
+      "segments": 2,
+      "chains": 1,
+      "shortSegments": 0,
+      "length": 98.855
+    },
+    {
+      "cities": [
+        "宁波",
+        "嘉兴"
+      ],
+      "segments": 2,
+      "chains": 1,
+      "shortSegments": 0,
+      "length": 48.5
+    },
+    {
+      "cities": [
+        "宁波",
+        "绍兴"
+      ],
+      "segments": 3,
+      "chains": 1,
+      "shortSegments": 1,
+      "length": 119.255
+    },
+    {
+      "cities": [
+        "宁波",
+        "台州"
+      ],
+      "segments": 2,
+      "chains": 1,
+      "shortSegments": 0,
+      "length": 57.0
+    },
+    {
+      "cities": [
+        "温州",
+        "台州"
+      ],
+      "segments": 2,
+      "chains": 1,
+      "shortSegments": 0,
+      "length": 111.0
+    },
+    {
+      "cities": [
+        "温州",
+        "丽水"
+      ],
+      "segments": 3,
+      "chains": 1,
+      "shortSegments": 0,
+      "length": 149.577
+    },
+    {
+      "cities": [
+        "温州",
+        "宁德"
+      ],
+      "segments": 4,
+      "chains": 1,
+      "shortSegments": 2,
+      "length": 110.899
+    },
+    {
+      "cities": [
+        "嘉兴",
+        "湖州"
+      ],
+      "segments": 2,
+      "chains": 1,
+      "shortSegments": 1,
+      "length": 34.956
+    },
+    {
+      "cities": [
+        "嘉兴",
+        "绍兴"
+      ],
+      "segments": 2,
+      "chains": 1,
+      "shortSegments": 1,
+      "length": 14.621
+    },
+    {
+      "cities": [
+        "绍兴",
+        "金华"
+      ],
+      "segments": 3,
+      "chains": 1,
+      "shortSegments": 0,
+      "length": 105.37
+    },
+    {
+      "cities": [
+        "绍兴",
+        "台州"
+      ],
+      "segments": 1,
+      "chains": 1,
+      "shortSegments": 0,
+      "length": 40.5
+    },
+    {
+      "cities": [
+        "金华",
+        "衢州"
+      ],
+      "segments": 1,
+      "chains": 1,
+      "shortSegments": 0,
+      "length": 49.5
+    },
+    {
+      "cities": [
+        "金华",
+        "台州"
+      ],
+      "segments": 2,
+      "chains": 1,
+      "shortSegments": 0,
+      "length": 73.033
+    },
+    {
+      "cities": [
+        "金华",
+        "丽水"
+      ],
+      "segments": 1,
+      "chains": 1,
+      "shortSegments": 0,
+      "length": 109.0
+    },
+    {
+      "cities": [
+        "衢州",
+        "丽水"
+      ],
+      "segments": 1,
+      "chains": 1,
+      "shortSegments": 0,
+      "length": 80.61
+    },
+    {
+      "cities": [
+        "衢州",
+        "南平"
+      ],
+      "segments": 1,
+      "chains": 1,
+      "shortSegments": 0,
+      "length": 23.0
+    },
+    {
+      "cities": [
+        "台州",
+        "丽水"
+      ],
+      "segments": 1,
+      "chains": 1,
+      "shortSegments": 0,
+      "length": 35.5
+    },
+    {
+      "cities": [
+        "丽水",
+        "南平"
+      ],
+      "segments": 2,
+      "chains": 1,
+      "shortSegments": 0,
+      "length": 136.0
+    },
+    {
+      "cities": [
+        "丽水",
+        "宁德"
+      ],
+      "segments": 2,
+      "chains": 1,
+      "shortSegments": 0,
+      "length": 41.471
+    },
+    {
+      "cities": [
+        "福州",
+        "莆田"
+      ],
+      "segments": 2,
+      "chains": 1,
+      "shortSegments": 0,
+      "length": 86.5
+    },
+    {
+      "cities": [
+        "福州",
+        "三明"
+      ],
+      "segments": 2,
+      "chains": 1,
+      "shortSegments": 0,
+      "length": 50.5
+    },
+    {
+      "cities": [
+        "福州",
+        "泉州"
+      ],
+      "segments": 1,
+      "chains": 1,
+      "shortSegments": 0,
+      "length": 24.5
+    },
+    {
+      "cities": [
+        "福州",
+        "南平"
+      ],
+      "segments": 1,
+      "chains": 1,
+      "shortSegments": 1,
+      "length": 3.0
+    },
+    {
+      "cities": [
+        "福州",
+        "宁德"
+      ],
+      "segments": 2,
+      "chains": 1,
+      "shortSegments": 0,
+      "length": 107.012
+    },
+    {
+      "cities": [
+        "厦门",
+        "泉州"
+      ],
+      "segments": 2,
+      "chains": 1,
+      "shortSegments": 0,
+      "length": 70.5
+    },
+    {
+      "cities": [
+        "厦门",
+        "漳州"
+      ],
+      "segments": 1,
+      "chains": 1,
+      "shortSegments": 0,
+      "length": 48.0
+    },
+    {
+      "cities": [
+        "莆田",
+        "泉州"
+      ],
+      "segments": 2,
+      "chains": 1,
+      "shortSegments": 0,
+      "length": 79.5
+    },
+    {
+      "cities": [
+        "三明",
+        "泉州"
+      ],
+      "segments": 2,
+      "chains": 1,
+      "shortSegments": 0,
+      "length": 96.276
+    },
+    {
+      "cities": [
+        "三明",
+        "南平"
+      ],
+      "segments": 4,
+      "chains": 1,
+      "shortSegments": 1,
+      "length": 192.693
+    },
+    {
+      "cities": [
+        "三明",
+        "龙岩"
+      ],
+      "segments": 3,
+      "chains": 1,
+      "shortSegments": 0,
+      "length": 162.717
+    },
+    {
+      "cities": [
+        "泉州",
+        "漳州"
+      ],
+      "segments": 2,
+      "chains": 1,
+      "shortSegments": 0,
+      "length": 71.0
+    },
+    {
+      "cities": [
+        "泉州",
+        "龙岩"
+      ],
+      "segments": 2,
+      "chains": 1,
+      "shortSegments": 0,
+      "length": 38.92
+    },
+    {
+      "cities": [
+        "漳州",
+        "龙岩"
+      ],
+      "segments": 3,
+      "chains": 1,
+      "shortSegments": 1,
+      "length": 114.267
+    },
+    {
+      "cities": [
+        "南平",
+        "宁德"
+      ],
+      "segments": 4,
+      "chains": 1,
+      "shortSegments": 2,
+      "length": 164.474
+    },
+    {
+      "cities": [
+        "长沙",
+        "株洲"
+      ],
+      "segments": 1,
+      "chains": 1,
+      "shortSegments": 0,
+      "length": 75.0
+    },
+    {
+      "cities": [
+        "长沙",
+        "湘潭"
+      ],
+      "segments": 1,
+      "chains": 1,
+      "shortSegments": 0,
+      "length": 95.5
+    },
+    {
+      "cities": [
+        "长沙",
+        "岳阳"
+      ],
+      "segments": 1,
+      "chains": 1,
+      "shortSegments": 0,
+      "length": 142.0
+    },
+    {
+      "cities": [
+        "长沙",
+        "益阳"
+      ],
+      "segments": 3,
+      "chains": 1,
+      "shortSegments": 0,
+      "length": 125.0
+    },
+    {
+      "cities": [
+        "长沙",
+        "娄底"
+      ],
+      "segments": 1,
+      "chains": 1,
+      "shortSegments": 1,
+      "length": 6.0
+    },
+    {
+      "cities": [
+        "株洲",
+        "湘潭"
+      ],
+      "segments": 1,
+      "chains": 1,
+      "shortSegments": 0,
+      "length": 59.0
+    },
+    {
+      "cities": [
+        "株洲",
+        "衡阳"
+      ],
+      "segments": 2,
+      "chains": 1,
+      "shortSegments": 0,
+      "length": 75.977
+    },
+    {
+      "cities": [
+        "株洲",
+        "郴州"
+      ],
+      "segments": 3,
+      "chains": 1,
+      "shortSegments": 0,
+      "length": 104.882
+    },
+    {
+      "cities": [
+        "湘潭",
+        "衡阳"
+      ],
+      "segments": 1,
+      "chains": 1,
+      "shortSegments": 0,
+      "length": 45.0
+    },
+    {
+      "cities": [
+        "湘潭",
+        "娄底"
+      ],
+      "segments": 3,
+      "chains": 1,
+      "shortSegments": 2,
+      "length": 79.918
+    },
+    {
+      "cities": [
+        "衡阳",
+        "邵阳"
+      ],
+      "segments": 1,
+      "chains": 1,
+      "shortSegments": 0,
+      "length": 56.569
+    },
+    {
+      "cities": [
+        "衡阳",
+        "郴州"
+      ],
+      "segments": 3,
+      "chains": 1,
+      "shortSegments": 1,
+      "length": 173.0
+    },
+    {
+      "cities": [
+        "衡阳",
+        "永州"
+      ],
+      "segments": 2,
+      "chains": 1,
+      "shortSegments": 0,
+      "length": 103.403
+    },
+    {
+      "cities": [
+        "衡阳",
+        "娄底"
+      ],
+      "segments": 2,
+      "chains": 1,
+      "shortSegments": 0,
+      "length": 50.406
+    },
+    {
+      "cities": [
+        "邵阳",
+        "永州"
+      ],
+      "segments": 2,
+      "chains": 1,
+      "shortSegments": 1,
+      "length": 86.66
+    },
+    {
+      "cities": [
+        "邵阳",
+        "怀化"
+      ],
+      "segments": 2,
+      "chains": 1,
+      "shortSegments": 0,
+      "length": 194.744
+    },
+    {
+      "cities": [
+        "邵阳",
+        "娄底"
+      ],
+      "segments": 2,
+      "chains": 1,
+      "shortSegments": 0,
+      "length": 137.261
+    },
+    {
+      "cities": [
+        "岳阳",
+        "益阳"
+      ],
+      "segments": 4,
+      "chains": 1,
+      "shortSegments": 1,
+      "length": 136.054
+    },
+    {
+      "cities": [
+        "常德",
+        "张家界"
+      ],
+      "segments": 3,
+      "chains": 1,
+      "shortSegments": 0,
+      "length": 139.82
+    },
+    {
+      "cities": [
+        "常德",
+        "益阳"
+      ],
+      "segments": 4,
+      "chains": 1,
+      "shortSegments": 0,
+      "length": 254.0
+    },
+    {
+      "cities": [
+        "常德",
+        "怀化"
+      ],
+      "segments": 4,
+      "chains": 1,
+      "shortSegments": 0,
+      "length": 91.713
+    },
+    {
+      "cities": [
+        "张家界",
+        "怀化"
+      ],
+      "segments": 2,
+      "chains": 1,
+      "shortSegments": 0,
+      "length": 57.835
+    },
+    {
+      "cities": [
+        "张家界",
+        "湘西"
+      ],
+      "segments": 2,
+      "chains": 1,
+      "shortSegments": 0,
+      "length": 107.924
+    },
+    {
+      "cities": [
+        "益阳",
+        "怀化"
+      ],
+      "segments": 2,
+      "chains": 1,
+      "shortSegments": 0,
+      "length": 51.713
+    },
+    {
+      "cities": [
+        "益阳",
+        "娄底"
+      ],
+      "segments": 4,
+      "chains": 1,
+      "shortSegments": 2,
+      "length": 105.399
+    },
+    {
+      "cities": [
+        "郴州",
+        "永州"
+      ],
+      "segments": 1,
+      "chains": 1,
+      "shortSegments": 0,
+      "length": 89.5
+    },
+    {
+      "cities": [
+        "怀化",
+        "娄底"
+      ],
+      "segments": 2,
+      "chains": 1,
+      "shortSegments": 0,
+      "length": 46.299
+    },
+    {
+      "cities": [
+        "怀化",
+        "湘西"
+      ],
+      "segments": 3,
+      "chains": 1,
+      "shortSegments": 0,
+      "length": 201.376
+    }
+  ],
+  "optimization": {
+    "algorithm": "shared-junction-lobe-removal",
+    "candidateSelection": "first_improvement",
+    "targetCities": [
+      "娄底",
+      "岳阳",
+      "常德",
+      "张家界",
+      "怀化",
+      "株洲",
+      "永州",
+      "湘潭",
+      "湘西",
+      "益阳",
+      "衡阳",
+      "邵阳",
+      "郴州",
+      "长沙"
+    ],
+    "shortEdgeThreshold": 12,
+    "deviationLimit": 18,
+    "beforeObjective": [
+      47,
+      238,
+      567
+    ],
+    "afterObjective": [
+      32,
+      222,
+      536
+    ],
+    "objectiveTrace": [
+      [
+        47,
+        238,
+        567
+      ],
+      [
+        46,
+        237,
+        565
+      ],
+      [
+        45,
+        236,
+        563
+      ],
+      [
+        43,
+        235,
+        561
+      ],
+      [
+        41,
+        235,
+        561
+      ],
+      [
+        40,
+        234,
+        561
+      ],
+      [
+        40,
+        233,
+        559
+      ],
+      [
+        40,
+        232,
+        557
+      ],
+      [
+        40,
+        232,
+        556
+      ],
+      [
+        38,
+        231,
+        554
+      ],
+      [
+        37,
+        230,
+        551
+      ],
+      [
+        36,
+        229,
+        549
+      ],
+      [
+        35,
+        227,
+        545
+      ],
+      [
+        35,
+        226,
+        544
+      ],
+      [
+        35,
+        226,
+        543
+      ],
+      [
+        34,
+        225,
+        542
+      ],
+      [
+        33,
+        224,
+        540
+      ],
+      [
+        32,
+        222,
+        536
+      ]
+    ],
+    "edits": [
+      {
+        "type": "chain",
+        "chain": 4
+      },
+      {
+        "type": "chain",
+        "chain": 19
+      },
+      {
+        "type": "chain",
+        "chain": 22
+      },
+      {
+        "type": "junction",
+        "from": [
+          -119.5,
+          337.0
+        ],
+        "to": [
+          -119.5,
+          333.0
+        ]
+      },
+      {
+        "type": "junction",
+        "from": [
+          -105.0,
+          559.5
+        ],
+        "to": [
+          -105.0,
+          559.0
+        ]
+      },
+      {
+        "type": "junction",
+        "from": [
+          -53.5,
+          507.5
+        ],
+        "to": [
+          -40.5,
+          507.5
+        ]
+      },
+      {
+        "type": "junction",
+        "from": [
+          -40.5,
+          507.5
+        ],
+        "to": [
+          -40.5,
+          505.5
+        ]
+      },
+      {
+        "type": "junction",
+        "from": [
+          -18.5,
+          379.0
+        ],
+        "to": [
+          -9.5,
+          379.0
+        ]
+      },
+      {
+        "type": "chain",
+        "chain": 30
+      },
+      {
+        "type": "chain",
+        "chain": 15
+      },
+      {
+        "type": "chain",
+        "chain": 26
+      },
+      {
+        "type": "chain",
+        "chain": 26
+      },
+      {
+        "type": "junction",
+        "from": [
+          26.0,
+          685.0
+        ],
+        "to": [
+          16.0,
+          675.0
+        ]
+      },
+      {
+        "type": "junction",
+        "from": [
+          87.0,
+          443.0
+        ],
+        "to": [
+          86.0,
+          444.0
+        ]
+      },
+      {
+        "type": "chain",
+        "chain": 31
+      },
+      {
+        "type": "junction",
+        "from": [
+          95.5,
+          387.0
+        ],
+        "to": [
+          86.0,
+          385.0
+        ]
+      },
+      {
+        "type": "chain",
+        "chain": 33
+      }
+    ],
+    "stopReason": "no_feasible_improving_candidate",
+    "chains": [
+      {
+        "original": [
+          [
+            -258.5,
+            412.0
+          ],
+          [
+            -308.0,
+            461.5
+          ],
+          [
+            -308.0,
+            476.0
+          ],
+          [
+            -253.5,
+            476.0
+          ],
+          [
+            -253.5,
+            594.5
+          ],
+          [
+            -223.0,
+            594.5
+          ],
+          [
+            -206.0,
+            577.5
+          ]
+        ],
+        "simplified": [
+          [
+            -258.5,
+            412.0
+          ],
+          [
+            -308.0,
+            461.5
+          ],
+          [
+            -308.0,
+            476.0
+          ],
+          [
+            -253.5,
+            476.0
+          ],
+          [
+            -253.5,
+            594.5
+          ],
+          [
+            -223.0,
+            594.5
+          ],
+          [
+            -206.0,
+            577.5
+          ]
+        ]
+      },
+      {
+        "original": [
+          [
+            -230.0,
+            203.5
+          ],
+          [
+            -266.0,
+            239.5
+          ],
+          [
+            -266.0,
+            404.5
+          ],
+          [
+            -258.5,
+            412.0
+          ]
+        ],
+        "simplified": [
+          [
+            -230.0,
+            203.5
+          ],
+          [
+            -266.0,
+            239.5
+          ],
+          [
+            -266.0,
+            404.5
+          ],
+          [
+            -258.5,
+            412.0
+          ]
+        ]
+      },
+      {
+        "original": [
+          [
+            -230.0,
+            203.5
+          ],
+          [
+            -165.0,
+            268.5
+          ],
+          [
+            -165.0,
+            284.5
+          ]
+        ],
+        "simplified": [
+          [
+            -230.0,
+            203.5
+          ],
+          [
+            -165.0,
+            268.5
+          ],
+          [
+            -165.0,
+            284.5
+          ]
+        ]
+      },
+      {
+        "original": [
+          [
+            -206.0,
+            577.5
+          ],
+          [
+            -187.5,
+            577.5
+          ],
+          [
+            -187.5,
+            591.0
+          ],
+          [
+            -186.5,
+            592.0
+          ],
+          [
+            -154.0,
+            559.5
+          ],
+          [
+            -105.0,
+            559.5
+          ]
+        ],
+        "simplified": [
+          [
+            -206.0,
+            577.5
+          ],
+          [
+            -187.5,
+            577.5
+          ],
+          [
+            -187.5,
+            591.0
+          ],
+          [
+            -186.5,
+            592.0
+          ],
+          [
+            -154.0,
+            559.5
+          ],
+          [
+            -154.0,
+            559.0
+          ],
+          [
+            -105.0,
+            559.0
+          ]
+        ]
+      },
+      {
+        "original": [
+          [
+            -165.0,
+            284.5
+          ],
+          [
+            -176.5,
+            284.5
+          ],
+          [
+            -176.5,
+            378.5
+          ],
+          [
+            -225.0,
+            378.5
+          ],
+          [
+            -258.5,
+            412.0
+          ]
+        ],
+        "simplified": [
+          [
+            -165.0,
+            284.5
+          ],
+          [
+            -165.0,
+            378.5
+          ],
+          [
+            -225.0,
+            378.5
+          ],
+          [
+            -258.5,
+            412.0
+          ]
+        ]
+      },
+      {
+        "original": [
+          [
+            -165.0,
+            284.5
+          ],
+          [
+            -130.5,
+            284.5
+          ],
+          [
+            -114.0,
+            268.0
+          ]
+        ],
+        "simplified": [
+          [
+            -165.0,
+            284.5
+          ],
+          [
+            -130.5,
+            284.5
+          ],
+          [
+            -114.0,
+            268.0
+          ]
+        ]
+      },
+      {
+        "original": [
+          [
+            -141.5,
+            187.5
+          ],
+          [
+            -230.0,
+            187.5
+          ],
+          [
+            -230.0,
+            203.5
+          ]
+        ],
+        "simplified": [
+          [
+            -141.5,
+            187.5
+          ],
+          [
+            -230.0,
+            187.5
+          ],
+          [
+            -230.0,
+            203.5
+          ]
+        ]
+      },
+      {
+        "original": [
+          [
+            -141.5,
+            187.5
+          ],
+          [
+            -91.5,
+            187.5
+          ],
+          [
+            -91.5,
+            245.5
+          ],
+          [
+            -114.0,
+            268.0
+          ]
+        ],
+        "simplified": [
+          [
+            -141.5,
+            187.5
+          ],
+          [
+            -91.5,
+            187.5
+          ],
+          [
+            -91.5,
+            245.5
+          ],
+          [
+            -114.0,
+            268.0
+          ]
+        ]
+      },
+      {
+        "original": [
+          [
+            -119.5,
+            337.0
+          ],
+          [
+            -119.5,
+            363.5
+          ],
+          [
+            -104.5,
+            378.5
+          ]
+        ],
+        "simplified": [
+          [
+            -119.5,
+            333.0
+          ],
+          [
+            -119.5,
+            363.5
+          ],
+          [
+            -104.5,
+            378.5
+          ]
+        ]
+      },
+      {
+        "original": [
+          [
+            -119.5,
+            337.0
+          ],
+          [
+            -109.5,
+            337.0
+          ],
+          [
+            -84.0,
+            311.5
+          ],
+          [
+            18.0,
+            311.5
+          ],
+          [
+            18.0,
+            216.5
+          ]
+        ],
+        "simplified": [
+          [
+            -119.5,
+            333.0
+          ],
+          [
+            -84.0,
+            333.0
+          ],
+          [
+            -84.0,
+            311.5
+          ],
+          [
+            18.0,
+            311.5
+          ],
+          [
+            18.0,
+            216.5
+          ]
+        ]
+      },
+      {
+        "original": [
+          [
+            -118.5,
+            419.0
+          ],
+          [
+            -206.0,
+            506.5
+          ],
+          [
+            -206.0,
+            577.5
+          ]
+        ],
+        "simplified": [
+          [
+            -118.5,
+            419.0
+          ],
+          [
+            -206.0,
+            506.5
+          ],
+          [
+            -206.0,
+            577.5
+          ]
+        ]
+      },
+      {
+        "original": [
+          [
+            -118.5,
+            419.0
+          ],
+          [
+            -118.5,
+            392.5
+          ],
+          [
+            -104.5,
+            378.5
+          ]
+        ],
+        "simplified": [
+          [
+            -118.5,
+            419.0
+          ],
+          [
+            -118.5,
+            392.5
+          ],
+          [
+            -104.5,
+            378.5
+          ]
+        ]
+      },
+      {
+        "original": [
+          [
+            -114.0,
+            268.0
+          ],
+          [
+            -99.0,
+            283.0
+          ],
+          [
+            -99.0,
+            312.5
+          ],
+          [
+            -119.5,
+            333.0
+          ],
+          [
+            -119.5,
+            337.0
+          ]
+        ],
+        "simplified": [
+          [
+            -114.0,
+            268.0
+          ],
+          [
+            -99.0,
+            283.0
+          ],
+          [
+            -99.0,
+            312.5
+          ],
+          [
+            -119.5,
+            312.5
+          ],
+          [
+            -119.5,
+            333.0
+          ]
+        ]
+      },
+      {
+        "original": [
+          [
+            -105.0,
+            559.5
+          ],
+          [
+            -105.0,
+            559.0
+          ],
+          [
+            -53.5,
+            507.5
+          ]
+        ],
+        "simplified": [
+          [
+            -105.0,
+            559.0
+          ],
+          [
+            -51.5,
+            505.5
+          ],
+          [
+            -40.5,
+            505.5
+          ]
+        ]
+      },
+      {
+        "original": [
+          [
+            -105.0,
+            559.5
+          ],
+          [
+            -105.0,
+            566.0
+          ],
+          [
+            -58.5,
+            612.5
+          ],
+          [
+            -94.0,
+            648.0
+          ],
+          [
+            -94.0,
+            701.5
+          ],
+          [
+            -59.5,
+            701.5
+          ],
+          [
+            -59.5,
+            730.5
+          ],
+          [
+            -19.5,
+            730.5
+          ],
+          [
+            26.0,
+            685.0
+          ]
+        ],
+        "simplified": [
+          [
+            -105.0,
+            559.0
+          ],
+          [
+            -105.0,
+            566.0
+          ],
+          [
+            -58.5,
+            612.5
+          ],
+          [
+            -94.0,
+            648.0
+          ],
+          [
+            -94.0,
+            701.5
+          ],
+          [
+            -59.5,
+            701.5
+          ],
+          [
+            -59.5,
+            730.5
+          ],
+          [
+            -19.5,
+            730.5
+          ],
+          [
+            16.0,
+            695.0
+          ],
+          [
+            16.0,
+            675.0
+          ]
+        ]
+      },
+      {
+        "original": [
+          [
+            -104.5,
+            378.5
+          ],
+          [
+            -98.5,
+            378.5
+          ],
+          [
+            -91.5,
+            371.5
+          ],
+          [
+            -26.0,
+            371.5
+          ],
+          [
+            -18.5,
+            379.0
+          ]
+        ],
+        "simplified": [
+          [
+            -104.5,
+            378.5
+          ],
+          [
+            -97.5,
+            371.5
+          ],
+          [
+            -26.0,
+            371.5
+          ],
+          [
+            -26.0,
+            379.0
+          ],
+          [
+            -9.5,
+            379.0
+          ]
+        ]
+      },
+      {
+        "original": [
+          [
+            -53.5,
+            507.5
+          ],
+          [
+            -40.5,
+            507.5
+          ],
+          [
+            16.0,
+            564.0
+          ],
+          [
+            16.0,
+            585.5
+          ]
+        ],
+        "simplified": [
+          [
+            -40.5,
+            505.5
+          ],
+          [
+            16.0,
+            562.0
+          ],
+          [
+            16.0,
+            585.5
+          ]
+        ]
+      },
+      {
+        "original": [
+          [
+            -18.5,
+            379.0
+          ],
+          [
+            -18.5,
+            391.5
+          ],
+          [
+            -9.5,
+            391.5
+          ]
+        ],
+        "simplified": [
+          [
+            -9.5,
+            379.0
+          ],
+          [
+            -9.5,
+            391.5
+          ]
+        ]
+      },
+      {
+        "original": [
+          [
+            -9.5,
+            391.5
+          ],
+          [
+            -9.5,
+            385.0
+          ],
+          [
+            93.5,
+            385.0
+          ],
+          [
+            95.5,
+            387.0
+          ]
+        ],
+        "simplified": [
+          [
+            -9.5,
+            391.5
+          ],
+          [
+            -9.5,
+            385.0
+          ],
+          [
+            86.0,
+            385.0
+          ]
+        ]
+      },
+      {
+        "original": [
+          [
+            -9.5,
+            391.5
+          ],
+          [
+            -9.5,
+            393.5
+          ],
+          [
+            39.0,
+            442.0
+          ],
+          [
+            41.0,
+            442.0
+          ],
+          [
+            41.0,
+            444.0
+          ]
+        ],
+        "simplified": [
+          [
+            -9.5,
+            391.5
+          ],
+          [
+            -9.5,
+            393.0
+          ],
+          [
+            41.0,
+            443.5
+          ],
+          [
+            41.0,
+            444.0
+          ]
+        ]
+      },
+      {
+        "original": [
+          [
+            -0.5,
+            465.5
+          ],
+          [
+            -47.0,
+            419.0
+          ],
+          [
+            -118.5,
+            419.0
+          ]
+        ],
+        "simplified": [
+          [
+            -0.5,
+            465.5
+          ],
+          [
+            -47.0,
+            419.0
+          ],
+          [
+            -118.5,
+            419.0
+          ]
+        ]
+      },
+      {
+        "original": [
+          [
+            -0.5,
+            465.5
+          ],
+          [
+            -38.0,
+            503.0
+          ],
+          [
+            -53.5,
+            503.0
+          ],
+          [
+            -53.5,
+            507.5
+          ]
+        ],
+        "simplified": [
+          [
+            -0.5,
+            465.5
+          ],
+          [
+            -40.5,
+            505.5
+          ]
+        ]
+      },
+      {
+        "original": [
+          [
+            16.0,
+            585.5
+          ],
+          [
+            16.0,
+            587.5
+          ],
+          [
+            26.0,
+            587.5
+          ],
+          [
+            26.0,
+            685.0
+          ]
+        ],
+        "simplified": [
+          [
+            16.0,
+            585.5
+          ],
+          [
+            16.0,
+            675.0
+          ]
+        ]
+      },
+      {
+        "original": [
+          [
+            16.0,
+            585.5
+          ],
+          [
+            107.0,
+            585.5
+          ],
+          [
+            107.0,
+            509.0
+          ],
+          [
+            112.5,
+            509.0
+          ]
+        ],
+        "simplified": [
+          [
+            16.0,
+            585.5
+          ],
+          [
+            107.0,
+            585.5
+          ],
+          [
+            107.0,
+            509.0
+          ],
+          [
+            112.5,
+            509.0
+          ]
+        ]
+      },
+      {
+        "original": [
+          [
+            18.0,
+            216.5
+          ],
+          [
+            -35.0,
+            163.5
+          ],
+          [
+            -141.5,
+            163.5
+          ],
+          [
+            -141.5,
+            187.5
+          ]
+        ],
+        "simplified": [
+          [
+            18.0,
+            216.5
+          ],
+          [
+            -35.0,
+            163.5
+          ],
+          [
+            -141.5,
+            163.5
+          ],
+          [
+            -141.5,
+            187.5
+          ]
+        ]
+      },
+      {
+        "original": [
+          [
+            21.0,
+            213.5
+          ],
+          [
+            18.0,
+            216.5
+          ]
+        ],
+        "simplified": [
+          [
+            21.0,
+            213.5
+          ],
+          [
+            18.0,
+            216.5
+          ]
+        ]
+      },
+      {
+        "original": [
+          [
+            21.0,
+            213.5
+          ],
+          [
+            67.0,
+            259.5
+          ],
+          [
+            67.0,
+            279.5
+          ],
+          [
+            41.0,
+            305.5
+          ],
+          [
+            41.0,
+            310.0
+          ],
+          [
+            55.0,
+            324.0
+          ],
+          [
+            57.0,
+            324.0
+          ]
+        ],
+        "simplified": [
+          [
+            21.0,
+            213.5
+          ],
+          [
+            67.0,
+            259.5
+          ],
+          [
+            67.0,
+            275.625
+          ],
+          [
+            57.0,
+            275.625
+          ],
+          [
+            57.0,
+            324.0
+          ]
+        ]
+      },
+      {
+        "original": [
+          [
+            26.0,
+            685.0
+          ],
+          [
+            41.0,
+            685.0
+          ],
+          [
+            66.0,
+            710.0
+          ],
+          [
+            117.5,
+            658.5
+          ],
+          [
+            186.0,
+            658.5
+          ]
+        ],
+        "simplified": [
+          [
+            16.0,
+            675.0
+          ],
+          [
+            41.0,
+            675.0
+          ],
+          [
+            41.0,
+            685.0
+          ],
+          [
+            66.0,
+            710.0
+          ],
+          [
+            117.5,
+            658.5
+          ],
+          [
+            186.0,
+            658.5
+          ]
+        ]
+      },
+      {
+        "original": [
+          [
+            41.0,
+            444.0
+          ],
+          [
+            21.0,
+            444.0
+          ],
+          [
+            -0.5,
+            465.5
+          ]
+        ],
+        "simplified": [
+          [
+            41.0,
+            444.0
+          ],
+          [
+            21.0,
+            444.0
+          ],
+          [
+            -0.5,
+            465.5
+          ]
+        ]
+      },
+      {
+        "original": [
+          [
+            41.0,
+            444.0
+          ],
+          [
+            86.0,
+            444.0
+          ],
+          [
+            87.0,
+            443.0
+          ]
+        ],
+        "simplified": [
+          [
+            41.0,
+            444.0
+          ],
+          [
+            86.0,
+            444.0
+          ]
+        ]
+      },
+      {
+        "original": [
+          [
+            57.0,
+            324.0
+          ],
+          [
+            57.0,
+            329.5
+          ],
+          [
+            31.0,
+            329.5
+          ],
+          [
+            -18.5,
+            379.0
+          ]
+        ],
+        "simplified": [
+          [
+            57.0,
+            324.0
+          ],
+          [
+            57.0,
+            347.0
+          ],
+          [
+            -9.5,
+            347.0
+          ],
+          [
+            -9.5,
+            379.0
+          ]
+        ]
+      },
+      {
+        "original": [
+          [
+            87.0,
+            443.0
+          ],
+          [
+            112.5,
+            468.5
+          ],
+          [
+            112.5,
+            509.0
+          ]
+        ],
+        "simplified": [
+          [
+            86.0,
+            444.0
+          ],
+          [
+            112.5,
+            470.5
+          ],
+          [
+            112.5,
+            509.0
+          ]
+        ]
+      },
+      {
+        "original": [
+          [
+            95.5,
+            387.0
+          ],
+          [
+            87.0,
+            395.5
+          ],
+          [
+            87.0,
+            443.0
+          ]
+        ],
+        "simplified": [
+          [
+            86.0,
+            385.0
+          ],
+          [
+            86.0,
+            444.0
+          ]
+        ]
+      },
+      {
+        "original": [
+          [
+            95.5,
+            387.0
+          ],
+          [
+            102.5,
+            394.0
+          ],
+          [
+            161.0,
+            394.0
+          ]
+        ],
+        "simplified": [
+          [
+            86.0,
+            385.0
+          ],
+          [
+            161.0,
+            385.0
+          ],
+          [
+            161.0,
+            394.0
+          ]
+        ]
+      },
+      {
+        "original": [
+          [
+            112.5,
+            509.0
+          ],
+          [
+            160.5,
+            557.0
+          ],
+          [
+            160.5,
+            578.5
+          ],
+          [
+            176.0,
+            578.5
+          ]
+        ],
+        "simplified": [
+          [
+            112.5,
+            509.0
+          ],
+          [
+            160.5,
+            557.0
+          ],
+          [
+            160.5,
+            578.5
+          ],
+          [
+            176.0,
+            578.5
+          ]
+        ]
+      },
+      {
+        "original": [
+          [
+            161.0,
+            394.0
+          ],
+          [
+            161.0,
+            405.0
+          ],
+          [
+            146.0,
+            420.0
+          ],
+          [
+            146.0,
+            445.0
+          ],
+          [
+            169.0,
+            468.0
+          ],
+          [
+            163.0,
+            474.0
+          ],
+          [
+            163.0,
+            481.0
+          ],
+          [
+            174.0,
+            492.0
+          ],
+          [
+            176.0,
+            492.0
+          ]
+        ],
+        "simplified": [
+          [
+            161.0,
+            394.0
+          ],
+          [
+            161.0,
+            405.0
+          ],
+          [
+            146.0,
+            420.0
+          ],
+          [
+            146.0,
+            445.0
+          ],
+          [
+            169.0,
+            468.0
+          ],
+          [
+            163.0,
+            474.0
+          ],
+          [
+            163.0,
+            481.0
+          ],
+          [
+            174.0,
+            492.0
+          ],
+          [
+            176.0,
+            492.0
+          ]
+        ]
+      },
+      {
+        "original": [
+          [
+            176.0,
+            492.0
+          ],
+          [
+            176.0,
+            463.0
+          ],
+          [
+            211.0,
+            428.0
+          ]
+        ],
+        "simplified": [
+          [
+            176.0,
+            492.0
+          ],
+          [
+            176.0,
+            463.0
+          ],
+          [
+            211.0,
+            428.0
+          ]
+        ]
+      },
+      {
+        "original": [
+          [
+            176.0,
+            492.0
+          ],
+          [
+            176.0,
+            578.5
+          ]
+        ],
+        "simplified": [
+          [
+            176.0,
+            492.0
+          ],
+          [
+            176.0,
+            578.5
+          ]
+        ]
+      },
+      {
+        "original": [
+          [
+            176.0,
+            578.5
+          ],
+          [
+            176.0,
+            590.0
+          ],
+          [
+            186.0,
+            590.0
+          ]
+        ],
+        "simplified": [
+          [
+            176.0,
+            578.5
+          ],
+          [
+            176.0,
+            590.0
+          ],
+          [
+            186.0,
+            590.0
+          ]
+        ]
+      },
+      {
+        "original": [
+          [
+            178.0,
+            391.0
+          ],
+          [
+            178.0,
+            382.0
+          ],
+          [
+            161.0,
+            382.0
+          ],
+          [
+            161.0,
+            394.0
+          ]
+        ],
+        "simplified": [
+          [
+            178.0,
+            391.0
+          ],
+          [
+            178.0,
+            382.0
+          ],
+          [
+            161.0,
+            382.0
+          ],
+          [
+            161.0,
+            394.0
+          ]
+        ]
+      },
+      {
+        "original": [
+          [
+            186.0,
+            590.0
+          ],
+          [
+            186.0,
+            658.5
+          ]
+        ],
+        "simplified": [
+          [
+            186.0,
+            590.0
+          ],
+          [
+            186.0,
+            658.5
+          ]
+        ]
+      },
+      {
+        "original": [
+          [
+            186.0,
+            658.5
+          ],
+          [
+            186.0,
+            672.0
+          ],
+          [
+            253.0,
+            672.0
+          ],
+          [
+            202.0,
+            723.0
+          ],
+          [
+            202.0,
+            738.0
+          ],
+          [
+            368.0,
+            738.0
+          ],
+          [
+            368.0,
+            712.0
+          ]
+        ],
+        "simplified": [
+          [
+            186.0,
+            658.5
+          ],
+          [
+            186.0,
+            672.0
+          ],
+          [
+            253.0,
+            672.0
+          ],
+          [
+            202.0,
+            723.0
+          ],
+          [
+            202.0,
+            738.0
+          ],
+          [
+            368.0,
+            738.0
+          ],
+          [
+            368.0,
+            712.0
+          ]
+        ]
+      },
+      {
+        "original": [
+          [
+            189.0,
+            278.0
+          ],
+          [
+            161.0,
+            250.0
+          ],
+          [
+            142.5,
+            250.0
+          ],
+          [
+            142.5,
+            179.5
+          ],
+          [
+            141.5,
+            178.5
+          ],
+          [
+            116.0,
+            204.0
+          ],
+          [
+            21.0,
+            204.0
+          ],
+          [
+            21.0,
+            213.5
+          ]
+        ],
+        "simplified": [
+          [
+            189.0,
+            278.0
+          ],
+          [
+            161.0,
+            250.0
+          ],
+          [
+            142.5,
+            250.0
+          ],
+          [
+            142.5,
+            179.5
+          ],
+          [
+            141.5,
+            178.5
+          ],
+          [
+            116.0,
+            204.0
+          ],
+          [
+            21.0,
+            204.0
+          ],
+          [
+            21.0,
+            213.5
+          ]
+        ]
+      },
+      {
+        "original": [
+          [
+            189.0,
+            278.0
+          ],
+          [
+            185.0,
+            282.0
+          ],
+          [
+            199.0,
+            296.0
+          ]
+        ],
+        "simplified": [
+          [
+            189.0,
+            278.0
+          ],
+          [
+            185.0,
+            282.0
+          ],
+          [
+            199.0,
+            296.0
+          ]
+        ]
+      },
+      {
+        "original": [
+          [
+            199.0,
+            296.0
+          ],
+          [
+            199.0,
+            320.5
+          ]
+        ],
+        "simplified": [
+          [
+            199.0,
+            296.0
+          ],
+          [
+            199.0,
+            320.5
+          ]
+        ]
+      },
+      {
+        "original": [
+          [
+            199.0,
+            296.0
+          ],
+          [
+            280.0,
+            296.0
+          ],
+          [
+            280.0,
+            266.0
+          ],
+          [
+            332.0,
+            266.0
+          ]
+        ],
+        "simplified": [
+          [
+            199.0,
+            296.0
+          ],
+          [
+            280.0,
+            296.0
+          ],
+          [
+            280.0,
+            266.0
+          ],
+          [
+            332.0,
+            266.0
+          ]
+        ]
+      },
+      {
+        "original": [
+          [
+            199.0,
+            320.5
+          ],
+          [
+            57.0,
+            320.5
+          ],
+          [
+            57.0,
+            324.0
+          ]
+        ],
+        "simplified": [
+          [
+            199.0,
+            320.5
+          ],
+          [
+            57.0,
+            320.5
+          ],
+          [
+            57.0,
+            324.0
+          ]
+        ]
+      },
+      {
+        "original": [
+          [
+            199.0,
+            320.5
+          ],
+          [
+            199.0,
+            370.0
+          ],
+          [
+            178.0,
+            391.0
+          ]
+        ],
+        "simplified": [
+          [
+            199.0,
+            320.5
+          ],
+          [
+            199.0,
+            370.0
+          ],
+          [
+            178.0,
+            391.0
+          ]
+        ]
+      },
+      {
+        "original": [
+          [
+            211.0,
+            428.0
+          ],
+          [
+            211.0,
+            422.0
+          ],
+          [
+            196.0,
+            407.0
+          ],
+          [
+            184.0,
+            407.0
+          ],
+          [
+            173.0,
+            396.0
+          ],
+          [
+            178.0,
+            391.0
+          ]
+        ],
+        "simplified": [
+          [
+            211.0,
+            428.0
+          ],
+          [
+            211.0,
+            422.0
+          ],
+          [
+            196.0,
+            407.0
+          ],
+          [
+            184.0,
+            407.0
+          ],
+          [
+            173.0,
+            396.0
+          ],
+          [
+            178.0,
+            391.0
+          ]
+        ]
+      },
+      {
+        "original": [
+          [
+            235.0,
+            425.0
+          ],
+          [
+            235.0,
+            428.0
+          ],
+          [
+            211.0,
+            428.0
+          ]
+        ],
+        "simplified": [
+          [
+            235.0,
+            425.0
+          ],
+          [
+            235.0,
+            428.0
+          ],
+          [
+            211.0,
+            428.0
+          ]
+        ]
+      },
+      {
+        "original": [
+          [
+            235.0,
+            425.0
+          ],
+          [
+            292.0,
+            425.0
+          ],
+          [
+            292.0,
+            411.0
+          ],
+          [
+            320.0,
+            411.0
+          ]
+        ],
+        "simplified": [
+          [
+            235.0,
+            425.0
+          ],
+          [
+            292.0,
+            425.0
+          ],
+          [
+            292.0,
+            411.0
+          ],
+          [
+            320.0,
+            411.0
+          ]
+        ]
+      },
+      {
+        "original": [
+          [
+            320.0,
+            411.0
+          ],
+          [
+            320.0,
+            395.0
+          ],
+          [
+            295.0,
+            395.0
+          ],
+          [
+            295.0,
+            373.0
+          ],
+          [
+            235.0,
+            373.0
+          ],
+          [
+            235.0,
+            425.0
+          ]
+        ],
+        "simplified": [
+          [
+            320.0,
+            411.0
+          ],
+          [
+            320.0,
+            395.0
+          ],
+          [
+            295.0,
+            395.0
+          ],
+          [
+            295.0,
+            373.0
+          ],
+          [
+            235.0,
+            373.0
+          ],
+          [
+            235.0,
+            425.0
+          ]
+        ]
+      },
+      {
+        "original": [
+          [
+            332.0,
+            266.0
+          ],
+          [
+            332.0,
+            356.0
+          ],
+          [
+            388.0,
+            356.0
+          ]
+        ],
+        "simplified": [
+          [
+            332.0,
+            266.0
+          ],
+          [
+            332.0,
+            356.0
+          ],
+          [
+            388.0,
+            356.0
+          ]
+        ]
+      },
+      {
+        "original": [
+          [
+            351.0,
+            411.0
+          ],
+          [
+            320.0,
+            411.0
+          ]
+        ],
+        "simplified": [
+          [
+            351.0,
+            411.0
+          ],
+          [
+            320.0,
+            411.0
+          ]
+        ]
+      },
+      {
+        "original": [
+          [
+            351.0,
+            411.0
+          ],
+          [
+            388.0,
+            374.0
+          ],
+          [
+            388.0,
+            356.0
+          ]
+        ],
+        "simplified": [
+          [
+            351.0,
+            411.0
+          ],
+          [
+            388.0,
+            374.0
+          ],
+          [
+            388.0,
+            356.0
+          ]
+        ]
+      },
+      {
+        "original": [
+          [
+            351.0,
+            483.0
+          ],
+          [
+            244.0,
+            590.0
+          ],
+          [
+            186.0,
+            590.0
+          ]
+        ],
+        "simplified": [
+          [
+            351.0,
+            483.0
+          ],
+          [
+            244.0,
+            590.0
+          ],
+          [
+            186.0,
+            590.0
+          ]
+        ]
+      },
+      {
+        "original": [
+          [
+            351.0,
+            483.0
+          ],
+          [
+            351.0,
+            411.0
+          ]
+        ],
+        "simplified": [
+          [
+            351.0,
+            483.0
+          ],
+          [
+            351.0,
+            411.0
+          ]
+        ]
+      },
+      {
+        "original": [
+          [
+            368.0,
+            712.0
+          ],
+          [
+            368.0,
+            625.0
+          ],
+          [
+            407.0,
+            586.0
+          ]
+        ],
+        "simplified": [
+          [
+            368.0,
+            712.0
+          ],
+          [
+            368.0,
+            625.0
+          ],
+          [
+            407.0,
+            586.0
+          ]
+        ]
+      },
+      {
+        "original": [
+          [
+            368.0,
+            712.0
+          ],
+          [
+            387.0,
+            712.0
+          ],
+          [
+            400.5,
+            725.5
+          ],
+          [
+            416.0,
+            725.5
+          ],
+          [
+            462.5,
+            772.0
+          ],
+          [
+            464.5,
+            770.0
+          ]
+        ],
+        "simplified": [
+          [
+            368.0,
+            712.0
+          ],
+          [
+            387.0,
+            712.0
+          ],
+          [
+            400.5,
+            725.5
+          ],
+          [
+            416.0,
+            725.5
+          ],
+          [
+            462.5,
+            772.0
+          ],
+          [
+            464.5,
+            770.0
+          ]
+        ]
+      },
+      {
+        "original": [
+          [
+            388.0,
+            356.0
+          ],
+          [
+            419.0,
+            356.0
+          ],
+          [
+            431.0,
+            344.0
+          ]
+        ],
+        "simplified": [
+          [
+            388.0,
+            356.0
+          ],
+          [
+            419.0,
+            356.0
+          ],
+          [
+            431.0,
+            344.0
+          ]
+        ]
+      },
+      {
+        "original": [
+          [
+            407.0,
+            586.0
+          ],
+          [
+            429.0,
+            564.0
+          ],
+          [
+            429.0,
+            531.0
+          ]
+        ],
+        "simplified": [
+          [
+            407.0,
+            586.0
+          ],
+          [
+            429.0,
+            564.0
+          ],
+          [
+            429.0,
+            531.0
+          ]
+        ]
+      },
+      {
+        "original": [
+          [
+            407.0,
+            586.0
+          ],
+          [
+            449.0,
+            628.0
+          ],
+          [
+            520.5,
+            628.0
+          ],
+          [
+            543.0,
+            650.5
+          ]
+        ],
+        "simplified": [
+          [
+            407.0,
+            586.0
+          ],
+          [
+            449.0,
+            628.0
+          ],
+          [
+            520.5,
+            628.0
+          ],
+          [
+            543.0,
+            650.5
+          ]
+        ]
+      },
+      {
+        "original": [
+          [
+            416.0,
+            266.0
+          ],
+          [
+            332.0,
+            266.0
+          ]
+        ],
+        "simplified": [
+          [
+            416.0,
+            266.0
+          ],
+          [
+            332.0,
+            266.0
+          ]
+        ]
+      },
+      {
+        "original": [
+          [
+            416.0,
+            266.0
+          ],
+          [
+            444.0,
+            238.0
+          ],
+          [
+            444.0,
+            205.0
+          ]
+        ],
+        "simplified": [
+          [
+            416.0,
+            266.0
+          ],
+          [
+            444.0,
+            238.0
+          ],
+          [
+            444.0,
+            205.0
+          ]
+        ]
+      },
+      {
+        "original": [
+          [
+            429.0,
+            531.0
+          ],
+          [
+            399.0,
+            531.0
+          ],
+          [
+            351.0,
+            483.0
+          ]
+        ],
+        "simplified": [
+          [
+            429.0,
+            531.0
+          ],
+          [
+            399.0,
+            531.0
+          ],
+          [
+            351.0,
+            483.0
+          ]
+        ]
+      },
+      {
+        "original": [
+          [
+            429.0,
+            531.0
+          ],
+          [
+            479.5,
+            480.5
+          ]
+        ],
+        "simplified": [
+          [
+            429.0,
+            531.0
+          ],
+          [
+            479.5,
+            480.5
+          ]
+        ]
+      },
+      {
+        "original": [
+          [
+            431.0,
+            344.0
+          ],
+          [
+            416.0,
+            329.0
+          ],
+          [
+            416.0,
+            266.0
+          ]
+        ],
+        "simplified": [
+          [
+            431.0,
+            344.0
+          ],
+          [
+            416.0,
+            329.0
+          ],
+          [
+            416.0,
+            266.0
+          ]
+        ]
+      },
+      {
+        "original": [
+          [
+            444.0,
+            205.0
+          ],
+          [
+            444.0,
+            187.0
+          ],
+          [
+            458.0,
+            173.0
+          ],
+          [
+            458.0,
+            171.0
+          ],
+          [
+            423.0,
+            171.0
+          ],
+          [
+            409.0,
+            185.0
+          ],
+          [
+            302.0,
+            185.0
+          ],
+          [
+            256.0,
+            231.0
+          ],
+          [
+            236.0,
+            231.0
+          ],
+          [
+            189.0,
+            278.0
+          ]
+        ],
+        "simplified": [
+          [
+            444.0,
+            205.0
+          ],
+          [
+            444.0,
+            187.0
+          ],
+          [
+            458.0,
+            173.0
+          ],
+          [
+            458.0,
+            171.0
+          ],
+          [
+            423.0,
+            171.0
+          ],
+          [
+            409.0,
+            185.0
+          ],
+          [
+            302.0,
+            185.0
+          ],
+          [
+            256.0,
+            231.0
+          ],
+          [
+            236.0,
+            231.0
+          ],
+          [
+            189.0,
+            278.0
+          ]
+        ]
+      },
+      {
+        "original": [
+          [
+            453.0,
+            344.0
+          ],
+          [
+            431.0,
+            344.0
+          ]
+        ],
+        "simplified": [
+          [
+            453.0,
+            344.0
+          ],
+          [
+            431.0,
+            344.0
+          ]
+        ]
+      },
+      {
+        "original": [
+          [
+            453.0,
+            344.0
+          ],
+          [
+            453.0,
+            356.0
+          ],
+          [
+            495.0,
+            398.0
+          ]
+        ],
+        "simplified": [
+          [
+            453.0,
+            344.0
+          ],
+          [
+            453.0,
+            356.0
+          ],
+          [
+            495.0,
+            398.0
+          ]
+        ]
+      },
+      {
+        "original": [
+          [
+            464.5,
+            770.0
+          ],
+          [
+            464.5,
+            843.5
+          ],
+          [
+            522.5,
+            843.5
+          ],
+          [
+            575.0,
+            791.0
+          ],
+          [
+            562.5,
+            778.5
+          ],
+          [
+            562.5,
+            767.0
+          ]
+        ],
+        "simplified": [
+          [
+            464.5,
+            770.0
+          ],
+          [
+            464.5,
+            843.5
+          ],
+          [
+            522.5,
+            843.5
+          ],
+          [
+            575.0,
+            791.0
+          ],
+          [
+            562.5,
+            778.5
+          ],
+          [
+            562.5,
+            767.0
+          ]
+        ]
+      },
+      {
+        "original": [
+          [
+            476.0,
+            205.0
+          ],
+          [
+            444.0,
+            205.0
+          ]
+        ],
+        "simplified": [
+          [
+            476.0,
+            205.0
+          ],
+          [
+            444.0,
+            205.0
+          ]
+        ]
+      },
+      {
+        "original": [
+          [
+            476.0,
+            205.0
+          ],
+          [
+            476.0,
+            284.0
+          ],
+          [
+            523.0,
+            284.0
+          ],
+          [
+            523.0,
+            230.0
+          ],
+          [
+            542.0,
+            211.0
+          ]
+        ],
+        "simplified": [
+          [
+            476.0,
+            205.0
+          ],
+          [
+            476.0,
+            284.0
+          ],
+          [
+            523.0,
+            284.0
+          ],
+          [
+            523.0,
+            230.0
+          ],
+          [
+            542.0,
+            211.0
+          ]
+        ]
+      },
+      {
+        "original": [
+          [
+            479.5,
+            480.5
+          ],
+          [
+            500.0,
+            460.0
+          ],
+          [
+            500.0,
+            403.0
+          ],
+          [
+            495.0,
+            398.0
+          ]
+        ],
+        "simplified": [
+          [
+            479.5,
+            480.5
+          ],
+          [
+            500.0,
+            460.0
+          ],
+          [
+            500.0,
+            403.0
+          ],
+          [
+            495.0,
+            398.0
+          ]
+        ]
+      },
+      {
+        "original": [
+          [
+            495.0,
+            398.0
+          ],
+          [
+            517.0,
+            398.0
+          ],
+          [
+            517.0,
+            389.0
+          ]
+        ],
+        "simplified": [
+          [
+            495.0,
+            398.0
+          ],
+          [
+            517.0,
+            398.0
+          ],
+          [
+            517.0,
+            389.0
+          ]
+        ]
+      },
+      {
+        "original": [
+          [
+            517.0,
+            389.0
+          ],
+          [
+            504.0,
+            376.0
+          ],
+          [
+            504.0,
+            322.0
+          ],
+          [
+            475.0,
+            322.0
+          ],
+          [
+            453.0,
+            344.0
+          ]
+        ],
+        "simplified": [
+          [
+            517.0,
+            389.0
+          ],
+          [
+            504.0,
+            376.0
+          ],
+          [
+            504.0,
+            322.0
+          ],
+          [
+            475.0,
+            322.0
+          ],
+          [
+            453.0,
+            344.0
+          ]
+        ]
+      },
+      {
+        "original": [
+          [
+            517.0,
+            389.0
+          ],
+          [
+            612.0,
+            389.0
+          ],
+          [
+            612.0,
+            350.5
+          ]
+        ],
+        "simplified": [
+          [
+            517.0,
+            389.0
+          ],
+          [
+            612.0,
+            389.0
+          ],
+          [
+            612.0,
+            350.5
+          ]
+        ]
+      },
+      {
+        "original": [
+          [
+            527.5,
+            683.0
+          ],
+          [
+            525.5,
+            683.0
+          ],
+          [
+            464.5,
+            744.0
+          ],
+          [
+            464.5,
+            770.0
+          ]
+        ],
+        "simplified": [
+          [
+            527.5,
+            683.0
+          ],
+          [
+            525.5,
+            683.0
+          ],
+          [
+            464.5,
+            744.0
+          ],
+          [
+            464.5,
+            770.0
+          ]
+        ]
+      },
+      {
+        "original": [
+          [
+            527.5,
+            683.0
+          ],
+          [
+            527.5,
+            719.0
+          ],
+          [
+            562.5,
+            719.0
+          ]
+        ],
+        "simplified": [
+          [
+            527.5,
+            683.0
+          ],
+          [
+            527.5,
+            719.0
+          ],
+          [
+            562.5,
+            719.0
+          ]
+        ]
+      },
+      {
+        "original": [
+          [
+            542.0,
+            211.0
+          ],
+          [
+            511.0,
+            180.0
+          ],
+          [
+            482.0,
+            180.0
+          ],
+          [
+            482.0,
+            199.0
+          ],
+          [
+            476.0,
+            205.0
+          ]
+        ],
+        "simplified": [
+          [
+            542.0,
+            211.0
+          ],
+          [
+            511.0,
+            180.0
+          ],
+          [
+            482.0,
+            180.0
+          ],
+          [
+            482.0,
+            199.0
+          ],
+          [
+            476.0,
+            205.0
+          ]
+        ]
+      },
+      {
+        "original": [
+          [
+            543.0,
+            650.5
+          ],
+          [
+            527.5,
+            666.0
+          ],
+          [
+            527.5,
+            683.0
+          ]
+        ],
+        "simplified": [
+          [
+            543.0,
+            650.5
+          ],
+          [
+            527.5,
+            666.0
+          ],
+          [
+            527.5,
+            683.0
+          ]
+        ]
+      },
+      {
+        "original": [
+          [
+            543.0,
+            650.5
+          ],
+          [
+            583.5,
+            610.0
+          ],
+          [
+            622.5,
+            610.0
+          ]
+        ],
+        "simplified": [
+          [
+            543.0,
+            650.5
+          ],
+          [
+            583.5,
+            610.0
+          ],
+          [
+            622.5,
+            610.0
+          ]
+        ]
+      },
+      {
+        "original": [
+          [
+            562.5,
+            719.0
+          ],
+          [
+            562.5,
+            767.0
+          ]
+        ],
+        "simplified": [
+          [
+            562.5,
+            719.0
+          ],
+          [
+            562.5,
+            767.0
+          ]
+        ]
+      },
+      {
+        "original": [
+          [
+            562.5,
+            767.0
+          ],
+          [
+            575.0,
+            767.0
+          ],
+          [
+            589.5,
+            752.5
+          ],
+          [
+            601.5,
+            752.5
+          ],
+          [
+            601.5,
+            750.5
+          ]
+        ],
+        "simplified": [
+          [
+            562.5,
+            767.0
+          ],
+          [
+            575.0,
+            767.0
+          ],
+          [
+            589.5,
+            752.5
+          ],
+          [
+            601.5,
+            752.5
+          ],
+          [
+            601.5,
+            750.5
+          ]
+        ]
+      },
+      {
+        "original": [
+          [
+            574.0,
+            243.0
+          ],
+          [
+            542.0,
+            211.0
+          ]
+        ],
+        "simplified": [
+          [
+            574.0,
+            243.0
+          ],
+          [
+            542.0,
+            211.0
+          ]
+        ]
+      },
+      {
+        "original": [
+          [
+            594.25,
+            773.75
+          ],
+          [
+            596.75,
+            771.25
+          ],
+          [
+            596.75,
+            761.75
+          ],
+          [
+            594.25,
+            759.25
+          ],
+          [
+            586.75,
+            759.25
+          ],
+          [
+            584.25,
+            761.75
+          ],
+          [
+            584.25,
+            771.25
+          ],
+          [
+            586.75,
+            773.75
+          ],
+          [
+            594.25,
+            773.75
+          ]
+        ],
+        "simplified": [
+          [
+            594.25,
+            773.75
+          ],
+          [
+            596.75,
+            771.25
+          ],
+          [
+            596.75,
+            761.75
+          ],
+          [
+            594.25,
+            759.25
+          ],
+          [
+            586.75,
+            759.25
+          ],
+          [
+            584.25,
+            761.75
+          ],
+          [
+            584.25,
+            771.25
+          ],
+          [
+            586.75,
+            773.75
+          ],
+          [
+            594.25,
+            773.75
+          ]
+        ]
+      },
+      {
+        "original": [
+          [
+            601.5,
+            750.5
+          ],
+          [
+            601.5,
+            719.0
+          ],
+          [
+            562.5,
+            719.0
+          ]
+        ],
+        "simplified": [
+          [
+            601.5,
+            750.5
+          ],
+          [
+            601.5,
+            719.0
+          ],
+          [
+            562.5,
+            719.0
+          ]
+        ]
+      },
+      {
+        "original": [
+          [
+            601.5,
+            750.5
+          ],
+          [
+            630.0,
+            750.5
+          ],
+          [
+            657.0,
+            723.5
+          ],
+          [
+            657.0,
+            679.5
+          ]
+        ],
+        "simplified": [
+          [
+            601.5,
+            750.5
+          ],
+          [
+            630.0,
+            750.5
+          ],
+          [
+            657.0,
+            723.5
+          ],
+          [
+            657.0,
+            679.5
+          ]
+        ]
+      },
+      {
+        "original": [
+          [
+            603.5,
+            219.0
+          ],
+          [
+            598.0,
+            219.0
+          ],
+          [
+            574.0,
+            243.0
+          ]
+        ],
+        "simplified": [
+          [
+            603.5,
+            219.0
+          ],
+          [
+            598.0,
+            219.0
+          ],
+          [
+            574.0,
+            243.0
+          ]
+        ]
+      },
+      {
+        "original": [
+          [
+            603.5,
+            219.0
+          ],
+          [
+            628.5,
+            244.0
+          ],
+          [
+            692.0,
+            244.0
+          ]
+        ],
+        "simplified": [
+          [
+            603.5,
+            219.0
+          ],
+          [
+            628.5,
+            244.0
+          ],
+          [
+            692.0,
+            244.0
+          ]
+        ]
+      },
+      {
+        "original": [
+          [
+            612.0,
+            350.5
+          ],
+          [
+            612.0,
+            281.0
+          ],
+          [
+            574.0,
+            243.0
+          ]
+        ],
+        "simplified": [
+          [
+            612.0,
+            350.5
+          ],
+          [
+            612.0,
+            281.0
+          ],
+          [
+            574.0,
+            243.0
+          ]
+        ]
+      },
+      {
+        "original": [
+          [
+            612.0,
+            350.5
+          ],
+          [
+            635.0,
+            350.5
+          ]
+        ],
+        "simplified": [
+          [
+            612.0,
+            350.5
+          ],
+          [
+            635.0,
+            350.5
+          ]
+        ]
+      },
+      {
+        "original": [
+          [
+            622.5,
+            610.0
+          ],
+          [
+            622.5,
+            634.5
+          ]
+        ],
+        "simplified": [
+          [
+            622.5,
+            610.0
+          ],
+          [
+            622.5,
+            634.5
+          ]
+        ]
+      },
+      {
+        "original": [
+          [
+            622.5,
+            634.5
+          ],
+          [
+            622.5,
+            679.5
+          ],
+          [
+            657.0,
+            679.5
+          ]
+        ],
+        "simplified": [
+          [
+            622.5,
+            634.5
+          ],
+          [
+            622.5,
+            679.5
+          ],
+          [
+            657.0,
+            679.5
+          ]
+        ]
+      },
+      {
+        "original": [
+          [
+            622.5,
+            634.5
+          ],
+          [
+            688.0,
+            634.5
+          ],
+          [
+            688.0,
+            655.5
+          ]
+        ],
+        "simplified": [
+          [
+            622.5,
+            634.5
+          ],
+          [
+            688.0,
+            634.5
+          ],
+          [
+            688.0,
+            655.5
+          ]
+        ]
+      },
+      {
+        "original": [
+          [
+            634.5,
+            568.5
+          ],
+          [
+            632.5,
+            566.5
+          ],
+          [
+            632.5,
+            496.5
+          ],
+          [
+            692.0,
+            437.0
+          ],
+          [
+            692.0,
+            429.5
+          ]
+        ],
+        "simplified": [
+          [
+            634.5,
+            568.5
+          ],
+          [
+            632.5,
+            566.5
+          ],
+          [
+            632.5,
+            496.5
+          ],
+          [
+            692.0,
+            437.0
+          ],
+          [
+            692.0,
+            429.5
+          ]
+        ]
+      },
+      {
+        "original": [
+          [
+            634.5,
+            568.5
+          ],
+          [
+            634.5,
+            571.5
+          ]
+        ],
+        "simplified": [
+          [
+            634.5,
+            568.5
+          ],
+          [
+            634.5,
+            571.5
+          ]
+        ]
+      },
+      {
+        "original": [
+          [
+            634.5,
+            571.5
+          ],
+          [
+            583.0,
+            571.5
+          ],
+          [
+            494.0,
+            482.5
+          ],
+          [
+            481.5,
+            482.5
+          ],
+          [
+            479.5,
+            480.5
+          ]
+        ],
+        "simplified": [
+          [
+            634.5,
+            571.5
+          ],
+          [
+            583.0,
+            571.5
+          ],
+          [
+            494.0,
+            482.5
+          ],
+          [
+            481.5,
+            482.5
+          ],
+          [
+            479.5,
+            480.5
+          ]
+        ]
+      },
+      {
+        "original": [
+          [
+            634.5,
+            571.5
+          ],
+          [
+            634.5,
+            610.0
+          ],
+          [
+            622.5,
+            610.0
+          ]
+        ],
+        "simplified": [
+          [
+            634.5,
+            571.5
+          ],
+          [
+            634.5,
+            610.0
+          ],
+          [
+            622.5,
+            610.0
+          ]
+        ]
+      },
+      {
+        "original": [
+          [
+            635.0,
+            350.5
+          ],
+          [
+            635.0,
+            429.5
+          ],
+          [
+            692.0,
+            429.5
+          ]
+        ],
+        "simplified": [
+          [
+            635.0,
+            350.5
+          ],
+          [
+            635.0,
+            429.5
+          ],
+          [
+            692.0,
+            429.5
+          ]
+        ]
+      },
+      {
+        "original": [
+          [
+            635.0,
+            350.5
+          ],
+          [
+            692.0,
+            293.5
+          ]
+        ],
+        "simplified": [
+          [
+            635.0,
+            350.5
+          ],
+          [
+            692.0,
+            293.5
+          ]
+        ]
+      },
+      {
+        "original": [
+          [
+            657.0,
+            679.5
+          ],
+          [
+            663.0,
+            679.5
+          ],
+          [
+            681.0,
+            697.5
+          ],
+          [
+            699.5,
+            679.0
+          ],
+          [
+            688.0,
+            667.5
+          ],
+          [
+            688.0,
+            655.5
+          ]
+        ],
+        "simplified": [
+          [
+            657.0,
+            679.5
+          ],
+          [
+            663.0,
+            679.5
+          ],
+          [
+            681.0,
+            697.5
+          ],
+          [
+            699.5,
+            679.0
+          ],
+          [
+            688.0,
+            667.5
+          ],
+          [
+            688.0,
+            655.5
+          ]
+        ]
+      },
+      {
+        "original": [
+          [
+            688.0,
+            655.5
+          ],
+          [
+            729.5,
+            655.5
+          ],
+          [
+            729.5,
+            539.5
+          ]
+        ],
+        "simplified": [
+          [
+            688.0,
+            655.5
+          ],
+          [
+            729.5,
+            655.5
+          ],
+          [
+            729.5,
+            539.5
+          ]
+        ]
+      },
+      {
+        "original": [
+          [
+            692.0,
+            244.0
+          ],
+          [
+            692.0,
+            293.5
+          ]
+        ],
+        "simplified": [
+          [
+            692.0,
+            244.0
+          ],
+          [
+            692.0,
+            293.5
+          ]
+        ]
+      },
+      {
+        "original": [
+          [
+            692.0,
+            244.0
+          ],
+          [
+            739.0,
+            197.0
+          ],
+          [
+            761.0,
+            197.0
+          ]
+        ],
+        "simplified": [
+          [
+            692.0,
+            244.0
+          ],
+          [
+            739.0,
+            197.0
+          ],
+          [
+            761.0,
+            197.0
+          ]
+        ]
+      },
+      {
+        "original": [
+          [
+            692.0,
+            293.5
+          ],
+          [
+            801.0,
+            293.5
+          ]
+        ],
+        "simplified": [
+          [
+            692.0,
+            293.5
+          ],
+          [
+            801.0,
+            293.5
+          ]
+        ]
+      },
+      {
+        "original": [
+          [
+            692.0,
+            429.5
+          ],
+          [
+            716.5,
+            429.5
+          ],
+          [
+            728.5,
+            417.5
+          ]
+        ],
+        "simplified": [
+          [
+            692.0,
+            429.5
+          ],
+          [
+            716.5,
+            429.5
+          ],
+          [
+            728.5,
+            417.5
+          ]
+        ]
+      },
+      {
+        "original": [
+          [
+            706.0,
+            119.0
+          ],
+          [
+            639.5,
+            119.0
+          ],
+          [
+            639.5,
+            183.0
+          ],
+          [
+            603.5,
+            219.0
+          ]
+        ],
+        "simplified": [
+          [
+            706.0,
+            119.0
+          ],
+          [
+            639.5,
+            119.0
+          ],
+          [
+            639.5,
+            183.0
+          ],
+          [
+            603.5,
+            219.0
+          ]
+        ]
+      },
+      {
+        "original": [
+          [
+            728.5,
+            417.5
+          ],
+          [
+            728.5,
+            427.5
+          ],
+          [
+            735.5,
+            434.5
+          ],
+          [
+            735.5,
+            453.0
+          ],
+          [
+            808.0,
+            453.0
+          ]
+        ],
+        "simplified": [
+          [
+            728.5,
+            417.5
+          ],
+          [
+            728.5,
+            427.5
+          ],
+          [
+            735.5,
+            434.5
+          ],
+          [
+            735.5,
+            453.0
+          ],
+          [
+            808.0,
+            453.0
+          ]
+        ]
+      },
+      {
+        "original": [
+          [
+            729.5,
+            539.5
+          ],
+          [
+            663.5,
+            539.5
+          ],
+          [
+            634.5,
+            568.5
+          ]
+        ],
+        "simplified": [
+          [
+            729.5,
+            539.5
+          ],
+          [
+            663.5,
+            539.5
+          ],
+          [
+            634.5,
+            568.5
+          ]
+        ]
+      },
+      {
+        "original": [
+          [
+            729.5,
+            539.5
+          ],
+          [
+            730.5,
+            539.5
+          ],
+          [
+            808.0,
+            462.0
+          ],
+          [
+            808.0,
+            453.0
+          ]
+        ],
+        "simplified": [
+          [
+            729.5,
+            539.5
+          ],
+          [
+            730.5,
+            539.5
+          ],
+          [
+            808.0,
+            462.0
+          ],
+          [
+            808.0,
+            453.0
+          ]
+        ]
+      },
+      {
+        "original": [
+          [
+            761.0,
+            197.0
+          ],
+          [
+            761.0,
+            217.0
+          ],
+          [
+            819.5,
+            217.0
+          ],
+          [
+            838.5,
+            236.0
+          ]
+        ],
+        "simplified": [
+          [
+            761.0,
+            197.0
+          ],
+          [
+            761.0,
+            217.0
+          ],
+          [
+            819.5,
+            217.0
+          ],
+          [
+            838.5,
+            236.0
+          ]
+        ]
+      },
+      {
+        "original": [
+          [
+            761.0,
+            197.0
+          ],
+          [
+            764.5,
+            197.0
+          ],
+          [
+            833.0,
+            128.5
+          ]
+        ],
+        "simplified": [
+          [
+            761.0,
+            197.0
+          ],
+          [
+            764.5,
+            197.0
+          ],
+          [
+            833.0,
+            128.5
+          ]
+        ]
+      },
+      {
+        "original": [
+          [
+            792.5,
+            102.5
+          ],
+          [
+            722.5,
+            102.5
+          ],
+          [
+            706.0,
+            119.0
+          ]
+        ],
+        "simplified": [
+          [
+            792.5,
+            102.5
+          ],
+          [
+            722.5,
+            102.5
+          ],
+          [
+            706.0,
+            119.0
+          ]
+        ]
+      },
+      {
+        "original": [
+          [
+            801.0,
+            293.5
+          ],
+          [
+            801.0,
+            329.0
+          ]
+        ],
+        "simplified": [
+          [
+            801.0,
+            293.5
+          ],
+          [
+            801.0,
+            329.0
+          ]
+        ]
+      },
+      {
+        "original": [
+          [
+            801.0,
+            293.5
+          ],
+          [
+            838.5,
+            256.0
+          ],
+          [
+            838.5,
+            236.0
+          ]
+        ],
+        "simplified": [
+          [
+            801.0,
+            293.5
+          ],
+          [
+            838.5,
+            256.0
+          ],
+          [
+            838.5,
+            236.0
+          ]
+        ]
+      },
+      {
+        "original": [
+          [
+            801.0,
+            329.0
+          ],
+          [
+            801.0,
+            398.0
+          ],
+          [
+            748.0,
+            398.0
+          ],
+          [
+            728.5,
+            417.5
+          ]
+        ],
+        "simplified": [
+          [
+            801.0,
+            329.0
+          ],
+          [
+            801.0,
+            398.0
+          ],
+          [
+            748.0,
+            398.0
+          ],
+          [
+            728.5,
+            417.5
+          ]
+        ]
+      },
+      {
+        "original": [
+          [
+            808.0,
+            453.0
+          ],
+          [
+            812.5,
+            453.0
+          ],
+          [
+            871.5,
+            394.0
+          ],
+          [
+            859.5,
+            382.0
+          ],
+          [
+            870.5,
+            371.0
+          ],
+          [
+            870.5,
+            370.5
+          ]
+        ],
+        "simplified": [
+          [
+            808.0,
+            453.0
+          ],
+          [
+            812.5,
+            453.0
+          ],
+          [
+            871.5,
+            394.0
+          ],
+          [
+            859.5,
+            382.0
+          ],
+          [
+            870.5,
+            371.0
+          ],
+          [
+            870.5,
+            370.5
+          ]
+        ]
+      },
+      {
+        "original": [
+          [
+            810.5,
+            75.0
+          ],
+          [
+            792.5,
+            93.0
+          ],
+          [
+            792.5,
+            102.5
+          ]
+        ],
+        "simplified": [
+          [
+            810.5,
+            75.0
+          ],
+          [
+            792.5,
+            93.0
+          ],
+          [
+            792.5,
+            102.5
+          ]
+        ]
+      },
+      {
+        "original": [
+          [
+            810.5,
+            75.0
+          ],
+          [
+            810.5,
+            55.5
+          ],
+          [
+            775.5,
+            55.5
+          ],
+          [
+            765.5,
+            45.5
+          ],
+          [
+            736.5,
+            45.5
+          ],
+          [
+            690.5,
+            91.5
+          ],
+          [
+            690.5,
+            103.5
+          ],
+          [
+            706.0,
+            119.0
+          ]
+        ],
+        "simplified": [
+          [
+            810.5,
+            75.0
+          ],
+          [
+            810.5,
+            55.5
+          ],
+          [
+            775.5,
+            55.5
+          ],
+          [
+            765.5,
+            45.5
+          ],
+          [
+            736.5,
+            45.5
+          ],
+          [
+            690.5,
+            91.5
+          ],
+          [
+            690.5,
+            103.5
+          ],
+          [
+            706.0,
+            119.0
+          ]
+        ]
+      },
+      {
+        "original": [
+          [
+            833.0,
+            128.5
+          ],
+          [
+            807.0,
+            102.5
+          ],
+          [
+            792.5,
+            102.5
+          ]
+        ],
+        "simplified": [
+          [
+            833.0,
+            128.5
+          ],
+          [
+            807.0,
+            102.5
+          ],
+          [
+            792.5,
+            102.5
+          ]
+        ]
+      },
+      {
+        "original": [
+          [
+            833.0,
+            128.5
+          ],
+          [
+            834.5,
+            130.0
+          ],
+          [
+            847.0,
+            130.0
+          ]
+        ],
+        "simplified": [
+          [
+            833.0,
+            128.5
+          ],
+          [
+            834.5,
+            130.0
+          ],
+          [
+            847.0,
+            130.0
+          ]
+        ]
+      },
+      {
+        "original": [
+          [
+            838.5,
+            236.0
+          ],
+          [
+            879.0,
+            236.0
+          ]
+        ],
+        "simplified": [
+          [
+            838.5,
+            236.0
+          ],
+          [
+            879.0,
+            236.0
+          ]
+        ]
+      },
+      {
+        "original": [
+          [
+            847.0,
+            130.0
+          ],
+          [
+            847.0,
+            132.0
+          ],
+          [
+            879.0,
+            164.0
+          ],
+          [
+            879.0,
+            236.0
+          ]
+        ],
+        "simplified": [
+          [
+            847.0,
+            130.0
+          ],
+          [
+            847.0,
+            132.0
+          ],
+          [
+            879.0,
+            164.0
+          ],
+          [
+            879.0,
+            236.0
+          ]
+        ]
+      },
+      {
+        "original": [
+          [
+            870.5,
+            370.5
+          ],
+          [
+            870.5,
+            329.0
+          ],
+          [
+            801.0,
+            329.0
+          ]
+        ],
+        "simplified": [
+          [
+            870.5,
+            370.5
+          ],
+          [
+            870.5,
+            329.0
+          ],
+          [
+            801.0,
+            329.0
+          ]
+        ]
+      },
+      {
+        "original": [
+          [
+            870.5,
+            370.5
+          ],
+          [
+            919.0,
+            370.5
+          ],
+          [
+            919.0,
+            253.0
+          ]
+        ],
+        "simplified": [
+          [
+            870.5,
+            370.5
+          ],
+          [
+            919.0,
+            370.5
+          ],
+          [
+            919.0,
+            253.0
+          ]
+        ]
+      },
+      {
+        "original": [
+          [
+            871.5,
+            106.0
+          ],
+          [
+            871.5,
+            57.0
+          ],
+          [
+            828.5,
+            57.0
+          ],
+          [
+            810.5,
+            75.0
+          ]
+        ],
+        "simplified": [
+          [
+            871.5,
+            106.0
+          ],
+          [
+            871.5,
+            57.0
+          ],
+          [
+            828.5,
+            57.0
+          ],
+          [
+            810.5,
+            75.0
+          ]
+        ]
+      },
+      {
+        "original": [
+          [
+            871.5,
+            106.0
+          ],
+          [
+            871.5,
+            130.0
+          ],
+          [
+            847.0,
+            130.0
+          ]
+        ],
+        "simplified": [
+          [
+            871.5,
+            106.0
+          ],
+          [
+            871.5,
+            130.0
+          ],
+          [
+            847.0,
+            130.0
+          ]
+        ]
+      },
+      {
+        "original": [
+          [
+            879.0,
+            236.0
+          ],
+          [
+            879.0,
+            253.0
+          ],
+          [
+            919.0,
+            253.0
+          ]
+        ],
+        "simplified": [
+          [
+            879.0,
+            236.0
+          ],
+          [
+            879.0,
+            253.0
+          ],
+          [
+            919.0,
+            253.0
+          ]
+        ]
+      },
+      {
+        "original": [
+          [
+            919.0,
+            253.0
+          ],
+          [
+            941.0,
+            253.0
+          ],
+          [
+            951.5,
+            263.5
+          ],
+          [
+            953.5,
+            263.5
+          ],
+          [
+            953.5,
+            182.0
+          ],
+          [
+            877.5,
+            106.0
+          ],
+          [
+            871.5,
+            106.0
+          ]
+        ],
+        "simplified": [
+          [
+            919.0,
+            253.0
+          ],
+          [
+            941.0,
+            253.0
+          ],
+          [
+            951.5,
+            263.5
+          ],
+          [
+            953.5,
+            263.5
+          ],
+          [
+            953.5,
+            182.0
+          ],
+          [
+            877.5,
+            106.0
+          ],
+          [
+            871.5,
+            106.0
+          ]
+        ]
+      },
+      {
+        "original": [
+          [
+            980.25,
+            94.75
+          ],
+          [
+            996.75,
+            94.75
+          ],
+          [
+            1000.75,
+            90.75
+          ],
+          [
+            1000.75,
+            80.25
+          ],
+          [
+            996.75,
+            76.25
+          ],
+          [
+            980.25,
+            76.25
+          ],
+          [
+            976.25,
+            80.25
+          ],
+          [
+            976.25,
+            90.75
+          ],
+          [
+            980.25,
+            94.75
+          ]
+        ],
+        "simplified": [
+          [
+            980.25,
+            94.75
+          ],
+          [
+            996.75,
+            94.75
+          ],
+          [
+            1000.75,
+            90.75
+          ],
+          [
+            1000.75,
+            80.25
+          ],
+          [
+            996.75,
+            76.25
+          ],
+          [
+            980.25,
+            76.25
+          ],
+          [
+            976.25,
+            80.25
+          ],
+          [
+            976.25,
+            90.75
+          ],
+          [
+            980.25,
+            94.75
+          ]
+        ]
+      },
+      {
+        "original": [
+          [
+            989.0,
+            159.5
+          ],
+          [
+            989.0,
+            137.5
+          ],
+          [
+            980.5,
+            129.0
+          ],
+          [
+            957.5,
+            129.0
+          ],
+          [
+            949.0,
+            137.5
+          ],
+          [
+            949.0,
+            159.5
+          ],
+          [
+            957.5,
+            168.0
+          ],
+          [
+            980.5,
+            168.0
+          ],
+          [
+            989.0,
+            159.5
+          ]
+        ],
+        "simplified": [
+          [
+            989.0,
+            159.5
+          ],
+          [
+            989.0,
+            137.5
+          ],
+          [
+            980.5,
+            129.0
+          ],
+          [
+            957.5,
+            129.0
+          ],
+          [
+            949.0,
+            137.5
+          ],
+          [
+            949.0,
+            159.5
+          ],
+          [
+            957.5,
+            168.0
+          ],
+          [
+            980.5,
+            168.0
+          ],
+          [
+            989.0,
+            159.5
+          ]
+        ]
+      },
+      {
+        "original": [
+          [
+            995.0,
+            193.0
+          ],
+          [
+            995.0,
+            180.0
+          ],
+          [
+            989.5,
+            174.5
+          ],
+          [
+            976.5,
+            174.5
+          ],
+          [
+            971.0,
+            180.0
+          ],
+          [
+            971.0,
+            193.0
+          ],
+          [
+            976.5,
+            198.5
+          ],
+          [
+            989.5,
+            198.5
+          ],
+          [
+            995.0,
+            193.0
+          ]
+        ],
+        "simplified": [
+          [
+            995.0,
+            193.0
+          ],
+          [
+            995.0,
+            180.0
+          ],
+          [
+            989.5,
+            174.5
+          ],
+          [
+            976.5,
+            174.5
+          ],
+          [
+            971.0,
+            180.0
+          ],
+          [
+            971.0,
+            193.0
+          ],
+          [
+            976.5,
+            198.5
+          ],
+          [
+            989.5,
+            198.5
+          ],
+          [
+            995.0,
+            193.0
+          ]
+        ]
+      }
+    ],
+    "cities": [
+      {
+        "name": "南昌",
+        "beforeShortEdges": 0,
+        "shortEdges": 0,
+        "beforeTurns": 6,
+        "turns": 6,
+        "acuteAngles": 0
+      },
+      {
+        "name": "景德镇",
+        "beforeShortEdges": 1,
+        "shortEdges": 1,
+        "beforeTurns": 8,
+        "turns": 8,
+        "acuteAngles": 0
+      },
+      {
+        "name": "萍乡",
+        "beforeShortEdges": 6,
+        "shortEdges": 6,
+        "beforeTurns": 17,
+        "turns": 17,
+        "acuteAngles": 0
+      },
+      {
+        "name": "九江",
+        "beforeShortEdges": 1,
+        "shortEdges": 1,
+        "beforeTurns": 14,
+        "turns": 14,
+        "acuteAngles": 0
+      },
+      {
+        "name": "新余",
+        "beforeShortEdges": 0,
+        "shortEdges": 0,
+        "beforeTurns": 8,
+        "turns": 8,
+        "acuteAngles": 0
+      },
+      {
+        "name": "鹰潭",
+        "beforeShortEdges": 1,
+        "shortEdges": 1,
+        "beforeTurns": 8,
+        "turns": 8,
+        "acuteAngles": 0
+      },
+      {
+        "name": "赣州",
+        "beforeShortEdges": 0,
+        "shortEdges": 0,
+        "beforeTurns": 12,
+        "turns": 12,
+        "acuteAngles": 0
+      },
+      {
+        "name": "吉安",
+        "beforeShortEdges": 1,
+        "shortEdges": 1,
+        "beforeTurns": 10,
+        "turns": 10,
+        "acuteAngles": 0
+      },
+      {
+        "name": "宜春",
+        "beforeShortEdges": 1,
+        "shortEdges": 1,
+        "beforeTurns": 20,
+        "turns": 20,
+        "acuteAngles": 0
+      },
+      {
+        "name": "抚州",
+        "beforeShortEdges": 0,
+        "shortEdges": 0,
+        "beforeTurns": 12,
+        "turns": 12,
+        "acuteAngles": 0
+      },
+      {
+        "name": "上饶",
+        "beforeShortEdges": 0,
+        "shortEdges": 0,
+        "beforeTurns": 17,
+        "turns": 17,
+        "acuteAngles": 0
+      },
+      {
+        "name": "杭州",
+        "beforeShortEdges": 0,
+        "shortEdges": 0,
+        "beforeTurns": 11,
+        "turns": 11,
+        "acuteAngles": 0
+      },
+      {
+        "name": "宁波",
+        "beforeShortEdges": 3,
+        "shortEdges": 3,
+        "beforeTurns": 11,
+        "turns": 11,
+        "acuteAngles": 0
+      },
+      {
+        "name": "温州",
+        "beforeShortEdges": 2,
+        "shortEdges": 2,
+        "beforeTurns": 12,
+        "turns": 12,
+        "acuteAngles": 0
+      },
+      {
+        "name": "嘉兴",
+        "beforeShortEdges": 1,
+        "shortEdges": 1,
+        "beforeTurns": 7,
+        "turns": 7,
+        "acuteAngles": 0
+      },
+      {
+        "name": "湖州",
+        "beforeShortEdges": 1,
+        "shortEdges": 1,
+        "beforeTurns": 11,
+        "turns": 11,
+        "acuteAngles": 0
+      },
+      {
+        "name": "绍兴",
+        "beforeShortEdges": 3,
+        "shortEdges": 3,
+        "beforeTurns": 11,
+        "turns": 11,
+        "acuteAngles": 0
+      },
+      {
+        "name": "金华",
+        "beforeShortEdges": 0,
+        "shortEdges": 0,
+        "beforeTurns": 9,
+        "turns": 9,
+        "acuteAngles": 0
+      },
+      {
+        "name": "衢州",
+        "beforeShortEdges": 1,
+        "shortEdges": 1,
+        "beforeTurns": 9,
+        "turns": 9,
+        "acuteAngles": 0
+      },
+      {
+        "name": "舟山",
+        "beforeShortEdges": 10,
+        "shortEdges": 10,
+        "beforeTurns": 24,
+        "turns": 24,
+        "acuteAngles": 0
+      },
+      {
+        "name": "台州",
+        "beforeShortEdges": 0,
+        "shortEdges": 0,
+        "beforeTurns": 10,
+        "turns": 10,
+        "acuteAngles": 0
+      },
+      {
+        "name": "丽水",
+        "beforeShortEdges": 0,
+        "shortEdges": 0,
+        "beforeTurns": 7,
+        "turns": 7,
+        "acuteAngles": 0
+      },
+      {
+        "name": "福州",
+        "beforeShortEdges": 0,
+        "shortEdges": 0,
+        "beforeTurns": 9,
+        "turns": 9,
+        "acuteAngles": 0
+      },
+      {
+        "name": "厦门",
+        "beforeShortEdges": 8,
+        "shortEdges": 8,
+        "beforeTurns": 14,
+        "turns": 14,
+        "acuteAngles": 0
+      },
+      {
+        "name": "莆田",
+        "beforeShortEdges": 0,
+        "shortEdges": 0,
+        "beforeTurns": 7,
+        "turns": 7,
+        "acuteAngles": 0
+      },
+      {
+        "name": "三明",
+        "beforeShortEdges": 1,
+        "shortEdges": 1,
+        "beforeTurns": 13,
+        "turns": 13,
+        "acuteAngles": 0
+      },
+      {
+        "name": "泉州",
+        "beforeShortEdges": 0,
+        "shortEdges": 0,
+        "beforeTurns": 10,
+        "turns": 10,
+        "acuteAngles": 0
+      },
+      {
+        "name": "漳州",
+        "beforeShortEdges": 1,
+        "shortEdges": 1,
+        "beforeTurns": 9,
+        "turns": 9,
+        "acuteAngles": 0
+      },
+      {
+        "name": "南平",
+        "beforeShortEdges": 6,
+        "shortEdges": 6,
+        "beforeTurns": 19,
+        "turns": 19,
+        "acuteAngles": 1
+      },
+      {
+        "name": "龙岩",
+        "beforeShortEdges": 2,
+        "shortEdges": 2,
+        "beforeTurns": 15,
+        "turns": 15,
+        "acuteAngles": 0
+      },
+      {
+        "name": "宁德",
+        "beforeShortEdges": 5,
+        "shortEdges": 5,
+        "beforeTurns": 14,
+        "turns": 14,
+        "acuteAngles": 1
+      },
+      {
+        "name": "长沙",
+        "beforeShortEdges": 4,
+        "shortEdges": 2,
+        "beforeTurns": 15,
+        "turns": 10,
+        "acuteAngles": 1
+      },
+      {
+        "name": "株洲",
+        "beforeShortEdges": 5,
+        "shortEdges": 3,
+        "beforeTurns": 18,
+        "turns": 16,
+        "acuteAngles": 0
+      },
+      {
+        "name": "湘潭",
+        "beforeShortEdges": 5,
+        "shortEdges": 2,
+        "beforeTurns": 10,
+        "turns": 6,
+        "acuteAngles": 0
+      },
+      {
+        "name": "衡阳",
+        "beforeShortEdges": 3,
+        "shortEdges": 1,
+        "beforeTurns": 13,
+        "turns": 9,
+        "acuteAngles": 0
+      },
+      {
+        "name": "邵阳",
+        "beforeShortEdges": 3,
+        "shortEdges": 3,
+        "beforeTurns": 14,
+        "turns": 13,
+        "acuteAngles": 0
+      },
+      {
+        "name": "岳阳",
+        "beforeShortEdges": 6,
+        "shortEdges": 4,
+        "beforeTurns": 18,
+        "turns": 15,
+        "acuteAngles": 0
+      },
+      {
+        "name": "常德",
+        "beforeShortEdges": 2,
+        "shortEdges": 0,
+        "beforeTurns": 14,
+        "turns": 14,
+        "acuteAngles": 0
+      },
+      {
+        "name": "张家界",
+        "beforeShortEdges": 0,
+        "shortEdges": 0,
+        "beforeTurns": 7,
+        "turns": 7,
+        "acuteAngles": 0
+      },
+      {
+        "name": "益阳",
+        "beforeShortEdges": 8,
+        "shortEdges": 4,
+        "beforeTurns": 20,
+        "turns": 17,
+        "acuteAngles": 0
+      },
+      {
+        "name": "郴州",
+        "beforeShortEdges": 5,
+        "shortEdges": 4,
+        "beforeTurns": 16,
+        "turns": 15,
+        "acuteAngles": 0
+      },
+      {
+        "name": "永州",
+        "beforeShortEdges": 2,
+        "shortEdges": 2,
+        "beforeTurns": 14,
+        "turns": 12,
+        "acuteAngles": 0
+      },
+      {
+        "name": "怀化",
+        "beforeShortEdges": 0,
+        "shortEdges": 0,
+        "beforeTurns": 19,
+        "turns": 19,
+        "acuteAngles": 0
+      },
+      {
+        "name": "娄底",
+        "beforeShortEdges": 7,
+        "shortEdges": 2,
+        "beforeTurns": 16,
+        "turns": 12,
+        "acuteAngles": 0
+      },
+      {
+        "name": "湘西",
+        "beforeShortEdges": 2,
+        "shortEdges": 1,
+        "beforeTurns": 9,
+        "turns": 7,
+        "acuteAngles": 0
+      }
+    ],
+    "vertices": 648,
+    "provinceIou": 0.9777,
+    "minCityIou": 0.7519,
+    "areaRatio": 20.624,
+    "inheritedAcutePoints": [
+      [
+        495.0,
+        398.0
+      ],
+      [
+        728.5,
+        417.5
+      ],
+      [
+        178.0,
+        391.0
+      ]
+    ]
+  },
+  "inheritedAcutePoints": [
+    [
+      495.0,
+      398.0
+    ],
+    [
+      728.5,
+      417.5
+    ],
+    [
+      178.0,
+      391.0
+    ]
+  ]
+}

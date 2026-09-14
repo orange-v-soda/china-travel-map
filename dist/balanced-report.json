@@ -1,0 +1,876 @@
+{
+  "sourceSha256": "10ac3477afabe7f08c2d2d1dc9b62e65340ba56d172b0b5836b657ecd55d883b",
+  "alpha": 0.75,
+  "beforeRatio": 25.033158212040306,
+  "afterRatio": 11.27623500906111,
+  "targetRatio": 11.19145964707509,
+  "trace": [
+    {
+      "alpha": 0.95,
+      "acceptedStep": 1.0,
+      "iterations": 225,
+      "optimizerSuccess": true,
+      "message": "Optimization terminated successfully",
+      "ratio": 21.34444625046916
+    },
+    {
+      "alpha": 0.9,
+      "acceptedStep": 1.0,
+      "iterations": 226,
+      "optimizerSuccess": true,
+      "message": "Optimization terminated successfully",
+      "ratio": 18.19796732734065
+    },
+    {
+      "alpha": 0.85,
+      "acceptedStep": 1.0,
+      "iterations": 226,
+      "optimizerSuccess": true,
+      "message": "Optimization terminated successfully",
+      "ratio": 15.514376059546668
+    },
+    {
+      "alpha": 0.8,
+      "acceptedStep": 1.0,
+      "iterations": 222,
+      "optimizerSuccess": true,
+      "message": "Optimization terminated successfully",
+      "ratio": 13.226917342197755
+    },
+    {
+      "alpha": 0.75,
+      "acceptedStep": 1.0,
+      "iterations": 220,
+      "optimizerSuccess": true,
+      "message": "Optimization terminated successfully",
+      "ratio": 11.27623500906111
+    }
+  ],
+  "cities": [
+    {
+      "id": "360100",
+      "name": "南昌",
+      "beforeArea": 7780.5,
+      "afterArea": 8766.190273319342,
+      "areaFactor": 1.1266872660265204,
+      "normalizedShapeIou": 0.9887916333821424,
+      "centroidShift": 7.408870664832701,
+      "parts": 1
+    },
+    {
+      "id": "360200",
+      "name": "景德镇",
+      "beforeArea": 5045.0,
+      "afterArea": 6339.746622262961,
+      "areaFactor": 1.2566395683375542,
+      "normalizedShapeIou": 0.9903045391093209,
+      "centroidShift": 19.759000916944423,
+      "parts": 1
+    },
+    {
+      "id": "360300",
+      "name": "萍乡",
+      "beforeArea": 3369.5,
+      "afterArea": 4682.8403425538545,
+      "areaFactor": 1.3897730650107893,
+      "normalizedShapeIou": 0.9262902658964729,
+      "centroidShift": 17.360476538343764,
+      "parts": 1
+    },
+    {
+      "id": "360400",
+      "name": "九江",
+      "beforeArea": 18232.5,
+      "afterArea": 16627.159730388383,
+      "areaFactor": 0.9119517197525508,
+      "normalizedShapeIou": 0.9598318021081983,
+      "centroidShift": 7.986335324972003,
+      "parts": 1
+    },
+    {
+      "id": "360500",
+      "name": "新余",
+      "beforeArea": 3478.0,
+      "afterArea": 4793.901571575995,
+      "areaFactor": 1.3783500780839548,
+      "normalizedShapeIou": 0.9677581009637104,
+      "centroidShift": 15.200408734838339,
+      "parts": 1
+    },
+    {
+      "id": "360600",
+      "name": "鹰潭",
+      "beforeArea": 2953.5,
+      "afterArea": 4242.83717981508,
+      "areaFactor": 1.436545515427486,
+      "normalizedShapeIou": 0.971210097708163,
+      "centroidShift": 9.730802239780095,
+      "parts": 1
+    },
+    {
+      "id": "360700",
+      "name": "赣州",
+      "beforeArea": 36332.5,
+      "afterArea": 28062.768689125045,
+      "areaFactor": 0.7723874957441696,
+      "normalizedShapeIou": 0.9088938795662256,
+      "centroidShift": 9.437341059295221,
+      "parts": 1
+    },
+    {
+      "id": "360800",
+      "name": "吉安",
+      "beforeArea": 23187.0,
+      "afterArea": 19991.03922189761,
+      "areaFactor": 0.8621658352480963,
+      "normalizedShapeIou": 0.9650248859847591,
+      "centroidShift": 14.06784491183828,
+      "parts": 1
+    },
+    {
+      "id": "360900",
+      "name": "宜春",
+      "beforeArea": 17606.5,
+      "afterArea": 16213.19165633063,
+      "areaFactor": 0.9208639795717848,
+      "normalizedShapeIou": 0.8593017398978732,
+      "centroidShift": 8.055968717671528,
+      "parts": 1
+    },
+    {
+      "id": "361000",
+      "name": "抚州",
+      "beforeArea": 20283.5,
+      "afterArea": 18044.525425311822,
+      "areaFactor": 0.8896159649622511,
+      "normalizedShapeIou": 0.9550051074862386,
+      "centroidShift": 7.821754367051164,
+      "parts": 1
+    },
+    {
+      "id": "361100",
+      "name": "上饶",
+      "beforeArea": 22833.5,
+      "afterArea": 19746.30727976758,
+      "areaFactor": 0.864795466300286,
+      "normalizedShapeIou": 0.7728910502733249,
+      "centroidShift": 13.960771640088304,
+      "parts": 1
+    },
+    {
+      "id": "330100",
+      "name": "杭州",
+      "beforeArea": 19175.75,
+      "afterArea": 17417.490674877426,
+      "areaFactor": 0.9083081848103687,
+      "normalizedShapeIou": 0.9639422968704916,
+      "centroidShift": 9.504521703846216,
+      "parts": 1
+    },
+    {
+      "id": "330200",
+      "name": "宁波",
+      "beforeArea": 8895.625,
+      "afterArea": 9707.302128083182,
+      "areaFactor": 1.0912445306634646,
+      "normalizedShapeIou": 0.9257433991963784,
+      "centroidShift": 11.778591960333081,
+      "parts": 1
+    },
+    {
+      "id": "330300",
+      "name": "温州",
+      "beforeArea": 10459.375,
+      "afterArea": 10950.116381849946,
+      "areaFactor": 1.04691880555482,
+      "normalizedShapeIou": 0.8928681092392784,
+      "centroidShift": 5.834932240397725,
+      "parts": 1
+    },
+    {
+      "id": "330400",
+      "name": "嘉兴",
+      "beforeArea": 4342.125,
+      "afterArea": 5661.140446975328,
+      "areaFactor": 1.30377187367368,
+      "normalizedShapeIou": 0.9323544504853871,
+      "centroidShift": 8.204187879979965,
+      "parts": 1
+    },
+    {
+      "id": "330500",
+      "name": "湖州",
+      "beforeArea": 5320.75,
+      "afterArea": 6596.311093375788,
+      "areaFactor": 1.2397333258235752,
+      "normalizedShapeIou": 0.9094971724187928,
+      "centroidShift": 8.972823674834776,
+      "parts": 1
+    },
+    {
+      "id": "330600",
+      "name": "绍兴",
+      "beforeArea": 8163.25,
+      "afterArea": 9086.954954080604,
+      "areaFactor": 1.1131540690387534,
+      "normalizedShapeIou": 0.9522829088057895,
+      "centroidShift": 9.91386867338225,
+      "parts": 1
+    },
+    {
+      "id": "330700",
+      "name": "金华",
+      "beforeArea": 10599.125,
+      "afterArea": 11054.228470425194,
+      "areaFactor": 1.0429378340594335,
+      "normalizedShapeIou": 0.9653631094971106,
+      "centroidShift": 11.273979177621092,
+      "parts": 1
+    },
+    {
+      "id": "330800",
+      "name": "衢州",
+      "beforeArea": 8341.5,
+      "afterArea": 9240.394174207262,
+      "areaFactor": 1.107761694444316,
+      "normalizedShapeIou": 0.9294402145177575,
+      "centroidShift": 10.73638404848442,
+      "parts": 1
+    },
+    {
+      "id": "330900",
+      "name": "舟山",
+      "beforeArea": 2352.25,
+      "afterArea": 3579.2005847054684,
+      "areaFactor": 1.5216072206208815,
+      "normalizedShapeIou": 0.6339835175231844,
+      "centroidShift": 0.676635994556223,
+      "parts": 3
+    },
+    {
+      "id": "331000",
+      "name": "台州",
+      "beforeArea": 10853.625,
+      "afterArea": 11256.974387295952,
+      "areaFactor": 1.037162642646669,
+      "normalizedShapeIou": 0.9282828141900737,
+      "centroidShift": 10.408675253248179,
+      "parts": 1
+    },
+    {
+      "id": "331100",
+      "name": "丽水",
+      "beforeArea": 18785.875,
+      "afterArea": 17037.54391944431,
+      "areaFactor": 0.906933742476425,
+      "normalizedShapeIou": 0.9195511789082459,
+      "centroidShift": 7.63998052884916,
+      "parts": 1
+    },
+    {
+      "id": "350100",
+      "name": "福州",
+      "beforeArea": 9770.0,
+      "afterArea": 10398.912866289153,
+      "areaFactor": 1.0643718389241712,
+      "normalizedShapeIou": 0.8937187455215495,
+      "centroidShift": 10.523418727510698,
+      "parts": 1
+    },
+    {
+      "id": "350200",
+      "name": "厦门",
+      "beforeArea": 1761.625,
+      "afterArea": 2871.8959756545073,
+      "areaFactor": 1.6302538710874943,
+      "normalizedShapeIou": 0.8550666681121931,
+      "centroidShift": 11.428217406429114,
+      "parts": 2
+    },
+    {
+      "id": "350300",
+      "name": "莆田",
+      "beforeArea": 3343.25,
+      "afterArea": 4649.922407166653,
+      "areaFactor": 1.3908389761958133,
+      "normalizedShapeIou": 0.978387963830424,
+      "centroidShift": 9.024963667073585,
+      "parts": 1
+    },
+    {
+      "id": "350400",
+      "name": "三明",
+      "beforeArea": 19894.375,
+      "afterArea": 17779.846399135942,
+      "areaFactor": 0.8937122377122148,
+      "normalizedShapeIou": 0.9305561598750788,
+      "centroidShift": 9.162803340676088,
+      "parts": 1
+    },
+    {
+      "id": "350500",
+      "name": "泉州",
+      "beforeArea": 11533.5,
+      "afterArea": 11756.990910954868,
+      "areaFactor": 1.0193775446269449,
+      "normalizedShapeIou": 0.829544330798101,
+      "centroidShift": 13.799254321972338,
+      "parts": 1
+    },
+    {
+      "id": "350600",
+      "name": "漳州",
+      "beforeArea": 11964.75,
+      "afterArea": 12092.500978339905,
+      "areaFactor": 1.0106772793698076,
+      "normalizedShapeIou": 0.9128329402970385,
+      "centroidShift": 18.13696302178304,
+      "parts": 1
+    },
+    {
+      "id": "350700",
+      "name": "南平",
+      "beforeArea": 24074.5,
+      "afterArea": 20508.886946512626,
+      "areaFactor": 0.8518925396794378,
+      "normalizedShapeIou": 0.8945000544288009,
+      "centroidShift": 4.426562973273245,
+      "parts": 1
+    },
+    {
+      "id": "350800",
+      "name": "龙岩",
+      "beforeArea": 17534.0,
+      "afterArea": 16176.300720264371,
+      "areaFactor": 0.9225676240597908,
+      "normalizedShapeIou": 0.948241327890903,
+      "centroidShift": 16.324534935353604,
+      "parts": 1
+    },
+    {
+      "id": "350900",
+      "name": "宁德",
+      "beforeArea": 12919.75,
+      "afterArea": 12820.250789277954,
+      "areaFactor": 0.9922986736800599,
+      "normalizedShapeIou": 0.8623186117833873,
+      "centroidShift": 4.3216473298041285,
+      "parts": 1
+    },
+    {
+      "id": "430100",
+      "name": "长沙",
+      "beforeArea": 11540.5,
+      "afterArea": 11796.901528323522,
+      "areaFactor": 1.0222175406891836,
+      "normalizedShapeIou": 0.9424228149967961,
+      "centroidShift": 7.2265947780225,
+      "parts": 1
+    },
+    {
+      "id": "430200",
+      "name": "株洲",
+      "beforeArea": 9971.375,
+      "afterArea": 10572.54986324596,
+      "areaFactor": 1.060290066640354,
+      "normalizedShapeIou": 0.8830347577192227,
+      "centroidShift": 15.497118405643832,
+      "parts": 1
+    },
+    {
+      "id": "430300",
+      "name": "湘潭",
+      "beforeArea": 4334.125,
+      "afterArea": 5646.104861632245,
+      "areaFactor": 1.3027092807965264,
+      "normalizedShapeIou": 0.9809797631618693,
+      "centroidShift": 10.571023732977578,
+      "parts": 1
+    },
+    {
+      "id": "430400",
+      "name": "衡阳",
+      "beforeArea": 16062.625,
+      "afterArea": 15147.39328035286,
+      "areaFactor": 0.9430210367454174,
+      "normalizedShapeIou": 0.9451985610565653,
+      "centroidShift": 10.306277761239267,
+      "parts": 1
+    },
+    {
+      "id": "430500",
+      "name": "邵阳",
+      "beforeArea": 19820.25,
+      "afterArea": 17754.86605138401,
+      "areaFactor": 0.8957942534218293,
+      "normalizedShapeIou": 0.9316704293138075,
+      "centroidShift": 10.241351975376821,
+      "parts": 1
+    },
+    {
+      "id": "430600",
+      "name": "岳阳",
+      "beforeArea": 14254.875,
+      "afterArea": 13832.854646926738,
+      "areaFactor": 0.9703946647674384,
+      "normalizedShapeIou": 0.9401546768887091,
+      "centroidShift": 10.133065989790683,
+      "parts": 1
+    },
+    {
+      "id": "430700",
+      "name": "常德",
+      "beforeArea": 17436.125,
+      "afterArea": 16078.670409377057,
+      "areaFactor": 0.9221470028103754,
+      "normalizedShapeIou": 0.9372008545747192,
+      "centroidShift": 11.033177279475849,
+      "parts": 1
+    },
+    {
+      "id": "430800",
+      "name": "张家界",
+      "beforeArea": 9521.5,
+      "afterArea": 10207.437185287738,
+      "areaFactor": 1.0720408743672465,
+      "normalizedShapeIou": 0.9887953377377252,
+      "centroidShift": 16.902174554456735,
+      "parts": 1
+    },
+    {
+      "id": "430900",
+      "name": "益阳",
+      "beforeArea": 11719.0,
+      "afterArea": 11929.11622636609,
+      "areaFactor": 1.0179295354864826,
+      "normalizedShapeIou": 0.9224426572930502,
+      "centroidShift": 6.844189579955497,
+      "parts": 1
+    },
+    {
+      "id": "431000",
+      "name": "郴州",
+      "beforeArea": 18127.875,
+      "afterArea": 16578.50561806065,
+      "areaFactor": 0.914531108475795,
+      "normalizedShapeIou": 0.862201213193676,
+      "centroidShift": 5.654611157386441,
+      "parts": 1
+    },
+    {
+      "id": "431100",
+      "name": "永州",
+      "beforeArea": 19557.875,
+      "afterArea": 17529.950087780453,
+      "areaFactor": 0.8963115925314203,
+      "normalizedShapeIou": 0.9691885621981137,
+      "centroidShift": 5.426562174098503,
+      "parts": 1
+    },
+    {
+      "id": "431200",
+      "name": "怀化",
+      "beforeArea": 24689.25,
+      "afterArea": 20883.807260365116,
+      "areaFactor": 0.8458664098895315,
+      "normalizedShapeIou": 0.9247327043204591,
+      "centroidShift": 11.629840575045895,
+      "parts": 1
+    },
+    {
+      "id": "431300",
+      "name": "娄底",
+      "beforeArea": 7220.875,
+      "afterArea": 8294.17401391246,
+      "areaFactor": 1.1486383594664717,
+      "normalizedShapeIou": 0.9076187520270192,
+      "centroidShift": 12.039814434695298,
+      "parts": 1
+    },
+    {
+      "id": "433100",
+      "name": "湘西",
+      "beforeArea": 15698.75,
+      "afterArea": 14871.648067901826,
+      "areaFactor": 0.9473141535410033,
+      "normalizedShapeIou": 0.9816070597079185,
+      "centroidShift": 16.591788270603406,
+      "parts": 1
+    },
+    {
+      "id": "340100",
+      "name": "合肥",
+      "beforeArea": 12250.375,
+      "afterArea": 12378.683901107921,
+      "areaFactor": 1.0104738753799718,
+      "normalizedShapeIou": 0.8718110459380733,
+      "centroidShift": 8.04129990727413,
+      "parts": 1
+    },
+    {
+      "id": "340200",
+      "name": "芜湖",
+      "beforeArea": 6130.375,
+      "afterArea": 7331.555299472766,
+      "areaFactor": 1.1959391227245912,
+      "normalizedShapeIou": 0.887820277212503,
+      "centroidShift": 5.460585115700942,
+      "parts": 1
+    },
+    {
+      "id": "340300",
+      "name": "蚌埠",
+      "beforeArea": 6102.25,
+      "afterArea": 7313.710273540048,
+      "areaFactor": 1.1985268177377275,
+      "normalizedShapeIou": 0.9505390381860919,
+      "centroidShift": 2.9660434570005307,
+      "parts": 1
+    },
+    {
+      "id": "340400",
+      "name": "淮南",
+      "beforeArea": 5288.375,
+      "afterArea": 6561.411549243001,
+      "areaFactor": 1.2407235775153995,
+      "normalizedShapeIou": 0.9711883662648794,
+      "centroidShift": 8.471513481272947,
+      "parts": 1
+    },
+    {
+      "id": "340500",
+      "name": "马鞍山",
+      "beforeArea": 3774.0,
+      "afterArea": 5093.853410168492,
+      "areaFactor": 1.3497226841993883,
+      "normalizedShapeIou": 0.9851084081217509,
+      "centroidShift": 1.9369259610325544,
+      "parts": 1
+    },
+    {
+      "id": "340600",
+      "name": "淮北",
+      "beforeArea": 3314.75,
+      "afterArea": 4624.594671456278,
+      "areaFactor": 1.3951563983577278,
+      "normalizedShapeIou": 0.991955960910138,
+      "centroidShift": 13.142511840321603,
+      "parts": 1
+    },
+    {
+      "id": "340700",
+      "name": "铜陵",
+      "beforeArea": 2852.5,
+      "afterArea": 4131.198210460552,
+      "areaFactor": 1.4482728169888002,
+      "normalizedShapeIou": 0.9035491857787076,
+      "centroidShift": 10.500354792755386,
+      "parts": 1
+    },
+    {
+      "id": "340800",
+      "name": "安庆",
+      "beforeArea": 13012.125,
+      "afterArea": 12918.717992102582,
+      "areaFactor": 0.9928215408399921,
+      "normalizedShapeIou": 0.8719344287009223,
+      "centroidShift": 11.129368689093369,
+      "parts": 1
+    },
+    {
+      "id": "341000",
+      "name": "黄山",
+      "beforeArea": 9567.25,
+      "afterArea": 10252.002685178577,
+      "areaFactor": 1.0715725715517601,
+      "normalizedShapeIou": 0.9616042154265961,
+      "centroidShift": 12.056821491976958,
+      "parts": 1
+    },
+    {
+      "id": "341100",
+      "name": "滁州",
+      "beforeArea": 15657.0,
+      "afterArea": 14851.576624822399,
+      "areaFactor": 0.948558256678955,
+      "normalizedShapeIou": 0.9289418769794201,
+      "centroidShift": 5.637948407486769,
+      "parts": 1
+    },
+    {
+      "id": "341200",
+      "name": "阜阳",
+      "beforeArea": 9864.25,
+      "afterArea": 10491.372059299449,
+      "areaFactor": 1.0635752398103706,
+      "normalizedShapeIou": 0.9436676094235043,
+      "centroidShift": 10.365770657946111,
+      "parts": 1
+    },
+    {
+      "id": "341300",
+      "name": "宿州",
+      "beforeArea": 10318.375,
+      "afterArea": 10850.374941114342,
+      "areaFactor": 1.0515585003563392,
+      "normalizedShapeIou": 0.896981184021709,
+      "centroidShift": 6.840573112745671,
+      "parts": 1
+    },
+    {
+      "id": "341500",
+      "name": "六安",
+      "beforeArea": 16597.125,
+      "afterArea": 15518.671306594224,
+      "areaFactor": 0.9350216562563832,
+      "normalizedShapeIou": 0.9242691817484929,
+      "centroidShift": 8.453654041035643,
+      "parts": 1
+    },
+    {
+      "id": "341600",
+      "name": "亳州",
+      "beforeArea": 8080.75,
+      "afterArea": 9034.119295378594,
+      "areaFactor": 1.117980298286495,
+      "normalizedShapeIou": 0.9748259991067308,
+      "centroidShift": 10.897973479658873,
+      "parts": 1
+    },
+    {
+      "id": "341700",
+      "name": "池州",
+      "beforeArea": 9396.75,
+      "afterArea": 10120.025777054856,
+      "areaFactor": 1.076970843861426,
+      "normalizedShapeIou": 0.9356601448908527,
+      "centroidShift": 12.681963101270426,
+      "parts": 1
+    },
+    {
+      "id": "341800",
+      "name": "宣城",
+      "beforeArea": 12713.5,
+      "afterArea": 12675.605151305532,
+      "areaFactor": 0.9970193220832605,
+      "normalizedShapeIou": 0.8649964009452503,
+      "centroidShift": 10.331975723631272,
+      "parts": 1
+    },
+    {
+      "id": "440100",
+      "name": "广州",
+      "beforeArea": 5837.75,
+      "afterArea": 7070.7148363070155,
+      "areaFactor": 1.2112054877833096,
+      "normalizedShapeIou": 0.9194849433842245,
+      "centroidShift": 21.185551584454377,
+      "parts": 1
+    },
+    {
+      "id": "440200",
+      "name": "韶关",
+      "beforeArea": 16605.375,
+      "afterArea": 15522.492395127396,
+      "areaFactor": 0.9347872237228847,
+      "normalizedShapeIou": 0.8682261360188754,
+      "centroidShift": 17.64982543238124,
+      "parts": 1
+    },
+    {
+      "id": "440300",
+      "name": "深圳",
+      "beforeArea": 1982.625,
+      "afterArea": 3146.0856200273165,
+      "areaFactor": 1.5868283815786226,
+      "normalizedShapeIou": 0.9467262459956505,
+      "centroidShift": 10.538032263007679,
+      "parts": 1
+    },
+    {
+      "id": "440400",
+      "name": "珠海",
+      "beforeArea": 1704.25,
+      "afterArea": 2810.353855211495,
+      "areaFactor": 1.6490267596957577,
+      "normalizedShapeIou": 0.9848398060734148,
+      "centroidShift": 8.063763997869891,
+      "parts": 1
+    },
+    {
+      "id": "440500",
+      "name": "汕头",
+      "beforeArea": 2016.75,
+      "afterArea": 3178.4855012841485,
+      "areaFactor": 1.5760433872736574,
+      "normalizedShapeIou": 0.8190839960680953,
+      "centroidShift": 9.912174329515762,
+      "parts": 2
+    },
+    {
+      "id": "440600",
+      "name": "佛山",
+      "beforeArea": 3856.625,
+      "afterArea": 5180.027878666209,
+      "areaFactor": 1.343150521159358,
+      "normalizedShapeIou": 0.9285090257842477,
+      "centroidShift": 15.097423543451619,
+      "parts": 1
+    },
+    {
+      "id": "440700",
+      "name": "江门",
+      "beforeArea": 7563.0,
+      "afterArea": 8611.679793594007,
+      "areaFactor": 1.1386592349059905,
+      "normalizedShapeIou": 0.887642130404365,
+      "centroidShift": 8.395049123789653,
+      "parts": 2
+    },
+    {
+      "id": "440800",
+      "name": "湛江",
+      "beforeArea": 11064.25,
+      "afterArea": 11431.798462671515,
+      "areaFactor": 1.0332194647329476,
+      "normalizedShapeIou": 0.9390313333434106,
+      "centroidShift": 15.134585149741056,
+      "parts": 2
+    },
+    {
+      "id": "440900",
+      "name": "茂名",
+      "beforeArea": 11019.875,
+      "afterArea": 11401.553214077769,
+      "areaFactor": 1.0346354395197557,
+      "normalizedShapeIou": 0.9633500490456978,
+      "centroidShift": 14.97891920284373,
+      "parts": 1
+    },
+    {
+      "id": "441200",
+      "name": "肇庆",
+      "beforeArea": 12041.875,
+      "afterArea": 12188.371911745495,
+      "areaFactor": 1.012165623023449,
+      "normalizedShapeIou": 0.8893425485907489,
+      "centroidShift": 16.090807893648478,
+      "parts": 1
+    },
+    {
+      "id": "441300",
+      "name": "惠州",
+      "beforeArea": 11259.625,
+      "afterArea": 11577.890847452665,
+      "areaFactor": 1.0282661143202074,
+      "normalizedShapeIou": 0.8766760636567217,
+      "centroidShift": 21.820563675573588,
+      "parts": 1
+    },
+    {
+      "id": "441400",
+      "name": "梅州",
+      "beforeArea": 13212.75,
+      "afterArea": 13097.188503866568,
+      "areaFactor": 0.9912537892464905,
+      "normalizedShapeIou": 0.9348453091436786,
+      "centroidShift": 23.054640437124515,
+      "parts": 1
+    },
+    {
+      "id": "441500",
+      "name": "汕尾",
+      "beforeArea": 4510.5,
+      "afterArea": 5806.560838318477,
+      "areaFactor": 1.2873430525038194,
+      "normalizedShapeIou": 0.7953133552909006,
+      "centroidShift": 8.978479965605041,
+      "parts": 2
+    },
+    {
+      "id": "441600",
+      "name": "河源",
+      "beforeArea": 15069.0,
+      "afterArea": 14429.647534627671,
+      "areaFactor": 0.9575716726144847,
+      "normalizedShapeIou": 0.9495870180368342,
+      "centroidShift": 24.21140169446278,
+      "parts": 1
+    },
+    {
+      "id": "441700",
+      "name": "阳江",
+      "beforeArea": 6508.5,
+      "afterArea": 7671.378999484348,
+      "areaFactor": 1.1786708150087344,
+      "normalizedShapeIou": 0.9859052467161299,
+      "centroidShift": 11.893287714049748,
+      "parts": 1
+    },
+    {
+      "id": "441800",
+      "name": "清远",
+      "beforeArea": 17803.625,
+      "afterArea": 16369.406788895134,
+      "areaFactor": 0.9194423488977741,
+      "normalizedShapeIou": 0.8725436276337535,
+      "centroidShift": 15.623789816048504,
+      "parts": 1
+    },
+    {
+      "id": "441900",
+      "name": "东莞",
+      "beforeArea": 2436.75,
+      "afterArea": 3668.5285545972733,
+      "areaFactor": 1.505500586681963,
+      "normalizedShapeIou": 0.9821647377503627,
+      "centroidShift": 15.490195549451894,
+      "parts": 1
+    },
+    {
+      "id": "442000",
+      "name": "中山",
+      "beforeArea": 1451.375,
+      "afterArea": 2488.6647596981597,
+      "areaFactor": 1.7146945205051485,
+      "normalizedShapeIou": 0.9624005088524156,
+      "centroidShift": 4.194559759585501,
+      "parts": 1
+    },
+    {
+      "id": "445100",
+      "name": "潮州",
+      "beforeArea": 2694.5,
+      "afterArea": 3954.61055140489,
+      "areaFactor": 1.4676602528873224,
+      "normalizedShapeIou": 0.9023007115405468,
+      "centroidShift": 21.158657803262678,
+      "parts": 1
+    },
+    {
+      "id": "445200",
+      "name": "揭阳",
+      "beforeArea": 5230.125,
+      "afterArea": 6502.188343490556,
+      "areaFactor": 1.2432185355972478,
+      "normalizedShapeIou": 0.8345438492824334,
+      "centroidShift": 16.306442464997282,
+      "parts": 1
+    },
+    {
+      "id": "445300",
+      "name": "云浮",
+      "beforeArea": 7653.0,
+      "afterArea": 8666.974759211324,
+      "areaFactor": 1.132493761820374,
+      "normalizedShapeIou": 0.8643851482149477,
+      "centroidShift": 13.668575401093566,
+      "parts": 1
+    }
+  ],
+  "vertices": 615,
+  "edges": 695,
+  "adjacencies": 191,
+  "acuteAngles": 6,
+  "note": "Fixed edge directions, fixed shared vertex connectivity; soft area targets; no manual coordinates."
+}

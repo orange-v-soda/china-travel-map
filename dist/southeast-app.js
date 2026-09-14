@@ -12,7 +12,7 @@ let mode=MAP_DATA.defaultVariant;
 const referenceSvg=svg.cloneNode(true);
 for(const el of [referenceSvg,...referenceSvg.querySelectorAll('[id]')])el.id='reference-'+el.id;
 referenceSvg.setAttribute('aria-labelledby','reference-map-title reference-map-desc');
-referenceSvg.querySelector('#reference-map-title').textContent='江西省真实区划参考图';
+referenceSvg.querySelector('#reference-map-title').textContent='江西、浙江与福建真实区划参考图';
 referenceSvg.querySelector('#reference-map-desc').textContent='根据市级边界数据生成的 SVG，同步高亮并标记对应城市。';
 referenceSvg.querySelector('#reference-map-subtitle').textContent='真实区划 / GEOGRAPHIC REFERENCE';
 referenceSvg.querySelector('#reference-map-note').textContent='边界数据：DataV.GeoAtlas · 参考示意';
@@ -33,7 +33,7 @@ function makeRegion(region,d,parent,elements){
  p.addEventListener('click',()=>paint(region));p.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();paint(region);}});
  p.addEventListener('pointerenter',()=>highlight(region,true));p.addEventListener('pointerleave',()=>highlight(region,false));p.addEventListener('focus',()=>highlight(region,true));p.addEventListener('blur',()=>highlight(region,false));parent.append(p);elements.set(region.id,p);
 }
-function makeLabel(region,xy,parent,elements,halo=false){const t=document.createElementNS(NS,'text');t.setAttribute('x',xy[0]);t.setAttribute('y',xy[1]);t.setAttribute('fill','#17263b');if(halo){t.setAttribute('paint-order','stroke');t.setAttribute('stroke','#ffffff');t.setAttribute('stroke-width','3');t.setAttribute('stroke-linejoin','round');}t.textContent=region.name;parent.append(t);elements.set(region.id,t);}
+function makeLabel(region,xy,parent,elements,halo=false){const t=document.createElementNS(NS,'text');t.setAttribute('x',xy[0]);t.setAttribute('y',xy[1]);t.setAttribute('fill','#17263b');if(halo){t.setAttribute('paint-order','stroke');t.setAttribute('stroke','#ffffff');t.setAttribute('stroke-width','3');t.setAttribute('stroke-linejoin','round');}if(region.name==='厦门')t.setAttribute('font-size','16');t.textContent=region.name;parent.append(t);elements.set(region.id,t);}
 for(const region of MAP_DATA.regions){
  makeRegion(region,region.variants[mode].path,document.querySelector('#regions'),regionElements);
  makeLabel(region,region.variants[mode].label,document.querySelector('#labels'),labelElements,true);
@@ -41,24 +41,7 @@ for(const region of MAP_DATA.regions){
  makeRegion(region,real.path,referenceSvg.querySelector('#reference-regions'),referenceElements);
  makeLabel(region,real.label,referenceSvg.querySelector('#reference-labels'),referenceLabels,true);
 }
-const iterationSelect=document.querySelector('#iteration');
-const stopLabels={fixed_point:'已收敛',topology_blocked:'拓扑约束停止',cycle_detected:'检测到循环',iteration_limit:'达到迭代上限'};
-const sharedOption=document.createElement('option');sharedOption.value='shared';sharedOption.textContent='共边简化 · 新版';iterationSelect.append(sharedOption);
-const compactOption=document.createElement('option');compactOption.value='compact';compactOption.textContent='主体整合 · 上一版';iterationSelect.append(compactOption);
-const softenedOption=document.createElement('option');softenedOption.value='softened';softenedOption.textContent='去尖角 · 上一版';iterationSelect.append(softenedOption);
-const shortcutOption=document.createElement('option');shortcutOption.value='shortcuts';shortcutOption.textContent='长线合并 · 上一版';iterationSelect.append(shortcutOption);
-for(const log of MAP_DATA.iterations){const option=document.createElement('option');option.value='iteration_'+log.iteration;option.textContent=log.iteration===0?'首次贴合':('第 '+log.iteration+' 轮'+(option.value===MAP_DATA.defaultVariant?' · '+stopLabels[MAP_DATA.convergence.status]:''));iterationSelect.append(option);}
-function setMode(value){
- mode=value;
- for(const region of MAP_DATA.regions){const variant=region.variants[mode];regionElements.get(region.id).setAttribute('d',variant.path);labelElements.get(region.id).setAttribute('x',variant.label[0]);labelElements.get(region.id).setAttribute('y',variant.label[1]);}
- const shared=mode==='shared';const integrated=mode==='compact';const softened=mode==='softened';const compact=softened||mode==='shortcuts';const iteration=Number(mode.split('_')[1]);const record=shared?MAP_DATA.sharedReport:integrated?MAP_DATA.compactReport:softened?MAP_DATA.angleReport:(compact?MAP_DATA.shortcutReport:MAP_DATA.iterations[iteration]);
- document.querySelector('#outline').setAttribute('d',MAP_DATA.variants[mode].outline);
- document.querySelector('#map-subtitle').textContent=shared?'45°共边简化 / SHARED BOUNDARIES':integrated?'45°主体整合 / COMPACT MAP':softened?'45°去尖角 / SOFTENED MAP':compact?'45°长线合并 / SIMPLIFIED MAP':'45°迭代规整 / PASS '+iteration;
- document.querySelector('#iteration-caption').textContent=shared?('市际共边 '+record.afterObjective[1]+' 段 · 全图 '+record.afterObjective[2]+' 个转角 · 0 个锐角'):integrated?('全图 '+record.afterObjective[1]+' 个转角 · 0 个锐角 · 19 对市际邻接'):softened?('全图 '+record.afterScore[1]+' 个转角 · '+record.afterScore[0]+' 个锐角 · 忽略极小离散地块'):compact?'全图 '+record.afterTurns.reduce((a,b)=>a+b,0)+' 个转角 · 共享边界统一合并 · 19 对市际邻接':('第 '+iteration+' 轮 · 路径坐标点 '+record.vertices+' · 19 对市际邻接');
- iterationSelect.value=mode;
-}
-iterationSelect.addEventListener('change',()=>{setMode(iterationSelect.value);status.textContent='已切换地图版本，颜色保留';});
-setMode(mode);
+document.querySelector('#outline').setAttribute('d',MAP_DATA.variants[mode].outline);
 function select(color){active=color.toLowerCase();for(const b of document.querySelectorAll('.swatch'))b.setAttribute('aria-pressed',String(b.dataset.color===active));document.querySelector('#custom-color').value=active;}
 for(const [color,name]of palette){const b=document.createElement('button');b.type='button';b.className='swatch';b.dataset.color=color;b.style.backgroundColor=color;b.style.setProperty('--check',ink(color));b.setAttribute('aria-label',name);b.title=name;b.addEventListener('click',()=>select(color));document.querySelector('#palette').append(b);}
 select(active);
@@ -68,11 +51,11 @@ document.querySelector('#export').addEventListener('click',async()=>{
  const button=document.querySelector('#export');button.disabled=true;status.textContent='正在生成完整图片…';let sourceUrl;
  try{
   await document.fonts.ready;
-  const exportMode=mode;const copy=svg.cloneNode(true);copy.setAttribute('width','1520');copy.setAttribute('height','1720');copy.querySelectorAll('[tabindex]').forEach(el=>{el.removeAttribute('tabindex');el.removeAttribute('role');});
+  const copy=svg.cloneNode(true);copy.setAttribute('width','2320');copy.setAttribute('height','2320');copy.querySelectorAll('[tabindex]').forEach(el=>{el.removeAttribute('tabindex');el.removeAttribute('role');});
   sourceUrl=URL.createObjectURL(new Blob([new XMLSerializer().serializeToString(copy)],{type:'image/svg+xml;charset=utf-8'}));
   const img=new Image();await new Promise((resolve,reject)=>{img.onload=resolve;img.onerror=()=>reject(new Error('图片渲染失败'));img.src=sourceUrl;});
-  const canvas=document.createElement('canvas');canvas.width=1520;canvas.height=1720;const ctx=canvas.getContext('2d');if(!ctx)throw new Error('浏览器不支持图片导出');ctx.drawImage(img,0,0,1520,1720);
+  const canvas=document.createElement('canvas');canvas.width=2320;canvas.height=2320;const ctx=canvas.getContext('2d');if(!ctx)throw new Error('浏览器不支持图片导出');ctx.drawImage(img,0,0,2320,2320);
   const blob=await new Promise(resolve=>canvas.toBlob(resolve,'image/png'));if(!blob)throw new Error('无法生成 PNG');
-  const downloadUrl=URL.createObjectURL(blob);const a=document.createElement('a');a.href=downloadUrl;a.download='中国旅行地图-江西-'+(exportMode==='shared'?'45度共边简化':exportMode==='compact'?'45度主体整合':exportMode==='softened'?'45度去尖角':exportMode==='shortcuts'?'45度长线合并':('45度规整-第'+exportMode.split('_')[1]+'轮'))+'.png';document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(downloadUrl),60000);status.textContent='已生成完整图片（1520 × 1720）';
+  const downloadUrl=URL.createObjectURL(blob);const a=document.createElement('a');a.href=downloadUrl;a.download='中国旅行地图-江西、浙江与福建.png';document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(downloadUrl),60000);status.textContent='已生成完整图片（2320 × 2320）';
  }catch(e){status.textContent='导出失败，请重试或更换浏览器。';console.error(e);}finally{if(sourceUrl)URL.revokeObjectURL(sourceUrl);button.disabled=false;}
 });
