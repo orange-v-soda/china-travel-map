@@ -1,0 +1,17 @@
+{
+  "mapSha256": "592530cdc8d7553f1dcba75722c92322a5a218efa426ce44e7ef9495ea3dfdf5",
+  "sketchSha256": "341f13210e3f4cf5445ced270aa89aca80c145c3e06143b7bff7f45c86de4e90",
+  "geometryUnchanged": true,
+  "placement": "One affine transform from reference bounds to accepted city bounds, followed by polygon clipping. Not a topology-preserving full boundary warp.",
+  "limitations": [
+    "Authored approximate positions and extents",
+    "Relief bands are decorative, not elevation contours",
+    "River width exaggerated for overview readability",
+    "No cross-city river continuity claimed",
+    "Only Nanchang has landscape content"
+  ],
+  "layers": {
+    "east": 68,
+    "balanced": 75
+  }
+}
