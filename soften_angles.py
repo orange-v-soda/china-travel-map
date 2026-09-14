@@ -1,7 +1,7 @@
 """Remove negligible detached components and optimize acute polygon angles."""
 import json,math
 import shapely
-from shapely.geometry import LineString, Polygon
+from shapely.geometry import LineString, Polygon, Point
 from shapely.geometry.polygon import orient
 from shapely.ops import unary_union,linemerge,polygonize
 from generate_map import ROOT,read_reference,geometry_from_path,polygon_parts,validate_step,topology_signature,svg_path,label_for,stats
@@ -74,7 +74,7 @@ def candidates(points,sharp,steps=(2,4,6,8)):
                 yield clean(points[:i]+[p,q]+points[i+1:])
 
 
-def soften(initial,real,*,locked_count=0,expected_topology=None,split_rings=False,first_improvement=False,detail_steps=(2,4,6,8),checkpoint_path=None):
+def soften(initial,real,*,locked_count=0,expected_topology=None,split_rings=False,first_improvement=False,detail_steps=(2,4,6,8),checkpoint_path=None,acute_first=False):
     initial,removed=filter_parts(initial);real,source_removed=filter_parts(real)
     expected=topology_signature(real) if expected_topology is None else expected_topology
     assert validate_step(initial,expected) is None
@@ -97,7 +97,7 @@ def soften(initial,real,*,locked_count=0,expected_topology=None,split_rings=Fals
         import hashlib
         from pathlib import Path
         checkpoint_path=Path(checkpoint_path)
-        checkpoint_key=hashlib.sha256(json.dumps({'algorithm':'angle-checkpoint-v1','initial':[p.wkb_hex for p in initial],'real':[p.wkb_hex for p in real],'expected':expected,'locked':locked_count,'split':split_rings,'first':first_improvement,'steps':detail_steps},sort_keys=True).encode()).hexdigest()
+        checkpoint_key=hashlib.sha256(json.dumps({'algorithm':'angle-checkpoint-v1','initial':[p.wkb_hex for p in initial],'real':[p.wkb_hex for p in real],'expected':expected,'locked':locked_count,'split':split_rings,'first':first_improvement,'steps':detail_steps,**({'acuteFirst':True} if acute_first else {})},sort_keys=True).encode()).hexdigest()
         if checkpoint_path.exists():
             saved=json.loads(checkpoint_path.read_text())
             if saved['key']!=checkpoint_key:raise ValueError('Angle checkpoint input or strategy changed')
@@ -112,7 +112,11 @@ def soften(initial,real,*,locked_count=0,expected_topology=None,split_rings=Fals
         temporary=checkpoint_path.with_suffix('.tmp');temporary.write_text(json.dumps(saved));temporary.replace(checkpoint_path)
     while not completed:
         best=None;sharp={tuple(v["point"]) for p in current for v in acute_vertices(p)}
-        for k,line in enumerate(chains):
+        movable={p for p in sharp if frozen is None or frozen.distance(Point(p))>1e-7} if acute_first else set()
+        strict=bool(movable);fallback=None
+        order=sorted(range(len(chains)),key=lambda k:not any(chains[k].distance(Point(p))<1e-7 for p in movable)) if strict else range(len(chains))
+        for k in order:
+            line=chains[k]
             if line.is_ring:continue
             if frozen is not None and line.intersection(frozen).length>1e-7:continue
             others=unary_union([g for i,g in enumerate(chains) if i!=k]);contacts=line.intersection(others)
@@ -134,15 +138,19 @@ def soften(initial,real,*,locked_count=0,expected_topology=None,split_rings=Fals
                 if validate_step(polys,expected):continue
                 if any(p.intersection(r).area/p.union(r).area<.75 or abs(p.area-r.area)/r.area>.15 for p,r in zip(polys,real)):continue
                 rank=(s,original[k].hausdorff_distance(candidate),k,key)
+                if strict and s[0]==trace[-1][0]:
+                    if fallback is None:fallback=(rank,proposal,polys)
+                    continue
                 if best is None or rank<best[0]:best=(rank,proposal,polys)
                 if first_improvement:break
             if best is not None and first_improvement:break
+        if best is None:best=fallback
         if best is None:
             completed=True;checkpoint();break
         _,chains,current=best;trace.append(score(current));accepted+=1
         checkpoint()
         print('angle improvement',accepted,trace[-1],flush=True)
-    report={'algorithm':'acute-angle-priority','minimumPreferredAngle':90,'localDeviationLimit':8,'removedComponents':removed,'removedSourceComponents':source_removed,'beforeScore':trace[0],'afterScore':trace[-1],'scoreTrace':trace,'stopReason':'no_feasible_improving_candidate','junctionRotationPreserved':rotations(chains)==rotation,'chains':[{'original':list(a.coords),'simplified':list(b.coords)} for a,b in zip(original,chains)],**stats(real,current)}
+    report={'algorithm':'acute-angle-priority','minimumPreferredAngle':90,'acuteFirst':acute_first,'localDeviationLimit':8,'removedComponents':removed,'removedSourceComponents':source_removed,'beforeScore':trace[0],'afterScore':trace[-1],'scoreTrace':trace,'stopReason':'no_feasible_improving_candidate','junctionRotationPreserved':rotations(chains)==rotation,'chains':[{'original':list(a.coords),'simplified':list(b.coords)} for a,b in zip(original,chains)],**stats(real,current)}
     return current,report
 
 

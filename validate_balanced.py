@@ -15,7 +15,7 @@ def turn_count(p):
             a=rr[i-1];c=rr[(i+1)%len(rr)];u=(b[0]-a[0],b[1]-a[1]);v=(c[0]-b[0],c[1]-b[1]);count+=abs(u[0]*v[1]-u[1]*v[0])/(math.hypot(*u)*math.hypot(*v))>1e-7
     return count
 
-def validate(source_name="south-data.js",result_name="balanced-data.js",report_name="balanced-report.json"):
+def validate(source_name="south-data.js",result_name="balanced-data.js",report_name="balanced-report.json",canvas=(1660,500,530,140,1800)):
     d=load(result_name);old=load(source_name);report=json.loads((ROOT/'dist'/report_name).read_text());count=len(old['regions'])
     assert hashlib.sha256((ROOT/'dist'/source_name).read_bytes()).hexdigest()==report['sourceSha256']
     assert len(d['regions'])==count and [r['id'] for r in d['regions']]==[r['id'] for r in old['regions']]
@@ -34,11 +34,10 @@ def validate(source_name="south-data.js",result_name="balanced-data.js",report_n
         for rr in rings(p):
             for a,b in zip(rr,rr[1:]):
                 dx=abs(b[0]-a[0]);dy=abs(b[1]-a[1]);assert min(dx,dy)<1e-6 or abs(dx-dy)<1e-6
-            assert all(0<x+500<1660 and 140<y+530<1800 for x,y in rr),(r['name'],'canvas')
-        parts=polygon_parts(p)
-        for part in sorted(parts,key=lambda g:-g.area)[1:]:
-            other=unary_union([x if j!=i else x.difference(part) for j,x in enumerate(pp)])
-            assert part.distance(other)>=2.5-1e-6
+            assert all(0<x+canvas[1]<canvas[0] and canvas[3]<y+canvas[2]<canvas[4] for x,y in rr),(r['name'],'canvas')
+    components=polygon_parts(unary_union(pp))
+    for i,part in enumerate(components):
+        assert all(part.distance(other)>=2.5-1e-6 for other in components[i+1:])
     assert abs(max(p.area for p in pp)/min(p.area for p in pp)-report['afterRatio'])<1e-7
     print(json.dumps({'cities':count,'topology':'identical','turnsBefore':sum(turn_count(p) for p in qq),'turnsAfter':sum(turn_count(p) for p in pp),'acuteAngles':sum(len(acute_vertices(p)) for p in pp),'beforeRatio':report['beforeRatio'],'afterRatio':report['afterRatio'],'minimumNormalizedShapeIou':min(m['normalizedShapeIou'] for m in report['cities'])},ensure_ascii=False))
 if __name__=='__main__':validate()

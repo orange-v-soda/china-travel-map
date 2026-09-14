@@ -48,3 +48,11 @@ data/guangdong-generation.lock
 
 # Special-region geometry intermediates
 data/special-initial.json
+
+# Jiangsu reproducible intermediate geometry
+data/jiangsu-base*.json
+data/jiangsu-anchored.json
+data/jiangsu-finished.json
+data/jiangsu-final.json
+data/jiangsu-*-checkpoint.*
+data/jiangsu-generation.lock

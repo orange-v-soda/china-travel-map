@@ -13,7 +13,7 @@ from soften_angles import acute_vertices
 
 ALPHA=.75
 
-def run(input_path="dist/south-data.js",output_prefix="balanced",minimum_median_fraction=0.,alphas=None,max_iterations=400):
+def run(input_path="dist/south-data.js",output_prefix="balanced",minimum_median_fraction=0.,alphas=None,max_iterations=400,version=None):
     source=(ROOT/input_path).read_text();data=json.loads(source.split(' = ',1)[1].split(';\n')[0])
     original=[geometry_from_path(r['variants']['east']['path']) for r in data['regions']]
     count=len(original)
@@ -51,12 +51,11 @@ def run(input_path="dist/south-data.js",output_prefix="balanced",minimum_median_
         u=unary_union(pp)
         if len(polygon_parts(u))!=len(polygon_parts(unary_union(original))) or any(p.interiors for p in polygon_parts(u)):return fail("union components or holes")
         if sum(len(acute_vertices(p)) for p in pp)!=oldacute:return fail("acute angles")
-        # Keep detached pieces detached and readable as islands.
-        for i,p in enumerate(pp):
-            for part in polygon_parts(p):
-                if part.area==max(q.area for q in polygon_parts(p)):continue
-                other=unary_union([q if j!=i else q.difference(part) for j,q in enumerate(pp)])
-                if part.distance(other)<2.5-1e-6:return fail("island gap "+str(i))
+        # Sea clearance applies to disconnected components of the whole map.
+        # A city's separate part can legitimately share a boundary with another city.
+        components=polygon_parts(u)
+        for i,part in enumerate(components):
+            if any(part.distance(other)<2.5-1e-6 for other in components[i+1:]):return fail("island gap")
         return True
     E=np.sum((N.reshape(V,2,-1)[eb]-N.reshape(V,2,-1)[ea])*unit[:,:,None],axis=1)
     # Supporting halfplanes keep nearby nonincident edges separated. Shared
@@ -122,7 +121,7 @@ def run(input_path="dist/south-data.js",output_prefix="balanced",minimum_median_
         moved=translate(p,xoff=q.centroid.x-p.centroid.x,yoff=q.centroid.y-p.centroid.y);normalized=rescale(moved,xfact=np.sqrt(q.area/p.area),yfact=np.sqrt(q.area/p.area),origin=q.centroid)
         metrics.append({'id':r['id'],'name':r['name'],'beforeArea':q.area,'afterArea':p.area,'areaFactor':p.area/q.area,'targetArea':float(target[i]*10000),'normalizedShapeIou':normalized.intersection(q).area/normalized.union(q).area,'centroidShift':p.centroid.distance(q.centroid),'parts':len(polygon_parts(p))})
         r['variants']['balanced']={'path':path(p),'label':label_for(max(polygon_parts(p),key=lambda p:p.area),r['variants']['east']['label'])}
-    data['variants']['balanced']={'outline':path(unary_union(pp))};data['defaultVariant']='balanced';data['version']='0.15.0-experiment' if output_prefix=='balanced' else '0.16.0'
+    data['variants']['balanced']={'outline':path(unary_union(pp))};data['defaultVariant']='balanced';data['version']=version or ('0.15.0-experiment' if output_prefix=='balanced' else '0.16.0')
     report={'sourceSha256':hashlib.sha256(source.encode()).hexdigest(),'alpha':ALPHA,'minimumMedianFraction':minimum_median_fraction,'sourceFile':input_path,'beforeRatio':max(areas)/min(areas),'afterRatio':max(p.area for p in pp)/min(p.area for p in pp),'targetRatio':float(max(target)/min(target)),'powerOnlyTargetRatio':float((max(areas)/min(areas))**ALPHA),'trace':trace,'cities':metrics,'vertices':V,'edges':len(edges),'adjacencies':len(expected),'acuteAngles':oldacute,'note':'Fixed edge directions, fixed shared vertex connectivity; soft area targets; no manual coordinates.'}
     payload='const MAP_DATA = '+json.dumps(data,ensure_ascii=False)+';\n'
     if output_prefix!='balanced' and 'const REFERENCE_MAP = ' in source:

@@ -1,19 +1,27 @@
 """Inspect and simplify every inter-city shared boundary, without city quotas."""
 import json,math
+from functools import lru_cache
+from shapely import STRtree
 from shapely.ops import unary_union,linemerge
 from generate_map import ROOT,read_reference,geometry_from_path,svg_path,label_for,stats
 from simplify_boundaries import clean,turns,alternatives
 from compact_lobes import optimize
 
 
+@lru_cache(maxsize=8192)
+def shared_parts(p,q):
+    g=p.boundary.intersection(q.boundary)
+    if g.length<1e-6:return ()
+    if g.geom_type=='MultiLineString':g=linemerge(g)
+    return (g,) if g.geom_type=='LineString' else tuple(x for x in g.geoms if x.geom_type=='LineString')
+
+
 def shared_lines(polys):
+    index=STRtree(polys)
     for i,p in enumerate(polys):
-        for j in range(i+1,len(polys)):
-            g=p.boundary.intersection(polys[j].boundary)
-            if g.length<1e-6:continue
-            if g.geom_type=='MultiLineString':g=linemerge(g)
-            parts=[g] if g.geom_type=='LineString' else [x for x in g.geoms if x.geom_type=='LineString']
-            yield i,j,parts
+        for j in sorted(int(j) for j in index.query(p) if j>i):
+            parts=shared_parts(p,polys[j])
+            if parts:yield i,j,parts
 
 
 def pair_stats(polys,names):
