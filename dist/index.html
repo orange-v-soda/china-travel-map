@@ -1,34 +1,17 @@
-<!doctype html>
-<html lang="zh-CN">
-<head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>中国旅行地图 · 七省与香港、澳门、上海</title>
-<meta name="description" content="七省与香港、澳门、上海 98 个市级区划抽象旅行地图。选择颜色，点击填色，导出完整图片。">
-<link rel="stylesheet" href="style.css">
-<script defer src="jiangsu-balanced-data.js"></script><script defer src="jiangsu-app.js"></script>
-</head>
-<body>
-<header class="top"><a class="brand" href="./">中国旅行地图<span>TRAVEL ATLAS</span></a><span class="edition">江 苏 · 17</span></header>
-<main>
-<div class="heading"><div><h1>江苏，沿长江与海岸接入。</h1><p class="intro">左侧为真实区划，右侧为面积均衡图。悬停对照同一区划，点击可同步填色。</p></div><div class="progress"><strong id="count">0</strong><span>/ 98 个区划已填色</span></div></div>
-<p class="intro" style="margin-bottom:12px"><a href="jiangsu-comparison.html">查看均衡前后 ↗</a> · <a href="special.html">查看上一版港澳沪地图 ↗</a></p><p class="intro" id="balance-summary" style="margin-bottom:16px"></p><label class="iteration-control" style="margin-bottom:16px">查看范围<select id="focus"><option value="all">全部 98 个区划</option><option value="jiangsu">江苏全省</option><option value="delta">珠三角与港澳</option><option value="macau">澳门与珠海</option><option value="hongkong">香港与深圳</option><option value="shanghai">上海与周边</option><option value="minnan">厦门与周边</option><option value="chaoshan">潮汕地区</option><option value="islands">舟山与宁波</option><option value="shangrao">上饶与周边</option></select></label><div class="toolbar"><fieldset><legend class="sr-only">填充颜色</legend><span class="tool-label" aria-hidden="true">填充颜色</span><div id="palette" class="palette"></div><label class="custom">自选<input id="custom-color" type="color" value="#2864dc" aria-label="自选填充颜色"></label></fieldset><div class="actions"><button id="reset" class="secondary">清空颜色</button><button id="export" class="primary">导出抽象图 PNG <span aria-hidden="true">↓</span></button></div></div>
-<div class="status-row"><p id="status" class="status" role="status" aria-live="polite">点击任意一张地图填色</p><p class="hint">白色擦除 · Tab 选择区划，回车填色</p></div>
-<div class="comparison">
-<section class="workspace" aria-labelledby="reference-heading"><div class="panel-heading"><div><span class="panel-number">01</span><h2 id="reference-heading">真实区划</h2></div><a class="download-svg" href="jiangsu-reference.svg" download>下载真实 SVG ↗</a></div><div class="paper" id="reference-host"></div><p class="caption">完整源边界 · 两侧使用相同画布和缩放</p></section>
-<section class="workspace" aria-labelledby="abstract-heading"><div class="panel-heading"><div><span class="panel-number">02</span><h2 id="abstract-heading">面积均衡</h2></div><label class="iteration-control">显示<select id="variant"><option value="balanced">均衡版</option><option value="east">均衡前</option></select></label></div>
-<div class="paper"><svg id="map" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1660 2040" aria-labelledby="map-title map-desc">
-<title id="map-title">七省与香港、澳门、上海 98 个市级区划抽象地图</title><desc id="map-desc">边界和面积经过调整的旅行标记示意图。每个区划可独立填色。</desc>
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>中国旅行地图 · 南昌山水</title><meta name="description" content="在98区划总览中直接呈现南昌的山地、水系与城镇概括。"><link rel="stylesheet" href="style.css"><link rel="stylesheet" href="landscape.css"><script defer src="jiangsu-balanced-data.js"></script><script defer src="nanchang-landscape-data.js"></script><script defer src="landscape-app.js"></script><script defer src="map-navigation.js"></script></head><body>
+<header class="top"><a class="brand" href="./">中国旅行地图<span>TRAVEL ATLAS</span></a><span class="edition">南昌山水 · 19</span></header><main>
+<div class="heading"><div><h1>把山水画进旅行地图。</h1><p class="intro">南昌试绘：山地、河湖与城镇直接显示在总览中。</p></div><a href="jiangsu.html">上一版填色地图 ↗</a></div>
+<div class="toolbar"><div class="landscape-legend"><label><input id="landscape-toggle" type="checkbox" checked> 显示南昌地貌</label><span><i style="background:#5f8267"></i>山地</span><span><i style="background:#4d91a8"></i>河湖</span><span><i style="background:#c9c1b0"></i>城镇</span></div><div class="actions"><button id="reset" class="secondary">清除选择</button><button id="export" class="primary">导出完整 PNG ↓</button></div></div>
+<div class="status-row"><p id="status" class="status" role="status" aria-live="polite">南昌：梅岭山地、赣江与两岸城镇；红色小图标表示滕王阁。</p><span class="hint">点击区划选择 · 不改变颜色</span></div>
+<section class="workspace"><div class="panel-heading"><h2>98 区划总览</h2><label class="iteration-control">底图<select id="variant"><option value="balanced">面积均衡</option><option value="east">均衡前</option></select></label></div><div class="map-navigation" role="group" aria-label="地图缩放"><button id="zoom-out" aria-label="缩小地图">−</button><output id="zoom-level" aria-live="polite">100%</output><button id="zoom-in" aria-label="放大地图">+</button><button id="zoom-reset">复位全图</button><span id="zoom-help">滚轮缩放 · 拖动平移 · 双指缩放</span></div><div class="paper terrain-paper"><svg id="map" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1660 2040" aria-labelledby="map-title map-desc">
+<title id="map-title">七省与香港、澳门、上海 98 个市级区划抽象地图</title><desc id="map-desc">边界和面积经过调整的旅行标记示意图。南昌区划内显示山水与城镇概括。</desc>
 <rect width="1660" height="2040" fill="#fff"/>
-<g font-family="sans-serif" fill="#17263b"><text x="64" y="76" font-size="34" font-weight="700">七省 · 香港 · 澳门 · 上海</text><text id="map-subtitle" x="65" y="101" font-size="12" fill="#68768a">面积均衡试验 / AREA BALANCE</text><text x="1595" y="69" text-anchor="end" font-size="12" fill="#68768a">中国旅行地图</text></g>
+<g font-family="sans-serif" fill="#17263b"><text x="64" y="76" font-size="34" font-weight="700">七省 · 香港 · 澳门 · 上海</text><text id="map-subtitle" x="65" y="101" font-size="12" fill="#68768a">南昌地貌试绘 / LANDSCAPE STUDY</text><text x="1595" y="69" text-anchor="end" font-size="12" fill="#68768a">中国旅行地图</text></g>
 <path d="M1580 142V114M1573 122L1580 114L1587 122" fill="none" stroke="#17263b" stroke-width="1.5"/><text x="1580" y="105" text-anchor="middle" font-size="12" font-family="sans-serif" fill="#17263b">N</text>
 <g id="geography" transform="translate(500 690)"><g id="regions" stroke="#26364b" stroke-width="2" stroke-linejoin="round"></g>
 <path id="outline" fill="none" stroke="#17263b" stroke-width="3" stroke-linejoin="round" pointer-events="none"/>
 <g id="labels" font-family="sans-serif" font-size="21" font-weight="600" text-anchor="middle" dominant-baseline="central" pointer-events="none"></g>
-</g><path d="M64 1975H1596" stroke="#dfe5ec"/><g font-family="sans-serif" fill="#68768a" font-size="12"><text id="map-note" x="64" y="2002">轮廓结构保持 · 区划面积均衡示意</text><text x="1596" y="2002" text-anchor="end">赣 · 浙 · 闽 · 湘 · 皖 · 粤 · 苏 · 港 · 澳 · 沪 / 98 个市级区划</text></g>
-</svg></div>
-<p class="caption" id="iteration-caption">江苏 13 市 · 与浙皖沪共享边界 · 港澳保持可读</p>
-</section>
-</div>
-</main>
-<footer><span>参考数据：<a href="https://datav.aliyun.com/portal/school/atlas/area_selector" target="_blank" rel="noopener">DataV.GeoAtlas</a> · 2026-09-07—11 获取 · 对照示意，非官方标准地图</span><a href="https://github.com/orange-v-soda/china-travel-map" target="_blank" rel="noopener">GitHub ↗</a></footer>
-</body></html>
+</g><path d="M64 1975H1596" stroke="#dfe5ec"/><g font-family="sans-serif" fill="#68768a" font-size="12"><text id="map-note" x="64" y="2002">南昌山水与城区为人工概括示意，非卫星影像</text><text x="1596" y="2002" text-anchor="end">赣 · 浙 · 闽 · 湘 · 皖 · 粤 · 苏 · 港 · 澳 · 沪 / 98 个市级区划</text></g>
+</svg></div><p class="caption">仅南昌已加入地貌 · 地物范围与位置经过人工概括，山体阴影不代表实测高程</p></section>
+<details class="reference-details"><summary>查看真实区划参考</summary><div class="paper" id="reference-host"></div><a href="jiangsu-reference.svg" download>下载真实区划 SVG ↗</a></details>
+</main><footer><span>区划：<a href="https://datav.aliyun.com/portal/school/atlas/area_selector">DataV.GeoAtlas</a> · 地貌：人工示意</span><a href="https://github.com/orange-v-soda/china-travel-map">GitHub ↗</a></footer></body></html>
