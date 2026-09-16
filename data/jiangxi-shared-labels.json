@@ -1,0 +1,36 @@
+{
+  "ownershipBasis": "Largest intersection with accepted pre-balanced city polygons in the shared map projection. This assigns label placement in the stylized map, not real-world jurisdiction.",
+  "features": [
+    {
+      "key": "poyang-lake",
+      "name": "鄱阳湖",
+      "ownerCity": "360400",
+      "kind": "lake",
+      "displayIntersectionAreas": {
+        "360400": 1407.18,
+        "361100": 461.29,
+        "360100": 189.66
+      },
+      "source": "Natural Earth Poyang Hu polygon; shared map projection; city polygon intersection",
+      "status": "reserved-for-owner-tile"
+    },
+    {
+      "key": "junshan-lake",
+      "name": "军山湖",
+      "ownerCity": "360100",
+      "kind": "lake",
+      "displayIntersectionAreas": {
+        "360100": 160.36,
+        "361100": 21.32
+      },
+      "source": "Natural Earth unnamed polygon centered 116.339E 28.525N; approximate identification as Junshan Lake"
+    },
+    {
+      "key": "meiling",
+      "name": "梅岭",
+      "ownerCity": "360100",
+      "kind": "mountain-area",
+      "source": "Existing Nanchang relief guide; wholly local regional label"
+    }
+  ]
+}

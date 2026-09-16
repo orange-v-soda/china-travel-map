@@ -1,0 +1,57 @@
+[
+  {
+    "id": "360100",
+    "name": "南昌",
+    "brief": "Nanchang: Gan river on both banks, Tengwang Pavilion locator 1 on EAST/right bank, northwest Meiling low wooded hills, northeast Poyang lake plain; detailed riverfront neighborhoods. Contemporary settlement correction: cities primarily modern apartment and office blocks with road networks; rural towns primarily ordinary modern low-rise buildings. Historic roofs only at the named historic landmark or small old quarter. Main waterways dominate; small tributaries are thin and selectively omitted, with no decorative canals."
+  },
+  {
+    "id": "360400",
+    "name": "九江",
+    "brief": "Jiujiang: upper Yangtze southern riverfront, northern Poyang Lake shoreline and narrow lake outlet; Lushan at marker 4 WEST of the lake, recognizable steep wooded massif and waterfall with small hillside villas; Xiushui river from western hills to lake. Most western portion green wooded ridges and small towns in valleys; do not fill flat lake plains with mountains. New Nanchang neighbor to south must connect exactly. Contemporary settlement correction: cities primarily modern apartment and office blocks with road networks; rural towns primarily ordinary modern low-rise buildings. Historic roofs only at the named historic landmark or small old quarter. Main waterways dominate; small tributaries are thin and selectively omitted, with no decorative canals."
+  },
+  {
+    "id": "360200",
+    "name": "景德镇",
+    "brief": "Jingdezhen: Chang River valley city, detailed white-walled charcoal-roof ceramic workshops and courtyards, at marker 2 red brick imperial kiln barrel vaults with subtle small blue-white porcelain shapes. Forested hills surround the city; preserve Chang River courses north-south and river border endpoints. Newly rendered Jiujiang at west and southwest controls continuity. Do not turn the whole region into giant pottery. Contemporary settlement correction: cities primarily modern apartment and office blocks with road networks; rural towns primarily ordinary modern low-rise buildings. Historic roofs only at the named historic landmark or small old quarter. Main waterways dominate; small tributaries are thin and selectively omitted, with no decorative canals."
+  },
+  {
+    "id": "361100",
+    "name": "上饶",
+    "brief": "Shangrao: extensive varied region including Poyang Lake eastern shore in west, Xin River valley through southern city areas, northeastern Wuyuan white-walled black-tile villages and finely divided fields marker12, Sanqingshan slender pale granite pillars and pines marker11 in eastern hills. Render small detailed villages and river-valley cities at brown patches. Neighbor Jingdezhen and Jiujiang on upper-west and Nanchang at west are already detailed; keep those interfaces continuous. Distinct flat lake shore vs wooded eastern ranges. Contemporary settlement correction: cities primarily modern apartment and office blocks with road networks; rural towns primarily ordinary modern low-rise buildings. Historic roofs only at the named historic landmark or small old quarter. Main waterways dominate; small tributaries are thin and selectively omitted, with no decorative canals."
+  },
+  {
+    "id": "360600",
+    "name": "鹰潭",
+    "brief": "Yingtan: Xin River valley and railway-city settlement location in north, Longhushan landmark6 in southwest featuring red sandstone Danxia cliffs with rounded tops, Luxi River, small Taoist temple by river and tiny bamboo rafts. Keep red sandstone shapes distinct from grey granite. New Shangrao surroundings define river/color continuity. Buildings small, not huge palace; exact incoming and outgoing water endpoints. Contemporary settlement correction: cities primarily modern apartment and office blocks with road networks; rural towns primarily ordinary modern low-rise buildings. Historic roofs only at the named historic landmark or small old quarter. Main waterways dominate; small tributaries are thin and selectively omitted, with no decorative canals."
+  },
+  {
+    "id": "361000",
+    "name": "抚州",
+    "brief": "Fuzhou: Fu River running generally northward through the city and farmland, marker10 Wenchangli historic district: white walls, dark tiles, small courtyards along river; brown urban footprint controls city placement in northern part. Broad agricultural valleys, wooded hills and eastern Wuyi mountain ridges; smaller valleys and settlements through southern/eastern county areas. New Nanchang north and Yingtan/Shangrao northeast provide continuity. Do not fill city plains with invented steep peaks. Contemporary settlement correction: cities primarily modern apartment and office blocks with road networks; rural towns primarily ordinary modern low-rise buildings. Historic roofs only at the named historic landmark or small old quarter. Main waterways dominate; small tributaries are thin and selectively omitted, with no decorative canals."
+  },
+  {
+    "id": "360700",
+    "name": "赣州",
+    "brief": "Ganzhou: large southern region of rolling wooded Gannan hills, branching Zhang and Gong Rivers meeting to form north-flowing Gan. At marker7 detailed old Ganzhou city walls and a SMALL WOODEN PONTOON BRIDGE consisting of linked boats crossing Gong river (not a stone arched bridge), narrow historic streets. Smaller town clusters follow measured rivers and brown patches, southern hills can include subtle citrus orchards. Northeast neighboring Fuzhou is already rendered; connect rivers and ridges at border. No invented enormous mountains blocking valleys. Contemporary settlement correction: cities primarily modern apartment and office blocks with road networks; rural towns primarily ordinary modern low-rise buildings. Historic roofs only at the named historic landmark or small old quarter. Main waterways dominate; small tributaries are thin and selectively omitted, with no decorative canals."
+  },
+  {
+    "id": "360800",
+    "name": "吉安",
+    "brief": "Jian: Gan River north-south valley with detailed city/towns at source patches, broad fields in river basin, southwest Jinggangshan marker8 dense forest ridges and a modest historic white house, western Luoxiao mountains; eastern rolling hills. Neighbor Ganzhou south and Fuzhou east already detailed. Keep Gan river consistent in width/course where it enters from Ganzhou and leaves north. Mountain landforms follow measured shaded relief, no generic lake or giant palace. Contemporary settlement correction: cities primarily modern apartment and office blocks with road networks; rural towns primarily ordinary modern low-rise buildings. Historic roofs only at the named historic landmark or small old quarter. Main waterways dominate; small tributaries are thin and selectively omitted, with no decorative canals."
+  },
+  {
+    "id": "360500",
+    "name": "新余",
+    "brief": "Xinyu: Yuan River crosses the region through urban core and fields; source urban patches become detailed towns with small modern and traditional roof blocks. Southwest Fairy Lake marker5 represented by a reservoir with irregular shoreline and wooded small islands, modest boats. Gentle hills around farmed valley. Newly detailed Jian south/east controls edge continuity; no vast alpine mountains in lowlands. Contemporary settlement correction: cities primarily modern apartment and office blocks with road networks; rural towns primarily ordinary modern low-rise buildings. Historic roofs only at the named historic landmark or small old quarter. Main waterways dominate; small tributaries are thin and selectively omitted, with no decorative canals."
+  },
+  {
+    "id": "360900",
+    "name": "宜春",
+    "brief": "Yichun: long varied region with Yuan River, Jin River and Gan tributaries, wooded Jiuling mountain ridges in north/west and agricultural valleys, urban clusters at brown reference patches. Southern Mingyueshan marker9 forested mountain ridge and waterfall, geographically close to Wugong massif, keep it integrated, not isolated fantasy peak. Detailed neighbors Jiujiang north,Nanchang east,Xinyu southeast,Jian south define shared edges. Mountain/river crossings must meet neighbor positions exactly. Contemporary settlement correction: cities primarily modern apartment and office blocks with road networks; rural towns primarily ordinary modern low-rise buildings. Historic roofs only at the named historic landmark or small old quarter. Main waterways dominate; small tributaries are thin and selectively omitted, with no decorative canals."
+  },
+  {
+    "id": "360300",
+    "name": "萍乡",
+    "brief": "Pingxiang: western city and river valley with close-packed roofs and courtyards at source settlement patches; southeastern Wugongshan marker3 rolling alpine grass meadows on high ridge above forest, fine footpaths, tiny tent accents only on ridge, no huge jagged granite. Connect to completed Yichun and Jian neighbors, extend same Wugong/Mingyue mountain system across border. Preserve local river courses and field lowlands. Contemporary settlement correction: cities primarily modern apartment and office blocks with road networks; rural towns primarily ordinary modern low-rise buildings. Historic roofs only at the named historic landmark or small old quarter. Main waterways dominate; small tributaries are thin and selectively omitted, with no decorative canals."
+  }
+]

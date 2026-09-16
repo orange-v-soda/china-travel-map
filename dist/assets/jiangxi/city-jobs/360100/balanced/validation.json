@@ -1,0 +1,10 @@
+{
+  "outsideMaskPixels": 0,
+  "interiorPixels": 1192565,
+  "uncoveredInteriorPixels": 0,
+  "uncoveredInteriorFraction": 0,
+  "pathSha256": "e70de343e774c6c938cfe9370abd4c6e7c7c8193b7314cf5ebf71ae28ba91204",
+  "layout": "balanced",
+  "status": "geometry-validated-content-review-required",
+  "note": "Clipping verifies containment, not geographic accuracy of generated content."
+}

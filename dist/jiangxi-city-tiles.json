@@ -1,0 +1,17 @@
+[
+  {
+    "id": "360100",
+    "layout": "balanced",
+    "path": "M328.68328868,272.59962157 L417.81560560,272.59962157 L417.81560560,337.32012232 L433.22301825,352.72753497 L419.01823997,366.93231326 L388.08722327,366.93231326 L328.68328868,366.93231326 L328.68328868,272.59962157 Z",
+    "pathSha256": "e70de343e774c6c938cfe9370abd4c6e7c7c8193b7314cf5ebf71ae28ba91204",
+    "bounds": [
+      315.61582248375,
+      254.42863643374997,
+      130.6746619625,
+      130.6746619625
+    ],
+    "image": "assets/jiangxi/city-jobs/360100/balanced/tile.png",
+    "status": "accepted",
+    "reviewNote": "Published for user evaluation; geography remains illustrative."
+  }
+]

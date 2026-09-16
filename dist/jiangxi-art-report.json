@@ -1,0 +1,230 @@
+{
+  "mapSha256": "592530cdc8d7553f1dcba75722c92322a5a218efa426ce44e7ef9495ea3dfdf5",
+  "geometryUnchanged": true,
+  "cityCount": 11,
+  "triangles": 110,
+  "positiveJacobian": true,
+  "exactTargetCoverage": true,
+  "counts": {
+    "lakes": 21,
+    "urban_areas": 64,
+    "populated_places": 24,
+    "hydrorivers": 9973
+  },
+  "bounds": [
+    130,
+    145,
+    500,
+    625
+  ],
+  "mapping": "Original shared Mercator projection for geographic features; joint-valid per-city triangulation maps one continuous texture into the accepted balanced outlines. Shared edges have identical endpoint maps.",
+  "limitations": [
+    "Geographic features approximate after administrative simplification; source features outside accepted province silhouette clipped.",
+    "Artwork interprets measured relief and rivers; generated details are not measurements.",
+    "Natural Earth urban extents are historical and generalized, not current built-up boundaries.",
+    "Landmark anchors are approximate, enlarged illustrative symbols; shifts into simplified city masks recorded."
+  ],
+  "landmarks": [
+    {
+      "number": 1,
+      "name": "滕王阁",
+      "en": "Tengwang Pavilion",
+      "coordinate": [
+        115.881,
+        28.681
+      ],
+      "point": [
+        365.5714509074122,
+        306.73193795661126
+      ],
+      "city": "360100",
+      "schematicShift": 0.0,
+      "depiction": "red-pillared multi-tier pavilion on the Gan east bank"
+    },
+    {
+      "number": 2,
+      "name": "景德镇御窑",
+      "en": "Imperial kilns",
+      "coordinate": [
+        117.207,
+        29.294
+      ],
+      "point": [
+        493.66336156009174,
+        239.03481189684118
+      ],
+      "city": "360200",
+      "schematicShift": 0.0,
+      "depiction": "low red brick barrel-vault kilns and white porcelain vessels"
+    },
+    {
+      "number": 3,
+      "name": "武功山",
+      "en": "Wugong Shan",
+      "coordinate": [
+        114.173,
+        27.458
+      ],
+      "point": [
+        195.94030751623202,
+        435.9886246719025
+      ],
+      "city": "360300",
+      "schematicShift": 6.5590422375920525,
+      "depiction": "golden-green alpine meadow ridge"
+    },
+    {
+      "number": 4,
+      "name": "庐山",
+      "en": "Lushan",
+      "coordinate": [
+        115.983,
+        29.567
+      ],
+      "point": [
+        375.42467480377354,
+        208.75542374684096
+      ],
+      "city": "360400",
+      "schematicShift": 0.0,
+      "depiction": "steep forested massif west of Poyang Lake, waterfall"
+    },
+    {
+      "number": 5,
+      "name": "仙女湖",
+      "en": "Fairy Lake",
+      "coordinate": [
+        114.818,
+        27.77
+      ],
+      "point": [
+        262.8854018698558,
+        406.61273312713007
+      ],
+      "city": "360500",
+      "schematicShift": 0.0,
+      "depiction": "small forested reservoir with islands"
+    },
+    {
+      "number": 6,
+      "name": "龙虎山",
+      "en": "Longhu Shan",
+      "coordinate": [
+        116.958,
+        28.114
+      ],
+      "point": [
+        471.3389979591537,
+        367.26793014728815
+      ],
+      "city": "360600",
+      "schematicShift": 2.445309223865747,
+      "depiction": "red sandstone cliffs along a winding river"
+    },
+    {
+      "number": 7,
+      "name": "赣州古城",
+      "en": "Ganzhou old town",
+      "coordinate": [
+        114.948,
+        25.866
+      ],
+      "point": [
+        275.4434323260025,
+        612.7204665643386
+      ],
+      "city": "360700",
+      "schematicShift": 0.0,
+      "depiction": "city wall and small pontoon bridge at river confluence"
+    },
+    {
+      "number": 8,
+      "name": "井冈山",
+      "en": "Jinggangshan",
+      "coordinate": [
+        114.167,
+        26.57
+      ],
+      "point": [
+        199.9986493548544,
+        536.9142991987344
+      ],
+      "city": "360800",
+      "schematicShift": 0.0,
+      "depiction": "layered forested mountain ridges and small historical house"
+    },
+    {
+      "number": 9,
+      "name": "明月山",
+      "en": "Mingyue Shan",
+      "coordinate": [
+        114.29,
+        27.59
+      ],
+      "point": [
+        216.0,
+        423.0
+      ],
+      "city": "360900",
+      "schematicShift": 5.2458971690030065,
+      "depiction": "high wooded mountain ridge"
+    },
+    {
+      "number": 10,
+      "name": "文昌里",
+      "en": "Wenchangli",
+      "coordinate": [
+        116.37,
+        27.99
+      ],
+      "point": [
+        412.8089654693741,
+        382.5699944475116
+      ],
+      "city": "361000",
+      "schematicShift": 0.0,
+      "depiction": "white-walled dark-tile historic street by Fu river"
+    },
+    {
+      "number": 11,
+      "name": "三清山",
+      "en": "Sanqing Shan",
+      "coordinate": [
+        118.067,
+        28.917
+      ],
+      "point": [
+        576.7395630392047,
+        280.71654525596796
+      ],
+      "city": "361100",
+      "schematicShift": 0.0,
+      "depiction": "slender pale granite pillars and pines"
+    },
+    {
+      "number": 12,
+      "name": "婺源",
+      "en": "Wuyuan villages",
+      "coordinate": [
+        117.85,
+        29.25
+      ],
+      "point": [
+        555.7773122008696,
+        243.90741296371374
+      ],
+      "city": "361100",
+      "schematicShift": 0.0,
+      "depiction": "white walls black roofs in fields and foothills"
+    }
+  ],
+  "artworkSha256": "f6fbff2d240963c73fecc3d64ef71a3e7ee1e3aa818de8540dbb0eee65cb75ae",
+  "sourceHashes": {
+    "data/jiangxi-dem.npz": "db37cc7622d31e5f1a82ca2519515a693e9d948377911e245f1aff5c6d0d87ac",
+    "data/jiangxi-hydrorivers.geojson": "1b6fe46ffab9afbab6a3a770a4fd20441c40393aefd656c8cd8c75bc420f37a0",
+    "data/jiangxi-lakes.geojson": "921db493a555dfd8ce0ee35680e85236cac9e2729b11e399ce12787e7e894ff0",
+    "data/jiangxi-populated_places.geojson": "5648fdec4088a337ed4384b61d0f4fdcf71383e310f1bbc7fe542ad253b77862",
+    "data/jiangxi-urban_areas.geojson": "f414ca65b3e8f9484b9537dd1c9c1f6ceabba2f4776a943dd1475c988ba970fa"
+  },
+  "renderBleed": 0.12
+}
