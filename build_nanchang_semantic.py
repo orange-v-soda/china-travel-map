@@ -1,72 +1,151 @@
-"""Build a coordinate-anchored, text-free SVG illustration of Nanchang.
+"""Map real Nanchang geography into the project's accepted balanced outline.
 
-Administrative geometry and settlement anchors come from the Nanchang county
-GeoJSON. Rivers, lakes, urban extents and elevation come from the existing
-Jiangxi project data. The output is deliberately semantic rather than a street
-map, but every major mark is tied to geographic coordinates.
+The project's existing per-triangle east->balanced warp is authoritative for
+the final silhouette. Real hydrology, DEM samples, and county-seat anchors are
+mapped through those same triangles. The generated guide is used as a visual
+reference; the overlay and mask restore exact geometry after image generation.
 """
 from __future__ import annotations
 
 import json
 import math
 import random
+import re
 from pathlib import Path
 
 import numpy as np
+from shapely import affinity
 from shapely.geometry import LineString, MultiLineString, MultiPolygon, Point, Polygon, shape
 from shapely.ops import transform, unary_union
 
 
-ROOT = Path(__file__).resolve().parent
-DATA = ROOT / "data"
-OUT = ROOT / "dist" / "assets" / "nanchang"
-COUNTIES = DATA / "nanchang-counties-source.geojson"
-W = H = 1200
-MARGIN = 54
+HERE = Path(__file__).resolve().parent
+if (HERE / "dist" / "jiangxi-art-data.js").exists():
+    # Repository-root installation.
+    WORK = HERE
+    DATA = WORK / "data"
+    PROJECT = WORK / "dist"
+    COUNTIES = DATA / "nanchang-counties-source.geojson"
+    OUT = PROJECT / "assets" / "nanchang"
+else:
+    # Standalone workspace prototype.
+    WORK = HERE.parents[1]
+    DATA = WORK / "local-data"
+    PROJECT = WORK / "project-main"
+    COUNTIES = WORK / "nanchang-counties.geojson"
+    OUT = HERE
+SIZE = 1024
+MARGIN = 56
 
 
 def load_geojson(path: Path):
     return json.loads(path.read_text())
 
 
+def load_js_json(path: Path):
+    text = path.read_text()
+    return json.loads(text.split(" = ", 1)[1].rsplit(";", 1)[0])
+
+
+def path_geometry(path_text: str):
+    polygons = []
+    for subpath in re.findall(r"M(.*?)(?=M|$)", path_text):
+        nums = [float(v) for v in re.findall(r"-?\d+(?:\.\d+)?", subpath)]
+        pts = list(zip(nums[0::2], nums[1::2]))
+        if len(pts) >= 3:
+            polygons.append(Polygon(pts))
+    return unary_union(polygons)
+
+
+art = load_js_json(PROJECT / "jiangxi-art-data.js")
+city_record = next(c for c in art["cities"] if c["id"] == "360100")
+east_outline = path_geometry(city_record["east"])
+balanced = path_geometry(city_record["balanced"])
+cells = [c for c in art["cells"] if c["id"] == "360100"]
+cell_records = []
+for cell in cells:
+    source = Polygon(cell["from"])
+    matrix = cell["matrix"]
+    shapely_matrix = [matrix[0], matrix[2], matrix[1], matrix[3], matrix[4], matrix[5]]
+    cell_records.append((source, shapely_matrix))
+
+projection = json.loads((DATA / "jiangxi-projection.json").read_text())
 county_fc = load_geojson(COUNTIES)
-county_features = county_fc["features"]
-county_geoms = [shape(f["geometry"]) for f in county_features]
-city = unary_union(county_geoms)
-minx, miny, maxx, maxy = city.bounds
-mid_lat = (miny + maxy) / 2
-cos_lat = math.cos(math.radians(mid_lat))
-map_w = (maxx - minx) * cos_lat
-map_h = maxy - miny
-scale = min((W - 2 * MARGIN) / map_w, (H - 2 * MARGIN) / map_h)
-ox = (W - map_w * scale) / 2
-oy = (H - map_h * scale) / 2
+county_union = unary_union([shape(f["geometry"]) for f in county_fc["features"]])
 
 
-def xy(lon, lat, z=None):
+def geographic_to_east(lon, lat, z=None):
     if hasattr(lon, "__iter__"):
-        return [ox + (float(x) - minx) * cos_lat * scale for x in lon], [oy + (maxy - float(y)) * scale for y in lat]
-    return ox + (lon - minx) * cos_lat * scale, oy + (maxy - lat) * scale
+        xs, ys = [], []
+        for x, y in zip(lon, lat):
+            px, py = geographic_to_east(float(x), float(y))
+            xs.append(px)
+            ys.append(py)
+        return xs, ys
+    x = math.radians(lon)
+    y = -math.log(math.tan(math.pi / 4 + math.radians(lat) / 2))
+    return projection["dx"] + (x - projection["left"]) * projection["scale"], projection["dy"] + (y - projection["top"]) * projection["scale"]
 
 
-def projected(geom):
-    return transform(xy, geom)
+# First fit the complete real Nanchang extent into the project's schematic
+# east-outline box. This retains county-seat relative positions while ensuring
+# every anchor lies inside the project's accepted city footprint.
+real_projected = transform(geographic_to_east, county_union)
+rminx, rminy, rmaxx, rmaxy = real_projected.bounds
+eminx, eminy, emaxx, emaxy = east_outline.bounds
+fit_x = (emaxx - eminx) / (rmaxx - rminx)
+fit_y = (emaxy - eminy) / (rmaxy - rminy)
+fit_matrix = [fit_x, 0, 0, fit_y, eminx - rminx * fit_x, eminy - rminy * fit_y]
+
+
+def warp_geometry(geom):
+    east = affinity.affine_transform(transform(geographic_to_east, geom), fit_matrix)
+    pieces = []
+    for source, matrix in cell_records:
+        piece = east.intersection(source.buffer(1e-7))
+        if not piece.is_empty:
+            pieces.append(affinity.affine_transform(piece, matrix))
+    return unary_union(pieces) if pieces else Polygon()
+
+
+def warp_point(lon, lat):
+    x, y = geographic_to_east(lon, lat)
+    x, y = fit_matrix[0] * x + fit_matrix[4], fit_matrix[3] * y + fit_matrix[5]
+    point = Point(x, y)
+    candidates = [(source.distance(point), source, matrix) for source, matrix in cell_records]
+    _, _, matrix = min(candidates, key=lambda item: item[0])
+    a, b, d, e, xoff, yoff = matrix
+    return a * x + b * y + xoff, d * x + e * y + yoff
+
+
+minx, miny, maxx, maxy = balanced.bounds
+scale = min((SIZE - 2 * MARGIN) / (maxx - minx), (SIZE - 2 * MARGIN) / (maxy - miny))
+offset_x = (SIZE - (maxx - minx) * scale) / 2
+offset_y = (SIZE - (maxy - miny) * scale) / 2
+
+
+def canvas_xy(x, y, z=None):
+    if hasattr(x, "__iter__"):
+        return [offset_x + (float(px) - minx) * scale for px in x], [offset_y + (float(py) - miny) * scale for py in y]
+    return offset_x + (x - minx) * scale, offset_y + (y - miny) * scale
+
+
+def canvas_geometry(geom):
+    return transform(canvas_xy, geom)
+
+
+balanced_canvas = canvas_geometry(balanced)
 
 
 def ring_path(coords):
-    pts = list(coords)
-    return "M" + " L".join(f"{x:.2f},{y:.2f}" for x, y in pts) + " Z"
+    return "M" + " L".join(f"{x:.2f},{y:.2f}" for x, y in coords) + " Z"
 
 
 def area_path(geom):
     if geom.is_empty:
         return ""
     parts = [geom] if isinstance(geom, Polygon) else list(geom.geoms) if isinstance(geom, MultiPolygon) else []
-    chunks = []
-    for poly in parts:
-        chunks.append(ring_path(poly.exterior.coords))
-        chunks.extend(ring_path(r.coords) for r in poly.interiors)
-    return " ".join(chunks)
+    return " ".join(ring_path(poly.exterior.coords) + " " + " ".join(ring_path(r.coords) for r in poly.interiors) for poly in parts)
 
 
 def line_path(geom):
@@ -76,184 +155,133 @@ def line_path(geom):
     return " ".join("M" + " L".join(f"{x:.2f},{y:.2f}" for x, y in line.coords) for line in parts)
 
 
-city_svg = projected(city)
-county_svg = [projected(g) for g in county_geoms]
+clip_path = area_path(balanced_canvas)
+defs = f'''<defs>
+  <clipPath id="clip"><path d="{clip_path}" fill-rule="evenodd"/></clipPath>
+  <filter id="shadow" x="-30%" y="-30%" width="160%" height="170%"><feDropShadow dx="0" dy="2" stdDeviation="2" flood-color="#3f5148" flood-opacity=".24"/></filter>
+  <linearGradient id="plain" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#e2e7c5"/><stop offset="1" stop-color="#d5d7a9"/></linearGradient>
+</defs>'''
 
+base = [f'<path d="{clip_path}" fill="url(#plain)" fill-rule="evenodd"/>']
+overlay = []
 
-def dem_elevation(lon, lat):
-    dem_data = dem_elevation.data
-    zoom = dem_elevation.zoom
-    tx, ty = dem_elevation.origin
-    world = 256 * (2 ** zoom)
-    px = (lon + 180) / 360 * world - tx * 256
-    rad = math.radians(lat)
-    py = (1 - math.asinh(math.tan(rad)) / math.pi) / 2 * world - ty * 256
-    ix, iy = int(round(px)), int(round(py))
-    if 0 <= iy < dem_data.shape[0] and 0 <= ix < dem_data.shape[1]:
-        return float(dem_data[iy, ix])
-    return 0.0
-
-
+# DEM-tied hill and mountain marks.
 dem_npz = np.load(DATA / "jiangxi-dem.npz")
-dem_elevation.data = dem_npz["elevation"]
-dem_elevation.origin = dem_npz["tileOrigin"].tolist()
-dem_elevation.zoom = int(dem_npz["zoom"])
+dem = dem_npz["elevation"]
+tile_x, tile_y = dem_npz["tileOrigin"].tolist()
+zoom = int(dem_npz["zoom"])
 
 
-def svg_el(tag, attrs, body=""):
-    attr = " ".join(f'{k}="{v}"' for k, v in attrs.items())
-    return f"<{tag} {attr}>{body}</{tag}>" if body else f"<{tag} {attr}/>"
+def elevation(lon, lat):
+    world = 256 * (2 ** zoom)
+    px = (lon + 180) / 360 * world - tile_x * 256
+    py = (1 - math.asinh(math.tan(math.radians(lat))) / math.pi) / 2 * world - tile_y * 256
+    ix, iy = int(round(px)), int(round(py))
+    return float(dem[iy, ix]) if 0 <= iy < dem.shape[0] and 0 <= ix < dem.shape[1] else 0
 
 
-defs = f"""
-<defs>
-  <clipPath id="city-clip"><path d="{area_path(city_svg)}" fill-rule="evenodd"/></clipPath>
-  <filter id="soft-shadow" x="-30%" y="-30%" width="160%" height="170%">
-    <feDropShadow dx="0" dy="2" stdDeviation="2" flood-color="#405147" flood-opacity=".22"/>
-  </filter>
-  <linearGradient id="plain" x1="0" y1="0" x2="0" y2="1">
-    <stop offset="0" stop-color="#dce3bd"/><stop offset="1" stop-color="#d5d7a9"/>
-  </linearGradient>
-</defs>
-"""
-
-layers = []
-layers.append(svg_el("path", {"d": area_path(city_svg), "fill": "url(#plain)", "fill-rule": "evenodd"}))
-
-# County-level tonal fields keep the administrative structure legible without labels.
-county_fills = ["#d8ddb5", "#dfe0b9", "#d5d9ad", "#daddb3", "#d7dab0", "#dfe1b9", "#d9d9aa", "#d5d7ad", "#dfddb0"]
-for geom, fill in zip(county_svg, county_fills):
-    layers.append(svg_el("path", {"d": area_path(geom), "fill": fill, "fill-rule": "evenodd", "opacity": ".72"}))
-
-# Measured urban extents, subdued so settlement symbols remain dominant.
-urban_fc = load_geojson(DATA / "jiangxi-urban_areas.geojson")
-for f in urban_fc["features"]:
-    g = shape(f["geometry"]).intersection(city)
-    if not g.is_empty:
-        layers.append(svg_el("path", {"d": area_path(projected(g)), "fill": "#c9b8a1", "opacity": ".30", "fill-rule": "evenodd"}))
-
-# Elevation-tied ridge glyphs: sparse marks, not invented continuous terrain.
-ridge_marks = []
-for lat in np.arange(miny + .025, maxy, .042):
-    for lon in np.arange(minx + .025, maxx, .050):
-        p = Point(float(lon), float(lat))
-        if not city.contains(p):
+for lat in np.arange(county_union.bounds[1] + .025, county_union.bounds[3], .045):
+    for lon in np.arange(county_union.bounds[0] + .025, county_union.bounds[2], .052):
+        if not county_union.contains(Point(float(lon), float(lat))):
             continue
-        elev = dem_elevation(float(lon), float(lat))
-        if elev < 55:
+        elev = elevation(float(lon), float(lat))
+        if elev < 58:
             continue
-        x, y = xy(float(lon), float(lat))
-        size = min(16.0, 5.5 + max(0, elev - 55) / 38)
-        back = f"M{x-size:.2f},{y+size*.48:.2f} Q{x-size*.30:.2f},{y-size*.80:.2f} {x:.2f},{y-size:.2f} Q{x+size*.40:.2f},{y-size*.34:.2f} {x+size:.2f},{y+size*.48:.2f} Z"
-        front = f"M{x-size*.20:.2f},{y-size*.73:.2f} Q{x+size*.15:.2f},{y-size*.15:.2f} {x+size:.2f},{y+size*.48:.2f} L{x:.2f},{y+size*.30:.2f} Z"
-        ridge_marks.append(svg_el("path", {"d": back, "fill": "#6f8e68", "opacity": ".80"}))
-        ridge_marks.append(svg_el("path", {"d": front, "fill": "#4f745c", "opacity": ".72"}))
-layers.extend(ridge_marks)
+        x, y = canvas_xy(*warp_point(float(lon), float(lat)))
+        size = min(18, 7 + (elev - 58) / 35)
+        base.append(f'<path d="M{x-size:.2f},{y+size*.48:.2f} Q{x-size*.30:.2f},{y-size*.80:.2f} {x:.2f},{y-size:.2f} Q{x+size*.42:.2f},{y-size*.30:.2f} {x+size:.2f},{y+size*.48:.2f} Z" fill="#70906c" opacity=".76"/>')
+        base.append(f'<path d="M{x-size*.20:.2f},{y-size*.72:.2f} Q{x+size*.15:.2f},{y-size*.12:.2f} {x+size:.2f},{y+size*.48:.2f} L{x:.2f},{y+size*.28:.2f} Z" fill="#4f755e" opacity=".70"/>')
 
-# Real lakes and wetlands.
-lake_fc = load_geojson(DATA / "jiangxi-lakes.geojson")
-for f in lake_fc["features"]:
-    g = shape(f["geometry"]).intersection(city)
-    if not g.is_empty:
-        layers.append(svg_el("path", {"d": area_path(projected(g)), "fill": "#77b5c2", "stroke": "#5b98aa", "stroke-width": "1", "fill-rule": "evenodd"}))
+# Lakes mapped through the project's exact triangle warp.
+for feature in load_geojson(DATA / "jiangxi-lakes.geojson")["features"]:
+    mapped = canvas_geometry(warp_geometry(shape(feature["geometry"])))
+    if not mapped.is_empty:
+        d = area_path(mapped)
+        base.append(f'<path d="{d}" fill="#77b8c5" stroke="#5b99a9" stroke-width="1.2" fill-rule="evenodd"/>')
 
-# Real river centerlines, filtered by upstream area and drawn in flow hierarchy.
-river_fc = load_geojson(DATA / "jiangxi-hydrorivers.geojson")
-rivers = []
-for f in river_fc["features"]:
-    props = f.get("properties", {})
-    upland = float(props.get("UPLAND_SKM", 0) or 0)
+# Rivers mapped through the same warp. They are included in the guide and exact overlay.
+river_draws = []
+for feature in load_geojson(DATA / "jiangxi-hydrorivers.geojson")["features"]:
+    upland = float(feature.get("properties", {}).get("UPLAND_SKM", 0) or 0)
     if upland < 120:
         continue
-    g = shape(f["geometry"]).intersection(city)
-    if g.is_empty:
+    mapped = canvas_geometry(warp_geometry(shape(feature["geometry"])))
+    if mapped.is_empty:
         continue
-    width = max(1.0, min(7.5, .65 + math.log10(max(upland, 1)) * 1.30))
-    rivers.append((width, projected(g)))
-river_draws = [(width, line_path(g)) for width, g in sorted(rivers, key=lambda item: item[0])]
-for width, d in river_draws:
-    layers.append(svg_el("path", {"d": d, "fill": "none", "stroke": "#eff7f4", "stroke-width": f"{width+2.1:.2f}", "stroke-linecap": "round", "stroke-linejoin": "round", "opacity": ".78"}))
-for width, d in river_draws:
-    layers.append(svg_el("path", {"d": d, "fill": "none", "stroke": "#579bad", "stroke-width": f"{width:.2f}", "stroke-linecap": "round", "stroke-linejoin": "round"}))
+    width = max(1.4, min(8.2, .8 + math.log10(max(upland, 1)) * 1.45))
+    river_draws.append((width, line_path(mapped)))
+for width, d in sorted(river_draws):
+    base.append(f'<path d="{d}" fill="none" stroke="#eaf5f3" stroke-width="{width+2.4:.2f}" stroke-linecap="round" stroke-linejoin="round" opacity=".85"/>')
+for width, d in sorted(river_draws):
+    river = f'<path d="{d}" fill="none" stroke="#559cad" stroke-width="{width:.2f}" stroke-linecap="round" stroke-linejoin="round"/>'
+    base.append(river)
+    overlay.append(river)
 
 
-def settlement_cluster(lon, lat, scale_factor, seed, core=False):
+def settlement_cluster(lon, lat, factor, seed, core=False):
     rng = random.Random(seed)
-    x, y = xy(lon, lat)
-    pieces = []
-    radius = 20 * scale_factor
-    pieces.append(svg_el("ellipse", {"cx": f"{x:.2f}", "cy": f"{y+2:.2f}", "rx": f"{radius:.2f}", "ry": f"{radius*.58:.2f}", "fill": "#d9c6aa", "opacity": ".72"}))
-    count = 13 if core else 11
-    for i in range(count):
-        dx = rng.uniform(-radius*.72, radius*.72)
-        dy = rng.uniform(-radius*.38, radius*.38)
-        bw = rng.uniform(4.2, 7.4) * scale_factor
-        bh = rng.uniform(5.5, 11.0) * scale_factor
-        tone = rng.choice(["#b9785d", "#c88a65", "#9e7867", "#d09a70"])
-        pieces.append(svg_el("rect", {"x": f"{x+dx-bw/2:.2f}", "y": f"{y+dy-bh:.2f}", "width": f"{bw:.2f}", "height": f"{bh:.2f}", "rx": "1.1", "fill": tone, "stroke": "#f4ebd8", "stroke-width": ".8"}))
-    return f'<g filter="url(#soft-shadow)">{"".join(pieces)}</g>'
+    x, y = canvas_xy(*warp_point(lon, lat))
+    radius = 23 * factor
+    pieces = [f'<ellipse cx="{x:.2f}" cy="{y+2:.2f}" rx="{radius:.2f}" ry="{radius*.58:.2f}" fill="#d8c4a5" opacity=".80"/>']
+    for _ in range(13 if core else 11):
+        dx, dy = rng.uniform(-radius*.70, radius*.70), rng.uniform(-radius*.38, radius*.38)
+        bw, bh = rng.uniform(4.5, 8.0)*factor, rng.uniform(6.0, 12.0)*factor
+        tone = rng.choice(["#b96f55", "#ca8862", "#9b7464", "#d29a70"])
+        pieces.append(f'<rect x="{x+dx-bw/2:.2f}" y="{y+dy-bh:.2f}" width="{bw:.2f}" height="{bh:.2f}" rx="1.2" fill="{tone}" stroke="#f5ead5" stroke-width=".9"/>')
+    return f'<g filter="url(#shadow)">{"".join(pieces)}</g>', [x, y]
 
 
-# Every county-level unit gets an explicit settlement anchor at its published center.
-for f in county_features:
-    props = f["properties"]
+anchors = []
+for feature in county_fc["features"]:
+    props = feature["properties"]
     lon, lat = props["center"]
     adcode = int(props["adcode"])
     core = adcode in {360102, 360103, 360104, 360111, 360112, 360113}
-    factor = 0.96 if core else 1.42
-    layers.append(settlement_cluster(lon, lat, factor, adcode, core=core))
+    cluster, point = settlement_cluster(lon, lat, .90 if core else 1.23, adcode, core)
+    base.append(cluster)
+    overlay.append(cluster)
+    anchors.append({"adcode": adcode, "name": props["name"], "coordinate": [lon, lat], "canvas": point})
 
-# Two coordinate-anchored landmarks, deliberately smaller than settlement clusters.
+
 def pavilion(lon, lat):
-    x, y = xy(lon, lat)
-    return f'''<g transform="translate({x:.2f} {y:.2f})" filter="url(#soft-shadow)">
-      <path d="M-10 0 L0 -6 L10 0 L7 2 L-7 2 Z M-7 -5 L0 -10 L7 -5 L5 -3 L-5 -3 Z" fill="#a94e38" stroke="#f2d9b5" stroke-width="1"/>
-      <path d="M-5 2 V10 H5 V2 M-2 2 V10 M2 2 V10" fill="#c88958" stroke="#6e4f3d" stroke-width="1.1"/>
+    x, y = canvas_xy(*warp_point(lon, lat))
+    return f'''<g transform="translate({x:.2f} {y:.2f})" filter="url(#shadow)">
+      <path d="M-11 0 L0 -7 L11 0 L8 2 L-8 2 Z M-8 -6 L0 -11 L8 -6 L6 -4 L-6 -4 Z" fill="#a84d37" stroke="#f3d8b2" stroke-width="1.2"/>
+      <path d="M-5 2 V11 H5 V2 M-2 2 V11 M2 2 V11" fill="#c98756" stroke="#68493b" stroke-width="1.2"/>
     </g>'''
 
 
 def ferris_wheel(lon, lat):
-    x, y = xy(lon, lat)
-    return f'''<g transform="translate({x:.2f} {y:.2f})" fill="none" stroke="#8b6f60" stroke-width="1.2" opacity=".92">
-      <circle r="9" fill="#edf0dc"/><circle r="1.6" fill="#b46d56"/>
-      <path d="M0 -9 V9 M-9 0 H9 M-6.4 -6.4 L6.4 6.4 M6.4 -6.4 L-6.4 6.4 M-6 13 L0 1 L6 13"/>
+    x, y = canvas_xy(*warp_point(lon, lat))
+    return f'''<g transform="translate({x:.2f} {y:.2f})" fill="none" stroke="#8a6c5e" stroke-width="1.4">
+      <circle r="10" fill="#eef0dc"/><circle r="1.8" fill="#b66d55"/><path d="M0 -10 V10 M-10 0 H10 M-7 -7 L7 7 M7 -7 L-7 7 M-7 14 L0 2 L7 14"/>
     </g>'''
 
 
-layers.append(pavilion(115.885, 28.684))
-layers.append(ferris_wheel(115.80, 28.61))
+for mark in (pavilion(115.885, 28.684), ferris_wheel(115.80, 28.61)):
+    base.append(mark)
+    overlay.append(mark)
 
-# County boundaries and prefecture outline sit above all art.
-for geom in county_svg:
-    layers.append(svg_el("path", {"d": area_path(geom), "fill": "none", "stroke": "#eee8d5", "stroke-width": "1.35", "stroke-linejoin": "round", "opacity": ".95"}))
-layers.append(svg_el("path", {"d": area_path(city_svg), "fill": "none", "stroke": "#4f675d", "stroke-width": "4.2", "stroke-linejoin": "round", "fill-rule": "evenodd"}))
+outline = f'<path d="{clip_path}" fill="none" stroke="#4e675d" stroke-width="5" stroke-linejoin="round" fill-rule="evenodd"/>'
+overlay.append(outline)
 
-svg = f'''<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {W} {H}" width="{W}" height="{H}">
-{defs}
-<rect width="{W}" height="{H}" fill="#f5f1e6"/>
-<g clip-path="url(#city-clip)">{"".join(layers)}</g>
-</svg>
-'''
-(OUT / "nanchang-semantic.svg").write_text(svg)
+guide = f'''<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {SIZE} {SIZE}">{defs}
+<rect width="{SIZE}" height="{SIZE}" fill="#f5f1e7"/>
+<g clip-path="url(#clip)">{"".join(base)}</g>{outline}</svg>'''
+overlay_svg = f'''<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {SIZE} {SIZE}">{defs}<g clip-path="url(#clip)">{"".join(overlay)}</g></svg>'''
+mask_svg = f'''<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {SIZE} {SIZE}"><rect width="{SIZE}" height="{SIZE}" fill="black"/><path d="{clip_path}" fill="white" fill-rule="evenodd"/></svg>'''
 
-manifest = {
-    "title": "Nanchang semantic SVG prototype",
+(OUT / "project-guide.svg").write_text(guide)
+(OUT / "project-overlay.svg").write_text(overlay_svg)
+(OUT / "project-mask.svg").write_text(mask_svg)
+(OUT / "manifest.json").write_text(json.dumps({
+    "projectOutline": "main / MAP_DATA region 360100 / balanced",
+    "warp": "main / JIANGXI_ART cells for city 360100",
     "textFree": True,
-    "countyUnitCount": len(county_features),
-    "settlementAnchors": [
-        {"adcode": f["properties"]["adcode"], "name": f["properties"]["name"], "coordinate": f["properties"]["center"]}
-        for f in county_features
-    ],
+    "anchors": anchors,
     "landmarks": [
-        {"name": "Tengwang Pavilion", "coordinate": [115.885, 28.684]},
-        {"name": "Star of Nanchang", "coordinate": [115.80, 28.61]},
+        {"name": "Tengwang Pavilion", "coordinate": [115.885, 28.684], "canvas": list(canvas_xy(*warp_point(115.885, 28.684)))},
+        {"name": "Star of Nanchang", "coordinate": [115.80, 28.61], "canvas": list(canvas_xy(*warp_point(115.80, 28.61)))},
     ],
-    "sources": {
-        "countyGeometry": "DataV GeoAtlas 360100_full.json snapshot",
-        "hydrology": "repository Jiangxi HydroRIVERS and Natural Earth lake snapshots",
-        "urban": "repository Natural Earth urban-area snapshot",
-        "terrain": "repository DEM tile mosaic",
-    },
-}
-(OUT / "manifest.json").write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + "\n")
-print(f"wrote {OUT / 'nanchang-semantic.svg'}")
+}, ensure_ascii=False, indent=2) + "\n")
+print({"cells": len(cells), "anchors": len(anchors), "outlineBounds": balanced.bounds})
