@@ -1,0 +1,45 @@
+{
+  "schemaVersion": 1,
+  "region": {
+    "id": "360100",
+    "name": "南昌",
+    "layout": "balanced",
+    "outlineSource": "dist/jiangxi-art-data.js / JIANGXI_ART.cities[360100].balanced"
+  },
+  "stages": [
+    "lock-project-outline",
+    "map-real-geography",
+    "draw-semantic-svg",
+    "generate-raster-from-svg",
+    "apply-exact-mask-and-clean",
+    "publish-raster-only"
+  ],
+  "artifacts": {
+    "semanticSvg": "dist/assets/nanchang/nanchang-semantic.svg",
+    "maskSvg": "dist/assets/nanchang/nanchang-mask.svg",
+    "manifest": "dist/assets/nanchang/manifest.json",
+    "finalImage": "dist/assets/nanchang/nanchang-art-final.webp",
+    "tileManifest": "dist/jiangxi-city-tiles.json"
+  },
+  "independentAreas": [
+    {
+      "id": "nanchang-city-region",
+      "landmarks": [
+        {
+          "name": "滕王阁",
+          "coordinate": [115.8756428, 28.6840374],
+          "placementRule": "主赣江东岸，位于城市肌理内"
+        }
+      ]
+    }
+  ],
+  "forbiddenPublicArtifacts": [
+    "dist/assets/nanchang/nanchang-overlay.svg"
+  ],
+  "rules": {
+    "semanticSvgPrecedesGeneration": true,
+    "finalPageLoadsRasterOnly": true,
+    "maxLandmarksPerIndependentArea": 1,
+    "constructionGuidesVisibleInFinal": false
+  }
+}
