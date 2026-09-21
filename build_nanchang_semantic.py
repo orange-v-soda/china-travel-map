@@ -2,8 +2,9 @@
 
 The project's existing per-triangle east->balanced warp is authoritative for
 the final silhouette. Real hydrology, DEM samples, and county-seat anchors are
-mapped through those same triangles. The generated guide is used as a visual
-reference; the overlay and mask restore exact geometry after image generation.
+mapped through those same triangles. The generated guide is only a visual
+reference; the mask restores exact geometry after image generation. Construction
+anchors are never published or composited into the final artwork.
 """
 from __future__ import annotations
 
@@ -163,7 +164,6 @@ defs = f'''<defs>
 </defs>'''
 
 base = [f'<path d="{clip_path}" fill="url(#plain)" fill-rule="evenodd"/>']
-overlay = []
 
 # DEM-tied hill and mountain marks.
 dem_npz = np.load(DATA / "jiangxi-dem.npz")
@@ -199,7 +199,7 @@ for feature in load_geojson(DATA / "jiangxi-lakes.geojson")["features"]:
         d = area_path(mapped)
         base.append(f'<path d="{d}" fill="#77b8c5" stroke="#5b99a9" stroke-width="1.2" fill-rule="evenodd"/>')
 
-# Rivers mapped through the same warp. They are included in the guide and exact overlay.
+# Rivers mapped through the same warp. They are included in the guide only.
 river_draws = []
 for feature in load_geojson(DATA / "jiangxi-hydrorivers.geojson")["features"]:
     upland = float(feature.get("properties", {}).get("UPLAND_SKM", 0) or 0)
@@ -215,7 +215,6 @@ for width, d in sorted(river_draws):
 for width, d in sorted(river_draws):
     river = f'<path d="{d}" fill="none" stroke="#559cad" stroke-width="{width:.2f}" stroke-linecap="round" stroke-linejoin="round"/>'
     base.append(river)
-    overlay.append(river)
 
 
 def settlement_cluster(lon, lat, factor, seed, core=False):
@@ -239,7 +238,6 @@ for feature in county_fc["features"]:
     core = adcode in {360102, 360103, 360104, 360111, 360112, 360113}
     cluster, point = settlement_cluster(lon, lat, .90 if core else 1.23, adcode, core)
     base.append(cluster)
-    overlay.append(cluster)
     anchors.append({"adcode": adcode, "name": props["name"], "coordinate": [lon, lat], "canvas": point})
 
 
@@ -251,28 +249,17 @@ def pavilion(lon, lat):
     </g>'''
 
 
-def ferris_wheel(lon, lat):
-    x, y = canvas_xy(*warp_point(lon, lat))
-    return f'''<g transform="translate({x:.2f} {y:.2f})" fill="none" stroke="#8a6c5e" stroke-width="1.4">
-      <circle r="10" fill="#eef0dc"/><circle r="1.8" fill="#b66d55"/><path d="M0 -10 V10 M-10 0 H10 M-7 -7 L7 7 M7 -7 L-7 7 M-7 14 L0 2 L7 14"/>
-    </g>'''
-
-
-for mark in (pavilion(115.885, 28.684), ferris_wheel(115.80, 28.61)):
-    base.append(mark)
-    overlay.append(mark)
+# One relatively independent map region keeps at most one landmark.
+base.append(pavilion(115.8756428, 28.6840374))
 
 outline = f'<path d="{clip_path}" fill="none" stroke="#4e675d" stroke-width="5" stroke-linejoin="round" fill-rule="evenodd"/>'
-overlay.append(outline)
 
 guide = f'''<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {SIZE} {SIZE}">{defs}
 <rect width="{SIZE}" height="{SIZE}" fill="#f5f1e7"/>
 <g clip-path="url(#clip)">{"".join(base)}</g>{outline}</svg>'''
-overlay_svg = f'''<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {SIZE} {SIZE}">{defs}<g clip-path="url(#clip)">{"".join(overlay)}</g></svg>'''
 mask_svg = f'''<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {SIZE} {SIZE}"><rect width="{SIZE}" height="{SIZE}" fill="black"/><path d="{clip_path}" fill="white" fill-rule="evenodd"/></svg>'''
 
 (OUT / "project-guide.svg").write_text(guide)
-(OUT / "project-overlay.svg").write_text(overlay_svg)
 (OUT / "project-mask.svg").write_text(mask_svg)
 (OUT / "manifest.json").write_text(json.dumps({
     "projectOutline": "main / MAP_DATA region 360100 / balanced",
@@ -280,8 +267,7 @@ mask_svg = f'''<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {SIZE} {SIZE
     "textFree": True,
     "anchors": anchors,
     "landmarks": [
-        {"name": "Tengwang Pavilion", "coordinate": [115.885, 28.684], "canvas": list(canvas_xy(*warp_point(115.885, 28.684)))},
-        {"name": "Star of Nanchang", "coordinate": [115.80, 28.61], "canvas": list(canvas_xy(*warp_point(115.80, 28.61)))},
+        {"name": "Tengwang Pavilion", "coordinate": [115.8756428, 28.6840374], "canvas": list(canvas_xy(*warp_point(115.8756428, 28.6840374)))},
     ],
 }, ensure_ascii=False, indent=2) + "\n")
 print({"cells": len(cells), "anchors": len(anchors), "outlineBounds": balanced.bounds})
