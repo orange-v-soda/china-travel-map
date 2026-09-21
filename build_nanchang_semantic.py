@@ -198,24 +198,21 @@ for feature in load_geojson(DATA / "jiangxi-lakes.geojson")["features"]:
     mapped = canvas_geometry(warp_geometry(shape(feature["geometry"])))
     if not mapped.is_empty:
         d = area_path(mapped)
-        base.append(f'<path d="{d}" fill="#77b8c5" stroke="#5b99a9" stroke-width="1.2" fill-rule="evenodd"/>')
+        # Water is a positional constraint, not a request to expand the whole
+        # surrounding wetland into open water. Keep it pale and subordinate.
+        base.append(f'<path d="{d}" fill="#a9c8c5" stroke="#7fa8a8" stroke-width="0.8" fill-rule="evenodd"/>')
 
 # Rivers mapped through the same warp. They are included in the guide only.
 river_draws = []
 for feature in load_geojson(DATA / "jiangxi-hydrorivers.geojson")["features"]:
     upland = float(feature.get("properties", {}).get("UPLAND_SKM", 0) or 0)
-    if upland < 120:
+    if upland < 220:
         continue
     mapped = canvas_geometry(warp_geometry(shape(feature["geometry"])))
     if mapped.is_empty:
         continue
-    width = max(1.4, min(8.2, .8 + math.log10(max(upland, 1)) * 1.45))
+    width = max(1.0, min(5.8, .45 + math.log10(max(upland, 1)) * 1.05))
     river_draws.append((width, line_path(mapped)))
-for width, d in sorted(river_draws):
-    base.append(f'<path d="{d}" fill="none" stroke="#eaf5f3" stroke-width="{width+2.4:.2f}" stroke-linecap="round" stroke-linejoin="round" opacity=".85"/>')
-for width, d in sorted(river_draws):
-    river = f'<path d="{d}" fill="none" stroke="#559cad" stroke-width="{width:.2f}" stroke-linecap="round" stroke-linejoin="round"/>'
-    base.append(river)
 
 
 # Settlement semantics are continuous density regions, not miniature buildings.
@@ -250,21 +247,21 @@ metro_zone = organic_zone(core_points, 32, 1.25, .80, 16)
 # Draw broad, low-density farmland first, then progressively darker urban areas.
 base.append(f'<path d="{area_path(rural_zone)}" fill="#ddcea0" opacity=".42" fill-rule="evenodd"/>')
 base.append(f'<path d="{area_path(rural_zone)}" fill="url(#farmland)" opacity=".46" fill-rule="evenodd"/>')
-base.append(f'<path d="{area_path(county_zone)}" fill="#c68c68" stroke="#a66f57" stroke-width="1.6" opacity=".68" fill-rule="evenodd"/>')
-base.append(f'<path d="{area_path(metro_zone)}" fill="#9f554e" stroke="#7e4542" stroke-width="2.2" opacity=".78" fill-rule="evenodd"/>')
+base.append(f'<path d="{area_path(county_zone)}" fill="#c8c3b7" stroke="#9f9b91" stroke-width="1.4" opacity=".76" fill-rule="evenodd"/>')
+base.append(f'<path d="{area_path(metro_zone)}" fill="#9da3a1" stroke="#747c7b" stroke-width="1.8" opacity=".84" fill-rule="evenodd"/>')
 
 # Keep the constrained river network legible above settlement-density regions.
 for width, d in sorted(river_draws):
-    base.append(f'<path d="{d}" fill="none" stroke="#edf7f3" stroke-width="{width+2.0:.2f}" stroke-linecap="round" stroke-linejoin="round" opacity=".90"/>')
-    base.append(f'<path d="{d}" fill="none" stroke="#4f98ae" stroke-width="{width:.2f}" stroke-linecap="round" stroke-linejoin="round"/>')
+    base.append(f'<path d="{d}" fill="none" stroke="#eef3ec" stroke-width="{width+1.0:.2f}" stroke-linecap="round" stroke-linejoin="round" opacity=".72"/>')
+    base.append(f'<path d="{d}" fill="none" stroke="#6f9fa7" stroke-width="{width:.2f}" stroke-linecap="round" stroke-linejoin="round"/>')
 
 
 def landmark_marker(lon, lat):
     x, y = canvas_xy(*warp_point(lon, lat))
     return f'''<g transform="translate({x:.2f} {y:.2f})">
-      <circle r="13" fill="#fff8df" stroke="#8f302f" stroke-width="3"/>
-      <circle r="5" fill="#b63f38"/>
-      <path d="M0 -19 V-13 M0 13 V19 M-19 0 H-13 M13 0 H19" stroke="#8f302f" stroke-width="2.4" stroke-linecap="round"/>
+      <circle r="7" fill="#fff8df" stroke="#8f302f" stroke-width="2"/>
+      <circle r="2.6" fill="#b63f38"/>
+      <path d="M0 -11 V-7 M0 7 V11 M-11 0 H-7 M7 0 H11" stroke="#8f302f" stroke-width="1.5" stroke-linecap="round"/>
     </g>'''
 
 
@@ -289,8 +286,8 @@ mask_svg = f'''<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {SIZE} {SIZE
         "regionalProfile": "south-china / Poyang Lake plain / Gan River basin",
         "wilderness": {"visual": "untinted base", "generation": "woodland, wetland, or open terrain according to elevation and hydrology"},
         "rural": {"visual": "light ochre farmland texture", "generation": "Jiangnan paddy fields, water-linked villages, compact farm plots"},
-        "countyTown": {"visual": "medium terracotta region", "generation": "compact southern county town with tiled roofs and river-oriented streets"},
-        "metropolitan": {"visual": "dark red continuous region", "generation": "dense Nanchang urban fabric concentrated along the Gan River"},
+        "countyTown": {"visual": "warm light-gray compact region", "generation": "compact southern county town with mostly gray-white built fabric, tiled roofs and river-oriented streets"},
+        "metropolitan": {"visual": "medium cool-gray continuous region", "generation": "dense gray-white Nanchang urban fabric concentrated along the Gan River; semantic gray does not prescribe roof color"},
     },
     "landmarks": [
         {"marker": "landmark-1", "name": "Tengwang Pavilion", "coordinate": [115.8756428, 28.6840374], "canvas": list(canvas_xy(*warp_point(115.8756428, 28.6840374))), "description": "Historic pavilion on the east bank of the Gan River; render as the single landmark for this independent region."},

@@ -123,12 +123,12 @@
       "generation": "Jiangnan paddy fields, water-linked villages, compact farm plots"
     },
     "countyTown": {
-      "visual": "medium terracotta region",
-      "generation": "compact southern county town with tiled roofs and river-oriented streets"
+      "visual": "warm light-gray compact region",
+      "generation": "compact southern county town with mostly gray-white built fabric, tiled roofs and river-oriented streets"
     },
     "metropolitan": {
-      "visual": "dark red continuous region",
-      "generation": "dense Nanchang urban fabric concentrated along the Gan River"
+      "visual": "medium cool-gray continuous region",
+      "generation": "dense gray-white Nanchang urban fabric concentrated along the Gan River; semantic gray does not prescribe roof color"
     }
   },
   "landmarks": [
