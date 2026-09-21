@@ -1,0 +1,101 @@
+{
+  "title": "Nanchang semantic SVG prototype",
+  "textFree": true,
+  "countyUnitCount": 9,
+  "settlementAnchors": [
+    {
+      "adcode": 360102,
+      "name": "东湖区",
+      "coordinate": [
+        115.889675,
+        28.682988
+      ]
+    },
+    {
+      "adcode": 360103,
+      "name": "西湖区",
+      "coordinate": [
+        115.91065,
+        28.662901
+      ]
+    },
+    {
+      "adcode": 360104,
+      "name": "青云谱区",
+      "coordinate": [
+        115.907292,
+        28.635724
+      ]
+    },
+    {
+      "adcode": 360111,
+      "name": "青山湖区",
+      "coordinate": [
+        115.949044,
+        28.689292
+      ]
+    },
+    {
+      "adcode": 360112,
+      "name": "新建区",
+      "coordinate": [
+        115.820806,
+        28.690788
+      ]
+    },
+    {
+      "adcode": 360113,
+      "name": "红谷滩区",
+      "coordinate": [
+        115.8580521,
+        28.69819928
+      ]
+    },
+    {
+      "adcode": 360121,
+      "name": "南昌县",
+      "coordinate": [
+        115.942465,
+        28.543781
+      ]
+    },
+    {
+      "adcode": 360123,
+      "name": "安义县",
+      "coordinate": [
+        115.553109,
+        28.841334
+      ]
+    },
+    {
+      "adcode": 360124,
+      "name": "进贤县",
+      "coordinate": [
+        116.267671,
+        28.365681
+      ]
+    }
+  ],
+  "landmarks": [
+    {
+      "name": "Tengwang Pavilion",
+      "coordinate": [
+        115.885,
+        28.684
+      ]
+    },
+    {
+      "name": "Star of Nanchang",
+      "coordinate": [
+        115.8,
+        28.61
+      ]
+    }
+  ],
+  "sources": {
+    "countyGeometry": "DataV GeoAtlas 360100_full.json snapshot",
+    "hydrology": "repository Jiangxi HydroRIVERS and Natural Earth lake snapshots",
+    "urban": "repository Natural Earth urban-area snapshot",
+    "terrain": "repository DEM tile mosaic"
+  }
+}
