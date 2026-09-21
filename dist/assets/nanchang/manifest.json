@@ -1,14 +1,18 @@
 {
-  "title": "Nanchang semantic SVG prototype",
+  "projectOutline": "main / MAP_DATA region 360100 / balanced",
+  "warp": "main / JIANGXI_ART cells for city 360100",
   "textFree": true,
-  "countyUnitCount": 9,
-  "settlementAnchors": [
+  "anchors": [
     {
       "adcode": 360102,
       "name": "东湖区",
       "coordinate": [
         115.889675,
         28.682988
+      ],
+      "canvas": [
+        414.9177209173781,
+        476.35841887896373
       ]
     },
     {
@@ -17,6 +21,10 @@
       "coordinate": [
         115.91065,
         28.662901
+      ],
+      "canvas": [
+        431.61129076957656,
+        493.5017136162599
       ]
     },
     {
@@ -25,6 +33,10 @@
       "coordinate": [
         115.907292,
         28.635724
+      ],
+      "canvas": [
+        428.9387278344628,
+        516.6907561985322
       ]
     },
     {
@@ -33,6 +45,10 @@
       "coordinate": [
         115.949044,
         28.689292
+      ],
+      "canvas": [
+        466.26745532759236,
+        468.1644708215713
       ]
     },
     {
@@ -41,6 +57,10 @@
       "coordinate": [
         115.820806,
         28.690788
+      ],
+      "canvas": [
+        360.10630436670067,
+        469.70060535007394
       ]
     },
     {
@@ -49,6 +69,10 @@
       "coordinate": [
         115.8580521,
         28.69819928
+      ],
+      "canvas": [
+        389.7497070876336,
+        463.3741303520672
       ]
     },
     {
@@ -57,6 +81,10 @@
       "coordinate": [
         115.942465,
         28.543781
+      ],
+      "canvas": [
+        456.9321930268807,
+        595.097550812731
       ]
     },
     {
@@ -65,6 +93,10 @@
       "coordinate": [
         115.553109,
         28.841334
+      ],
+      "canvas": [
+        147.05178380788152,
+        341.1022654174311
       ]
     },
     {
@@ -73,6 +105,10 @@
       "coordinate": [
         116.267671,
         28.365681
+      ],
+      "canvas": [
+        719.0167114532253,
+        744.5456029740344
       ]
     }
   ],
@@ -82,6 +118,10 @@
       "coordinate": [
         115.885,
         28.684
+      ],
+      "canvas": [
+        411.19698484783004,
+        475.4946382495006
       ]
     },
     {
@@ -89,13 +129,11 @@
       "coordinate": [
         115.8,
         28.61
+      ],
+      "canvas": [
+        343.5472381285733,
+        538.6344800166091
       ]
     }
-  ],
-  "sources": {
-    "countyGeometry": "DataV GeoAtlas 360100_full.json snapshot",
-    "hydrology": "repository Jiangxi HydroRIVERS and Natural Earth lake snapshots",
-    "urban": "repository Natural Earth urban-area snapshot",
-    "terrain": "repository DEM tile mosaic"
-  }
+  ]
 }
