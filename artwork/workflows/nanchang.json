@@ -45,6 +45,9 @@
     "settlementEncoding": "density-regions",
     "settlementClasses": ["metropolitan", "county-town", "rural-farmland", "wilderness"],
     "landmarkEncoding": "marker-plus-manifest-description",
-    "regionalProfileRequired": true
+    "regionalProfileRequired": true,
+    "waterEncoding": "subordinate-major-network",
+    "urbanPalette": "neutral-gray-density",
+    "landmarkMarkerMaxRadius": 7
   }
 }

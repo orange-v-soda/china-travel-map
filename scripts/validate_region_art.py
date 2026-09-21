@@ -103,6 +103,13 @@ def main() -> int:
         fail(errors, "landmarks must use markers in SVG and descriptions in metadata")
     if rules.get("regionalProfileRequired") is not True:
         fail(errors, "regionalProfileRequired must be true")
+    if rules.get("waterEncoding") != "subordinate-major-network":
+        fail(errors, "water must be encoded as a subordinate major network")
+    if rules.get("urbanPalette") != "neutral-gray-density":
+        fail(errors, "urban density regions must use a neutral gray palette")
+    marker_radius = rules.get("landmarkMarkerMaxRadius")
+    if not isinstance(marker_radius, (int, float)) or marker_radius > 7:
+        fail(errors, "landmark markers must use a maximum radius of 7")
 
     if errors:
         for error in errors:
