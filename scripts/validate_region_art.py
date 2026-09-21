@@ -65,6 +65,8 @@ def main() -> int:
         for landmark in landmarks:
             if not landmark.get("placementRule"):
                 fail(errors, f"landmark {landmark.get('name')} lacks a placementRule")
+            if not landmark.get("description"):
+                fail(errors, f"landmark {landmark.get('name')} lacks a generation description")
 
     for value in data.get("forbiddenPublicArtifacts", []):
         if (repo / value).exists():
@@ -93,6 +95,14 @@ def main() -> int:
         fail(errors, "finalPageLoadsRasterOnly must be true")
     if rules.get("constructionGuidesVisibleInFinal") is not False:
         fail(errors, "constructionGuidesVisibleInFinal must be false")
+    if rules.get("settlementEncoding") != "density-regions":
+        fail(errors, "settlements must use density-regions instead of building glyphs")
+    if rules.get("settlementClasses") != ["metropolitan", "county-town", "rural-farmland", "wilderness"]:
+        fail(errors, "settlementClasses must define the fixed four-level hierarchy")
+    if rules.get("landmarkEncoding") != "marker-plus-manifest-description":
+        fail(errors, "landmarks must use markers in SVG and descriptions in metadata")
+    if rules.get("regionalProfileRequired") is not True:
+        fail(errors, "regionalProfileRequired must be true")
 
     if errors:
         for error in errors:

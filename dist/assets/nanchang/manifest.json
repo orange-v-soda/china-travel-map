@@ -1,7 +1,8 @@
 {
-  "outline": "main balanced region 360100",
-  "terrain": "DEM inverse-sampled after project normalization",
-  "countyAnchors": [
+  "projectOutline": "main / MAP_DATA region 360100 / balanced",
+  "warp": "main / JIANGXI_ART cells for city 360100",
+  "textFree": true,
+  "anchors": [
     {
       "adcode": 360102,
       "name": "东湖区",
@@ -111,9 +112,29 @@
       ]
     }
   ],
+  "settlementSemantics": {
+    "regionalProfile": "south-china / Poyang Lake plain / Gan River basin",
+    "wilderness": {
+      "visual": "untinted base",
+      "generation": "woodland, wetland, or open terrain according to elevation and hydrology"
+    },
+    "rural": {
+      "visual": "light ochre farmland texture",
+      "generation": "Jiangnan paddy fields, water-linked villages, compact farm plots"
+    },
+    "countyTown": {
+      "visual": "medium terracotta region",
+      "generation": "compact southern county town with tiled roofs and river-oriented streets"
+    },
+    "metropolitan": {
+      "visual": "dark red continuous region",
+      "generation": "dense Nanchang urban fabric concentrated along the Gan River"
+    }
+  },
   "landmarks": [
     {
-      "name": "滕王阁",
+      "marker": "landmark-1",
+      "name": "Tengwang Pavilion",
       "coordinate": [
         115.8756428,
         28.6840374
@@ -121,8 +142,8 @@
       "canvas": [
         403.7497823772088,
         475.4627157619384
-      ]
+      ],
+      "description": "Historic pavilion on the east bank of the Gan River; render as the single landmark for this independent region."
     }
-  ],
-  "publishedLandmarkPolicy": "one landmark for this independent city region; construction anchors are metadata only and are not rendered"
+  ]
 }

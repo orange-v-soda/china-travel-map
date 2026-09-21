@@ -28,7 +28,8 @@
         {
           "name": "滕王阁",
           "coordinate": [115.8756428, 28.6840374],
-          "placementRule": "主赣江东岸，位于城市肌理内"
+          "placementRule": "主赣江东岸，位于城市肌理内",
+          "description": "历史楼阁；作为该独立区域唯一地标，由 SVG 高对比标点定位，名称与形态通过文本提示传递给图像模型"
         }
       ]
     }
@@ -40,6 +41,10 @@
     "semanticSvgPrecedesGeneration": true,
     "finalPageLoadsRasterOnly": true,
     "maxLandmarksPerIndependentArea": 1,
-    "constructionGuidesVisibleInFinal": false
+    "constructionGuidesVisibleInFinal": false,
+    "settlementEncoding": "density-regions",
+    "settlementClasses": ["metropolitan", "county-town", "rural-farmland", "wilderness"],
+    "landmarkEncoding": "marker-plus-manifest-description",
+    "regionalProfileRequired": true
   }
 }

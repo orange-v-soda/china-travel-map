@@ -10,7 +10,6 @@ from __future__ import annotations
 
 import json
 import math
-import random
 import re
 from pathlib import Path
 
@@ -159,8 +158,10 @@ def line_path(geom):
 clip_path = area_path(balanced_canvas)
 defs = f'''<defs>
   <clipPath id="clip"><path d="{clip_path}" fill-rule="evenodd"/></clipPath>
-  <filter id="shadow" x="-30%" y="-30%" width="160%" height="170%"><feDropShadow dx="0" dy="2" stdDeviation="2" flood-color="#3f5148" flood-opacity=".24"/></filter>
   <linearGradient id="plain" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#e2e7c5"/><stop offset="1" stop-color="#d5d7a9"/></linearGradient>
+  <pattern id="farmland" width="14" height="14" patternUnits="userSpaceOnUse" patternTransform="rotate(18)">
+    <path d="M0 0 V14" stroke="#bcae7d" stroke-width="2" opacity=".45"/>
+  </pattern>
 </defs>'''
 
 base = [f'<path d="{clip_path}" fill="url(#plain)" fill-rule="evenodd"/>']
@@ -217,40 +218,58 @@ for width, d in sorted(river_draws):
     base.append(river)
 
 
-def settlement_cluster(lon, lat, factor, seed, core=False):
-    rng = random.Random(seed)
-    x, y = canvas_xy(*warp_point(lon, lat))
-    radius = 23 * factor
-    pieces = [f'<ellipse cx="{x:.2f}" cy="{y+2:.2f}" rx="{radius:.2f}" ry="{radius*.58:.2f}" fill="#d8c4a5" opacity=".80"/>']
-    for _ in range(13 if core else 11):
-        dx, dy = rng.uniform(-radius*.70, radius*.70), rng.uniform(-radius*.38, radius*.38)
-        bw, bh = rng.uniform(4.5, 8.0)*factor, rng.uniform(6.0, 12.0)*factor
-        tone = rng.choice(["#b96f55", "#ca8862", "#9b7464", "#d29a70"])
-        pieces.append(f'<rect x="{x+dx-bw/2:.2f}" y="{y+dy-bh:.2f}" width="{bw:.2f}" height="{bh:.2f}" rx="1.2" fill="{tone}" stroke="#f5ead5" stroke-width=".9"/>')
-    return f'<g filter="url(#shadow)">{"".join(pieces)}</g>', [x, y]
-
-
+# Settlement semantics are continuous density regions, not miniature buildings.
+# Their shape, palette, and texture describe the settlement hierarchy to the
+# image model while county centers remain recorded as geographic metadata.
 anchors = []
+core_points = []
+county_points = []
 for feature in county_fc["features"]:
     props = feature["properties"]
     lon, lat = props["center"]
     adcode = int(props["adcode"])
     core = adcode in {360102, 360103, 360104, 360111, 360112, 360113}
-    cluster, point = settlement_cluster(lon, lat, .90 if core else 1.23, adcode, core)
-    base.append(cluster)
+    point = list(canvas_xy(*warp_point(lon, lat)))
+    (core_points if core else county_points).append(Point(*point))
     anchors.append({"adcode": adcode, "name": props["name"], "coordinate": [lon, lat], "canvas": point})
 
 
-def pavilion(lon, lat):
+def organic_zone(points, radius, xscale=1.0, yscale=1.0, merge=0):
+    shapes = [affinity.scale(point.buffer(radius, resolution=32), xfact=xscale, yfact=yscale, origin=point) for point in points]
+    zone = unary_union(shapes)
+    if merge:
+        zone = zone.buffer(merge, resolution=24).buffer(-merge * .55, resolution=24)
+    return zone.intersection(balanced_canvas)
+
+
+all_points = core_points + county_points
+rural_zone = organic_zone(all_points, 68, 1.35, .74, 12)
+county_zone = organic_zone(county_points, 27, 1.25, .72, 3)
+metro_zone = organic_zone(core_points, 32, 1.25, .80, 16)
+
+# Draw broad, low-density farmland first, then progressively darker urban areas.
+base.append(f'<path d="{area_path(rural_zone)}" fill="#ddcea0" opacity=".42" fill-rule="evenodd"/>')
+base.append(f'<path d="{area_path(rural_zone)}" fill="url(#farmland)" opacity=".46" fill-rule="evenodd"/>')
+base.append(f'<path d="{area_path(county_zone)}" fill="#c68c68" stroke="#a66f57" stroke-width="1.6" opacity=".68" fill-rule="evenodd"/>')
+base.append(f'<path d="{area_path(metro_zone)}" fill="#9f554e" stroke="#7e4542" stroke-width="2.2" opacity=".78" fill-rule="evenodd"/>')
+
+# Keep the constrained river network legible above settlement-density regions.
+for width, d in sorted(river_draws):
+    base.append(f'<path d="{d}" fill="none" stroke="#edf7f3" stroke-width="{width+2.0:.2f}" stroke-linecap="round" stroke-linejoin="round" opacity=".90"/>')
+    base.append(f'<path d="{d}" fill="none" stroke="#4f98ae" stroke-width="{width:.2f}" stroke-linecap="round" stroke-linejoin="round"/>')
+
+
+def landmark_marker(lon, lat):
     x, y = canvas_xy(*warp_point(lon, lat))
-    return f'''<g transform="translate({x:.2f} {y:.2f})" filter="url(#shadow)">
-      <path d="M-11 0 L0 -7 L11 0 L8 2 L-8 2 Z M-8 -6 L0 -11 L8 -6 L6 -4 L-6 -4 Z" fill="#a84d37" stroke="#f3d8b2" stroke-width="1.2"/>
-      <path d="M-5 2 V11 H5 V2 M-2 2 V11 M2 2 V11" fill="#c98756" stroke="#68493b" stroke-width="1.2"/>
+    return f'''<g transform="translate({x:.2f} {y:.2f})">
+      <circle r="13" fill="#fff8df" stroke="#8f302f" stroke-width="3"/>
+      <circle r="5" fill="#b63f38"/>
+      <path d="M0 -19 V-13 M0 13 V19 M-19 0 H-13 M13 0 H19" stroke="#8f302f" stroke-width="2.4" stroke-linecap="round"/>
     </g>'''
 
 
 # One relatively independent map region keeps at most one landmark.
-base.append(pavilion(115.8756428, 28.6840374))
+base.append(landmark_marker(115.8756428, 28.6840374))
 
 outline = f'<path d="{clip_path}" fill="none" stroke="#4e675d" stroke-width="5" stroke-linejoin="round" fill-rule="evenodd"/>'
 
@@ -259,15 +278,22 @@ guide = f'''<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {SIZE} {SIZE}">
 <g clip-path="url(#clip)">{"".join(base)}</g>{outline}</svg>'''
 mask_svg = f'''<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {SIZE} {SIZE}"><rect width="{SIZE}" height="{SIZE}" fill="black"/><path d="{clip_path}" fill="white" fill-rule="evenodd"/></svg>'''
 
-(OUT / "project-guide.svg").write_text(guide)
-(OUT / "project-mask.svg").write_text(mask_svg)
+(OUT / "nanchang-semantic.svg").write_text(guide)
+(OUT / "nanchang-mask.svg").write_text(mask_svg)
 (OUT / "manifest.json").write_text(json.dumps({
     "projectOutline": "main / MAP_DATA region 360100 / balanced",
     "warp": "main / JIANGXI_ART cells for city 360100",
     "textFree": True,
     "anchors": anchors,
+    "settlementSemantics": {
+        "regionalProfile": "south-china / Poyang Lake plain / Gan River basin",
+        "wilderness": {"visual": "untinted base", "generation": "woodland, wetland, or open terrain according to elevation and hydrology"},
+        "rural": {"visual": "light ochre farmland texture", "generation": "Jiangnan paddy fields, water-linked villages, compact farm plots"},
+        "countyTown": {"visual": "medium terracotta region", "generation": "compact southern county town with tiled roofs and river-oriented streets"},
+        "metropolitan": {"visual": "dark red continuous region", "generation": "dense Nanchang urban fabric concentrated along the Gan River"},
+    },
     "landmarks": [
-        {"name": "Tengwang Pavilion", "coordinate": [115.8756428, 28.6840374], "canvas": list(canvas_xy(*warp_point(115.8756428, 28.6840374)))},
+        {"marker": "landmark-1", "name": "Tengwang Pavilion", "coordinate": [115.8756428, 28.6840374], "canvas": list(canvas_xy(*warp_point(115.8756428, 28.6840374))), "description": "Historic pavilion on the east bank of the Gan River; render as the single landmark for this independent region."},
     ],
 }, ensure_ascii=False, indent=2) + "\n")
 print({"cells": len(cells), "anchors": len(anchors), "outlineBounds": balanced.bounds})
