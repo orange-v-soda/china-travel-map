@@ -17,10 +17,10 @@ from shapely.geometry import LineString, MultiLineString, MultiPolygon, Point, P
 from shapely.ops import transform, unary_union
 
 
-ROOT = Path(__file__).resolve().parents[2]
-DATA = ROOT / "local-data"
-OUT = Path(__file__).resolve().parent
-COUNTIES = ROOT / "nanchang-counties.geojson"
+ROOT = Path(__file__).resolve().parent
+DATA = ROOT / "data"
+OUT = ROOT / "dist" / "assets" / "nanchang"
+COUNTIES = DATA / "nanchang-counties-source.geojson"
 W = H = 1200
 MARGIN = 54
 
