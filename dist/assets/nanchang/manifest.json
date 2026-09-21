@@ -122,17 +122,7 @@
         403.7497823772088,
         475.4627157619384
       ]
-    },
-    {
-      "name": "南昌之星",
-      "coordinate": [
-        115.8458347,
-        28.6594029
-      ],
-      "canvas": [
-        380.0261304338934,
-        496.4868388711065
-      ]
     }
-  ]
+  ],
+  "publishedLandmarkPolicy": "one landmark for this independent city region; construction anchors are metadata only and are not rendered"
 }
