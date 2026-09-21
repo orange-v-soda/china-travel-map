@@ -1,8 +1,7 @@
 {
-  "projectOutline": "main / MAP_DATA region 360100 / balanced",
-  "warp": "main / JIANGXI_ART cells for city 360100",
-  "textFree": true,
-  "anchors": [
+  "outline": "main balanced region 360100",
+  "terrain": "DEM inverse-sampled after project normalization",
+  "countyAnchors": [
     {
       "adcode": 360102,
       "name": "东湖区",
@@ -114,25 +113,25 @@
   ],
   "landmarks": [
     {
-      "name": "Tengwang Pavilion",
+      "name": "滕王阁",
       "coordinate": [
-        115.885,
-        28.684
+        115.8756428,
+        28.6840374
       ],
       "canvas": [
-        411.19698484783004,
-        475.4946382495006
+        403.7497823772088,
+        475.4627157619384
       ]
     },
     {
-      "name": "Star of Nanchang",
+      "name": "南昌之星",
       "coordinate": [
-        115.8,
-        28.61
+        115.8458347,
+        28.6594029
       ],
       "canvas": [
-        343.5472381285733,
-        538.6344800166091
+        380.0261304338934,
+        496.4868388711065
       ]
     }
   ]
