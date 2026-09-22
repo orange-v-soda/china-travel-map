@@ -116,6 +116,15 @@ def main() -> int:
         fail(errors, "wetlands must default to land-dominant rendering")
     if rules.get("waterQaRequiredBeforePublish") is not True:
         fail(errors, "water QA must be required before publishing")
+    adjacent = rules.get("adjacentRegions", [])
+    if adjacent:
+        if rules.get("adjacentGenerationMode") != "joint-canvas-one-pass":
+            fail(errors, "adjacent regions must be generated once on a joint canvas")
+        if rules.get("sharedRasterRequired") is not True:
+            fail(errors, "adjacent regions must reference one shared raster")
+        joint_reference = artifacts.get("jointSemanticReference")
+        if not joint_reference or not (repo / joint_reference).is_file():
+            fail(errors, "jointSemanticReference must exist for adjacent generation")
 
     if errors:
         for error in errors:

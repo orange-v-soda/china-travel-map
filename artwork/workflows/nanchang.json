@@ -18,7 +18,8 @@
     "semanticSvg": "dist/assets/nanchang/nanchang-semantic.svg",
     "maskSvg": "dist/assets/nanchang/nanchang-mask.svg",
     "manifest": "dist/assets/nanchang/manifest.json",
-    "finalImage": "dist/assets/nanchang/nanchang-art-final.webp",
+    "finalImage": "dist/assets/joint-nanchang-jiujiang/joint-art-final.webp",
+    "jointSemanticReference": "dist/assets/joint-nanchang-jiujiang/joint-semantic.png",
     "tileManifest": "dist/jiangxi-city-tiles.json"
   },
   "independentAreas": [
@@ -51,6 +52,9 @@
     "landmarkMarkerMaxRadius": 7,
     "openWaterExpansionAllowed": false,
     "wetlandDefaultRendering": "land-dominant",
-    "waterQaRequiredBeforePublish": true
+    "waterQaRequiredBeforePublish": true,
+    "adjacentGenerationMode": "joint-canvas-one-pass",
+    "adjacentRegions": ["360400"],
+    "sharedRasterRequired": true
   }
 }
