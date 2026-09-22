@@ -56,6 +56,8 @@ def main() -> int:
     final_image = artifacts.get("finalImage", "")
     if Path(final_image).suffix.lower() not in {".png", ".webp"}:
         fail(errors, "finalImage must be PNG or WebP")
+    elif (repo / final_image).is_file() and (repo / final_image).stat().st_size > 600_000:
+        fail(errors, "finalImage exceeds the safe static-deployment upload size (600 KB)")
 
     limit = data.get("rules", {}).get("maxLandmarksPerIndependentArea")
     for area in data.get("independentAreas", []):
