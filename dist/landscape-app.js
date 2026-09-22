@@ -38,10 +38,10 @@ svg.querySelector('#geography').insertBefore(terrain,svg.querySelector('#regions
 const meshClips=[],cityClips=new Map(),tileDefs=el('g',{},defs);
 let cityTiles=[];
 for(const city of JIANGXI_ART.cities){const cp=el('clipPath',{id:`jiangxi-city-${city.id}`,clipPathUnits:'userSpaceOnUse'},defs);cityClips.set(city.id,el('path',{d:city[mode]},cp));}
-fetch('jiangxi-city-tiles.json').then(r=>{if(!r.ok)throw Error('tile manifest');return r.json();}).then(tiles=>{cityTiles=tiles;render();}).catch(()=>{});
+fetch('jiangxi-city-tiles.json',{cache:'no-store'}).then(r=>{if(!r.ok)throw Error('tile manifest');return r.json();}).then(tiles=>{cityTiles=tiles;render();}).catch(()=>{});
 JIANGXI_ART.cells.forEach((cell,i)=>{const cp=el('clipPath',{id:`jiangxi-cell-${i}`,clipPathUnits:'userSpaceOnUse'},defs);el('path',{d:cell.clip},cp);meshClips.push(cp);});
 const assetCache=new Map();
-function loadAsset(url){if(!assetCache.has(url))assetCache.set(url,fetch(url).then(r=>{if(!r.ok)throw Error(`Image ${r.status}`);return r.blob();}).then(blob=>new Promise((resolve,reject)=>{const reader=new FileReader();reader.onload=()=>resolve(reader.result);reader.onerror=reject;reader.readAsDataURL(blob);})).catch(e=>{assetCache.delete(url);throw e;}));return assetCache.get(url);}
+function loadAsset(url){if(!assetCache.has(url))assetCache.set(url,fetch(url,{cache:'no-store'}).then(r=>{if(!r.ok)throw Error(`Image ${r.status}`);return r.blob();}).then(blob=>new Promise((resolve,reject)=>{const reader=new FileReader();reader.onload=()=>resolve(reader.result);reader.onerror=reject;reader.readAsDataURL(blob);})).catch(e=>{assetCache.delete(url);throw e;}));return assetCache.get(url);}
 function render(){
  for(const r of MAP_DATA.regions){const v=r.variants[mode];regions.get(r.id).setAttribute('d',v.path);regions.get(r.id).setAttribute('fill',jiangxiIds.has(r.id)&&layer!=='none'?'transparent':'#fff');const t=labels.get(r.id);t.setAttribute('x',v.label[0]);t.setAttribute('y',v.label[1]);t.setAttribute('font-size',jiangxiIds.has(r.id)?15:21);}
  svg.querySelector('#outline').setAttribute('d',MAP_DATA.variants[mode].outline);clip.replaceChildren();
