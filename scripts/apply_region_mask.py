@@ -20,8 +20,11 @@ def main() -> None:
     image = Image.open(args.source).convert("RGBA").resize((1024, 1024), Image.Resampling.LANCZOS)
     mask = Image.open(args.mask).convert("L").resize((1024, 1024), Image.Resampling.NEAREST)
     mask_arr = np.asarray(mask) >= 128
-    kernel = args.guide_width * 2 + 1
-    inner = np.asarray(mask.filter(ImageFilter.MinFilter(kernel))) >= 128
+    if args.guide_width <= 0:
+        inner = mask_arr.copy()
+    else:
+        kernel = args.guide_width * 2 + 1
+        inner = np.asarray(mask.filter(ImageFilter.MinFilter(kernel))) >= 128
 
     rgba = np.asarray(image).copy()
     known = inner.copy()

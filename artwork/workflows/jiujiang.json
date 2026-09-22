@@ -18,8 +18,8 @@
     "semanticSvg": "dist/assets/jiujiang/jiujiang-semantic.svg",
     "maskSvg": "dist/assets/jiujiang/jiujiang-mask.svg",
     "manifest": "dist/assets/jiujiang/manifest.json",
-    "finalImage": "dist/assets/jiujiang/jiujiang-art-final.webp",
-    "neighborContext": "dist/assets/nanchang/nanchang-art-final.webp",
+    "finalImage": "dist/assets/jiujiang/jiujiang-art-final-v3.webp",
+    "neighborContext": "dist/assets/nanchang/nanchang-art-final-v3.webp",
     "tileManifest": "dist/jiangxi-city-tiles.json"
   },
   "independentAreas": [
