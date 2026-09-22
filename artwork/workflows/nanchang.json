@@ -18,7 +18,7 @@
     "semanticSvg": "dist/assets/nanchang/nanchang-semantic.svg",
     "maskSvg": "dist/assets/nanchang/nanchang-mask.svg",
     "manifest": "dist/assets/nanchang/manifest.json",
-    "finalImage": "dist/assets/nanchang/nanchang-art-final.webp",
+    "finalImage": "dist/assets/nanchang/nanchang-art-final-v2.webp",
     "tileManifest": "dist/jiangxi-city-tiles.json"
   },
   "independentAreas": [
