@@ -116,6 +116,10 @@ def main() -> int:
         fail(errors, "every non-blue semantic region must render as dry land")
     if rules.get("waterQaRequiredBeforePublish") is not True:
         fail(errors, "water QA must be required before publishing")
+    if rules.get("canvasCoordinateSource") != "tile-manifest-bounds":
+        fail(errors, "the 1024 canvas must be normalized from the page tile bounds")
+    if rules.get("guideOutlineRemovalRequired") is not True:
+        fail(errors, "the generated guide outline must be removed before publishing")
     if rules.get("adjacentGenerationMode") != "neighbor-collar-independent":
         fail(errors, "regions must use independent generation with an optional neighbor collar")
     adjacent = rules.get("adjacentRegions", [])
