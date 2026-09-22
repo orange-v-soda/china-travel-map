@@ -1,4 +1,4 @@
-"""Map real Nanchang geography into the project's accepted balanced outline.
+"""Map real Jiujiang geography into the project's accepted balanced outline.
 
 The project's existing per-triangle east->balanced warp is authoritative for
 the final silhouette. Real hydrology, DEM samples, and county-seat anchors are
@@ -25,17 +25,18 @@ if (HERE / "dist" / "jiangxi-art-data.js").exists():
     WORK = HERE
     DATA = WORK / "data"
     PROJECT = WORK / "dist"
-    COUNTIES = DATA / "nanchang-counties-source.geojson"
-    OUT = PROJECT / "assets" / "nanchang"
+    COUNTIES = DATA / "jiujiang-counties-source.geojson"
+    OUT = PROJECT / "assets" / "jiujiang"
 else:
     # Standalone workspace prototype.
     WORK = HERE.parents[1]
     DATA = WORK / "local-data"
     PROJECT = WORK / "project-main"
-    COUNTIES = WORK / "nanchang-counties.geojson"
+    COUNTIES = WORK / "jiujiang-counties.geojson"
     OUT = HERE
 SIZE = 1024
 MARGIN = 56
+OUT.mkdir(parents=True, exist_ok=True)
 
 
 def load_geojson(path: Path):
@@ -58,10 +59,10 @@ def path_geometry(path_text: str):
 
 
 art = load_js_json(PROJECT / "jiangxi-art-data.js")
-city_record = next(c for c in art["cities"] if c["id"] == "360100")
+city_record = next(c for c in art["cities"] if c["id"] == "360400")
 east_outline = path_geometry(city_record["east"])
 balanced = path_geometry(city_record["balanced"])
-cells = [c for c in art["cells"] if c["id"] == "360100"]
+cells = [c for c in art["cells"] if c["id"] == "360400"]
 cell_records = []
 for cell in cells:
     source = Polygon(cell["from"])
@@ -87,7 +88,7 @@ def geographic_to_east(lon, lat, z=None):
     return projection["dx"] + (x - projection["left"]) * projection["scale"], projection["dy"] + (y - projection["top"]) * projection["scale"]
 
 
-# First fit the complete real Nanchang extent into the project's schematic
+# First fit the complete real Jiujiang extent into the project's schematic
 # east-outline box. This retains county-seat relative positions while ensuring
 # every anchor lies inside the project's accepted city footprint.
 real_projected = transform(geographic_to_east, county_union)
@@ -225,7 +226,7 @@ for feature in county_fc["features"]:
     props = feature["properties"]
     lon, lat = props["center"]
     adcode = int(props["adcode"])
-    core = adcode in {360102, 360103, 360104, 360111, 360112, 360113}
+    core = adcode in {360402, 360403, 360404}
     point = list(canvas_xy(*warp_point(lon, lat)))
     (core_points if core else county_points).append(Point(*point))
     anchors.append({"adcode": adcode, "name": props["name"], "coordinate": [lon, lat], "canvas": point})
@@ -240,9 +241,9 @@ def organic_zone(points, radius, xscale=1.0, yscale=1.0, merge=0):
 
 
 all_points = core_points + county_points
-rural_zone = organic_zone(all_points, 68, 1.35, .74, 12)
-county_zone = organic_zone(county_points, 27, 1.25, .72, 3)
-metro_zone = organic_zone(core_points, 32, 1.25, .80, 16)
+rural_zone = organic_zone(all_points, 55, 1.25, .72, 9)
+county_zone = organic_zone(county_points, 21, 1.20, .70, 2)
+metro_zone = organic_zone(core_points, 27, 1.20, .76, 12)
 
 # Draw broad, low-density farmland first, then progressively darker urban areas.
 base.append(f'<path d="{area_path(rural_zone)}" fill="#ddcea0" opacity=".42" fill-rule="evenodd"/>')
@@ -265,8 +266,8 @@ def landmark_marker(lon, lat):
     </g>'''
 
 
-# One relatively independent map region keeps at most one landmark.
-base.append(landmark_marker(115.8756428, 28.6840374))
+# One relatively independent map region keeps at most one landmark: Mount Lu.
+base.append(landmark_marker(115.9667, 29.5450))
 
 outline = f'<path d="{clip_path}" fill="none" stroke="#4e675d" stroke-width="5" stroke-linejoin="round" fill-rule="evenodd"/>'
 
@@ -275,19 +276,19 @@ guide = f'''<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {SIZE} {SIZE}">
 <g clip-path="url(#clip)">{"".join(base)}</g>{outline}</svg>'''
 mask_svg = f'''<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {SIZE} {SIZE}"><rect width="{SIZE}" height="{SIZE}" fill="black"/><path d="{clip_path}" fill="white" fill-rule="evenodd"/></svg>'''
 
-(OUT / "nanchang-semantic.svg").write_text(guide)
-(OUT / "nanchang-mask.svg").write_text(mask_svg)
+(OUT / "jiujiang-semantic.svg").write_text(guide)
+(OUT / "jiujiang-mask.svg").write_text(mask_svg)
 (OUT / "manifest.json").write_text(json.dumps({
-    "projectOutline": "main / MAP_DATA region 360100 / balanced",
-    "warp": "main / JIANGXI_ART cells for city 360100",
+    "projectOutline": "main / MAP_DATA region 360400 / balanced",
+    "warp": "main / JIANGXI_ART cells for city 360400",
     "textFree": True,
     "anchors": anchors,
     "settlementSemantics": {
-        "regionalProfile": "south-china / Poyang Lake plain / Gan River basin",
-        "wilderness": {"visual": "untinted base", "generation": "woodland, wetland, or open terrain according to elevation and hydrology"},
-        "rural": {"visual": "light ochre farmland texture", "generation": "Jiangnan paddy fields, water-linked villages, compact farm plots"},
-        "countyTown": {"visual": "warm light-gray compact region", "generation": "compact southern county town with mostly gray-white built fabric, tiled roofs and river-oriented streets"},
-        "metropolitan": {"visual": "medium cool-gray continuous region", "generation": "dense gray-white Nanchang urban fabric concentrated along the Gan River; semantic gray does not prescribe roof color"},
+        "regionalProfile": "south bank of the Yangtze / northwest Poyang Lake / Mount Lu and western Jiujiang hills",
+        "wilderness": {"visual": "untinted base", "generation": "forested western hills, Mount Lu highland, lake wetlands, or open terrain according to elevation and hydrology"},
+        "rural": {"visual": "light ochre farmland texture", "generation": "Jiangnan paddy fields, lake-edge dikes, water-linked villages, and compact farm plots"},
+        "countyTown": {"visual": "warm light-gray compact region", "generation": "compact northern Jiangxi county town with gray-white fabric, tiled roofs, and river- or lake-oriented streets"},
+        "metropolitan": {"visual": "medium cool-gray continuous region", "generation": "dense gray-white Jiujiang urban fabric on the south bank of the Yangtze; semantic gray does not prescribe roof color"},
     },
     "waterSemantics": {
         "openWaterExpansionAllowed": False,
@@ -295,7 +296,7 @@ mask_svg = f'''<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {SIZE} {SIZE
         "generation": "Blue water shapes are the maximum open-water extent. Render adjacent wetlands primarily as fields, meadow, reed strips, dikes, bars, and tree belts; reject continuous marsh expansion.",
     },
     "landmarks": [
-        {"marker": "landmark-1", "name": "Tengwang Pavilion", "coordinate": [115.8756428, 28.6840374], "canvas": list(canvas_xy(*warp_point(115.8756428, 28.6840374))), "description": "Historic pavilion on the east bank of the Gan River; render as the single landmark for this independent region."},
+        {"marker": "landmark-1", "name": "Mount Lu", "coordinate": [115.9667, 29.5450], "canvas": list(canvas_xy(*warp_point(115.9667, 29.5450))), "description": "Mount Lu highland south of Jiujiang's urban core and west of Poyang Lake; render as the single emphasized natural landmark, integrated into the mountain mass rather than as a building."},
     ],
 }, ensure_ascii=False, indent=2) + "\n")
 print({"cells": len(cells), "anchors": len(anchors), "outlineBounds": balanced.bounds})

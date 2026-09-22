@@ -1,10 +1,10 @@
 {
   "schemaVersion": 1,
   "region": {
-    "id": "360100",
-    "name": "南昌",
+    "id": "360400",
+    "name": "九江",
     "layout": "balanced",
-    "outlineSource": "dist/jiangxi-art-data.js / JIANGXI_ART.cities[360100].balanced"
+    "outlineSource": "dist/jiangxi-art-data.js / JIANGXI_ART.cities[360400].balanced"
   },
   "stages": [
     "lock-project-outline",
@@ -15,27 +15,27 @@
     "publish-raster-only"
   ],
   "artifacts": {
-    "semanticSvg": "dist/assets/nanchang/nanchang-semantic.svg",
-    "maskSvg": "dist/assets/nanchang/nanchang-mask.svg",
-    "manifest": "dist/assets/nanchang/manifest.json",
-    "finalImage": "dist/assets/nanchang/nanchang-art-final.webp",
+    "semanticSvg": "dist/assets/jiujiang/jiujiang-semantic.svg",
+    "maskSvg": "dist/assets/jiujiang/jiujiang-mask.svg",
+    "manifest": "dist/assets/jiujiang/manifest.json",
+    "finalImage": "dist/assets/jiujiang/jiujiang-art-final.webp",
     "tileManifest": "dist/jiangxi-city-tiles.json"
   },
   "independentAreas": [
     {
-      "id": "nanchang-city-region",
+      "id": "jiujiang-city-region",
       "landmarks": [
         {
-          "name": "滕王阁",
-          "coordinate": [115.8756428, 28.6840374],
-          "placementRule": "主赣江东岸，位于城市肌理内",
-          "description": "历史楼阁；作为该独立区域唯一地标，由 SVG 高对比标点定位，名称与形态通过文本提示传递给图像模型"
+          "name": "庐山",
+          "coordinate": [115.9667, 29.545],
+          "placementRule": "九江城区以南、鄱阳湖以西，融入既有山体",
+          "description": "作为该区域唯一强调地标，以连续山体和峰岭表达，不生成额外楼阁、牌坊或标点"
         }
       ]
     }
   ],
   "forbiddenPublicArtifacts": [
-    "dist/assets/nanchang/nanchang-overlay.svg"
+    "dist/assets/jiujiang/jiujiang-overlay.svg"
   ],
   "rules": {
     "semanticSvgPrecedesGeneration": true,
