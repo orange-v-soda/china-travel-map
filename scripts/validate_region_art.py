@@ -110,6 +110,12 @@ def main() -> int:
     marker_radius = rules.get("landmarkMarkerMaxRadius")
     if not isinstance(marker_radius, (int, float)) or marker_radius > 7:
         fail(errors, "landmark markers must use a maximum radius of 7")
+    if rules.get("openWaterExpansionAllowed") is not False:
+        fail(errors, "open water expansion beyond semantic water shapes must be forbidden")
+    if rules.get("wetlandDefaultRendering") != "land-dominant":
+        fail(errors, "wetlands must default to land-dominant rendering")
+    if rules.get("waterQaRequiredBeforePublish") is not True:
+        fail(errors, "water QA must be required before publishing")
 
     if errors:
         for error in errors:

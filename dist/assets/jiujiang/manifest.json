@@ -1,0 +1,202 @@
+{
+  "projectOutline": "main / MAP_DATA region 360400 / balanced",
+  "warp": "main / JIANGXI_ART cells for city 360400",
+  "textFree": true,
+  "anchors": [
+    {
+      "adcode": 360402,
+      "name": "濂溪区",
+      "coordinate": [
+        115.99012,
+        29.676175
+      ],
+      "canvas": [
+        676.7570632867727,
+        416.7342983456042
+      ]
+    },
+    {
+      "adcode": 360403,
+      "name": "浔阳区",
+      "coordinate": [
+        115.995947,
+        29.72465
+      ],
+      "canvas": [
+        677.2489429514593,
+        403.1687745915283
+      ]
+    },
+    {
+      "adcode": 360404,
+      "name": "柴桑区",
+      "coordinate": [
+        115.892977,
+        29.610264
+      ],
+      "canvas": [
+        648.3057524507877,
+        435.9843129551748
+      ]
+    },
+    {
+      "adcode": 360423,
+      "name": "武宁县",
+      "coordinate": [
+        115.105646,
+        29.260182
+      ],
+      "canvas": [
+        411.1086104899263,
+        539.4120167020271
+      ]
+    },
+    {
+      "adcode": 360424,
+      "name": "修水县",
+      "coordinate": [
+        114.573428,
+        29.032729
+      ],
+      "canvas": [
+        252.26918935101895,
+        610.7205144667946
+      ]
+    },
+    {
+      "adcode": 360425,
+      "name": "永修县",
+      "coordinate": [
+        115.809055,
+        29.018212
+      ],
+      "canvas": [
+        647.0422233766795,
+        607.1663635779096
+      ]
+    },
+    {
+      "adcode": 360426,
+      "name": "德安县",
+      "coordinate": [
+        115.762611,
+        29.327474
+      ],
+      "canvas": [
+        622.4443141455986,
+        520.7309743679122
+      ]
+    },
+    {
+      "adcode": 360428,
+      "name": "都昌县",
+      "coordinate": [
+        116.205114,
+        29.275105
+      ],
+      "canvas": [
+        767.7204040807014,
+        535.3858939523627
+      ]
+    },
+    {
+      "adcode": 360429,
+      "name": "湖口县",
+      "coordinate": [
+        116.244313,
+        29.7263
+      ],
+      "canvas": [
+        762.1378504371592,
+        405.7742982793892
+      ]
+    },
+    {
+      "adcode": 360430,
+      "name": "彭泽县",
+      "coordinate": [
+        116.55584,
+        29.898865
+      ],
+      "canvas": [
+        856.8203947198482,
+        356.45089265891323
+      ]
+    },
+    {
+      "adcode": 360481,
+      "name": "瑞昌市",
+      "coordinate": [
+        115.669081,
+        29.676599
+      ],
+      "canvas": [
+        576.6097718027933,
+        419.43122046475935
+      ]
+    },
+    {
+      "adcode": 360482,
+      "name": "共青城市",
+      "coordinate": [
+        115.805712,
+        29.247884
+      ],
+      "canvas": [
+        638.8900245724989,
+        543.0004409593652
+      ]
+    },
+    {
+      "adcode": 360483,
+      "name": "庐山市",
+      "coordinate": [
+        116.043743,
+        29.456169
+      ],
+      "canvas": [
+        709.7461326849556,
+        484.68499911680414
+      ]
+    }
+  ],
+  "settlementSemantics": {
+    "regionalProfile": "south bank of the Yangtze / northwest Poyang Lake / Mount Lu and western Jiujiang hills",
+    "wilderness": {
+      "visual": "untinted base",
+      "generation": "forested western hills, Mount Lu highland, lake wetlands, or open terrain according to elevation and hydrology"
+    },
+    "rural": {
+      "visual": "light ochre farmland texture",
+      "generation": "Jiangnan paddy fields, lake-edge dikes, water-linked villages, and compact farm plots"
+    },
+    "countyTown": {
+      "visual": "warm light-gray compact region",
+      "generation": "compact northern Jiangxi county town with gray-white fabric, tiled roofs, and river- or lake-oriented streets"
+    },
+    "metropolitan": {
+      "visual": "medium cool-gray continuous region",
+      "generation": "dense gray-white Jiujiang urban fabric on the south bank of the Yangtze; semantic gray does not prescribe roof color"
+    }
+  },
+  "waterSemantics": {
+    "openWaterExpansionAllowed": false,
+    "wetlandDefaultRendering": "land-dominant",
+    "generation": "Blue water shapes are the maximum open-water extent. Render adjacent wetlands primarily as fields, meadow, reed strips, dikes, bars, and tree belts; reject continuous marsh expansion."
+  },
+  "landmarks": [
+    {
+      "marker": "landmark-1",
+      "name": "Mount Lu",
+      "coordinate": [
+        115.9667,
+        29.545
+      ],
+      "canvas": [
+        680.1982187921323,
+        458.5077136820807
+      ],
+      "description": "Mount Lu highland south of Jiujiang's urban core and west of Poyang Lake; render as the single emphasized natural landmark, integrated into the mountain mass rather than as a building."
+    }
+  ]
+}
