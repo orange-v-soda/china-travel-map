@@ -112,19 +112,22 @@ def main() -> int:
         fail(errors, "landmark markers must use a maximum radius of 7")
     if rules.get("openWaterExpansionAllowed") is not False:
         fail(errors, "open water expansion beyond semantic water shapes must be forbidden")
-    if rules.get("wetlandDefaultRendering") != "land-dominant":
-        fail(errors, "wetlands must default to land-dominant rendering")
+    if rules.get("wetlandDefaultRendering") != "non-water-is-dry-land":
+        fail(errors, "every non-blue semantic region must render as dry land")
     if rules.get("waterQaRequiredBeforePublish") is not True:
         fail(errors, "water QA must be required before publishing")
+    if rules.get("adjacentGenerationMode") != "neighbor-collar-independent":
+        fail(errors, "regions must use independent generation with an optional neighbor collar")
     adjacent = rules.get("adjacentRegions", [])
     if adjacent:
-        if rules.get("adjacentGenerationMode") != "joint-canvas-one-pass":
-            fail(errors, "adjacent regions must be generated once on a joint canvas")
-        if rules.get("sharedRasterRequired") is not True:
-            fail(errors, "adjacent regions must reference one shared raster")
-        joint_reference = artifacts.get("jointSemanticReference")
-        if not joint_reference or not (repo / joint_reference).is_file():
-            fail(errors, "jointSemanticReference must exist for adjacent generation")
+        context = artifacts.get("neighborContext")
+        if not context or not (repo / context).is_file():
+            fail(errors, "neighborContext must exist when adjacentRegions are declared")
+        fraction = rules.get("neighborContextMaximumFraction")
+        if not isinstance(fraction, (int, float)) or fraction > .25:
+            fail(errors, "neighbor context may occupy at most one quarter of the reference")
+        if rules.get("independentRasterRequired") is not True:
+            fail(errors, "each region must publish an independent raster")
 
     if errors:
         for error in errors:
