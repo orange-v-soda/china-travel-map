@@ -18,8 +18,8 @@
     "semanticSvg": "dist/assets/jiujiang/jiujiang-semantic.svg",
     "maskSvg": "dist/assets/jiujiang/jiujiang-mask.svg",
     "manifest": "dist/assets/jiujiang/manifest.json",
-    "finalImage": "dist/assets/joint-nanchang-jiujiang/joint-art-final.webp",
-    "jointSemanticReference": "dist/assets/joint-nanchang-jiujiang/joint-semantic.png",
+    "finalImage": "dist/assets/jiujiang/jiujiang-art-final.webp",
+    "neighborContext": "dist/assets/nanchang/nanchang-art-final.webp",
     "tileManifest": "dist/jiangxi-city-tiles.json"
   },
   "independentAreas": [
@@ -51,10 +51,11 @@
     "urbanPalette": "neutral-gray-density",
     "landmarkMarkerMaxRadius": 7,
     "openWaterExpansionAllowed": false,
-    "wetlandDefaultRendering": "land-dominant",
+    "wetlandDefaultRendering": "non-water-is-dry-land",
     "waterQaRequiredBeforePublish": true,
-    "adjacentGenerationMode": "joint-canvas-one-pass",
+    "adjacentGenerationMode": "neighbor-collar-independent",
     "adjacentRegions": ["360100"],
-    "sharedRasterRequired": true
+    "neighborContextMaximumFraction": 0.25,
+    "independentRasterRequired": true
   }
 }
