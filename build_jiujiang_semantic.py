@@ -35,7 +35,6 @@ else:
     COUNTIES = WORK / "jiujiang-counties.geojson"
     OUT = HERE
 SIZE = 1024
-MARGIN = 56
 OUT.mkdir(parents=True, exist_ok=True)
 
 
@@ -119,16 +118,19 @@ def warp_point(lon, lat):
     return a * x + b * y + xoff, d * x + e * y + yoff
 
 
-minx, miny, maxx, maxy = balanced.bounds
-scale = min((SIZE - 2 * MARGIN) / (maxx - minx), (SIZE - 2 * MARGIN) / (maxy - miny))
-offset_x = (SIZE - (maxx - minx) * scale) / 2
-offset_y = (SIZE - (maxy - miny) * scale) / 2
+# Use the exact bitmap placement rectangle consumed by the web page.  This
+# keeps the semantic SVG, mask, generated raster and browser clip in one
+# coordinate system, including the page's intentional padding.
+tile_records = json.loads((PROJECT / "jiangxi-city-tiles.json").read_text())
+tile_record = next(t for t in tile_records if t["id"] == "360400" and t["layout"] == "balanced")
+tile_x0, tile_y0, tile_width, tile_height = tile_record["bounds"]
 
 
 def canvas_xy(x, y, z=None):
     if hasattr(x, "__iter__"):
-        return [offset_x + (float(px) - minx) * scale for px in x], [offset_y + (float(py) - miny) * scale for py in y]
-    return offset_x + (x - minx) * scale, offset_y + (y - miny) * scale
+        return ([(float(px) - tile_x0) / tile_width * SIZE for px in x],
+                [(float(py) - tile_y0) / tile_height * SIZE for py in y])
+    return (x - tile_x0) / tile_width * SIZE, (y - tile_y0) / tile_height * SIZE
 
 
 def canvas_geometry(geom):

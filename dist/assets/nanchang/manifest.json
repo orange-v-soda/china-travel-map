@@ -11,8 +11,8 @@
         28.682988
       ],
       "canvas": [
-        414.9177209173781,
-        476.35841887896373
+        424.7962686135046,
+        479.9851060807536
       ]
     },
     {
@@ -23,8 +23,8 @@
         28.662901
       ],
       "canvas": [
-        431.61129076957656,
-        493.5017136162599
+        439.7911945158302,
+        495.3839953886407
       ]
     },
     {
@@ -35,8 +35,8 @@
         28.635724
       ],
       "canvas": [
-        428.9387278344628,
-        516.6907561985322
+        437.3905765811315,
+        516.2134511818397
       ]
     },
     {
@@ -47,8 +47,8 @@
         28.689292
       ],
       "canvas": [
-        466.26745532759236,
-        468.1644708215713
+        470.92094232934613,
+        472.62492817656954
       ]
     },
     {
@@ -59,8 +59,8 @@
         28.690788
       ],
       "canvas": [
-        360.10630436670067,
-        469.70060535007394
+        375.56215409780833,
+        474.0047542793649
       ]
     },
     {
@@ -71,8 +71,8 @@
         28.69819928
       ],
       "canvas": [
-        389.7497070876336,
-        463.3741303520672
+        402.1892105769622,
+        468.3220258601027
       ]
     },
     {
@@ -83,8 +83,8 @@
         28.543781
       ],
       "canvas": [
-        456.9321930268807,
-        595.097550812731
+        462.5355839118648,
+        586.6420105545938
       ]
     },
     {
@@ -95,8 +95,8 @@
         28.841334
       ],
       "canvas": [
-        147.05178380788152,
-        341.1022654174311
+        184.1868654555006,
+        358.49185946267517
       ]
     },
     {
@@ -107,8 +107,8 @@
         28.365681
       ],
       "canvas": [
-        719.0167114532253,
-        744.5456029740344
+        697.951853094827,
+        720.8830679345714
       ]
     }
   ],
@@ -131,6 +131,11 @@
       "generation": "dense gray-white Nanchang urban fabric concentrated along the Gan River; semantic gray does not prescribe roof color"
     }
   },
+  "waterSemantics": {
+    "openWaterExpansionAllowed": false,
+    "wetlandDefaultRendering": "land-dominant",
+    "generation": "Blue water shapes are the maximum open-water extent. Render adjacent wetlands primarily as fields, meadow, reed strips, dikes, bars, and tree belts; reject continuous marsh expansion."
+  },
   "landmarks": [
     {
       "marker": "landmark-1",
@@ -140,8 +145,8 @@
         28.6840374
       ],
       "canvas": [
-        403.7497823772088,
-        475.4627157619384
+        414.7647168019841,
+        479.18054468440806
       ],
       "description": "Historic pavilion on the east bank of the Gan River; render as the single landmark for this independent region."
     }

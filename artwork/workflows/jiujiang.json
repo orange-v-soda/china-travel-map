@@ -53,6 +53,8 @@
     "openWaterExpansionAllowed": false,
     "wetlandDefaultRendering": "non-water-is-dry-land",
     "waterQaRequiredBeforePublish": true,
+    "canvasCoordinateSource": "tile-manifest-bounds",
+    "guideOutlineRemovalRequired": true,
     "adjacentGenerationMode": "neighbor-collar-independent",
     "adjacentRegions": ["360100"],
     "neighborContextMaximumFraction": 0.25,
