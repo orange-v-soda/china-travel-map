@@ -180,6 +180,8 @@
     }
   },
   "waterSemantics": {
+    "topology": "unified-lake-and-river-surface",
+    "riverStrokeInsideLakeAllowed": false,
     "openWaterExpansionAllowed": false,
     "wetlandDefaultRendering": "land-dominant",
     "generation": "Blue water shapes are the maximum open-water extent. Render adjacent wetlands primarily as fields, meadow, reed strips, dikes, bars, and tree belts; reject continuous marsh expansion."
@@ -198,5 +200,22 @@
       ],
       "description": "Mount Lu highland south of Jiujiang's urban core and west of Poyang Lake; render as the single emphasized natural landmark, integrated into the mountain mass rather than as a building."
     }
-  ]
+  ],
+  "generationViewport": {
+    "coordinateSystem": "balanced-page-space",
+    "bounds": [
+      146.070503105,
+      70.854843255,
+      350.0,
+      350.0
+    ],
+    "rasterSize": [
+      4096,
+      4096
+    ],
+    "globalPixelsPerPageUnit": 11.702857142857143,
+    "localPixelsPerPageUnit": 11.702857142857143,
+    "semanticScale": 1.0,
+    "neighborContext": "360100 / accepted Nanchang v5 artwork"
+  }
 }

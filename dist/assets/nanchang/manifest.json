@@ -132,6 +132,8 @@
     }
   },
   "waterSemantics": {
+    "topology": "unified-lake-and-river-surface",
+    "riverStrokeInsideLakeAllowed": false,
     "openWaterExpansionAllowed": false,
     "wetlandDefaultRendering": "land-dominant",
     "generation": "Blue water shapes are the maximum open-water extent. Render adjacent wetlands primarily as fields, meadow, reed strips, dikes, bars, and tree belts; reject continuous marsh expansion."
@@ -150,5 +152,23 @@
       ],
       "description": "Historic pavilion on the east bank of the Gan River; render as the single landmark for this independent region."
     }
-  ]
+  ],
+  "generationViewport": {
+    "coordinateSystem": "balanced-page-space",
+    "bounds": [
+      293.453153465,
+      232.265967415,
+      175.0,
+      175.0
+    ],
+    "rasterSize": [
+      2048,
+      2048
+    ],
+    "pixelsPerPageUnit": [
+      11.702857142857143,
+      11.702857142857143
+    ],
+    "neighborContext": "360400 / semantic SVG context"
+  }
 }

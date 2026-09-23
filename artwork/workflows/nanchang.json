@@ -1,5 +1,5 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "region": {
     "id": "360100",
     "name": "南昌",
@@ -10,15 +10,19 @@
     "lock-project-outline",
     "map-real-geography",
     "draw-semantic-svg",
+    "build-global-scale-context",
     "generate-raster-from-svg",
-    "apply-exact-mask-and-clean",
+    "apply-final-safety-clip-and-clean",
     "publish-raster-only"
   ],
   "artifacts": {
     "semanticSvg": "dist/assets/nanchang/nanchang-semantic.svg",
+    "jointSemanticSvg": "dist/assets/joint-nanchang-jiujiang/nanchang-jiujiang-joint-semantic-v7.svg",
+    "generationInput": "artwork/generation-inputs/nanchang/nanchang-joint-input.png",
+    "candidateImage": "dist/assets/nanchang/nanchang-art-final-v5.webp",
     "maskSvg": "dist/assets/nanchang/nanchang-mask.svg",
     "manifest": "dist/assets/nanchang/manifest.json",
-    "finalImage": "dist/assets/nanchang/nanchang-art-final-v3.webp",
+    "finalImage": "dist/assets/nanchang/nanchang-art-final-v5.webp",
     "tileManifest": "dist/jiangxi-city-tiles.json"
   },
   "independentAreas": [
@@ -52,8 +56,22 @@
     "openWaterExpansionAllowed": false,
     "wetlandDefaultRendering": "non-water-is-dry-land",
     "waterQaRequiredBeforePublish": true,
+    "hydrologyTopology": "unified-water-surface",
+    "riverStrokeInsideLakeAllowed": false,
+    "modelVisibleAdministrativeOutline": false,
+    "generationMaskRole": "final-safety-clip-only",
+    "targetGenerationMode": "fresh-from-semantic",
+    "globalScaleBaseline": {
+      "region": "360100",
+      "rasterSize": [2048, 2048],
+      "pageBounds": [293.453153465, 232.265967415, 175.0, 175.0],
+      "pixelsPerPageUnit": 11.702857142857143
+    },
     "canvasCoordinateSource": "tile-manifest-bounds",
     "guideOutlineRemovalRequired": true,
     "adjacentGenerationMode": "neighbor-collar-independent"
+    ,
+    "semanticDrawingMode": "crop-from-incremental-joint-master",
+    "jointSemanticState": "artwork/semantic-joint-state.json"
   }
 }

@@ -15,10 +15,11 @@ def main() -> None:
     parser.add_argument("mask", type=Path)
     parser.add_argument("output", type=Path)
     parser.add_argument("--guide-width", type=int, default=7)
+    parser.add_argument("--size", type=int, default=1024)
     args = parser.parse_args()
 
-    image = Image.open(args.source).convert("RGBA").resize((1024, 1024), Image.Resampling.LANCZOS)
-    mask = Image.open(args.mask).convert("L").resize((1024, 1024), Image.Resampling.NEAREST)
+    image = Image.open(args.source).convert("RGBA").resize((args.size, args.size), Image.Resampling.LANCZOS)
+    mask = Image.open(args.mask).convert("L").resize((args.size, args.size), Image.Resampling.NEAREST)
     mask_arr = np.asarray(mask) >= 128
     if args.guide_width <= 0:
         inner = mask_arr.copy()
