@@ -209,5 +209,17 @@
     ],
     "windowCount": 4,
     "pixelsPerPageUnit": 11.702857142857143
+  },
+  "generationProvenance": {
+    "version": "v2",
+    "mode": "imagegen-edit-from-semantic",
+    "semanticSource": "dist/assets/shangrao/shangrao-semantic.svg",
+    "styleReferences": [
+      "dist/assets/nanchang/nanchang-art-final-v6.webp",
+      "dist/assets/jiujiang/jiujiang-art-final-v7.webp",
+      "dist/assets/fuzhou/fuzhou-art-final-v1.webp"
+    ],
+    "prompt": "artwork/prompts/shangrao-canonical-v2.md",
+    "finalSha256": "8fe273d31774cffdd55e2808bf3965a6b723d5e7b6aed6a0ac2600e77ffa3c98"
   }
 }

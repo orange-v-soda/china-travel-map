@@ -25,8 +25,8 @@
       "worldBounds": [
         402.8156056,
         207.47860546,
-        175.0,
-        175.0
+        175,
+        175
       ],
       "canvasPixels": [
         2048,
@@ -46,8 +46,8 @@
       "worldBounds": [
         444.79016081,
         207.47860546,
-        175.0,
-        175.0
+        175,
+        175
       ],
       "canvasPixels": [
         2048,
@@ -67,8 +67,8 @@
       "worldBounds": [
         402.8156056,
         243.44506174000003,
-        175.0,
-        175.0
+        175,
+        175
       ],
       "canvasPixels": [
         2048,
@@ -88,8 +88,8 @@
       "worldBounds": [
         444.79016081,
         243.44506174000003,
-        175.0,
-        175.0
+        175,
+        175
       ],
       "canvasPixels": [
         2048,
@@ -114,5 +114,11 @@
     }
   ],
   "acceptedWindows": [],
-  "publishRule": "composite in balanced page coordinates; crop to canonicalPathBounds; never stretch"
+  "publishRule": "composite in balanced page coordinates; crop to canonicalPathBounds; never stretch",
+  "acceptedCanonical": {
+    "version": "v2",
+    "image": "dist/assets/shangrao/shangrao-art-final-v2.webp",
+    "mode": "imagegen-edit-from-semantic",
+    "sha256": "8fe273d31774cffdd55e2808bf3965a6b723d5e7b6aed6a0ac2600e77ffa3c98"
+  }
 }
