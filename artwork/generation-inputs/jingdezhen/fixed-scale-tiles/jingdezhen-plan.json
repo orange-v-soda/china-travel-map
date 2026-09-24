@@ -1,0 +1,63 @@
+{
+  "schemaVersion": 1,
+  "region": "360200",
+  "layout": "balanced",
+  "canonicalPath": "M465.35924429,222.47860546 L472.20374798,215.63410177 L472.20374798,194.61061724 L485.52712577,194.61061724 L504.88161135,194.61061724 L538.96799805,228.69700394 L518.06053762,249.60446437 L518.06053762,309.77860858 L465.35924429,309.77860858 L465.35924429,222.47860546 Z",
+  "canonicalPathBounds": [
+    465.35924429,
+    194.61061724,
+    73.60875376000001,
+    115.16799134000001
+  ],
+  "fixedScaleConfig": "artwork/fixed-scale-generation.json",
+  "windowCount": 1,
+  "generationOrder": [
+    1
+  ],
+  "windows": [
+    {
+      "index": 1,
+      "row": 0,
+      "column": 0,
+      "worldBounds": [
+        414.66362117,
+        164.69461291,
+        175,
+        175
+      ],
+      "canvasPixels": [
+        2048,
+        2048
+      ],
+      "pixelsPerPageUnit": 11.702857142857143,
+      "context": "artwork/generation-inputs/jingdezhen/fixed-scale-tiles/jingdezhen-01-context.png",
+      "visibleMask": "artwork/generation-inputs/jingdezhen/fixed-scale-tiles/jingdezhen-01-mask.png",
+      "editMask": "artwork/generation-inputs/jingdezhen/fixed-scale-tiles/jingdezhen-01-edit-mask.png",
+      "lockedAcceptedRegions": [],
+      "postGenerationRule": "restore every black-mask pixel from context before compositing"
+    }
+  ],
+  "neighborArt": [
+    {
+      "region": "360400",
+      "image": "dist/assets/jiujiang/jiujiang-art-final-v7.webp"
+    },
+    {
+      "region": "361100",
+      "image": "dist/assets/shangrao/shangrao-art-final-v2.webp"
+    }
+  ],
+  "acceptedWindows": [
+    {
+      "index": 1,
+      "image": "artwork/generated/jingdezhen/jingdezhen-fixed-scale-window-01-v1-restored.png"
+    }
+  ],
+  "acceptedCanonical": {
+    "version": "v1",
+    "image": "dist/assets/jingdezhen/jingdezhen-art-final-v1.webp",
+    "mode": "imagegen-edit-from-semantic",
+    "sha256": "51b62a224b908fe0176ad68550dd6b010e40f1fd3d434503872f41619d0d865a"
+  },
+  "publishRule": "composite in balanced page coordinates; crop to canonicalPathBounds; never stretch"
+}

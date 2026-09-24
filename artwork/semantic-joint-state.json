@@ -1,13 +1,24 @@
 {
   "schemaVersion": 1,
   "coordinateSystem": "balanced-page-space",
-  "masterSvg": "dist/assets/joint-nanchang-jiujiang-fuzhou-shangrao/nanchang-jiujiang-fuzhou-shangrao-joint-semantic-v9.svg",
+  "masterSvg": "dist/assets/joint-nanchang-jiujiang-fuzhou-shangrao-jingdezhen/nanchang-jiujiang-fuzhou-shangrao-jingdezhen-joint-semantic-v10.svg",
   "renderScale": 8,
-  "acceptedOrder": ["360100", "360400", "361000", "361100"],
+  "acceptedOrder": [
+    "360100",
+    "360400",
+    "361000",
+    "361100",
+    "360200"
+  ],
   "regions": {
     "360100": {
       "name": "南昌",
       "semanticSvg": "dist/assets/nanchang/nanchang-semantic.svg",
+      "status": "accepted-interior"
+    },
+    "360200": {
+      "name": "景德镇",
+      "semanticSvg": "dist/assets/jingdezhen/jingdezhen-semantic.svg",
       "status": "accepted-interior"
     },
     "360400": {
@@ -28,7 +39,10 @@
   },
   "joins": [
     {
-      "regions": ["360100", "360400"],
+      "regions": [
+        "360100",
+        "360400"
+      ],
       "collarWidthPageUnits": 14,
       "ownershipWidthPageUnits": 3.2,
       "featureClosingPageUnits": {
@@ -46,18 +60,46 @@
         "river": 0.8
       },
       "sharedWater": [
-        [[388.8, 272.6], [391.8, 269.0], [395.6, 264.5], [400.1, 260.0], [417.816, 260.0], [417.816, 272.6]]
+        [
+          [
+            388.8,
+            272.6
+          ],
+          [
+            391.8,
+            269
+          ],
+          [
+            395.6,
+            264.5
+          ],
+          [
+            400.1,
+            260
+          ],
+          [
+            417.816,
+            260
+          ],
+          [
+            417.816,
+            272.6
+          ]
+        ]
       ]
     },
     {
-      "regions": ["360100", "361000"],
+      "regions": [
+        "360100",
+        "361000"
+      ],
       "collarWidthPageUnits": 14,
       "ownershipWidthPageUnits": 3.2,
       "featureClosingPageUnits": {
         "rural": 2.4,
         "county": 1.4,
         "metro": 1.2,
-        "water": 1.0,
+        "water": 1,
         "river": 0.7
       },
       "boundaryContinuationPageUnits": {
@@ -70,19 +112,95 @@
       "sharedWater": []
     },
     {
-      "regions": ["360400", "361100"],
+      "regions": [
+        "360400",
+        "361100"
+      ],
       "collarWidthPageUnits": 14,
       "ownershipWidthPageUnits": 3.2,
-      "featureClosingPageUnits": {"rural": 2.4, "county": 1.4, "metro": 1.2, "water": 1.0, "river": 0.7},
-      "boundaryContinuationPageUnits": {"rural": 5.5, "county": 2.2, "metro": 2.8, "water": 0.8, "river": 0.8},
+      "featureClosingPageUnits": {
+        "rural": 2.4,
+        "county": 1.4,
+        "metro": 1.2,
+        "water": 1,
+        "river": 0.7
+      },
+      "boundaryContinuationPageUnits": {
+        "rural": 5.5,
+        "county": 2.2,
+        "metro": 2.8,
+        "water": 0.8,
+        "river": 0.8
+      },
       "sharedWater": []
     },
     {
-      "regions": ["361000", "361100"],
+      "regions": [
+        "361000",
+        "361100"
+      ],
       "collarWidthPageUnits": 14,
       "ownershipWidthPageUnits": 3.2,
-      "featureClosingPageUnits": {"rural": 2.4, "county": 1.4, "metro": 1.2, "water": 1.0, "river": 0.7},
-      "boundaryContinuationPageUnits": {"rural": 5.5, "county": 2.2, "metro": 2.8, "water": 0.8, "river": 0.8},
+      "featureClosingPageUnits": {
+        "rural": 2.4,
+        "county": 1.4,
+        "metro": 1.2,
+        "water": 1,
+        "river": 0.7
+      },
+      "boundaryContinuationPageUnits": {
+        "rural": 5.5,
+        "county": 2.2,
+        "metro": 2.8,
+        "water": 0.8,
+        "river": 0.8
+      },
+      "sharedWater": []
+    },
+    {
+      "regions": [
+        "360400",
+        "360200"
+      ],
+      "collarWidthPageUnits": 14,
+      "ownershipWidthPageUnits": 3.2,
+      "featureClosingPageUnits": {
+        "rural": 2.4,
+        "county": 1.4,
+        "metro": 1.2,
+        "water": 1,
+        "river": 0.7
+      },
+      "boundaryContinuationPageUnits": {
+        "rural": 5.5,
+        "county": 2.2,
+        "metro": 2.8,
+        "water": 0.8,
+        "river": 0.8
+      },
+      "sharedWater": []
+    },
+    {
+      "regions": [
+        "361100",
+        "360200"
+      ],
+      "collarWidthPageUnits": 14,
+      "ownershipWidthPageUnits": 3.2,
+      "featureClosingPageUnits": {
+        "rural": 2.4,
+        "county": 1.4,
+        "metro": 1.2,
+        "water": 1,
+        "river": 0.7
+      },
+      "boundaryContinuationPageUnits": {
+        "rural": 5.5,
+        "county": 2.2,
+        "metro": 2.8,
+        "water": 0.8,
+        "river": 0.8
+      },
       "sharedWater": []
     }
   ],

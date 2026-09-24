@@ -3,14 +3,15 @@
   "coordinateSystem": "balanced-page-space",
   "fixedScaleConfig": "artwork/fixed-scale-generation.json",
   "jointSemantic": {
-    "path": "dist/assets/joint-nanchang-jiujiang-fuzhou-shangrao/nanchang-jiujiang-fuzhou-shangrao-joint-semantic-v9.svg",
-    "sha256": "450e4f1075df4f02248c356e63d764c0ac21b0a1f92bf0b2fa19d9a17c4cb6bb"
+    "path": "dist/assets/joint-nanchang-jiujiang-fuzhou-shangrao-jingdezhen/nanchang-jiujiang-fuzhou-shangrao-jingdezhen-joint-semantic-v10.svg",
+    "sha256": "e8b9dcd01256b4fbfd3db111c2a265d13138beb25dafc92db830b22f8da2fbef"
   },
   "acceptedOrder": [
     "360100",
     "360400",
     "361000",
-    "361100"
+    "361100",
+    "360200"
   ],
   "regions": {
     "360100": {
@@ -24,6 +25,21 @@
       ],
       "finalImage": "dist/assets/nanchang/nanchang-art-final-v6.webp",
       "finalSha256": "c134bf5dca6053e7d39ed4a8c6535585fb14327b366fef4a482435267a2154aa"
+    },
+    "360200": {
+      "name": "景德镇",
+      "version": "v1",
+      "plan": "artwork/generation-inputs/jingdezhen/fixed-scale-tiles/jingdezhen-plan.json",
+      "planSha256": "8dae274649d75211cb3fa919d404b8e88f44324b8c19df1542a900a94de8bc96",
+      "promptFiles": [
+        "artwork/prompts/base.md",
+        "artwork/prompts/jingdezhen.md",
+        "artwork/prompts/jingdezhen-canonical-v1.md"
+      ],
+      "finalImage": "dist/assets/jingdezhen/jingdezhen-art-final-v1.webp",
+      "finalSha256": "51b62a224b908fe0176ad68550dd6b010e40f1fd3d434503872f41619d0d865a",
+      "generationMode": "imagegen-edit-from-semantic",
+      "sourceSemantic": "dist/assets/jingdezhen/jingdezhen-semantic.svg"
     },
     "360400": {
       "name": "九江",

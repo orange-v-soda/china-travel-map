@@ -1,0 +1,117 @@
+{
+  "projectOutline": "main / JIANGXI_ART region 360200 / balanced",
+  "warp": "JIANGXI_ART cells 360200",
+  "textFree": true,
+  "anchors": [
+    {
+      "adcode": 360202,
+      "name": "昌江区",
+      "coordinate": [
+        117.195023,
+        29.288465
+      ],
+      "page": [
+        488.8201423099725,
+        255.41441870409002
+      ]
+    },
+    {
+      "adcode": 360203,
+      "name": "珠山区",
+      "coordinate": [
+        117.214814,
+        29.292812
+      ],
+      "page": [
+        490.77149507096016,
+        254.9824403821842
+      ]
+    },
+    {
+      "adcode": 360222,
+      "name": "浮梁县",
+      "coordinate": [
+        117.217611,
+        29.352251
+      ],
+      "page": [
+        491.04727364063757,
+        249.32664520515502
+      ]
+    },
+    {
+      "adcode": 360281,
+      "name": "乐平市",
+      "coordinate": [
+        117.129376,
+        28.967361
+      ],
+      "page": [
+        482.3474802564839,
+        285.9791155146766
+      ]
+    }
+  ],
+  "settlementSemantics": {
+    "regionalProfile": "Chang River basin / Lean River valleys / forested low hills",
+    "wilderness": {
+      "visual": "green base",
+      "generation": "forested low mountains and wooded slopes"
+    },
+    "rural": {
+      "visual": "light ochre valley",
+      "generation": "river-valley fields and compact villages"
+    },
+    "countyTown": {
+      "visual": "warm gray",
+      "generation": "Fuliang and Leping county-scale towns"
+    },
+    "metropolitan": {
+      "visual": "cool gray continuous",
+      "generation": "Jingdezhen urban corridor along Chang River"
+    }
+  },
+  "waterSemantics": {
+    "topology": "unified-major-river-network",
+    "riverStrokeInsideLakeAllowed": false,
+    "openWaterExpansionAllowed": false,
+    "wetlandDefaultRendering": "land-dominant"
+  },
+  "landmarks": [
+    {
+      "marker": "landmark-1",
+      "name": "景德镇御窑",
+      "coordinate": [
+        117.207,
+        29.294
+      ],
+      "page": [
+        493.66336156009174,
+        239.03481189684118
+      ]
+    }
+  ],
+  "generationViewport": {
+    "coordinateSystem": "balanced-page-space",
+    "canonicalBounds": [
+      465.35924429,
+      194.61061724,
+      73.60875376000001,
+      115.16799134000001
+    ],
+    "windowCount": 1,
+    "pixelsPerPageUnit": 11.702857142857143
+  },
+  "generationProvenance": {
+    "version": "v1",
+    "mode": "imagegen-edit-from-semantic",
+    "semanticSource": "dist/assets/jingdezhen/jingdezhen-semantic.svg",
+    "styleReferences": [
+      "dist/assets/jiujiang/jiujiang-art-final-v7.webp",
+      "dist/assets/shangrao/shangrao-art-final-v2.webp",
+      "dist/assets/nanchang/nanchang-art-final-v6.webp"
+    ],
+    "prompt": "artwork/prompts/jingdezhen-canonical-v1.md",
+    "finalSha256": "51b62a224b908fe0176ad68550dd6b010e40f1fd3d434503872f41619d0d865a"
+  }
+}

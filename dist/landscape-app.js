@@ -60,7 +60,7 @@ function render(){
  }
  document.querySelector('#map-subtitle').textContent=layer==='geography'?'江西山川与城镇 · 地理依据 / GEOGRAPHIC GUIDE':'江西山河 · 艺术底图 / JIANGXI';
  document.querySelector('#map-note').textContent=layer==='geography'?'高程 · 河网 · 湖泊 · 历史城镇范围；沿既有区划作示意映射':'依据地理数据绘制 · 地标示意放大 · 保留既有区划';
- document.querySelector('#layer-caption').textContent=layer==='geography'?'地理依据：实际高程、河网、湖泊与历史城镇范围，按原区划示意映射。':layer==='none'?'原 98 区划边界与面积均衡结果。':(mode==='balanced'?'南昌、九江、抚州与上饶已采用统一比例、独立生成的手绘底图；其余江西城市正在逐区更新。':'原始布局参考；南昌、九江、抚州与上饶独立底图请切换至面积均衡布局查看。');
+ document.querySelector('#layer-caption').textContent=layer==='geography'?'地理依据：实际高程、河网、湖泊与历史城镇范围，按原区划示意映射。':layer==='none'?'原 98 区划边界与面积均衡结果。':(mode==='balanced'?'南昌、九江、抚州、上饶与景德镇已采用统一比例、独立生成的手绘底图；其余江西城市正在逐区更新。':'原始布局参考；南昌、九江、抚州、上饶与景德镇独立底图请切换至面积均衡布局查看。');
  svg.querySelector('#regions').setAttribute('stroke','#536b5e');svg.querySelector('#regions').setAttribute('stroke-width','1.15');svg.querySelector('#outline').setAttribute('stroke','#31483f');svg.querySelector('#outline').setAttribute('stroke-width','1.8');
  const current=image.getAttribute('href');loadAsset(current).catch(()=>{if(image.getAttribute('href')===current)status.textContent='图像加载失败，请刷新重试。';});
 }

@@ -1,0 +1,111 @@
+{
+  "schemaVersion": 3,
+  "region": {
+    "id": "360200",
+    "name": "景德镇",
+    "slug": "jingdezhen",
+    "layout": "balanced",
+    "outlineSource": "dist/jiangxi-art-data.js / JIANGXI_ART.cities[360200].balanced"
+  },
+  "stages": [
+    "lock-project-outline",
+    "map-real-geography",
+    "draw-semantic-svg",
+    "build-global-scale-context",
+    "tile-at-fixed-global-scale",
+    "generate-raster-windows-from-svg",
+    "merge-windows-in-page-space",
+    "apply-final-safety-clip-and-clean",
+    "publish-raster-only"
+  ],
+  "artifacts": {
+    "semanticSvg": "dist/assets/jingdezhen/jingdezhen-semantic.svg",
+    "maskSvg": "dist/assets/jingdezhen/jingdezhen-mask.svg",
+    "manifest": "dist/assets/jingdezhen/manifest.json",
+    "finalImage": "dist/assets/jingdezhen/jingdezhen-art-final-v1.webp",
+    "jointSemanticSvg": "dist/assets/joint-nanchang-jiujiang-fuzhou-shangrao-jingdezhen/nanchang-jiujiang-fuzhou-shangrao-jingdezhen-joint-semantic-v10.svg",
+    "fixedScalePlan": "artwork/generation-inputs/jingdezhen/fixed-scale-tiles/jingdezhen-plan.json",
+    "promptFiles": [
+      "artwork/prompts/base.md",
+      "artwork/prompts/jingdezhen.md",
+      "artwork/prompts/jingdezhen-canonical-v1.md"
+    ],
+    "tileManifest": "dist/jiangxi-city-tiles.json"
+  },
+  "independentAreas": [
+    {
+      "id": "jingdezhen-basin",
+      "landmarks": [
+        {
+          "name": "景德镇御窑",
+          "coordinate": [
+            117.207,
+            29.294
+          ],
+          "placementRule": "珠山区昌江沿岸主城区内，以低矮红砖筒拱窑炉融入街区",
+          "description": "该独立区域唯一人文地标；不生成巨型陶瓷或连续古城"
+        }
+      ]
+    }
+  ],
+  "forbiddenPublicArtifacts": [
+    "dist/assets/jingdezhen/jingdezhen-overlay.svg"
+  ],
+  "rules": {
+    "semanticSvgPrecedesGeneration": true,
+    "finalPageLoadsRasterOnly": true,
+    "maxLandmarksPerIndependentArea": 1,
+    "constructionGuidesVisibleInFinal": false,
+    "settlementEncoding": "density-regions",
+    "settlementClasses": [
+      "metropolitan",
+      "county-town",
+      "rural-farmland",
+      "wilderness"
+    ],
+    "landmarkEncoding": "marker-plus-manifest-description",
+    "regionalProfileRequired": true,
+    "waterEncoding": "subordinate-major-network",
+    "urbanPalette": "neutral-gray-density",
+    "landmarkMarkerMaxRadius": 7,
+    "openWaterExpansionAllowed": false,
+    "wetlandDefaultRendering": "non-water-is-dry-land",
+    "waterQaRequiredBeforePublish": true,
+    "hydrologyTopology": "unified-water-surface",
+    "riverStrokeInsideLakeAllowed": false,
+    "modelVisibleAdministrativeOutline": false,
+    "generationMaskRole": "final-safety-clip-only",
+    "targetGenerationMode": "fresh-from-semantic",
+    "semanticDrawingMode": "crop-from-incremental-joint-master",
+    "jointSemanticState": "artwork/semantic-joint-state.json",
+    "globalScaleBaseline": {
+      "region": "360100",
+      "rasterSize": [
+        2048,
+        2048
+      ],
+      "pageBounds": [
+        293.453153465,
+        232.265967415,
+        175,
+        175
+      ],
+      "pixelsPerPageUnit": 11.702857142857143
+    },
+    "fixedScaleConfig": "artwork/fixed-scale-generation.json",
+    "canvasCoordinateSource": "canonical-balanced-path",
+    "multipleGenerationWindowsAllowed": true,
+    "rasterStretchOnPublishAllowed": false,
+    "acceptedOverlapLockedInLaterWindows": true,
+    "restoreLockedPixelsAfterGeneration": true,
+    "guideOutlineRemovalRequired": true,
+    "adjacentGenerationMode": "neighbor-collar-independent",
+    "adjacentRegions": [
+      "360400",
+      "361100"
+    ],
+    "neighborContextMaximumFraction": 0.25,
+    "independentRasterRequired": true,
+    "acceptedGenerationMode": "imagegen-edit-from-semantic"
+  }
+}
