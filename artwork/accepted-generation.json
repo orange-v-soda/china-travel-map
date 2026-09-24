@@ -3,10 +3,10 @@
   "coordinateSystem": "balanced-page-space",
   "fixedScaleConfig": "artwork/fixed-scale-generation.json",
   "jointSemantic": {
-    "path": "dist/assets/joint-nanchang-jiujiang-fuzhou/nanchang-jiujiang-fuzhou-joint-semantic-v8.svg",
-    "sha256": "d150283d393d5f273181771cb23e4693612147d1ad94ffbb74b5117335486d53"
+    "path": "dist/assets/joint-nanchang-jiujiang-fuzhou-shangrao/nanchang-jiujiang-fuzhou-shangrao-joint-semantic-v9.svg",
+    "sha256": "450e4f1075df4f02248c356e63d764c0ac21b0a1f92bf0b2fa19d9a17c4cb6bb"
   },
-  "acceptedOrder": ["360100", "360400", "361000"],
+  "acceptedOrder": ["360100", "360400", "361000", "361100"],
   "regions": {
     "360100": {
       "name": "南昌",
@@ -42,6 +42,15 @@
       ],
       "finalImage": "dist/assets/fuzhou/fuzhou-art-final-v1.webp",
       "finalSha256": "e1cb9468a08eecf9ac38d099705f234238e685760ab8a420bc7e5c4b6307baf2"
+    },
+    "361100": {
+      "name": "上饶",
+      "version": "v1",
+      "plan": "artwork/generation-inputs/shangrao/fixed-scale-tiles/shangrao-plan.json",
+      "planSha256": "2e808bfe088c33b266356f4c01d9c97d403fbd363e3b4ac18dbe4a336d35d966",
+      "promptFiles": ["artwork/prompts/base.md", "artwork/prompts/shangrao-west.md", "artwork/prompts/shangrao-northeast.md", "artwork/prompts/shangrao-southeast.md"],
+      "finalImage": "dist/assets/shangrao/shangrao-art-final-v1.webp",
+      "finalSha256": "558055a6c6992d114749530ad9f251bcc3a972c871219f491717ab37e50c6a5d"
     }
   }
 }

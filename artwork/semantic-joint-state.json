@@ -1,9 +1,9 @@
 {
   "schemaVersion": 1,
   "coordinateSystem": "balanced-page-space",
-  "masterSvg": "dist/assets/joint-nanchang-jiujiang-fuzhou/nanchang-jiujiang-fuzhou-joint-semantic-v8.svg",
+  "masterSvg": "dist/assets/joint-nanchang-jiujiang-fuzhou-shangrao/nanchang-jiujiang-fuzhou-shangrao-joint-semantic-v9.svg",
   "renderScale": 8,
-  "acceptedOrder": ["360100", "360400", "361000"],
+  "acceptedOrder": ["360100", "360400", "361000", "361100"],
   "regions": {
     "360100": {
       "name": "南昌",
@@ -18,6 +18,11 @@
     "361000": {
       "name": "抚州",
       "semanticSvg": "dist/assets/fuzhou/fuzhou-semantic.svg",
+      "status": "accepted-interior"
+    },
+    "361100": {
+      "name": "上饶",
+      "semanticSvg": "dist/assets/shangrao/shangrao-semantic.svg",
       "status": "accepted-interior"
     }
   },
@@ -62,6 +67,22 @@
         "water": 0.8,
         "river": 0.8
       },
+      "sharedWater": []
+    },
+    {
+      "regions": ["360400", "361100"],
+      "collarWidthPageUnits": 14,
+      "ownershipWidthPageUnits": 3.2,
+      "featureClosingPageUnits": {"rural": 2.4, "county": 1.4, "metro": 1.2, "water": 1.0, "river": 0.7},
+      "boundaryContinuationPageUnits": {"rural": 5.5, "county": 2.2, "metro": 2.8, "water": 0.8, "river": 0.8},
+      "sharedWater": []
+    },
+    {
+      "regions": ["361000", "361100"],
+      "collarWidthPageUnits": 14,
+      "ownershipWidthPageUnits": 3.2,
+      "featureClosingPageUnits": {"rural": 2.4, "county": 1.4, "metro": 1.2, "water": 1.0, "river": 0.7},
+      "boundaryContinuationPageUnits": {"rural": 5.5, "county": 2.2, "metro": 2.8, "water": 0.8, "river": 0.8},
       "sharedWater": []
     }
   ],

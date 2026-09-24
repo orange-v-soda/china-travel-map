@@ -1,0 +1,37 @@
+{
+  "schemaVersion": 3,
+  "region": {"id": "361100", "name": "上饶", "slug": "shangrao", "layout": "balanced", "outlineSource": "dist/jiangxi-art-data.js / JIANGXI_ART.cities[361100].balanced"},
+  "stages": ["lock-project-outline", "map-real-geography", "draw-semantic-svg", "build-global-scale-context", "tile-at-fixed-global-scale", "generate-raster-windows-from-svg", "merge-windows-in-page-space", "apply-final-safety-clip-and-clean", "publish-raster-only"],
+  "artifacts": {
+    "semanticSvg": "dist/assets/shangrao/shangrao-semantic.svg",
+    "maskSvg": "dist/assets/shangrao/shangrao-mask.svg",
+    "manifest": "dist/assets/shangrao/manifest.json",
+    "finalImage": "dist/assets/shangrao/shangrao-art-final-v1.webp",
+    "jointSemanticSvg": "dist/assets/joint-nanchang-jiujiang-fuzhou-shangrao/nanchang-jiujiang-fuzhou-shangrao-joint-semantic-v9.svg",
+    "fixedScalePlan": "artwork/generation-inputs/shangrao/fixed-scale-tiles/shangrao-plan.json",
+    "promptFiles": ["artwork/prompts/base.md", "artwork/prompts/shangrao-west.md", "artwork/prompts/shangrao-northeast.md", "artwork/prompts/shangrao-southeast.md"],
+    "tileManifest": "dist/jiangxi-city-tiles.json"
+  },
+  "independentAreas": [
+    {"id": "shangrao-eastern-mountains", "landmarks": [{"name": "三清山", "coordinate": [118.067, 28.917], "placementRule": "上饶东部怀玉山系内，以细长花岗岩峰柱融入连续山体", "description": "浅灰峰柱与松树构成唯一强调自然地标，不生成楼阁、标牌或文字"}]},
+    {"id": "wuyuan-northern-valleys", "landmarks": [{"name": "婺源村落", "coordinate": [117.85, 29.25], "placementRule": "上饶东北丘陵河谷，在细分田块与林坡之间形成小尺度聚落", "description": "白墙黑瓦村落作为该独立区域唯一人文地标，不扩散为连续古城"}]}
+  ],
+  "forbiddenPublicArtifacts": ["dist/assets/shangrao/shangrao-overlay.svg"],
+  "rules": {
+    "semanticSvgPrecedesGeneration": true, "finalPageLoadsRasterOnly": true, "maxLandmarksPerIndependentArea": 1,
+    "constructionGuidesVisibleInFinal": false, "settlementEncoding": "density-regions",
+    "settlementClasses": ["metropolitan", "county-town", "rural-farmland", "wilderness"],
+    "landmarkEncoding": "marker-plus-manifest-description", "regionalProfileRequired": true,
+    "waterEncoding": "subordinate-major-network", "urbanPalette": "neutral-gray-density", "landmarkMarkerMaxRadius": 7,
+    "openWaterExpansionAllowed": false, "wetlandDefaultRendering": "non-water-is-dry-land", "waterQaRequiredBeforePublish": true,
+    "hydrologyTopology": "unified-water-surface", "riverStrokeInsideLakeAllowed": false, "modelVisibleAdministrativeOutline": false,
+    "generationMaskRole": "final-safety-clip-only", "targetGenerationMode": "fresh-from-semantic",
+    "semanticDrawingMode": "crop-from-incremental-joint-master", "jointSemanticState": "artwork/semantic-joint-state.json",
+    "globalScaleBaseline": {"region": "360100", "rasterSize": [2048, 2048], "pageBounds": [293.453153465, 232.265967415, 175.0, 175.0], "pixelsPerPageUnit": 11.702857142857143},
+    "fixedScaleConfig": "artwork/fixed-scale-generation.json", "canvasCoordinateSource": "canonical-balanced-path",
+    "multipleGenerationWindowsAllowed": true, "rasterStretchOnPublishAllowed": false,
+    "acceptedOverlapLockedInLaterWindows": true, "restoreLockedPixelsAfterGeneration": true, "guideOutlineRemovalRequired": true,
+    "adjacentGenerationMode": "neighbor-collar-independent", "adjacentRegions": ["360200", "360400", "360600", "361000"],
+    "neighborContextMaximumFraction": 0.25, "independentRasterRequired": true
+  }
+}

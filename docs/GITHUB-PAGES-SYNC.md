@@ -1,5 +1,5 @@
 # GitHub Pages publication
 
-The repository root redirects to dist/. GitHub Pages publishes main. Keep dist/index.html, its dependencies, jiangxi-city-tiles.json and every referenced image in the same commit. Current synchronized release includes the independently clipped Nanchang art with six regional labels and zoom-dependent city names. Jiujiang draft is not released.
+The repository root redirects to dist/. GitHub Pages publishes main. Keep dist/index.html, its dependencies, jiangxi-city-tiles.json and every referenced image in the same commit. Current synchronized release includes independent balanced-layout raster art for Nanchang, Jiujiang, Fuzhou and Shangrao. Shangrao v1 uses the exact canonical path and fixed global scale, with Xin River–Poyang Lake eastern shore, Wuyuan village and Sanqingshan semantics.
 
-Approved source checkpoint: f351324befb2f982909ee430b0592584a410be3a from the existing project checkout. Original 98-region geometry is unchanged.
+The original 98-region geometry is unchanged. Versioned image names and the landscape-app query string are updated together to avoid stale Pages/CDN assets.

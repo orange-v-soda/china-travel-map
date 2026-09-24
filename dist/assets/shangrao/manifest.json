@@ -1,0 +1,213 @@
+{
+  "projectOutline": "main / JIANGXI_ART region 361100 / balanced",
+  "warp": "JIANGXI_ART cells 361100",
+  "textFree": true,
+  "anchors": [
+    {
+      "adcode": 361102,
+      "name": "信州区",
+      "coordinate": [
+        117.970522,
+        28.445378
+      ],
+      "page": [
+        565.084584186217,
+        340.5863980809633
+      ]
+    },
+    {
+      "adcode": 361103,
+      "name": "广丰区",
+      "coordinate": [
+        118.189852,
+        28.440285
+      ],
+      "page": [
+        582.037664731127,
+        340.90250859123904
+      ]
+    },
+    {
+      "adcode": 361104,
+      "name": "广信区",
+      "coordinate": [
+        117.90612,
+        28.453897
+      ],
+      "page": [
+        559.9458977230086,
+        339.9840482694326
+      ]
+    },
+    {
+      "adcode": 361123,
+      "name": "玉山县",
+      "coordinate": [
+        118.244408,
+        28.673479
+      ],
+      "page": [
+        586.1945738788575,
+        318.1340550510479
+      ]
+    },
+    {
+      "adcode": 361124,
+      "name": "铅山县",
+      "coordinate": [
+        117.711906,
+        28.310892
+      ],
+      "page": [
+        544.923968157435,
+        354.1314789737952
+      ]
+    },
+    {
+      "adcode": 361125,
+      "name": "横峰县",
+      "coordinate": [
+        117.608247,
+        28.415103
+      ],
+      "page": [
+        536.3983503883578,
+        344.5978819371661
+      ]
+    },
+    {
+      "adcode": 361126,
+      "name": "弋阳县",
+      "coordinate": [
+        117.435002,
+        28.402391
+      ],
+      "page": [
+        519.5057018903476,
+        351.37682406737525
+      ]
+    },
+    {
+      "adcode": 361127,
+      "name": "余干县",
+      "coordinate": [
+        116.691072,
+        28.69173
+      ],
+      "page": [
+        449.5289802939844,
+        321.9443119046756
+      ]
+    },
+    {
+      "adcode": 361128,
+      "name": "鄱阳县",
+      "coordinate": [
+        116.673748,
+        28.993374
+      ],
+      "page": [
+        447.6833971753654,
+        292.0038100512428
+      ]
+    },
+    {
+      "adcode": 361129,
+      "name": "万年县",
+      "coordinate": [
+        117.07015,
+        28.692589
+      ],
+      "page": [
+        483.34210454278696,
+        317.6719777047247
+      ]
+    },
+    {
+      "adcode": 361130,
+      "name": "婺源县",
+      "coordinate": [
+        117.86219,
+        29.254015
+      ],
+      "page": [
+        554.2062134426504,
+        264.40663758006923
+      ]
+    },
+    {
+      "adcode": 361181,
+      "name": "德兴市",
+      "coordinate": [
+        117.578732,
+        28.945034
+      ],
+      "page": [
+        532.563552714678,
+        294.54307666176896
+      ]
+    }
+  ],
+  "settlementSemantics": {
+    "regionalProfile": "Poyang Lake eastern shore / Xin River valley / Wuyuan-Huaiyu-Sanqingshan ranges",
+    "wilderness": {
+      "visual": "untinted base",
+      "generation": "wooded ranges and dry valleys"
+    },
+    "rural": {
+      "visual": "light ochre farmland",
+      "generation": "lake-shore and Xin River fields"
+    },
+    "countyTown": {
+      "visual": "warm light-gray",
+      "generation": "compact modern county towns"
+    },
+    "metropolitan": {
+      "visual": "cool-gray continuous",
+      "generation": "Shangrao Xin River urban corridor"
+    }
+  },
+  "waterSemantics": {
+    "topology": "unified-lake-and-river-surface",
+    "riverStrokeInsideLakeAllowed": false,
+    "openWaterExpansionAllowed": false,
+    "wetlandDefaultRendering": "land-dominant"
+  },
+  "landmarks": [
+    {
+      "marker": "landmark-1",
+      "name": "三清山",
+      "coordinate": [
+        118.067,
+        28.917
+      ],
+      "page": [
+        576.739563,
+        280.716545
+      ]
+    },
+    {
+      "marker": "landmark-2",
+      "name": "婺源村落",
+      "coordinate": [
+        117.85,
+        29.25
+      ],
+      "page": [
+        555.777312,
+        243.907413
+      ]
+    }
+  ],
+  "generationViewport": {
+    "coordinateSystem": "balanced-page-space",
+    "canonicalBounds": [
+      417.8156056,
+      222.47860546,
+      186.97455520999995,
+      180.96645628000002
+    ],
+    "windowCount": 4,
+    "pixelsPerPageUnit": 11.702857142857143
+  }
+}

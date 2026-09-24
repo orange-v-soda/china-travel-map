@@ -1,0 +1,118 @@
+{
+  "schemaVersion": 1,
+  "region": "361100",
+  "layout": "balanced",
+  "canonicalPath": "M417.81560560,337.32012232 L417.81560560,272.59962157 L438.03587475,252.37935242 L438.03587475,222.47860546 L465.35924429,222.47860546 L465.35924429,309.77860858 L518.06053762,309.77860858 L518.06053762,249.60446437 L538.96799805,228.69700394 L567.70240073,257.43140662 L604.79016081,294.51916670 L604.79016081,364.68064192 L604.79016081,403.44506174 L521.35363622,403.44506174 L506.87357678,388.96500229 L506.87357678,325.95544533 L472.33974023,325.95544533 L445.56765059,352.72753497 L433.22301825,352.72753497 L417.81560560,337.32012232 Z",
+  "canonicalPathBounds": [
+    417.8156056,
+    222.47860546,
+    186.97455520999995,
+    180.96645628000002
+  ],
+  "fixedScaleConfig": "artwork/fixed-scale-generation.json",
+  "windowCount": 4,
+  "generationOrder": [
+    1,
+    2,
+    3,
+    4
+  ],
+  "windows": [
+    {
+      "index": 1,
+      "row": 0,
+      "column": 0,
+      "worldBounds": [
+        402.8156056,
+        207.47860546,
+        175.0,
+        175.0
+      ],
+      "canvasPixels": [
+        2048,
+        2048
+      ],
+      "pixelsPerPageUnit": 11.702857142857143,
+      "context": "artwork/generation-inputs/shangrao/fixed-scale-tiles/shangrao-01-context.png",
+      "visibleMask": "artwork/generation-inputs/shangrao/fixed-scale-tiles/shangrao-01-mask.png",
+      "editMask": "artwork/generation-inputs/shangrao/fixed-scale-tiles/shangrao-01-edit-mask.png",
+      "lockedAcceptedRegions": [],
+      "postGenerationRule": "restore every black-mask pixel from context before compositing"
+    },
+    {
+      "index": 2,
+      "row": 0,
+      "column": 1,
+      "worldBounds": [
+        444.79016081,
+        207.47860546,
+        175.0,
+        175.0
+      ],
+      "canvasPixels": [
+        2048,
+        2048
+      ],
+      "pixelsPerPageUnit": 11.702857142857143,
+      "context": "artwork/generation-inputs/shangrao/fixed-scale-tiles/shangrao-02-context.png",
+      "visibleMask": "artwork/generation-inputs/shangrao/fixed-scale-tiles/shangrao-02-mask.png",
+      "editMask": "artwork/generation-inputs/shangrao/fixed-scale-tiles/shangrao-02-edit-mask.png",
+      "lockedAcceptedRegions": [],
+      "postGenerationRule": "restore every black-mask pixel from context before compositing"
+    },
+    {
+      "index": 3,
+      "row": 1,
+      "column": 0,
+      "worldBounds": [
+        402.8156056,
+        243.44506174000003,
+        175.0,
+        175.0
+      ],
+      "canvasPixels": [
+        2048,
+        2048
+      ],
+      "pixelsPerPageUnit": 11.702857142857143,
+      "context": "artwork/generation-inputs/shangrao/fixed-scale-tiles/shangrao-03-context.png",
+      "visibleMask": "artwork/generation-inputs/shangrao/fixed-scale-tiles/shangrao-03-mask.png",
+      "editMask": "artwork/generation-inputs/shangrao/fixed-scale-tiles/shangrao-03-edit-mask.png",
+      "lockedAcceptedRegions": [],
+      "postGenerationRule": "restore every black-mask pixel from context before compositing"
+    },
+    {
+      "index": 4,
+      "row": 1,
+      "column": 1,
+      "worldBounds": [
+        444.79016081,
+        243.44506174000003,
+        175.0,
+        175.0
+      ],
+      "canvasPixels": [
+        2048,
+        2048
+      ],
+      "pixelsPerPageUnit": 11.702857142857143,
+      "context": "artwork/generation-inputs/shangrao/fixed-scale-tiles/shangrao-04-context.png",
+      "visibleMask": "artwork/generation-inputs/shangrao/fixed-scale-tiles/shangrao-04-mask.png",
+      "editMask": "artwork/generation-inputs/shangrao/fixed-scale-tiles/shangrao-04-edit-mask.png",
+      "lockedAcceptedRegions": [],
+      "postGenerationRule": "restore every black-mask pixel from context before compositing"
+    }
+  ],
+  "neighborArt": [
+    {
+      "region": "360400",
+      "image": "dist/assets/jiujiang/jiujiang-art-final-v7.webp"
+    },
+    {
+      "region": "361000",
+      "image": "dist/assets/fuzhou/fuzhou-art-final-v1.webp"
+    }
+  ],
+  "acceptedWindows": [],
+  "publishRule": "composite in balanced page coordinates; crop to canonicalPathBounds; never stretch"
+}
