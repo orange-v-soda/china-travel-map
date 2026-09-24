@@ -1,8 +1,9 @@
 {
-  "schemaVersion": 2,
+  "schemaVersion": 3,
   "region": {
     "id": "360400",
     "name": "九江",
+    "slug": "jiujiang",
     "layout": "balanced",
     "outlineSource": "dist/jiangxi-art-data.js / JIANGXI_ART.cities[360400].balanced"
   },
@@ -11,7 +12,9 @@
     "map-real-geography",
     "draw-semantic-svg",
     "build-global-scale-context",
-    "generate-raster-from-svg",
+    "tile-at-fixed-global-scale",
+    "generate-raster-windows-from-svg",
+    "merge-windows-in-page-space",
     "apply-final-safety-clip-and-clean",
     "publish-raster-only"
   ],
@@ -19,12 +22,14 @@
     "semanticSvg": "dist/assets/jiujiang/jiujiang-semantic.svg",
     "maskSvg": "dist/assets/jiujiang/jiujiang-mask.svg",
     "manifest": "dist/assets/jiujiang/manifest.json",
-    "finalImage": "dist/assets/jiujiang/jiujiang-art-final-v5.webp",
-    "neighborContext": "dist/assets/joint-nanchang-jiujiang/jiujiang-context-v5.png",
+    "finalImage": "dist/assets/jiujiang/jiujiang-art-final-v7.webp",
     "jointSemanticSvg": "dist/assets/joint-nanchang-jiujiang/nanchang-jiujiang-joint-semantic-v7.svg",
-    "generationInput": "artwork/generation-inputs/jiujiang/jiujiang-joint-input.png",
-    "candidateImage": "dist/assets/jiujiang/jiujiang-art-final-v5.webp",
-    "seamReview": "artwork/generated/nanchang-jiujiang-joint-review-v1.png",
+    "fixedScalePlan": "artwork/generation-inputs/jiujiang/fixed-scale-tiles/jiujiang-plan.json",
+    "promptFiles": [
+      "artwork/prompts/base.md",
+      "artwork/prompts/jiujiang-west.md",
+      "artwork/prompts/jiujiang-east.md"
+    ],
     "tileManifest": "dist/jiangxi-city-tiles.json"
   },
   "independentAreas": [
@@ -71,7 +76,12 @@
       "pageBounds": [293.453153465, 232.265967415, 175.0, 175.0],
       "pixelsPerPageUnit": 11.702857142857143
     },
-    "canvasCoordinateSource": "tile-manifest-bounds",
+    "fixedScaleConfig": "artwork/fixed-scale-generation.json",
+    "canvasCoordinateSource": "canonical-balanced-path",
+    "multipleGenerationWindowsAllowed": true,
+    "rasterStretchOnPublishAllowed": false,
+    "acceptedOverlapLockedInLaterWindows": true,
+    "restoreLockedPixelsAfterGeneration": true,
     "guideOutlineRemovalRequired": true,
     "adjacentGenerationMode": "neighbor-collar-independent",
     "adjacentRegions": ["360100"],

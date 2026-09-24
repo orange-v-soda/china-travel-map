@@ -1,0 +1,43 @@
+{
+  "schemaVersion": 1,
+  "region": "360100",
+  "layout": "balanced",
+  "canonicalPath": "M328.68328868,272.59962157 L417.81560560,272.59962157 L417.81560560,337.32012232 L433.22301825,352.72753497 L419.01823997,366.93231326 L388.08722327,366.93231326 L328.68328868,366.93231326 L328.68328868,272.59962157 Z",
+  "canonicalPathBounds": [
+    328.68328868,
+    272.59962157,
+    104.53972957000002,
+    94.33269168999999
+  ],
+  "fixedScaleConfig": "artwork/fixed-scale-generation.json",
+  "windowCount": 1,
+  "generationOrder": [
+    1
+  ],
+  "windows": [
+    {
+      "index": 1,
+      "row": 0,
+      "column": 0,
+      "worldBounds": [
+        293.453153465,
+        232.26596741499998,
+        175.0,
+        175.0
+      ],
+      "canvasPixels": [
+        2048,
+        2048
+      ],
+      "pixelsPerPageUnit": 11.702857142857143,
+      "context": "artwork/generation-inputs/nanchang/fixed-scale-tiles/nanchang-01-context.png",
+      "visibleMask": "artwork/generation-inputs/nanchang/fixed-scale-tiles/nanchang-01-mask.png",
+      "editMask": "artwork/generation-inputs/nanchang/fixed-scale-tiles/nanchang-01-edit-mask.png",
+      "lockedAcceptedRegions": [],
+      "postGenerationRule": "restore every black-mask pixel from context before compositing"
+    }
+  ],
+  "neighborArt": [],
+  "acceptedWindows": [],
+  "publishRule": "composite in balanced page coordinates; crop to canonicalPathBounds; never stretch"
+}

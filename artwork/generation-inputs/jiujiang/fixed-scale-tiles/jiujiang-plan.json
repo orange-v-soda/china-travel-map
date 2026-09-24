@@ -1,0 +1,92 @@
+{
+  "schemaVersion": 1,
+  "region": "360400",
+  "layout": "balanced",
+  "canonicalPath": "M328.68328868,272.59962157 L282.25571886,272.59962157 L282.25571886,305.21672565 L206.62264736,305.21672565 L191.86382596,290.45790425 L194.24585540,288.07587481 L239.48382863,242.83790158 L256.66933936,242.83790158 L300.95007407,198.55716688 L382.60978711,198.55716688 L399.48453293,198.55716688 L411.54873895,186.49296086 L435.98628847,186.49296086 L450.27718025,186.49296086 L450.27718025,190.54245630 L438.03587475,202.78376180 L438.03587475,222.47860546 L438.03587475,252.37935242 L417.81560560,272.59962157 L328.68328868,272.59962157 Z",
+  "canonicalPathBounds": [
+    191.86382596,
+    186.49296086,
+    258.41335429000003,
+    118.72376478999999
+  ],
+  "fixedScaleConfig": "artwork/fixed-scale-generation.json",
+  "windowCount": 2,
+  "generationOrder": [
+    1,
+    2
+  ],
+  "windows": [
+    {
+      "index": 1,
+      "row": 0,
+      "column": 0,
+      "worldBounds": [
+        176.86382596,
+        158.354843255,
+        175.0,
+        175.0
+      ],
+      "canvasPixels": [
+        2048,
+        2048
+      ],
+      "pixelsPerPageUnit": 11.702857142857143,
+      "context": "artwork/generation-inputs/jiujiang/fixed-scale-tiles/jiujiang-01-context.png",
+      "visibleMask": "artwork/generation-inputs/jiujiang/fixed-scale-tiles/jiujiang-01-mask.png",
+      "editMask": "artwork/generation-inputs/jiujiang/fixed-scale-tiles/jiujiang-01-edit-mask.png",
+      "lockedAcceptedRegions": [],
+      "postGenerationRule": "restore every black-mask pixel from context before compositing"
+    },
+    {
+      "index": 2,
+      "row": 0,
+      "column": 1,
+      "worldBounds": [
+        290.27718025,
+        158.354843255,
+        175.0,
+        175.0
+      ],
+      "canvasPixels": [
+        2048,
+        2048
+      ],
+      "pixelsPerPageUnit": 11.702857142857143,
+      "context": "artwork/generation-inputs/jiujiang/fixed-scale-tiles/jiujiang-02-context.png",
+      "visibleMask": "artwork/generation-inputs/jiujiang/fixed-scale-tiles/jiujiang-02-mask.png",
+      "editMask": "artwork/generation-inputs/jiujiang/fixed-scale-tiles/jiujiang-02-edit-mask.png",
+      "lockedAcceptedRegions": [
+        {
+          "sourceWindow": 1,
+          "sourceImage": "artwork/generated/jiujiang/jiujiang-fixed-scale-window-01-v7-restored.png",
+          "worldBounds": [
+            290.27718025,
+            158.354843255,
+            30.793322854999985,
+            175.0
+          ],
+          "pixelBoundsInCurrent": [
+            0,
+            0,
+            360,
+            2048
+          ]
+        }
+      ],
+      "postGenerationRule": "restore every black-mask pixel from context before compositing"
+    }
+  ],
+  "neighborArt": [
+    {
+      "region": "360100",
+      "image": "artwork/generated/nanchang/nanchang-fixed-scale-v6-canonical.png"
+    }
+  ],
+  "acceptedWindows": [
+    {
+      "index": 1,
+      "image": "artwork/generated/jiujiang/jiujiang-fixed-scale-window-01-v7-restored.png"
+    }
+  ],
+  "publishRule": "composite in balanced page coordinates; crop to canonicalPathBounds; never stretch"
+}

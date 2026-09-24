@@ -1,8 +1,9 @@
 {
-  "schemaVersion": 2,
+  "schemaVersion": 3,
   "region": {
     "id": "360100",
     "name": "南昌",
+    "slug": "nanchang",
     "layout": "balanced",
     "outlineSource": "dist/jiangxi-art-data.js / JIANGXI_ART.cities[360100].balanced"
   },
@@ -11,18 +12,20 @@
     "map-real-geography",
     "draw-semantic-svg",
     "build-global-scale-context",
-    "generate-raster-from-svg",
+    "tile-at-fixed-global-scale",
+    "generate-raster-windows-from-svg",
+    "merge-windows-in-page-space",
     "apply-final-safety-clip-and-clean",
     "publish-raster-only"
   ],
   "artifacts": {
     "semanticSvg": "dist/assets/nanchang/nanchang-semantic.svg",
     "jointSemanticSvg": "dist/assets/joint-nanchang-jiujiang/nanchang-jiujiang-joint-semantic-v7.svg",
-    "generationInput": "artwork/generation-inputs/nanchang/nanchang-joint-input.png",
-    "candidateImage": "dist/assets/nanchang/nanchang-art-final-v5.webp",
+    "fixedScalePlan": "artwork/generation-inputs/nanchang/fixed-scale-tiles/nanchang-plan.json",
+    "promptFiles": ["artwork/prompts/base.md", "artwork/prompts/nanchang.md"],
     "maskSvg": "dist/assets/nanchang/nanchang-mask.svg",
     "manifest": "dist/assets/nanchang/manifest.json",
-    "finalImage": "dist/assets/nanchang/nanchang-art-final-v5.webp",
+    "finalImage": "dist/assets/nanchang/nanchang-art-final-v6.webp",
     "tileManifest": "dist/jiangxi-city-tiles.json"
   },
   "independentAreas": [
@@ -67,7 +70,12 @@
       "pageBounds": [293.453153465, 232.265967415, 175.0, 175.0],
       "pixelsPerPageUnit": 11.702857142857143
     },
-    "canvasCoordinateSource": "tile-manifest-bounds",
+    "fixedScaleConfig": "artwork/fixed-scale-generation.json",
+    "canvasCoordinateSource": "canonical-balanced-path",
+    "multipleGenerationWindowsAllowed": true,
+    "rasterStretchOnPublishAllowed": false,
+    "acceptedOverlapLockedInLaterWindows": true,
+    "restoreLockedPixelsAfterGeneration": true,
     "guideOutlineRemovalRequired": true,
     "adjacentGenerationMode": "neighbor-collar-independent"
     ,

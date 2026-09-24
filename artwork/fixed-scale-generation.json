@@ -1,0 +1,26 @@
+{
+  "schemaVersion": 1,
+  "coordinateSystem": "balanced-page-space",
+  "outlineSource": "dist/jiangxi-art-data.js / JIANGXI_ART.cities[*].balanced",
+  "canvasPixels": [2048, 2048],
+  "canvasRole": "high-resolution semantic reference",
+  "normalizedGeneratedPixels": [1254, 1254],
+  "worldSpan": [175.0, 175.0],
+  "pixelsPerPageUnit": 11.702857142857143,
+  "generatedPixelsPerPageUnit": 7.1657142857142855,
+  "outerMarginPageUnits": 15.0,
+  "minimumWindowOverlapPageUnits": 48.0,
+  "overlapOwnership": "midpoint",
+  "lockedOverlapFraction": 0.5,
+  "rules": {
+    "allowMultipleWindowsPerRegion": true,
+    "allowPerRegionScaleChange": false,
+    "allowRasterStretchOnPublish": false,
+    "normalizeEveryModelResultToGeneratedPixels": true,
+    "deriveMasksFromCanonicalBalancedPath": true,
+    "publishBounds": "canonical-path-bounds",
+    "generationOrder": "accepted-neighbors-first-then-window-order",
+    "overlapRule": "later windows receive the owned half of accepted earlier-window overlaps as immutable visual context",
+    "restoreLockedPixelsAfterGeneration": true
+  }
+}

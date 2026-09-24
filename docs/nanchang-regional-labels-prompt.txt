@@ -1,9 +1,0 @@
-Edit this existing Nanchang atlas painting ONLY by integrating six widely separated regional labels. Keep all imagery, geography, buildings, rivers, lakes, colors, square framing, scale and opacity unchanged. This is a regional atlas, not a street or attraction map.
-EXACTLY SIX Chinese labels:
-安义 at normalized center (0.16,0.31), western/northwestern county-seat area (keep entire text inside x>=0.11);
-梅岭 at (0.25,0.37), important wooded mountain area;
-红谷滩 at (0.34,0.44), important west-bank urban area;
-莲塘 at (0.50,0.66), independent southern county-seat town cluster;
-进贤 at (0.68,0.76), southeastern county-seat area south of the large lake;
-军山湖 at (0.72,0.57), the large southeastern lake, horizontally within water or its quiet bank.
-Use small elegant map lettering, warm charcoal on land and muted dark blue for the lake, about 20–22px high on this 1254px square reference, narrow soft cream halo only if needed. No plaques, banners, oversized text, legend, decorative dots or landmark pins. Do not label specific buildings, temples, plazas, streets or sites. Do not subdivide the core city into 东湖/西湖/青山湖/青云谱; do not add 湾里/新建/向塘. Do not write 滕王阁 or 八一广场. Do not write 南昌 as a city title. Do not label 鄱阳湖 in this tile: its single label belongs on a neighboring city tile containing the largest displayed lake portion. No duplicate names. Keep all six words clear of the final crop (x .11-.77, y .16-.83) and separate from one another. County-seat labels refer to approximate local areas, not administrative boundary outlines. Preserve the entire existing square painting exactly apart from these six labels; no new terrain or large new urban clusters.

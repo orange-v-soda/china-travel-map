@@ -1,106 +1,93 @@
 #!/usr/bin/env python3
-"""Map fixed-scale raw generations back to exact project tiles and publish v5 assets."""
+"""Publish accepted canonical rasters using workflow-declared paths and bounds."""
 from __future__ import annotations
 
-import io
+import argparse
 import json
+import shutil
 from pathlib import Path
 
-import cairosvg
 from PIL import Image
 
 
 ROOT = Path(__file__).resolve().parents[1]
-PAPER = "#f5f1e7"
 TILES = ROOT / "dist/jiangxi-city-tiles.json"
-REGIONS = {
-    "360100": {
-        "name": "nanchang",
-        "source": ROOT / "generated_images/exec-bed00718-7969-439e-b4bc-39331edefc73.png",
-        "world": [293.453153465, 232.265967415, 175.0, 175.0],
-        "size": [1024, 1024],
-        "mask": ROOT / "dist/assets/nanchang/nanchang-mask.svg",
-    },
-    "360400": {
-        "name": "jiujiang",
-        "source": ROOT / "generated_images/exec-b6c18eef-7ecf-4537-8ac8-456be758a124.png",
-        "world": [146.070503105, 70.854843255, 350.0, 350.0],
-        "size": [1024, 979],
-        "mask": ROOT / "dist/assets/jiujiang/jiujiang-mask.svg",
-    },
-}
 
 
-def map_to_tile(source: Image.Image, world: list[float], tile_bounds: list[float], size: list[int]) -> Image.Image:
-    wx, wy, ww, wh = world
-    tx, ty, tw, th = tile_bounds
-    sw, sh = source.size
-    ow, oh = size
-    affine = (
-        tw * sw / (ww * ow),
-        0,
-        (tx - wx) * sw / ww,
-        0,
-        th * sh / (wh * oh),
-        (ty - wy) * sh / wh,
-    )
-    return source.transform(
-        (ow, oh),
-        Image.Transform.AFFINE,
-        affine,
-        resample=Image.Resampling.BICUBIC,
-    )
-
-
-def exact_mask(path: Path, size: list[int]) -> Image.Image:
-    data = cairosvg.svg2png(url=str(path), output_width=size[0], output_height=size[1])
-    return Image.open(io.BytesIO(data)).convert("L")
+def repository_path(value: str) -> Path:
+    path = Path(value)
+    return path if path.is_absolute() else ROOT / path
 
 
 def main() -> None:
-    tiles = json.loads(TILES.read_text())
-    by_id = {tile["id"]: tile for tile in tiles if tile["layout"] == "balanced"}
+    parser = argparse.ArgumentParser()
+    parser.add_argument(
+        "--region",
+        action="append",
+        required=True,
+        metavar="WORKFLOW=CANONICAL_PNG",
+        help="publish one accepted canonical raster through its workflow manifest",
+    )
+    args = parser.parse_args()
+
+    requests = []
+    for value in args.region:
+        workflow_text, separator, image_text = value.partition("=")
+        if not separator:
+            parser.error("--region must be WORKFLOW=CANONICAL_PNG")
+        workflow_path = repository_path(workflow_text)
+        image_path = repository_path(image_text)
+        if not workflow_path.is_file() or not image_path.is_file():
+            parser.error(f"missing workflow or canonical image: {value}")
+        requests.append((workflow_path, image_path))
+
+    tiles = json.loads(TILES.read_text(encoding="utf-8"))
     published = {}
 
-    for region_id, record in REGIONS.items():
-        tile = by_id[region_id]
-        source = Image.open(record["source"]).convert("RGB")
-        mapped = map_to_tile(source, record["world"], tile["bounds"], record["size"])
-        mask = exact_mask(record["mask"], record["size"])
-        final = Image.composite(mapped, Image.new("RGB", tuple(record["size"]), PAPER), mask)
+    for workflow_path, image_path in requests:
+        workflow = json.loads(workflow_path.read_text(encoding="utf-8"))
+        region = workflow["region"]
+        artifacts = workflow["artifacts"]
+        plan = json.loads(repository_path(artifacts["fixedScalePlan"]).read_text(encoding="utf-8"))
+        matches = [
+            tile for tile in tiles
+            if tile.get("id") == region["id"] and tile.get("layout") == region["layout"]
+        ]
+        if len(matches) != 1:
+            raise ValueError(f"{region['id']}: expected exactly one tile record")
+        tile = matches[0]
+        if tile["path"] != plan["canonicalPath"]:
+            raise ValueError(f"{region['id']}: page path differs from fixed-scale plan")
 
-        name = record["name"]
-        review_path = ROOT / f"artwork/generated/{name}/{name}-fixed-scale-v5.png"
-        dist_path = ROOT / f"dist/assets/{name}/{name}-art-final-v5.webp"
-        preview_path = ROOT / f"full-page-preview/assets/{name}/{name}-art-final-v5.webp"
-        review_path.parent.mkdir(parents=True, exist_ok=True)
-        final.save(review_path)
-        for path in (dist_path, preview_path):
-            path.parent.mkdir(parents=True, exist_ok=True)
-            final.save(path, "WEBP", quality=88, method=6)
-        published[region_id] = {"tile": tile, "image": final, "mask": mask, "dist": dist_path}
+        image = Image.open(image_path).convert("RGBA")
+        bx, by, bw, bh = plan["canonicalPathBounds"]
+        ppu_x, ppu_y = image.width / bw, image.height / bh
+        if abs(ppu_x - ppu_y) > 0.02:
+            raise ValueError(f"{region['id']}: canonical raster is stretched")
 
-    min_x = min(item["tile"]["bounds"][0] for item in published.values()) - 4
-    min_y = min(item["tile"]["bounds"][1] for item in published.values()) - 4
-    max_x = max(item["tile"]["bounds"][0] + item["tile"]["bounds"][2] for item in published.values()) + 4
-    max_y = max(item["tile"]["bounds"][1] + item["tile"]["bounds"][3] for item in published.values()) + 4
-    scale = 6
-    review = Image.new("RGB", (round((max_x - min_x) * scale), round((max_y - min_y) * scale)), PAPER)
-    for region_id in ("360400", "360100"):
-        item = published[region_id]
-        x, y, width, height = item["tile"]["bounds"]
-        review_size = (round(width * scale), round(height * scale))
-        image = item["image"].resize(review_size, Image.Resampling.LANCZOS)
-        mask = item["mask"].resize(review_size, Image.Resampling.LANCZOS)
-        review.paste(image, (round((x - min_x) * scale), round((y - min_y) * scale)), mask)
-    review_path = ROOT / "dist/nanchang-jiujiang-fixed-scale-v5-review.png"
-    review.save(review_path)
+        dist_path = repository_path(artifacts["finalImage"])
+        if dist_path.suffix.lower() != ".webp":
+            raise ValueError(f"{region['id']}: finalImage must be a WebP")
+        dist_path.parent.mkdir(parents=True, exist_ok=True)
+        image.save(dist_path, "WEBP", quality=92, method=6, exact=True)
 
-    print(json.dumps({
-        "assets": {region_id: str(item["dist"].relative_to(ROOT)) for region_id, item in published.items()},
-        "review": str(review_path.relative_to(ROOT)),
-        "sizes": {region_id: item["image"].size for region_id, item in published.items()},
-    }, ensure_ascii=False, indent=2))
+        tile["bounds"] = [bx, by, bw, bh]
+        tile["image"] = str(dist_path.relative_to(ROOT / "dist"))
+        tile["status"] = "accepted"
+        tile["reviewNote"] = (
+            f"Fixed-scale canonical {region['name']} raster published at exact balanced-layout bounds."
+        )
+        published[region["id"]] = {
+            "image": str(dist_path.relative_to(ROOT)),
+            "size": list(image.size),
+            "pixelsPerPageUnit": [ppu_x, ppu_y],
+        }
+
+    TILES.write_text(json.dumps(tiles, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    preview_tiles = ROOT / "full-page-preview/jiangxi-city-tiles.json"
+    if preview_tiles.parent.exists():
+        shutil.copy2(TILES, preview_tiles)
+    print(json.dumps({"assets": published}, ensure_ascii=False, indent=2))
 
 
 if __name__ == "__main__":

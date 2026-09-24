@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "coordinateSystem": "balanced-page-space",
+  "fixedScaleConfig": "artwork/fixed-scale-generation.json",
+  "jointSemantic": {
+    "path": "dist/assets/joint-nanchang-jiujiang/nanchang-jiujiang-joint-semantic-v7.svg",
+    "sha256": "0bb4258cf1b426e7d5d6d54ac99bb1d6b63c2b7bc327089d4129be81565cdd5b"
+  },
+  "acceptedOrder": ["360100", "360400"],
+  "regions": {
+    "360100": {
+      "name": "南昌",
+      "version": "v6",
+      "plan": "artwork/generation-inputs/nanchang/fixed-scale-tiles/nanchang-plan.json",
+      "planSha256": "1a21b537ac8658a04ee98a11d2960dd7e08e4d5a6f804f3ea70ad9e1639f8df2",
+      "promptFiles": ["artwork/prompts/base.md", "artwork/prompts/nanchang.md"],
+      "finalImage": "dist/assets/nanchang/nanchang-art-final-v6.webp",
+      "finalSha256": "c134bf5dca6053e7d39ed4a8c6535585fb14327b366fef4a482435267a2154aa"
+    },
+    "360400": {
+      "name": "九江",
+      "version": "v7",
+      "plan": "artwork/generation-inputs/jiujiang/fixed-scale-tiles/jiujiang-plan.json",
+      "planSha256": "bbde6eacc888e0b5cb155c6d473ea0740f0d235480b7a57bf13edb7169457f5e",
+      "promptFiles": [
+        "artwork/prompts/base.md",
+        "artwork/prompts/jiujiang-west.md",
+        "artwork/prompts/jiujiang-east.md"
+      ],
+      "finalImage": "dist/assets/jiujiang/jiujiang-art-final-v7.webp",
+      "finalSha256": "e049136b5fe0e2a19d8c1e32535b824c90cdfa9a6e7c6c21cf47340417ae593d"
+    }
+  }
+}
