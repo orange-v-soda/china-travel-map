@@ -4,19 +4,29 @@
     "layout": "balanced",
     "path": "M328.68328868,272.59962157 L417.81560560,272.59962157 L417.81560560,337.32012232 L433.22301825,352.72753497 L419.01823997,366.93231326 L388.08722327,366.93231326 L328.68328868,366.93231326 L328.68328868,272.59962157 Z",
     "pathSha256": "e70de343e774c6c938cfe9370abd4c6e7c7c8193b7314cf5ebf71ae28ba91204",
-    "bounds": [315.61582248375, 254.42863643374997, 130.6746619625, 130.6746619625],
-    "image": "assets/nanchang/nanchang-art-final-v5.webp",
+    "bounds": [
+      328.68328868,
+      272.59962157,
+      104.53972957000002,
+      94.33269168999999
+    ],
+    "image": "assets/nanchang/nanchang-art-final-v6.webp",
     "status": "accepted",
-    "reviewNote": "Fixed-scale semantic-first Nanchang v5, cropped from the accepted full-frame generation with exact project outline."
+    "reviewNote": "Fixed-scale semantic-first Nanchang v6 canonical raster, published at its exact balanced-layout bounds."
   },
   {
     "id": "360400",
     "layout": "balanced",
     "path": "M328.68328868,272.59962157 L282.25571886,272.59962157 L282.25571886,305.21672565 L206.62264736,305.21672565 L191.86382596,290.45790425 L194.24585540,288.07587481 L239.48382863,242.83790158 L256.66933936,242.83790158 L300.95007407,198.55716688 L382.60978711,198.55716688 L399.48453293,198.55716688 L411.54873895,186.49296086 L435.98628847,186.49296086 L450.27718025,186.49296086 L450.27718025,190.54245630 L438.03587475,202.78376180 L438.03587475,222.47860546 L438.03587475,252.37935242 L417.81560560,272.59962157 L328.68328868,272.59962157 Z",
     "pathSha256": "68242a733f0cea99426b6ecdd23b5a55c0b8503e15d96b297a5a04d4a1028922",
-    "bounds": [183.3374970113452, 141.34448692577467, 274.154269272132, 262.11197367369715],
-    "image": "assets/jiujiang/jiujiang-art-final-v5.webp",
+    "bounds": [
+      191.86382596,
+      186.49296086,
+      258.41335429000003,
+      118.72376478999999
+    ],
+    "image": "assets/jiujiang/jiujiang-art-final-v7.webp",
     "status": "accepted",
-    "reviewNote": "Fixed-scale Jiujiang v5, cropped from the full-frame generation with accepted Nanchang boundary context."
+    "reviewNote": "Fixed-scale Jiujiang v7 canonical raster with distinct west/east regional prompts and locked adjacent context."
   }
 ]
