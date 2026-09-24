@@ -23,7 +23,7 @@
     "maskSvg": "dist/assets/jiujiang/jiujiang-mask.svg",
     "manifest": "dist/assets/jiujiang/manifest.json",
     "finalImage": "dist/assets/jiujiang/jiujiang-art-final-v7.webp",
-    "jointSemanticSvg": "dist/assets/joint-nanchang-jiujiang/nanchang-jiujiang-joint-semantic-v7.svg",
+    "jointSemanticSvg": "dist/assets/joint-nanchang-jiujiang-fuzhou/nanchang-jiujiang-fuzhou-joint-semantic-v8.svg",
     "fixedScalePlan": "artwork/generation-inputs/jiujiang/fixed-scale-tiles/jiujiang-plan.json",
     "promptFiles": [
       "artwork/prompts/base.md",

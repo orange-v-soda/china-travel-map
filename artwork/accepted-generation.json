@@ -3,10 +3,10 @@
   "coordinateSystem": "balanced-page-space",
   "fixedScaleConfig": "artwork/fixed-scale-generation.json",
   "jointSemantic": {
-    "path": "dist/assets/joint-nanchang-jiujiang/nanchang-jiujiang-joint-semantic-v7.svg",
-    "sha256": "0bb4258cf1b426e7d5d6d54ac99bb1d6b63c2b7bc327089d4129be81565cdd5b"
+    "path": "dist/assets/joint-nanchang-jiujiang-fuzhou/nanchang-jiujiang-fuzhou-joint-semantic-v8.svg",
+    "sha256": "d150283d393d5f273181771cb23e4693612147d1ad94ffbb74b5117335486d53"
   },
-  "acceptedOrder": ["360100", "360400"],
+  "acceptedOrder": ["360100", "360400", "361000"],
   "regions": {
     "360100": {
       "name": "南昌",
@@ -29,6 +29,19 @@
       ],
       "finalImage": "dist/assets/jiujiang/jiujiang-art-final-v7.webp",
       "finalSha256": "e049136b5fe0e2a19d8c1e32535b824c90cdfa9a6e7c6c21cf47340417ae593d"
+    },
+    "361000": {
+      "name": "抚州",
+      "version": "v1",
+      "plan": "artwork/generation-inputs/fuzhou/fixed-scale-tiles/fuzhou-plan.json",
+      "planSha256": "6c99647862bc18c19234c5830e491047ed8c07764b78dcb2c187a1e6560b4b33",
+      "promptFiles": [
+        "artwork/prompts/base.md",
+        "artwork/prompts/fuzhou-north.md",
+        "artwork/prompts/fuzhou-south.md"
+      ],
+      "finalImage": "dist/assets/fuzhou/fuzhou-art-final-v1.webp",
+      "finalSha256": "e1cb9468a08eecf9ac38d099705f234238e685760ab8a420bc7e5c4b6307baf2"
     }
   }
 }

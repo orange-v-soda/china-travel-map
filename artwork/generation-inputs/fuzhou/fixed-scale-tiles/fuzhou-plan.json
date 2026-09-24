@@ -1,0 +1,92 @@
+{
+  "schemaVersion": 1,
+  "region": "361000",
+  "layout": "balanced",
+  "canonicalPath": "M419.01823997,366.93231326 L433.22301825,352.72753497 L445.56765059,352.72753497 L445.56765059,366.27819436 L494.21897362,414.92951739 L495.46897362,416.17951739 L495.46897362,461.59228315 L477.32980875,479.73144803 L424.80091962,532.26033716 L394.06823935,532.26033716 L353.61569303,491.80779084 L353.61569303,424.92438417 L388.08722327,390.45285392 L388.08722327,366.93231326 L419.01823997,366.93231326 Z",
+  "canonicalPathBounds": [
+    353.61569303,
+    352.72753497,
+    141.85328059,
+    179.53280218999993
+  ],
+  "fixedScaleConfig": "artwork/fixed-scale-generation.json",
+  "windowCount": 2,
+  "generationOrder": [
+    1,
+    2
+  ],
+  "windows": [
+    {
+      "index": 1,
+      "row": 0,
+      "column": 0,
+      "worldBounds": [
+        337.04233332499996,
+        337.72753497,
+        175.0,
+        175.0
+      ],
+      "canvasPixels": [
+        2048,
+        2048
+      ],
+      "pixelsPerPageUnit": 11.702857142857143,
+      "context": "artwork/generation-inputs/fuzhou/fixed-scale-tiles/fuzhou-01-context.png",
+      "visibleMask": "artwork/generation-inputs/fuzhou/fixed-scale-tiles/fuzhou-01-mask.png",
+      "editMask": "artwork/generation-inputs/fuzhou/fixed-scale-tiles/fuzhou-01-edit-mask.png",
+      "lockedAcceptedRegions": [],
+      "postGenerationRule": "restore every black-mask pixel from context before compositing"
+    },
+    {
+      "index": 2,
+      "row": 1,
+      "column": 0,
+      "worldBounds": [
+        337.04233332499996,
+        372.26033715999995,
+        175.0,
+        175.0
+      ],
+      "canvasPixels": [
+        2048,
+        2048
+      ],
+      "pixelsPerPageUnit": 11.702857142857143,
+      "context": "artwork/generation-inputs/fuzhou/fixed-scale-tiles/fuzhou-02-context.png",
+      "visibleMask": "artwork/generation-inputs/fuzhou/fixed-scale-tiles/fuzhou-02-mask.png",
+      "editMask": "artwork/generation-inputs/fuzhou/fixed-scale-tiles/fuzhou-02-edit-mask.png",
+      "lockedAcceptedRegions": [
+        {
+          "sourceWindow": 1,
+          "sourceImage": "artwork/generated/fuzhou/fuzhou-fixed-scale-window-01-v1-restored.png",
+          "worldBounds": [
+            337.04233332499996,
+            372.26033715999995,
+            175.0,
+            70.23359890500006
+          ],
+          "pixelBoundsInCurrent": [
+            0,
+            0,
+            2048,
+            822
+          ]
+        }
+      ],
+      "postGenerationRule": "restore every black-mask pixel from context before compositing"
+    }
+  ],
+  "neighborArt": [
+    {
+      "region": "360100",
+      "image": "dist/assets/nanchang/nanchang-art-final-v6.webp"
+    }
+  ],
+  "acceptedWindows": [
+    {
+      "index": 1,
+      "image": "artwork/generated/fuzhou/fuzhou-fixed-scale-window-01-v1-restored.png"
+    }
+  ],
+  "publishRule": "composite in balanced page coordinates; crop to canonicalPathBounds; never stretch"
+}

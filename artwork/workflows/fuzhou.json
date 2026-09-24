@@ -1,11 +1,11 @@
 {
   "schemaVersion": 3,
   "region": {
-    "id": "360100",
-    "name": "南昌",
-    "slug": "nanchang",
+    "id": "361000",
+    "name": "抚州",
+    "slug": "fuzhou",
     "layout": "balanced",
-    "outlineSource": "dist/jiangxi-art-data.js / JIANGXI_ART.cities[360100].balanced"
+    "outlineSource": "dist/jiangxi-art-data.js / JIANGXI_ART.cities[361000].balanced"
   },
   "stages": [
     "lock-project-outline",
@@ -19,30 +19,34 @@
     "publish-raster-only"
   ],
   "artifacts": {
-    "semanticSvg": "dist/assets/nanchang/nanchang-semantic.svg",
+    "semanticSvg": "dist/assets/fuzhou/fuzhou-semantic.svg",
+    "maskSvg": "dist/assets/fuzhou/fuzhou-mask.svg",
+    "manifest": "dist/assets/fuzhou/manifest.json",
+    "finalImage": "dist/assets/fuzhou/fuzhou-art-final-v1.webp",
     "jointSemanticSvg": "dist/assets/joint-nanchang-jiujiang-fuzhou/nanchang-jiujiang-fuzhou-joint-semantic-v8.svg",
-    "fixedScalePlan": "artwork/generation-inputs/nanchang/fixed-scale-tiles/nanchang-plan.json",
-    "promptFiles": ["artwork/prompts/base.md", "artwork/prompts/nanchang.md"],
-    "maskSvg": "dist/assets/nanchang/nanchang-mask.svg",
-    "manifest": "dist/assets/nanchang/manifest.json",
-    "finalImage": "dist/assets/nanchang/nanchang-art-final-v6.webp",
+    "fixedScalePlan": "artwork/generation-inputs/fuzhou/fixed-scale-tiles/fuzhou-plan.json",
+    "promptFiles": [
+      "artwork/prompts/base.md",
+      "artwork/prompts/fuzhou-north.md",
+      "artwork/prompts/fuzhou-south.md"
+    ],
     "tileManifest": "dist/jiangxi-city-tiles.json"
   },
   "independentAreas": [
     {
-      "id": "nanchang-city-region",
+      "id": "fuzhou-city-region",
       "landmarks": [
         {
-          "name": "滕王阁",
-          "coordinate": [115.8756428, 28.6840374],
-          "placementRule": "主赣江东岸，位于城市肌理内",
-          "description": "历史楼阁；作为该独立区域唯一地标，由 SVG 高对比标点定位，名称与形态通过文本提示传递给图像模型"
+          "name": "文昌里历史文化街区",
+          "coordinate": [116.356, 27.988],
+          "placementRule": "临川中心城市内、抚河附近，完全包含在都市灰色语义区",
+          "description": "一组尺度克制的赣东传统街巷、白墙深灰瓦院落与临河老屋；不生成巨型门楼、宝塔或文字"
         }
       ]
     }
   ],
   "forbiddenPublicArtifacts": [
-    "dist/assets/nanchang/nanchang-overlay.svg"
+    "dist/assets/fuzhou/fuzhou-overlay.svg"
   ],
   "rules": {
     "semanticSvgPrecedesGeneration": true,
@@ -64,6 +68,8 @@
     "modelVisibleAdministrativeOutline": false,
     "generationMaskRole": "final-safety-clip-only",
     "targetGenerationMode": "fresh-from-semantic",
+    "semanticDrawingMode": "crop-from-incremental-joint-master",
+    "jointSemanticState": "artwork/semantic-joint-state.json",
     "globalScaleBaseline": {
       "region": "360100",
       "rasterSize": [2048, 2048],
@@ -77,9 +83,9 @@
     "acceptedOverlapLockedInLaterWindows": true,
     "restoreLockedPixelsAfterGeneration": true,
     "guideOutlineRemovalRequired": true,
-    "adjacentGenerationMode": "neighbor-collar-independent"
-    ,
-    "semanticDrawingMode": "crop-from-incremental-joint-master",
-    "jointSemanticState": "artwork/semantic-joint-state.json"
+    "adjacentGenerationMode": "neighbor-collar-independent",
+    "adjacentRegions": ["360100"],
+    "neighborContextMaximumFraction": 0.25,
+    "independentRasterRequired": true
   }
 }

@@ -1,0 +1,184 @@
+{
+  "projectOutline": "main / JIANGXI_ART region 361000 / balanced",
+  "warp": "main / JIANGXI_ART cells for city 361000",
+  "textFree": true,
+  "anchors": [
+    {
+      "adcode": 361002,
+      "name": "临川区",
+      "coordinate": [
+        116.358,
+        27.983
+      ],
+      "canvas": [
+        442.39075495486554,
+        292.79467541771214
+      ]
+    },
+    {
+      "adcode": 361003,
+      "name": "东乡区",
+      "coordinate": [
+        116.603,
+        28.247
+      ],
+      "canvas": [
+        577.7719269043862,
+        148.02319325652232
+      ]
+    },
+    {
+      "adcode": 361021,
+      "name": "南城县",
+      "coordinate": [
+        116.637,
+        27.555
+      ],
+      "canvas": [
+        597.8879354792722,
+        488.8001563260789
+      ]
+    },
+    {
+      "adcode": 361022,
+      "name": "黎川县",
+      "coordinate": [
+        116.907,
+        27.282
+      ],
+      "canvas": [
+        773.4292327006204,
+        617.2727841697123
+      ]
+    },
+    {
+      "adcode": 361023,
+      "name": "南丰县",
+      "coordinate": [
+        116.525,
+        27.218
+      ],
+      "canvas": [
+        536.3904120459677,
+        661.2008196410283
+      ]
+    },
+    {
+      "adcode": 361024,
+      "name": "崇仁县",
+      "coordinate": [
+        116.061,
+        27.765
+      ],
+      "canvas": [
+        272.44641610600723,
+        413.7901488393793
+      ]
+    },
+    {
+      "adcode": 361025,
+      "name": "乐安县",
+      "coordinate": [
+        115.838,
+        27.428
+      ],
+      "canvas": [
+        138.58661767617107,
+        577.9179845576382
+      ]
+    },
+    {
+      "adcode": 361026,
+      "name": "宜黄县",
+      "coordinate": [
+        116.222,
+        27.546
+      ],
+      "canvas": [
+        367.76834316803956,
+        516.5773075553948
+      ]
+    },
+    {
+      "adcode": 361027,
+      "name": "金溪县",
+      "coordinate": [
+        116.755,
+        27.919
+      ],
+      "canvas": [
+        667.8480019435071,
+        304.03558255404266
+      ]
+    },
+    {
+      "adcode": 361028,
+      "name": "资溪县",
+      "coordinate": [
+        117.061,
+        27.706
+      ],
+      "canvas": [
+        865.5964186516001,
+        402.12160783374895
+      ]
+    },
+    {
+      "adcode": 361030,
+      "name": "广昌县",
+      "coordinate": [
+        116.325,
+        26.837
+      ],
+      "canvas": [
+        421.0139440507198,
+        856.3120828608895
+      ]
+    }
+  ],
+  "settlementSemantics": {
+    "regionalProfile": "Fu River basin with eastern Wuyi foothills and southern/western uplands",
+    "wilderness": "untinted dry land, forest or mountains according to elevation",
+    "rural": "compact Jiangnan paddy and citrus-growing belts around county seats",
+    "countyTown": "compact gray-white county fabric only inside light-gray regions",
+    "metropolitan": "continuous neutral-gray Fuzhou/Linchuan urban core"
+  },
+  "waterSemantics": {
+    "topology": "unified-major-river-surface",
+    "openWaterExpansionAllowed": false,
+    "riverStrokeInsideLakeAllowed": false,
+    "generation": "Blue is the maximum water extent; every non-blue pixel is dry land."
+  },
+  "landmarks": [
+    {
+      "marker": "landmark-1",
+      "name": "文昌里历史文化街区",
+      "coordinate": [
+        116.356,
+        27.988
+      ],
+      "canvas": [
+        441.2725441455251,
+        290.4291423884776
+      ],
+      "description": "A single compact traditional riverside street-and-courtyard cluster within the central urban area; no oversized gate, pagoda, or text."
+    }
+  ],
+  "generationViewport": {
+    "coordinateSystem": "balanced-page-space",
+    "bounds": [
+      353.61569303,
+      352.72753497,
+      141.85328059,
+      179.53280218999993
+    ],
+    "rasterSize": [
+      1024,
+      1024
+    ],
+    "globalPixelsPerPageUnit": 11.702857142857143,
+    "localPixelsPerPageUnit": 6.416650129862847,
+    "semanticScale": 0.5482977405888664,
+    "neighborContext": "360100 / accepted Nanchang v6 artwork"
+  }
+}

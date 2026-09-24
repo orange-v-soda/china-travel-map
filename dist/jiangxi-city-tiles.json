@@ -28,5 +28,20 @@
     "image": "assets/jiujiang/jiujiang-art-final-v7.webp",
     "status": "accepted",
     "reviewNote": "Fixed-scale Jiujiang v7 canonical raster with distinct west/east regional prompts and locked adjacent context."
+  },
+  {
+    "id": "361000",
+    "layout": "balanced",
+    "path": "M419.01823997,366.93231326 L433.22301825,352.72753497 L445.56765059,352.72753497 L445.56765059,366.27819436 L494.21897362,414.92951739 L495.46897362,416.17951739 L495.46897362,461.59228315 L477.32980875,479.73144803 L424.80091962,532.26033716 L394.06823935,532.26033716 L353.61569303,491.80779084 L353.61569303,424.92438417 L388.08722327,390.45285392 L388.08722327,366.93231326 L419.01823997,366.93231326 Z",
+    "pathSha256": "e9856981ea0b013dbd591f81d503a0568de5d429acf432a5f3e4e6e347e87310",
+    "bounds": [
+      353.61569303,
+      352.72753497,
+      141.85328059,
+      179.53280218999993
+    ],
+    "status": "accepted",
+    "reviewNote": "Fixed-scale canonical 抚州 raster published at exact balanced-layout bounds.",
+    "image": "assets/fuzhou/fuzhou-art-final-v1.webp"
   }
 ]

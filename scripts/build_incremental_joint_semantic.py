@@ -233,7 +233,7 @@ svg = f'''<svg xmlns="http://www.w3.org/2000/svg" viewBox="{x:.3f} {y:.3f} {widt
 OUT.mkdir(parents=True, exist_ok=True)
 svg_path = OUT / MASTER_NAME
 png_path = svg_path.with_suffix(".png")
-manifest_path = OUT / "nanchang-jiujiang-joint-semantic-v7.json"
+manifest_path = svg_path.with_suffix(".json")
 svg_path.write_text(svg)
 cairosvg.svg2png(
     bytestring=svg.encode(),
