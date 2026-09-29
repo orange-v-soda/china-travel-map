@@ -1,5 +1,7 @@
 # GitHub Pages publication
 
-The repository root redirects to dist/. GitHub Pages publishes main. Keep dist/index.html, its dependencies, jiangxi-city-tiles.json and every referenced image in the same commit. Current synchronized release includes independent balanced-layout raster art for Nanchang, Jiujiang, Fuzhou, Shangrao and Jingdezhen. Shangrao v2 is image-generated from the semantic SVG and uses the exact canonical path and fixed global scale, with Xin River–Poyang Lake eastern shore, Wuyuan village and Sanqingshan semantics, then deterministic canonical clipping. Jingdezhen v1 is image-generated from its semantic SVG at the canonical fixed scale, preserving the Chang River basin, Lean River valleys, four county-level settlement anchors and the small Imperial Kiln landmark.
+GitHub Pages publishes `main` from `dist/`. The accepted fixed-scale sequence is Nanchang v6, Jiujiang v7, Shangrao v3, then Jingdezhen v2. Fuzhou is excluded from the accepted baseline and from all generation references.
 
-The original 98-region geometry is unchanged. Versioned image names and the landscape-app query string are updated together to avoid stale Pages/CDN assets.
+Every regenerated region uses a 175 × 175 page-unit window rendered to a 2048 × 2048 semantic context plus a same-size strict binary edit mask. Model results are normalized to 1254 × 1254, all black-mask pixels are deterministically restored, multi-window regions are merged in balanced page coordinates, and the final raster is cropped to canonical path bounds without stretching.
+
+Keep `dist/index.html`, `landscape-app.js`, `jiangxi-city-tiles.json`, manifests and every referenced image in the same commit. Versioned image names and the script query string must change together to avoid stale Pages/CDN assets.

@@ -25,8 +25,8 @@
       "worldBounds": [
         402.8156056,
         207.47860546,
-        175,
-        175
+        175.0,
+        175.0
       ],
       "canvasPixels": [
         2048,
@@ -46,8 +46,8 @@
       "worldBounds": [
         444.79016081,
         207.47860546,
-        175,
-        175
+        175.0,
+        175.0
       ],
       "canvasPixels": [
         2048,
@@ -57,7 +57,24 @@
       "context": "artwork/generation-inputs/shangrao/fixed-scale-tiles/shangrao-02-context.png",
       "visibleMask": "artwork/generation-inputs/shangrao/fixed-scale-tiles/shangrao-02-mask.png",
       "editMask": "artwork/generation-inputs/shangrao/fixed-scale-tiles/shangrao-02-edit-mask.png",
-      "lockedAcceptedRegions": [],
+      "lockedAcceptedRegions": [
+        {
+          "sourceWindow": 1,
+          "sourceImage": "artwork/generated/shangrao/shangrao-fixed-scale-window-01-v3-restored.png",
+          "worldBounds": [
+            444.79016081,
+            207.47860546,
+            133.02544479000005,
+            175.00000000000003
+          ],
+          "pixelBoundsInCurrent": [
+            0,
+            0,
+            1557,
+            2048
+          ]
+        }
+      ],
       "postGenerationRule": "restore every black-mask pixel from context before compositing"
     },
     {
@@ -67,8 +84,8 @@
       "worldBounds": [
         402.8156056,
         243.44506174000003,
-        175,
-        175
+        175.0,
+        175.0
       ],
       "canvasPixels": [
         2048,
@@ -78,7 +95,40 @@
       "context": "artwork/generation-inputs/shangrao/fixed-scale-tiles/shangrao-03-context.png",
       "visibleMask": "artwork/generation-inputs/shangrao/fixed-scale-tiles/shangrao-03-mask.png",
       "editMask": "artwork/generation-inputs/shangrao/fixed-scale-tiles/shangrao-03-edit-mask.png",
-      "lockedAcceptedRegions": [],
+      "lockedAcceptedRegions": [
+        {
+          "sourceWindow": 1,
+          "sourceImage": "artwork/generated/shangrao/shangrao-fixed-scale-window-01-v3-restored.png",
+          "worldBounds": [
+            402.8156056,
+            243.44506174000003,
+            175.0,
+            139.03354372
+          ],
+          "pixelBoundsInCurrent": [
+            0,
+            0,
+            2048,
+            1627
+          ]
+        },
+        {
+          "sourceWindow": 2,
+          "sourceImage": "artwork/generated/shangrao/shangrao-fixed-scale-window-02-v3-restored.png",
+          "worldBounds": [
+            444.79016081,
+            243.44506174000003,
+            133.02544479000005,
+            139.03354372
+          ],
+          "pixelBoundsInCurrent": [
+            491,
+            0,
+            1557,
+            1627
+          ]
+        }
+      ],
       "postGenerationRule": "restore every black-mask pixel from context before compositing"
     },
     {
@@ -88,8 +138,8 @@
       "worldBounds": [
         444.79016081,
         243.44506174000003,
-        175,
-        175
+        175.0,
+        175.0
       ],
       "canvasPixels": [
         2048,
@@ -99,26 +149,96 @@
       "context": "artwork/generation-inputs/shangrao/fixed-scale-tiles/shangrao-04-context.png",
       "visibleMask": "artwork/generation-inputs/shangrao/fixed-scale-tiles/shangrao-04-mask.png",
       "editMask": "artwork/generation-inputs/shangrao/fixed-scale-tiles/shangrao-04-edit-mask.png",
-      "lockedAcceptedRegions": [],
+      "lockedAcceptedRegions": [
+        {
+          "sourceWindow": 1,
+          "sourceImage": "artwork/generated/shangrao/shangrao-fixed-scale-window-01-v3-restored.png",
+          "worldBounds": [
+            444.79016081,
+            243.44506174000003,
+            133.02544479000005,
+            139.03354372
+          ],
+          "pixelBoundsInCurrent": [
+            0,
+            0,
+            1557,
+            1627
+          ]
+        },
+        {
+          "sourceWindow": 2,
+          "sourceImage": "artwork/generated/shangrao/shangrao-fixed-scale-window-02-v3-restored.png",
+          "worldBounds": [
+            444.79016081,
+            243.44506174000003,
+            175.0,
+            139.03354372
+          ],
+          "pixelBoundsInCurrent": [
+            0,
+            0,
+            2048,
+            1627
+          ]
+        },
+        {
+          "sourceWindow": 3,
+          "sourceImage": "artwork/generated/shangrao/shangrao-fixed-scale-window-03-v3-restored.png",
+          "worldBounds": [
+            444.79016081,
+            243.44506174000003,
+            133.02544479000005,
+            175.0
+          ],
+          "pixelBoundsInCurrent": [
+            0,
+            0,
+            1557,
+            2048
+          ]
+        }
+      ],
       "postGenerationRule": "restore every black-mask pixel from context before compositing"
     }
   ],
   "neighborArt": [
     {
-      "region": "360400",
-      "image": "dist/assets/jiujiang/jiujiang-art-final-v7.webp"
+      "region": "360100",
+      "image": "dist/assets/nanchang/nanchang-art-final-v6.webp"
     },
     {
-      "region": "361000",
-      "image": "dist/assets/fuzhou/fuzhou-art-final-v1.webp"
+      "region": "360400",
+      "image": "dist/assets/jiujiang/jiujiang-art-final-v7.webp"
     }
   ],
-  "acceptedWindows": [],
+  "acceptedWindows": [
+    {
+      "index": 1,
+      "image": "artwork/generated/shangrao/shangrao-fixed-scale-window-01-v3-restored.png"
+    },
+    {
+      "index": 2,
+      "image": "artwork/generated/shangrao/shangrao-fixed-scale-window-02-v3-restored.png"
+    },
+    {
+      "index": 3,
+      "image": "artwork/generated/shangrao/shangrao-fixed-scale-window-03-v3-restored.png"
+    },
+    {
+      "index": 4,
+      "image": "artwork/generated/shangrao/shangrao-fixed-scale-window-04-v3-restored.png"
+    }
+  ],
   "publishRule": "composite in balanced page coordinates; crop to canonicalPathBounds; never stretch",
-  "acceptedCanonical": {
-    "version": "v2",
-    "image": "dist/assets/shangrao/shangrao-art-final-v2.webp",
-    "mode": "imagegen-edit-from-semantic",
-    "sha256": "8fe273d31774cffdd55e2808bf3965a6b723d5e7b6aed6a0ac2600e77ffa3c98"
+  "generationProtocol": {
+    "inputCount": 2,
+    "input1": "fixed-scale context containing semantic target plus immutable accepted artwork",
+    "input2": "strict binary edit mask; white editable, black immutable",
+    "normalizedResultPixels": [
+      1254,
+      1254
+    ],
+    "restoreBlackMaskPixels": true
   }
 }
